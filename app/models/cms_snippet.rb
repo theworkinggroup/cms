@@ -1,5 +1,2 @@
-class CmsSnippet < ActiveRecord::Base
-  
-  belongs_to :cms_page, :through => :cms_snippets
-  
+class CmsSnippet < ActiveRecord::Base  
 end

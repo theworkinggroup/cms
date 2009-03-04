@@ -1,7 +1,7 @@
 class CreateCmsPages < ActiveRecord::Migration
   def self.up
     create_table :cms_pages do |t|
-      t.integer :layout_id
+      t.integer :cms_layout_id
       t.integer :parent_id
       t.string :label
       t.string :slug
