@@ -3,13 +3,14 @@ class CmsLayout < ActiveRecord::Base
   # -- Relationships --------------------------------------------------------
   
   acts_as_tree
-  has_many :cms_pages
+  has_many :cms_pages, :dependent => :destroy
   
   # -- Validations ----------------------------------------------------------
   
   # TODO: If layout has parent layout, make sure that parent layout has a default block.
   validates_presence_of :label
-    
+  validates_uniqueness_of :label
+  
   # -- Instance methods -----------------------------------------------------
   
   def content

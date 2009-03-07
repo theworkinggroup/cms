@@ -3,7 +3,7 @@ class CmsPage < ActiveRecord::Base
   # -- Relationships --------------------------------------------------------
   
   belongs_to :cms_layout
-  has_many :cms_blocks
+  has_many :cms_blocks, :dependent => :destroy
   
   #-- Validations -----------------------------------------------------------
   
