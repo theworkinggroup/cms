@@ -1,0 +1,19 @@
+default_page_title:
+  cms_page: default_page
+  label: title
+  block_type: string
+  content: This is a title
+    
+default_page_left:
+  cms_page: default_page
+  label: left
+  block_type: text
+  content: |-
+    Content for the left block
+    
+default_page_right:
+  cms_page: default_page
+  label: right
+  block_type: text
+  content: |-
+    Content for the right block

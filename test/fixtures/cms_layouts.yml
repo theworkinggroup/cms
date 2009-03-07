@@ -1,3 +1,24 @@
 default_layout:
   label: Default Layout
-  content: Layout starts here {{ yield }} Layout stops here
+  content: |-
+    <html><head><title>Test Layout - {{ cms_block:title:string }} </title></head>
+    <body>
+      Hello and welcome to my site
+      {{ cms_block:default:text }}
+    </body>
+    </html>
+
+two_column_layout:
+  label: Two Column Layout
+  parent: default_layout
+  content: |-
+    <div class = 'left_column'> {{ cms_block:left:text }} </div>
+    <div class = 'right_column'> {{ cms_block:right:text }} </div>
+  
+three_column_layout:
+  label: Three Column Layout
+  parent: default_layout
+  content: |-
+    <div class = 'left_column'> {{ cms_block:left:text }} </div>
+    <div class = 'middle_column'> {{ cms_block:middle:text }} </div>
+    <div class = 'right_column'> {{ cms_block:right:text }} </div>

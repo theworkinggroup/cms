@@ -9,7 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090303165454) do
+ActiveRecord::Schema.define(:version => 20090305174550) do
+
+  create_table "cms_blocks", :force => true do |t|
+    t.integer  "cms_page_id"
+    t.string   "label"
+    t.string   "block_type"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "cms_layouts", :force => true do |t|
     t.integer  "parent_id"
@@ -23,12 +32,11 @@ ActiveRecord::Schema.define(:version => 20090303165454) do
   add_index "cms_layouts", ["parent_id"], :name => "index_cms_layouts_on_parent_id"
 
   create_table "cms_pages", :force => true do |t|
-    t.integer  "layout_id"
+    t.integer  "cms_layout_id"
     t.integer  "parent_id"
     t.string   "label"
     t.string   "slug"
     t.string   "full_path"
-    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,14 +53,5 @@ ActiveRecord::Schema.define(:version => 20090303165454) do
   end
 
   add_index "cms_snippets", ["label"], :name => "index_cms_snippets_on_label"
-
-  create_table "cms_substitutions", :force => true do |t|
-    t.integer  "page_id"
-    t.integer  "snippet_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cms_substitutions", ["page_id", "snippet_id"], :name => "index_cms_substitutions_on_page_id_and_snippet_id", :unique => true
 
 end
