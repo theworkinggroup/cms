@@ -3,6 +3,7 @@ default_layout:
   content: |-
     <html><head><title>Test Layout - {{ cms_block:title:string }} </title></head>
     <body>
+      {{ cms_snippet:marquee }}
       Hello and welcome to my site
       {{ cms_block:default:text }}
     </body>
@@ -12,7 +13,7 @@ two_column_layout:
   label: Two Column Layout
   parent: default_layout
   content: |-
-    <div class = 'left_column'> {{ cms_block:left:text }} </div>
+    <div class = 'left_column'> {{ cms_block:left:text }} {{ cms_snippet:links }}</div>
     <div class = 'right_column'> {{ cms_block:right:text }} </div>
   
 three_column_layout:

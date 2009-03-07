@@ -1,7 +1,13 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# one:
-#   column: value
-#
-# two:
-#   column: value
+links:
+  label: links
+  content: |-
+    <div class='links'>
+      <a href='http://google.com'>google.com</a>
+      <a href='http://google.com'>google.com</a>
+      <a href='http://google.com'>google.com</a>
+    </div>
+    
+marquee:
+  label: marquee
+  content: |-
+    <marquee>Checkout my awesome marquee with <blink> blink tag </blink></marquee>

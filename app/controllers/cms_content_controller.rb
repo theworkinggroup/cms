@@ -1,4 +1,4 @@
-class ContentController < ApplicationController
+class CmsContentController < ApplicationController
   
   def show
     render :inline => CmsPage.first.content

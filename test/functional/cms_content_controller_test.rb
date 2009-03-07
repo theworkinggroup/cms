@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ContentControllerTest < ActionController::TestCase
+class CmsContentControllerTest < ActionController::TestCase
   # Replace this with your real tests.
   test "the truth" do
     assert true
