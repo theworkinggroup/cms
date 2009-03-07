@@ -1,7 +1,16 @@
 class CmsPage < ActiveRecord::Base
   
+  # -- Relationships --------------------------------------------------------
+  
   belongs_to :cms_layout
   has_many :cms_blocks
+  
+  #-- Validations -----------------------------------------------------------
+  
+  validates_presence_of :cms_layout_id
+  validates_uniqueness_of :full_path
+  
+  # -- Instance Methods -----------------------------------------------------
   
   def content
     page_content = self.cms_layout.content
