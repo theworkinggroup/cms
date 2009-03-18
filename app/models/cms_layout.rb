@@ -1,8 +1,17 @@
 class CmsLayout < ActiveRecord::Base
   
-  acts_as_tree
+  # -- Relationships --------------------------------------------------------
   
-  has_many :cms_pages
+  acts_as_tree
+  has_many :cms_pages, :dependent => :destroy
+  
+  # -- Validations ----------------------------------------------------------
+  
+  # TODO: If layout has parent layout, make sure that parent layout has a default block.
+  validates_presence_of :label
+  validates_uniqueness_of :label
+  
+  # -- Instance methods -----------------------------------------------------
   
   def content
     if parent
@@ -12,9 +21,8 @@ class CmsLayout < ActiveRecord::Base
     end
   end
   
-  def blocks    
+  def blocks
     self.content.scan(/\{\{\s*cms_block:(.*?)\s*\}\}/).flatten
   end
-  
   
 end
