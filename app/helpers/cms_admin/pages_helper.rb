@@ -1,0 +1,2 @@
+module CmsAdmin::PagesHelper
+end
