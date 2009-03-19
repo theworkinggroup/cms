@@ -1,4 +1,4 @@
-class CmsAdmin::PagesController < ApplicationController
+class CmsAdmin::PagesController < CmsAdmin::BaseController
   
   def index
     

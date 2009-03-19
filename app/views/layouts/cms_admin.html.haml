@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %title
+    = stylesheet_link_tag 'cms_master'
+    = javascript_include_tag :defaults
+
+    = yield :head
+  %body#cms_admin_layout
+    
+    .header
+      %h1 Comatoast CMS
+      
+      %ul.main_nav
+        %li= active_link 'Layouts', cms_admin_layouts_path, :self
+        %li= active_link 'Pages', cms_admin_pages_path, :self
+        %li= active_link 'Snippets', cms_admin_snippets_path, :self
+    
+    .content
+      = yield
+    
+    .footer
+      &copy; The Working Group

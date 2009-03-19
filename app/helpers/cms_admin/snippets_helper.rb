@@ -1,0 +1,2 @@
+module CmsAdmin::SnippetsHelper
+end
