@@ -2,8 +2,8 @@ class CmsLayout < ActiveRecord::Base
   
   # -- Relationships --------------------------------------------------------
   
-  acts_as_tree
-  has_many :cms_pages, :dependent => :destroy
+  acts_as_tree :counter_cache => :children_count
+  has_many :cms_pages, :dependent => :nullify
   
   # -- Validations ----------------------------------------------------------
   

@@ -4,6 +4,7 @@ class CreateCmsLayouts < ActiveRecord::Migration
       t.integer :parent_id
       t.string :label
       t.text :content
+      t.integer :children_count
       t.timestamps
     end
     

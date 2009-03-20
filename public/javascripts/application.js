@@ -1,2 +1,9 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+function linkToggleElement(link, element){
+  if( element.style.display == 'none' ){
+    link.innerHTML = '&ndash;'
+    element.show()
+  }else{
+    link.innerHTML = '+'
+    element.hide()
+  }
+}

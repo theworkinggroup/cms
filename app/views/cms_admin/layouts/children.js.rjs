@@ -1,0 +1,2 @@
+page.replace "layout_#{@layout.id}_link", :partial => 'toggle_link', :object => @layout
+page.replace "layout_#{@layout.id}_children", :partial => 'tree_branch', :object => @layout.children

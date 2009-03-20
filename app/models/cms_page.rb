@@ -2,6 +2,8 @@ class CmsPage < ActiveRecord::Base
   
   # -- Relationships --------------------------------------------------------
   
+  acts_as_tree :counter_cache => :children_count
+  
   belongs_to :cms_layout
   has_many :cms_blocks, :dependent => :destroy
   

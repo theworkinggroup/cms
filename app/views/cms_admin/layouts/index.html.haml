@@ -1,18 +1,7 @@
 = link_to 'Add New Layout', new_cms_admin_layout_path, :class => 'big_button'
 
-%table#layouts.tree_structure
-  %tr
-    %th Label
-    %th Status
-    %th Actions
-  
-  - @layouts.each do |layout|
-    %tr
-      %td.main
-        = layout.label
-      %td
-        Status
-      %td.action_links
-        = link_to 'Add Child', new_cms_admin_layout_path, :class => 'new'
-        = link_to 'Edit', edit_cms_admin_layout_path(layout), :class => 'edit'
-        = link_to 'Remove', cms_admin_layout_path(layout), :method => 'delete', :confirm => 'Are you sure you want to remove this layout?'
+%h2 Layouts
+
+.tree_structure
+  = render :partial => 'tree_branch', :object => @layouts
+        

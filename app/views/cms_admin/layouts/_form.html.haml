@@ -4,7 +4,11 @@
 .form_element
   = form.label :label, 'Title'
   = form.text_field :label
-  
+
+.form_element
+  = form.label :parent_id, 'Parent Layout'
+  = form.select :parent_id, CmsLayout.all.collect(&:id)
+
 .form_element
   = form.label :content, 'Content'
   = form.text_area :content

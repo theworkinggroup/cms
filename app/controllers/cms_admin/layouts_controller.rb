@@ -1,9 +1,15 @@
 class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   
-  before_filter :load_layout, :only => [:edit, :update, :destroy]
+  before_filter :load_layout, :only => [:children, :edit, :update, :destroy]
   
   def index
     @layouts = CmsLayout.root
+  end
+  
+  def children
+    respond_to do |format|
+      format.js
+    end
   end
   
   def new

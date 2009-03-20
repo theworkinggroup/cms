@@ -1,13 +1,12 @@
 body#cms_admin_layout
-  // ------------------------------------------------------------------ Reset
   padding: 0px
   margin: 0px
   font: 13px arial, verdana, clean, sans-serif
-  background-color: #aaa
+  background-color: #dedede
   
   .header
     height: 50px
-    background-color: #000
+    background: #0E518B
     padding: 0px 25px
     position: relative
     h1
@@ -19,7 +18,7 @@ body#cms_admin_layout
     ul.main_nav
       position: absolute
       bottom: 0px
-      left: 300px
+      left: 250px
       list-style: none
       margin: 0px
       padding: 0px
@@ -28,30 +27,121 @@ body#cms_admin_layout
         a
           float: left
           margin-right: 5px
-          height: 35px
+          height: 30px
           width: 100px
-          color: #000
-          background-color: #ccc
-          font: 123%/35px Georgia, serif
+          color: #fff
+          background: #2086C4
+          font: 123%/30px Helvetica, serif
           text-decoration: none
           text-align: center
+          -moz-border-radius-topleft: 4px
+          -moz-border-radius-topright: 4px
         a.active
           background-color: #fff
+          color: #000
   .content
-    background-color: #e5e5e5
+    background-color: #fff
     padding: 25px
     
-    ul.tree_structure
+  .footer
+    color: #fff
+    text-align: center
+    padding: 10px
+
+    
+// ------------------------------------------------------------------- Common
+#cms_admin_layout
+
+  h2
+    margin: 0px
+    padding: 0px
+    margin-bottom: 15px
+  
+  a
+    outline: none
+  
+  a.big_button
+    float: right
+    background-color: #2086C4
+    font: 123%/30px Helvetica, serif
+    color: #fff
+    text-decoration: none
+    padding: 0px 10px
+    -moz-border-radius: 4px
+  
+  .tree_structure
+    ul
       list-style: none
       margin: 0px
       padding: 0px
       li
-        padding: 10px 25px
+        position: relative
         margin-bottom: 5px
-        border: 1px solid #ccc
-        background-color: #fff
-    
-  .footer
-    color: #fff
-      
+        background-color: #e6edf3
+        -moz-border-radius: 4px
+        padding: 10px 10px 10px 30px
+        a.expander
+          position: absolute
+          top: 0px
+          left: 0px
+          height: 100%
+          width: 15px
+          background-color: #ddd
+          color: #fff
+          overflow: hidden
+          border-left: 1px solid #e5e5e5
+          text-align: center
+          text-decoration: none
+          line-height: 30px
+          -moz-border-radius-topleft: 4px
+          -moz-border-radius-bottomleft: 4px
+          
+        a.expander:hover
+          background-color: #0E518B
+        
+        .action_links
+          a
+            float: right
+            background-color: #fff
+            padding: 2px 5px
+            margin-left: 5px
+            -moz-border-radius: 2px
+            text-decoration: none
+            color: #0E518B
+          a:hover
+            background-color: #2086C4
+            color: #fff
+          
+          
+        a.label
+          font: 123%/150% Georgia, serif
+          color: #000
+          text-decoration: none
+            
+        .loading
+          margin-bottom: 2px
+          background-color: #eee
+          color: #666
+          text-align: center
+          -moz-border-radius: 2px
+        
+        ul li
+          background-color: #cfdce8
+          ul li
+            background-color: #b6cadc
+            ul li
+              background-color: #9fb9d1
+              ul li
+                background-color: #86a8c5
+                ul li
+                  background-color: #6e97b9
+                  ul li
+                    background-color: #5785ae
+                    ul li
+                      background-color: #3e74a2
+                      ul li
+                        background-color: #266296
+                        ul li
+                          background-color: #0e518b
+            
     
