@@ -5,6 +5,7 @@ class CreateCmsLayouts < ActiveRecord::Migration
       t.string :label
       t.text :content
       t.integer :children_count
+      t.boolean :is_extendable, :null => false, :default => false
       t.timestamps
     end
     

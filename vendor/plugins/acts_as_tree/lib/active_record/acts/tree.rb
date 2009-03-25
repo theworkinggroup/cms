@@ -69,6 +69,16 @@ module ActiveRecord
           nodes << node = node.parent while node.parent
           nodes
         end
+        
+        # Returns all children and children of children
+        def descendants
+          nodes = []
+          self.children.each do |c|
+            nodes << c
+            nodes << c.descendants
+          end
+          nodes.flatten
+        end
 
         # Returns the root node of the tree.
         def root

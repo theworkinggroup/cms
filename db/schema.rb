@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20090305174550) do
     t.string   "label"
     t.text     "content"
     t.integer  "children_count"
+    t.boolean  "is_extendable",  :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

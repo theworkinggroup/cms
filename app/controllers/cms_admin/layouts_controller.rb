@@ -20,7 +20,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   end
   
   def new
-    # ...
+    @layout = CmsLayout.new(params.slice(:parent_id))
   end
   
   def edit
