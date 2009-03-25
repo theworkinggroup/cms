@@ -8,7 +8,14 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   
   def children
     respond_to do |format|
-      format.js
+      format.js do
+        session[:cms_layout_tree] = case params[:state]
+        when 'closed' # opening
+          (session[:cms_layout_tree] || []) + [params[:id]]
+        when 'open' # closing
+          (session[:cms_layout_tree] || []) - [params[:id]]
+        end
+      end
     end
   end
   

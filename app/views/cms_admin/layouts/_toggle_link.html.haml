@@ -1,1 +1,5 @@
-= link_to_function '&ndash;', "linkToggleElement($(this), $('layout_#{toggle_link.id}_branch'))", :class => 'expander'
+- case state
+- when 'closed'
+  = link_to_remote "+", :url => {:action => 'children', :id => toggle_link.id, :state => state}, :loading => "$('layout_#{toggle_link.id}_children').show()", :html => {:id => "layout_#{toggle_link.id}_link", :class => 'expander'}
+- when 'open'
+  = link_to_remote "-", :url => {:action => 'children', :id => toggle_link.id, :state => state}, :loading => "$('layout_#{toggle_link.id}_children').show()", :html => {:id => "layout_#{toggle_link.id}_link", :class => 'expander'}
