@@ -1,3 +1,14 @@
-- @layout.blocks.each do |block|
-  
-  = form_element_for_block(block)
+- fields_for 'page[blocks]' do |block_fields|
+
+  - @layout.tags.select{|t| t.type == 'cms_block'}.each do |tag|
+    
+    - block_fields.fields_for tag.label do |block_field|
+      - case tag.datatype
+      - when 'text'
+        .form_element.text_area
+          = block_field.label :label, tag.label.titleize
+          = block_field.text_area :content
+
+      - when 'string'
+        .form_element.text
+          todo

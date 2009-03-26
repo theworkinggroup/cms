@@ -10,7 +10,7 @@ class CmsPage < ActiveRecord::Base
   #-- Validations -----------------------------------------------------------
   
   validates_presence_of :cms_layout_id
-  validates_uniqueness_of :full_path
+  # validates_uniqueness_of :full_path
   
   # -- Instance Methods -----------------------------------------------------
   
@@ -30,4 +30,9 @@ class CmsPage < ActiveRecord::Base
     page_content
   end
   
+  def blocks=(blocks)
+    blocks.each do |label, params|
+      self.cms_blocks.build({:label => label}.merge(params))
+    end
+  end
 end

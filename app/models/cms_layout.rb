@@ -69,6 +69,10 @@ protected
     end
   end
   
+  def validate_children_againts_extendable
+    # todo
+  end
+  
   def flag_as_extendable
     self.is_extendable = !self.tags.select{|t| t.type == 'cms_block' && t.label == 'default'}.blank?
     true
