@@ -1,0 +1,30 @@
+- container_id = tree_branch.first.try(:parent).try(:id).to_i
+
+%ul{:id => "page_#{container_id}_branch"}
+  - tree_branch.each do |page|
+    
+    %li
+    
+      - if page.children.count > 0
+        - if session[:cms_page_tree] && session[:cms_page_tree].member?(page.id.to_s)
+          = render :partial => 'toggle_link', :object => page, :locals => { :state => 'open' }
+        - else
+          = render :partial => 'toggle_link', :object => page, :locals => { :state => 'closed' }
+      
+      
+      .action_links
+        = link_to 'Remove', cms_admin_page_path(page), :method => 'delete', :confirm => 'Are you sure you want to remove this page?', :class => 'remove'
+        = link_to 'Edit', edit_cms_admin_page_path(page), :class => 'edit'
+        - if page.is_extendable?
+          = link_to 'Add Child Layout', new_cms_admin_page_path + "?parent_id=#{page.id}", :class => 'new'
+      
+      
+      = link_to page.label, edit_cms_admin_page_path(page), :class => 'label'
+      
+      
+      - if session[:cms_page_tree] && session[:cms_page_tree].member?(page.id.to_s)
+        %div{:id => "page_#{page.id}_children"}
+          = render :partial => 'tree_branch', :object => page.children
+      - else
+        %div{:id => "page_#{page.id}_children", :style => 'display: none'}
+          Hold your horses woman. I'm loading stuff...

@@ -6,7 +6,7 @@
     %li
     
       - if layout.children.count > 0
-        - if session[:cms_layout_tree].member? layout.id.to_s
+        - if session[:cms_layout_tree] && session[:cms_layout_tree].member?(layout.id.to_s)
           = render :partial => 'toggle_link', :object => layout, :locals => { :state => 'open' }
         - else
           = render :partial => 'toggle_link', :object => layout, :locals => { :state => 'closed' }
@@ -22,7 +22,7 @@
       = link_to layout.label, edit_cms_admin_layout_path(layout), :class => 'label'
       
       
-      - if session[:cms_layout_tree].member? layout.id.to_s
+      - if session[:cms_layout_tree] && session[:cms_layout_tree].member?(layout.id.to_s)
         %div{:id => "layout_#{layout.id}_children"}
           = render :partial => 'tree_branch', :object => layout.children
       - else

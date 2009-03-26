@@ -1,21 +1,17 @@
 class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   
-  before_filter :load_layout, :only => [:children, :edit, :update, :destroy]
+  before_filter :load_layout, :only => [:children, :edit, :update, :destroy, :form_blocks]
   
   def index
-    @layouts = CmsLayout.root
+    @layouts = CmsLayout.roots
   end
   
   def children
-    respond_to do |format|
-      format.js do
-        session[:cms_layout_tree] = case params[:state]
-        when 'closed' # opening
-          (session[:cms_layout_tree] || []) + [params[:id]]
-        when 'open' # closing
-          (session[:cms_layout_tree] || []) - [params[:id]]
-        end
-      end
+    session[:cms_layout_tree] = case params[:state]
+    when 'closed' # opening
+      (session[:cms_layout_tree] || []) + [params[:id]]
+    when 'open' # closing
+      (session[:cms_layout_tree] || []) - [params[:id]]
     end
   end
   
@@ -53,6 +49,10 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
     
     flash[:notice] = 'Layout removed'
     redirect_to :action => :index
+  end
+  
+  def form_blocks
+    # ...
   end
   
 protected

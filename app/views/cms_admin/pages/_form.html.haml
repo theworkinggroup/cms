@@ -1,0 +1,5 @@
+.form_element.select
+  = form.label :cms_layout, 'Layout'
+  = form.select :cms_layout, CmsLayout.options_for_select, {}, :onchange => remote_function(:url => {:controller => :layouts, :action => :form_blocks}, :with => "'id=' + value")
+  
+#form_blocks

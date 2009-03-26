@@ -1,5 +1,8 @@
 class CmsLayout < ActiveRecord::Base
   
+  include CmsTag::InstanceMethods
+  
+  
   # -- Relationships --------------------------------------------------------
   
   acts_as_tree :counter_cache => :children_count
@@ -27,8 +30,8 @@ class CmsLayout < ActiveRecord::Base
   
   # -- Class Methods --------------------------------------------------------
   
-  def extendable_for_select
-    [['---', nil]] + CmsLayout.extendable.all.reject{|l| ([self]+self.descendants).member?(l)}.collect{ |l| [l.label, l.id] }
+  def self.options_for_select
+    [['---', nil]] + CmsLayout.all.collect{ |l| [l.label, l.id]}
   end
   
   
@@ -42,18 +45,22 @@ class CmsLayout < ActiveRecord::Base
     end
   end
   
-  def blocks
-    self.content.scan(/\{\{\s*cms_block:(.*?)\s*\}\}/).flatten
+  def extendable_for_select
+    [['---', nil]] + CmsLayout.extendable.all.reject{|l| ([self]+self.descendants).member?(l)}.collect{ |l| [l.label, l.id] }
   end
   
 protected
 
   def validate_block_presence
-    self.errors.add(:content, 'does not have any cms_blocks defined') if self.blocks.empty?
+    if self.tags.select{|t| t.type == 'cms_block'}.empty?
+      self.errors.add(:content, 'does not have any cms_blocks defined') 
+    end
   end
   
   def validate_block_uniqueness
-    self.errors.add(:content, 'has mutilple identical cms_blocks') if self.blocks.size != self.blocks.uniq.size
+    if !self.tags.unique_by{|t| [t.type, t.label]}
+      self.errors.add(:content, 'has mutilple identical cms_blocks')
+    end
   end
   
   def validate_proper_relationship
@@ -63,7 +70,7 @@ protected
   end
   
   def flag_as_extendable
-    self.is_extendable = !self.content.scan(/\{\{\s*cms_block:default:.*?\}\}/).empty?
+    self.is_extendable = !self.tags.select{|t| t.type == 'cms_block' && t.label == 'default'}.blank?
     true
   end
 
