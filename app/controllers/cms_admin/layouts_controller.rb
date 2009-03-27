@@ -7,12 +7,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   end
   
   def children
-    session[:cms_layout_tree] = case params[:state]
-    when 'closed' # opening
-      (session[:cms_layout_tree] || []) + [params[:id]]
-    when 'open' # closing
-      (session[:cms_layout_tree] || []) - [params[:id]]
-    end
+    manage_session_array(:cms_layout_tree, (params[:state] == 'open' ? :remove : :add), params[:id])
   end
   
   def new
@@ -28,6 +23,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
     @layout.save!
     
     flash[:notice] = 'Layout created'
+    manage_session_array(:cms_layout_tree, :add, @layout.parent_id.to_s)
     redirect_to :action => :index
     
   rescue ActiveRecord::RecordInvalid

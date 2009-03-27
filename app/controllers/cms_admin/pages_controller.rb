@@ -7,12 +7,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   end
   
   def children
-    session[:cms_page_tree] = case params[:state]
-    when 'closed' # opening
-      (session[:cms_page_tree] || []) + [params[:id]]
-    when 'open' # closing
-      (session[:cms_page_tree] || []) - [params[:id]]
-    end
+    manage_session_array(:cms_page_tree, (params[:state] == 'open' ? :remove : :add), params[:id])
   end
   
   def new
@@ -24,6 +19,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     @page.save!
     
     flash[:notice] = 'Page created'
+    manage_session_array(:cms_page_tree, :add, @page.parent_id.to_s)
     redirect_to :action => :index
     
   rescue ActiveRecord::RecordInvalid

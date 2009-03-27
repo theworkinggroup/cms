@@ -10,7 +10,9 @@ class CmsPage < ActiveRecord::Base
   #-- Validations -----------------------------------------------------------
   
   validates_presence_of :cms_layout_id
+  validates_presence_of :slug, :unless => Proc.new{ CmsPage.count == 0 }
   validates_uniqueness_of :full_path
+  
   
   # -- AR Callbacks ---------------------------------------------------------
   
@@ -47,7 +49,7 @@ class CmsPage < ActiveRecord::Base
 protected
   
   def assign_full_path
-    self.full_path = self.slug
+    self.full_path = (self.ancestors.reverse.collect{|p| p.slug} + [self.slug]).join('/')
   end
   
 end
