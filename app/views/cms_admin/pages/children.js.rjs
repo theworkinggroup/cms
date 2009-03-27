@@ -1,0 +1,10 @@
+case params[:state]
+when 'closed'
+  page.replace "page_#{@page.id}_link", :partial => 'toggle_link', :object => @page, :locals => { :state => 'open' }
+  page.replace_html "page_#{@page.id}_children", :partial => 'tree_branch', :object => @page.children
+when 'open'
+  page.replace "page_#{@page.id}_link", :partial => 'toggle_link', :object => @page, :locals => { :state => 'closed' }
+  page.hide "page_#{@page.id}_children"
+  page.replace_html "page_#{@page.id}_children", ''
+end
+

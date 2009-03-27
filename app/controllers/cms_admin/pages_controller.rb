@@ -1,7 +1,18 @@
 class CmsAdmin::PagesController < CmsAdmin::BaseController
   
+  before_filter :load_page, :only => [:children, :edit, :update, :destroy]
+  
   def index
     @pages = CmsPage.roots
+  end
+  
+  def children
+    session[:cms_page_tree] = case params[:state]
+    when 'closed' # opening
+      (session[:cms_page_tree] || []) + [params[:id]]
+    when 'open' # closing
+      (session[:cms_page_tree] || []) - [params[:id]]
+    end
   end
   
   def new
@@ -9,11 +20,27 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   end
   
   def create
-    
     @page = CmsPage.new(params[:page])
     @page.save!
     
-    # raise @page.to_yaml
+    flash[:notice] = 'Page created'
+    redirect_to :action => :index
+    
+  rescue ActiveRecord::RecordInvalid
+    render :action => :new
+  end
+  
+  def destroy
+    @page.destroy
+    
+    flash[:notice] = 'Page removed'
+    redirect_to :action => :index
+  end
+  
+protected
+
+  def load_page
+    @page = CmsPage.find(params[:id])
   end
   
 end

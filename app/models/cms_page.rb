@@ -10,7 +10,11 @@ class CmsPage < ActiveRecord::Base
   #-- Validations -----------------------------------------------------------
   
   validates_presence_of :cms_layout_id
-  # validates_uniqueness_of :full_path
+  validates_uniqueness_of :full_path
+  
+  # -- AR Callbacks ---------------------------------------------------------
+  
+  before_validation :assign_full_path
   
   # -- Instance Methods -----------------------------------------------------
   
@@ -35,4 +39,15 @@ class CmsPage < ActiveRecord::Base
       self.cms_blocks.build({:label => label}.merge(params))
     end
   end
+  
+  def ancestors_for_select
+    CmsPage.all.collect{|p| [p.label, p.id]}
+  end
+  
+protected
+  
+  def assign_full_path
+    self.full_path = self.slug
+  end
+  
 end

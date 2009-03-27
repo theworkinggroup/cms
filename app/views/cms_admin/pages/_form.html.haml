@@ -1,3 +1,17 @@
+= form.error_messages
+
+.form_element.text.large
+  = form.label :label, 'Title'
+  = form.text_field :label
+
+.form_element.text
+  = form.label :slug, 'Slug'
+  = form.text_field :slug
+  
+.form_element.select
+  = form.label :parent_id, 'Parent Page'
+  = form.select :parent_id, @page.ancestors_for_select
+
 .form_element.select
   = form.label :cms_layout_id, 'Layout'
   = form.select :cms_layout_id, CmsLayout.options_for_select, {}, :onchange => remote_function(:url => {:controller => :layouts, :action => :form_blocks}, :with => "'id=' + value")
