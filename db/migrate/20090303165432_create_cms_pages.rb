@@ -6,7 +6,8 @@ class CreateCmsPages < ActiveRecord::Migration
       t.string :label
       t.string :slug
       t.string :full_path
-      t.integer :children_count
+      t.integer :children_count,  :null => false, :default => 0
+      t.integer :position,        :null => false, :default => 0
       t.timestamps
     end
     

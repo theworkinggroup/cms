@@ -25,6 +25,7 @@ class CmsLayout < ActiveRecord::Base
   
   # -- Scopes ---------------------------------------------------------------
   
+  default_scope :order => 'position ASC'
   named_scope :extendable, :conditions => { :is_extendable => true }
   
   

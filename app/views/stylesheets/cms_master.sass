@@ -81,24 +81,28 @@ body#cms_admin_layout
         margin-bottom: 5px
         background-color: #e6edf3
         -moz-border-radius: 4px
-        padding: 10px 10px 10px 30px
-        a.expander
+        padding: 10px 10px 10px 50px
+        
+        .controls
           position: absolute
-          top: 0px
+          top: 0px 
           left: 0px
-          height: 100%
-          width: 15px
-          background-color: #ddd
-          color: #fff
-          overflow: hidden
-          border-left: 1px solid #e5e5e5
-          text-align: center
-          text-decoration: none
-          line-height: 30px
-          -moz-border-radius-topleft: 4px
-          -moz-border-radius-bottomleft: 4px
-        a.expander:hover
           background-color: #0E518B
+          -moz-border-radius-topleft: 4px
+          a.expander, .dragger
+            padding: 3px 5px
+            width: 30px
+            display: block
+            color: #fff
+          a.expander
+            text-decoration: none
+          a.expander:hover
+            font-weight: bold
+            -moz-border-radius-topleft: 4px
+          .dragger
+            cursor: move
+            background-color: #926492
+            -moz-border-radius-topleft: 4px
         
         .action_links
           a
@@ -112,11 +116,26 @@ body#cms_admin_layout
           a:hover
             background-color: #2086C4
             color: #fff
+          a.remove:hover
+            background-color: #C33013
+            color: #fff
+            
+        .item
+          a.label
+            font: 123% Georgia, serif
+            color: #000
+            text-decoration: none
           
-        a.label
-          font: 123%/150% Georgia, serif
-          color: #000
-          text-decoration: none
+          .item_properties
+            font-size: 85%
+            color: #666
+            margin-bottom: 5px
+            .property
+              margin-right: 10px
+              .label
+                color: #000
+          
+        
         
         ul li
           background-color: #cfdce8

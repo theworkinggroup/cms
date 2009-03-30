@@ -3,14 +3,16 @@
 %ul{:id => "layout_#{container_id}_branch"}
   - tree_branch.each do |layout|
     
-    %li
-    
-      - if layout.children.count > 0
-        - if session[:cms_layout_tree] && session[:cms_layout_tree].member?(layout.id.to_s)
-          = render :partial => 'toggle_link', :object => layout, :locals => { :state => 'open' }
-        - else
-          = render :partial => 'toggle_link', :object => layout, :locals => { :state => 'closed' }
-      
+    %li{:id => "layout_#{layout.id}"}
+      .controls
+        - if layout.children.count > 0
+          - if session[:cms_layout_tree] && session[:cms_layout_tree].member?(layout.id.to_s)
+            = render :partial => 'toggle_link', :object => layout, :locals => { :state => 'open' }
+          - else
+            = render :partial => 'toggle_link', :object => layout, :locals => { :state => 'closed' }
+        - if layout.siblings.size > 0 
+          .dragger
+            drag
       
       .action_links
         = link_to 'Remove', cms_admin_layout_path(layout), :method => 'delete', :confirm => 'Are you sure you want to remove this layout?', :class => 'remove'
@@ -18,8 +20,12 @@
         - if layout.is_extendable?
           = link_to 'Add Child Layout', new_cms_admin_layout_path + "?parent_id=#{layout.id}", :class => 'new'
       
-      
-      = link_to layout.label, edit_cms_admin_layout_path(layout), :class => 'label'
+      .item
+        = link_to layout.label, edit_cms_admin_layout_path(layout), :class => 'label'
+        .item_properties
+          %span.property
+            %span.label Last Updated:
+            = "#{time_ago_in_words(layout.updated_at)} ago"
       
       
       - if session[:cms_layout_tree] && session[:cms_layout_tree].member?(layout.id.to_s)
@@ -28,3 +34,6 @@
       - else
         %div{:id => "layout_#{layout.id}_children", :style => 'display: none'}
           Hold your horses woman. I'm loading stuff...
+          
+    - if layout.siblings.size > 0         
+      = sortable_element "layout_#{container_id}_branch", :url => {:action => :reorder, :id => container_id}, :handle => 'dragger'

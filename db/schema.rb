@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(:version => 20090305174550) do
     t.integer  "parent_id"
     t.string   "label"
     t.text     "content"
-    t.integer  "children_count"
+    t.integer  "children_count", :default => 0,     :null => false
     t.boolean  "is_extendable",  :default => false, :null => false
+    t.integer  "position",       :default => 0,     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,7 +40,8 @@ ActiveRecord::Schema.define(:version => 20090305174550) do
     t.string   "label"
     t.string   "slug"
     t.string   "full_path"
-    t.integer  "children_count"
+    t.integer  "children_count", :default => 0, :null => false
+    t.integer  "position",       :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

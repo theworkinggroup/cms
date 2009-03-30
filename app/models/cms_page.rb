@@ -19,6 +19,10 @@ class CmsPage < ActiveRecord::Base
   
   before_validation :assign_full_path
   
+  # -- Scopes ---------------------------------------------------------------
+  
+  default_scope :order => 'position ASC'
+  
   # -- Instance Methods -----------------------------------------------------
   
   def content

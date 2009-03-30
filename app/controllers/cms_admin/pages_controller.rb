@@ -1,6 +1,6 @@
 class CmsAdmin::PagesController < CmsAdmin::BaseController
   
-  before_filter :load_page, :only => [:children, :edit, :update, :destroy]
+  before_filter :load_page, :only => [:children, :edit, :update, :destroy, :reorder]
   
   def index
     @pages = CmsPage.roots
@@ -36,8 +36,8 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     flash[:notice] = 'Page updated'
     redirect_to :action => :index
     
-  #rescue ActiveRecord::RecordInvalid
-  #  render :action => :edit
+  rescue ActiveRecord::RecordInvalid
+    render :action => :edit
   end
   
   def destroy
@@ -52,10 +52,17 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     @page = CmsPage.find_by_id(params[:id])
   end
   
+  def reorder
+    params["page_#{@page.id}_branch"].each_with_index do |id, position|
+      @page.children.find(id).update_attribute(:position, position)
+    end
+    render :nothing => true
+  end
+  
 protected
 
   def load_page
-    @page = CmsPage.find(params[:id])
+    @page = CmsPage.find_by_id(params[:id])
   end
   
 end

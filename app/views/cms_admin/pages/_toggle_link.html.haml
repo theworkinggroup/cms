@@ -1,5 +1,5 @@
 - case state
 - when 'closed'
-  = link_to_remote "+", :url => {:action => 'children', :id => toggle_link.id, :state => state}, :loading => "$('page_#{toggle_link.id}_children').show()", :html => {:id => "page_#{toggle_link.id}_link", :class => 'expander'}
+  = link_to_remote "+ #{toggle_link.children.count}", :url => {:action => 'children', :id => toggle_link.id, :state => state}, :loading => "$('page_#{toggle_link.id}_children').show()", :html => {:id => "page_#{toggle_link.id}_link", :class => 'expander', :title => 'expand level'}
 - when 'open'
-  = link_to_remote "-", :url => {:action => 'children', :id => toggle_link.id, :state => state}, :loading => "$('page_#{toggle_link.id}_children').show()", :html => {:id => "page_#{toggle_link.id}_link", :class => 'expander'}
+  = link_to_remote "- #{toggle_link.children.count}", :url => {:action => 'children', :id => toggle_link.id, :state => state}, :loading => "$('page_#{toggle_link.id}_children').show()", :html => {:id => "page_#{toggle_link.id}_link", :class => 'expander', :title => 'collapse level'}

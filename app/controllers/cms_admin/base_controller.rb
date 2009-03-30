@@ -14,46 +14,9 @@ class CmsAdmin::BaseController < ApplicationController
   end
   
   def application_name
-    c = %w(
-      crazy
-      cool
-      colorful
-      cremated
-      creamed
-      crusty
-      clapping
-      campy
-      crude
-      corky
-    )
-    m = %w(
-      massive
-      monster
-      mini
-      mighty
-      morbid
-      mexican
-      moses
-      machine
-      mucus
-      murder
-    )
-    s = %w(
-      shit
-      ship
-      shark
-      scarf
-      scott
-      slayer
-      slave
-      shovel
-      school
-      stool
-      swan
-      squid
-      smoke
-      sloth
-    )
+    c = %w( crazy cool colorful cremated creamed crusty clapping campy crude corky comfortable crappy )
+    m = %w( massive monster mini mighty morbid mexican moses machine mucus murder )
+    s = %w( ship shark scarf scott slayer slave shovel school stool swan squid smoke sloth sofa sean )
     [c, m, s].collect{|a| a.sort_by{rand}.first.capitalize}.join
   end
   

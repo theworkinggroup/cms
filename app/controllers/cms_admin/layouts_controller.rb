@@ -1,6 +1,6 @@
 class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   
-  before_filter :load_layout, :only => [:children, :edit, :update, :destroy]
+  before_filter :load_layout, :only => [:children, :edit, :update, :destroy, :reorder]
   
   def index
     @layouts = CmsLayout.roots
@@ -47,10 +47,25 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
     redirect_to :action => :index
   end
   
+  def reorder
+    if @layout
+      layout_id = @layout.id
+      find_scope = @layout.children
+    else
+      layout_id = 0
+      find_scope = CmsLayout
+    end
+    
+    params["layout_#{layout_id}_branch"].each_with_index do |id, position|
+      find_scope.find(id).update_attribute(:position, position)
+    end
+    render :nothing => true
+  end
+  
 protected
 
   def load_layout
-    @layout = CmsLayout.find(params[:id])
+    @layout = CmsLayout.find_by_id(params[:id])
   end
   
 end
