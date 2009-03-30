@@ -19,6 +19,8 @@
       
       
       = link_to page.label, edit_cms_admin_page_path(page), :class => 'label'
+      %div
+        = link_to page.full_path, page.full_path
       
       
       - if session[:cms_page_tree] && session[:cms_page_tree].member?(page.id.to_s)

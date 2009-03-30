@@ -1,0 +1,12 @@
+- @layout.tags.select{|t| t.type == 'cms_block'}.each do |tag|
+  
+  - block_content = @page.cms_blocks.with_label(tag.label).first.content rescue ''
+  
+  - case tag.datatype
+    - when 'text'
+      .form_element.text_area
+        = label_tag tag.label.titleize
+        = text_area_tag "page[blocks][#{tag.label}][content]", block_content, :rows => 20
+        
+    - when 'string'
+      TODO

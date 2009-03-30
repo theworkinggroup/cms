@@ -1,0 +1,5 @@
+%h2 Editing Page
+
+- form_for :page, @page, :url => {:action => :update}, :html => {:method => :put} do |form|
+  = render :partial => form
+  = form.submit 'Edit Page'

@@ -9,7 +9,8 @@ class CmsPage < ActiveRecord::Base
   
   #-- Validations -----------------------------------------------------------
   
-  validates_presence_of :cms_layout_id
+  validates_presence_of :cms_layout_id,
+                        :label
   validates_presence_of :slug, :unless => Proc.new{ CmsPage.count == 0 }
   validates_uniqueness_of :full_path
   
@@ -38,7 +39,15 @@ class CmsPage < ActiveRecord::Base
   
   def blocks=(blocks)
     blocks.each do |label, params|
-      self.cms_blocks.build({:label => label}.merge(params))
+      if self.new_record? 
+        self.cms_blocks.build({:label => label}.merge(params))
+      else
+        if block = self.cms_blocks.with_label(label).try(:first)
+          block.update_attributes!(params)
+        else
+          self.cms_blocks.create!({:label => label}.merge(params))
+        end
+      end
     end
   end
   
@@ -46,10 +55,14 @@ class CmsPage < ActiveRecord::Base
     CmsPage.all.collect{|p| [p.label, p.id]}
   end
   
+  def full_path
+    "/#{read_attribute(:full_path)}"
+  end
+  
 protected
   
   def assign_full_path
-    self.full_path = (self.ancestors.reverse.collect{|p| p.slug} + [self.slug]).join('/')
+    self.full_path = (self.ancestors.reverse.collect{|p| p.slug}.compact + [self.slug]).join('/')
   end
   
 end

@@ -14,6 +14,10 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     @page = CmsPage.new(params.slice(:parent_id))
   end
   
+  def edit
+    @layout = @page.cms_layout
+  end
+  
   def create
     @page = CmsPage.new(params[:page])
     @page.save!
@@ -26,11 +30,26 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     render :action => :new
   end
   
+  def update
+    @page.update_attributes!(params[:page])
+    
+    flash[:notice] = 'Page updated'
+    redirect_to :action => :index
+    
+  #rescue ActiveRecord::RecordInvalid
+  #  render :action => :edit
+  end
+  
   def destroy
     @page.destroy
     
     flash[:notice] = 'Page removed'
     redirect_to :action => :index
+  end
+  
+  def form_blocks
+    @layout = CmsLayout.find(params[:layout_id])
+    @page = CmsPage.find_by_id(params[:id])
   end
   
 protected
