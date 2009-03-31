@@ -40,8 +40,9 @@ ActiveRecord::Schema.define(:version => 20090305174550) do
     t.string   "label"
     t.string   "slug"
     t.string   "full_path"
-    t.integer  "children_count", :default => 0, :null => false
-    t.integer  "position",       :default => 0, :null => false
+    t.integer  "children_count", :default => 0,    :null => false
+    t.integer  "position",       :default => 0,    :null => false
+    t.boolean  "is_published",   :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

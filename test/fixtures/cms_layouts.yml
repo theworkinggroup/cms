@@ -1,7 +1,10 @@
 default_layout:
   label: Default Layout
+  parent: 
+  children_count: 2
+  position: 0
   content: |-
-    <html><head><title>Test Layout - {{ cms_block:title:string }} </title></head>
+    <html>
     <body>
       {{ cms_snippet:marquee }}
       Hello and welcome to my site

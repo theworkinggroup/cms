@@ -26,6 +26,10 @@
           %span.property
             %span.label Path:
             = link_to page.full_path, page.full_path
+          - unless page.is_published
+            %span.property
+              %span.label Status:
+              %span.draft Draft
           %span.property
             %span.label Last Updated:
             = "#{time_ago_in_words(page.updated_at)} ago"

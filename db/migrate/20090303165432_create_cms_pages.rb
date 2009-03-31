@@ -8,6 +8,7 @@ class CreateCmsPages < ActiveRecord::Migration
       t.string :full_path
       t.integer :children_count,  :null => false, :default => 0
       t.integer :position,        :null => false, :default => 0
+      t.boolean :is_published,    :null => false, :default => true
       t.timestamps
     end
     

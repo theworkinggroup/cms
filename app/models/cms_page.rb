@@ -22,6 +22,7 @@ class CmsPage < ActiveRecord::Base
   # -- Scopes ---------------------------------------------------------------
   
   default_scope :order => 'position ASC'
+  named_scope :published, :conditions => {:is_published => true}
   
   # -- Instance Methods -----------------------------------------------------
   
