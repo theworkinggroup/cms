@@ -18,6 +18,11 @@
         %li= active_link 'Snippets', cms_admin_snippets_path, :self
     
     .content
+      
+      - flash.each do |type, value|
+        .flash{:class => type.to_s}
+          = value
+      
       = yield
     
     .footer
