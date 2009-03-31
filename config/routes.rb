@@ -8,7 +8,8 @@ ActionController::Routing::Routes.draw do |map|
       :member => {  :children     => :any,
                     :form_blocks  => :any,
                     :reorder      => :any }
-    cms_admin.resources :snippets
+    cms_admin.resources :snippets,
+      :collection => { :reorder   => :any }
   end
   
   map.connect '/*path', :controller => 'cms_content', :action => 'show'

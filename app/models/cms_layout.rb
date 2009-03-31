@@ -70,7 +70,7 @@ protected
     end
   end
   
-  def validate_children_againts_extendable
+  def validate_children_against_extendable
     # todo
   end
   

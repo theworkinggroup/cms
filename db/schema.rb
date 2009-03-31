@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20090305174550) do
   create_table "cms_snippets", :force => true do |t|
     t.string   "label"
     t.text     "content"
+    t.integer  "position",   :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

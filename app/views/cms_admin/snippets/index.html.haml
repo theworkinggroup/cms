@@ -1,0 +1,29 @@
+= link_to 'Add New Snippet', new_cms_admin_snippet_path, :class => 'big_button'
+
+%h2 Snippets
+
+
+.tree_structure
+  %ul#snippet_list
+    - @snippets.each do |snippet|
+      %li{:id => "snippet_#{snippet.id}"}
+        .controls
+          - if @snippets.size > 0 
+            .dragger
+              drag
+        
+        .action_links
+          = link_to 'Remove', cms_admin_snippet_path(snippet), :method => 'delete', :confirm => 'Are you sure you want to remove this snippet?', :class => 'remove'
+          = link_to 'Edit', edit_cms_admin_snippet_path(snippet), :class => 'edit'
+          
+          
+        .item
+          = link_to snippet.label, edit_cms_admin_snippet_path(snippet), :class => 'label'
+          .item_properties
+            %span.property
+              %span.label Last Updated:
+              = "#{time_ago_in_words(snippet.updated_at)} ago"
+              
+              
+  - if @snippets.size > 0
+    = sortable_element "snippet_list", :url => {:action => :reorder}, :handle => 'dragger'

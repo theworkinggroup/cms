@@ -1,0 +1,7 @@
+%h2 New Snippet
+
+- form_for :snippet, @snippet, :url => {:action => :create } do |form|
+  = render :partial => form
+  = form.submit 'Create Snippet'
+  or 
+  = link_to 'Cancel', cms_admin_snippets_path
