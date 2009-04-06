@@ -37,12 +37,13 @@ ActiveRecord::Schema.define(:version => 20090305174550) do
   create_table "cms_pages", :force => true do |t|
     t.integer  "cms_layout_id"
     t.integer  "parent_id"
+    t.integer  "redirect_to_page_id"
     t.string   "label"
     t.string   "slug"
     t.string   "full_path"
-    t.integer  "children_count", :default => 0,    :null => false
-    t.integer  "position",       :default => 0,    :null => false
-    t.boolean  "is_published",   :default => true, :null => false
+    t.integer  "children_count",      :default => 0,    :null => false
+    t.integer  "position",            :default => 0,    :null => false
+    t.boolean  "is_published",        :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

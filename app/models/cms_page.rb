@@ -4,25 +4,43 @@ class CmsPage < ActiveRecord::Base
   
   acts_as_tree :counter_cache => :children_count
   
-  belongs_to :cms_layout
-  has_many :cms_blocks, :dependent => :destroy
+  belongs_to  :cms_layout
+  has_many    :cms_blocks,
+    :dependent    => :destroy
+  belongs_to  :redirect_to_page,
+    :class_name   => 'CmsPage',
+    :foreign_key  => :redirect_to_page_id
+  has_one :redirected_from_page,
+    :class_name   => 'CmsPage',
+    :foreign_key  => :redirect_to_page_id
+  
   
   #-- Validations -----------------------------------------------------------
   
-  validates_presence_of :cms_layout_id,
-                        :label
-  validates_presence_of :slug, :unless => Proc.new{ CmsPage.count == 0 }
+  validates_presence_of   :cms_layout_id,
+    :unless => lambda{|p| p.redirect_to_page}
+  validates_presence_of   :label
+  validates_presence_of   :slug,
+    :unless => lambda{|p| CmsPage.count == 0 || p == CmsPage.root}
+  validates_format_of     :slug, 
+    :with   => /^\w[a-z0-9_-]*$/i,
+    :unless => lambda{|p| CmsPage.count == 0 || p == CmsPage.root}
   validates_uniqueness_of :full_path
+  
+  validate :validate_redirect_to
   
   
   # -- AR Callbacks ---------------------------------------------------------
   
   before_validation :assign_full_path
+  after_save        :sync_child_slugs
   
   # -- Scopes ---------------------------------------------------------------
   
   default_scope :order => 'position ASC'
-  named_scope :published, :conditions => {:is_published => true}
+  
+  named_scope :published,
+    :conditions => {:is_published => true}
   
   # -- Instance Methods -----------------------------------------------------
   
@@ -56,15 +74,16 @@ class CmsPage < ActiveRecord::Base
     end
   end
   
-  def ancestors_for_select(page = CmsPage.root, level = 0)
-    return [] if page == self
-    out = [["#{"--" * level} #{page.label}", page.id]]
+  def pages_for_select(page = CmsPage.root, level = 0, exclude_self = false)
+    page ||= CmsPage.root
+    return [] if (page == self && exclude_self)
+    out = [["#{". . " * level} #{page.label}", page.id]]
     page.children.each do |child|
       if child.children.count > 0
-        out += ancestors_for_select(child, level + 1)
+        out += pages_for_select(child, level + 1, exclude_self)
       else
-        unless child == self
-          out += [["#{"--" * (level + 1)} #{child.label}", child.id]]
+        unless (child == self && exclude_self)
+          out += [["#{". . " * (level + 1)} #{child.label}", child.id]]
         end
       end
     end
@@ -79,6 +98,20 @@ protected
   
   def assign_full_path
     self.full_path = (self.ancestors.reverse.collect{|p| p.slug}.compact + [self.slug]).join('/')
+  end
+  
+  def validate_redirect_to
+    if self.redirect_to_page && (self == self.redirect_to_page || self.redirect_to_page.redirect_to_page)
+      self.errors.add(:redirect_to_page_id) 
+    end
+  end
+  
+  def sync_child_slugs
+    if slug_changed?
+      children.each do |child|
+        child.save!
+      end
+    end
   end
   
 end

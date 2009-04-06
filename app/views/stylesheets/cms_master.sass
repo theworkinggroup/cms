@@ -136,17 +136,19 @@ body#cms_admin_layout
             font: 123% Georgia, serif
             color: #000
             text-decoration: none
-          
-          .item_properties
+          .details
             font-size: 85%
-            color: #666
             margin-bottom: 5px
-            .property
-              margin-right: 10px
-              .label
-                color: #000
-              .draft
-                color: #9E2C16
+            a
+              text-decoration: none
+            table
+              th, td
+                padding: 2px 5px
+              th
+                font-weight: normal
+                text-align: right
+                background-color: #e5e5e5
+                -moz-border-radius: 2px
           
         
         
@@ -183,7 +185,8 @@ body#cms_admin_layout
     
     .form_element
       overflow: hidden
-      margin-bottom: 15px
+      padding: 5px 0px
+      -moz-border-radius: 4px
       .label
         width: 10%
         float: left
@@ -209,6 +212,9 @@ body#cms_admin_layout
         font: 139%/185% Arial, sans-serif
       input
         font-size: 154%
+        
+    .form_element:hover
+      background-color: #e5e5e5
         
   // ------------------------------------------------------------------- Help
   .help

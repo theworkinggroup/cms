@@ -27,6 +27,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     redirect_to :action => :index
     
   rescue ActiveRecord::RecordInvalid
+    new
     render :action => :new
   end
   
@@ -37,6 +38,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     redirect_to :action => :index
     
   rescue ActiveRecord::RecordInvalid
+    edit
     render :action => :edit
   end
   

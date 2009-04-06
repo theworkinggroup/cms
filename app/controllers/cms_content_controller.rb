@@ -1,5 +1,7 @@
 class CmsContentController < ApplicationController
   
+  unloadable
+  
   def show
     
     if (@page = CmsPage.find_by_full_path(params[:path].join('/')))

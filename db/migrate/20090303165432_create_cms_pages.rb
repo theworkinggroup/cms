@@ -3,6 +3,7 @@ class CreateCmsPages < ActiveRecord::Migration
     create_table :cms_pages do |t|
       t.integer :cms_layout_id
       t.integer :parent_id
+      t.integer :redirect_to_page_id
       t.string :label
       t.string :slug
       t.string :full_path

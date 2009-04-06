@@ -12,6 +12,10 @@ module CmsTag
       self.type == tag.type && self.label == tag.label
     end
     
+    def to_s
+      "#{type}:#{label}:#{datatype}"
+    end
+    
   end
   
   module InstanceMethods
