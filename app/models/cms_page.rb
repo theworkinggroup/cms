@@ -56,8 +56,19 @@ class CmsPage < ActiveRecord::Base
     end
   end
   
-  def ancestors_for_select
-    CmsPage.all.collect{|p| [p.label, p.id]}
+  def ancestors_for_select(page = CmsPage.root, level = 0)
+    return [] if page == self
+    out = [["#{"--" * level} #{page.label}", page.id]]
+    page.children.each do |child|
+      if child.children.count > 0
+        out += ancestors_for_select(child, level + 1)
+      else
+        unless child == self
+          out += [["#{"--" * (level + 1)} #{child.label}", child.id]]
+        end
+      end
+    end
+    out
   end
   
   def full_path

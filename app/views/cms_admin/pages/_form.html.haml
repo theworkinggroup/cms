@@ -4,7 +4,7 @@
   = form.label :label, 'Title'
   = form.text_field :label
 
-- unless CmsPage.count == 0
+- unless CmsPage.count == 0 || @page == CmsPage.root
   .form_element.text
     = form.label :slug, 'Slug'
     = form.text_field :slug
