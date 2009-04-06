@@ -5,6 +5,8 @@ class CmsContentController < ApplicationController
   def show
     
     if (@page = CmsPage.find_by_full_path(params[:path].join('/')))
+      @page = @page.redirect_to_page if @page.redirect_to_page
+      
       render :inline => @page.content
     else
       render :text => '404', :status => 404
