@@ -1,9 +1,9 @@
 = form.error_messages
 
 .form_element.text.large
-  = form.label :label, 'Title'
-  = form.text_field :label
+  .label= form.label :label, 'Title'
+  .field= form.text_field :label
 
 .form_element.text_area
-  = form.label :content, 'Content'
-  = form.text_area :content
+  .label= form.label :content, 'Content'
+  .field= form.text_area :content

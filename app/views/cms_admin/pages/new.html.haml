@@ -2,6 +2,7 @@
 
 - form_for :page, @page, :url => {:action => :create } do |form|
   = render :partial => form
-  = form.submit 'Create Page'
-  or 
-  = link_to 'Cancel', cms_admin_pages_path
+  .submit
+    = form.submit 'Create Page'
+    or 
+    = link_to 'Cancel', cms_admin_pages_path

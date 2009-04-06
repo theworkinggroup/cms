@@ -1,25 +1,25 @@
 = form.error_messages
 
 .form_element.text.large
-  = form.label :label, 'Title'
-  = form.text_field :label
+  .label= form.label :label, 'Title'
+  .field= form.text_field :label
 
 - unless CmsPage.count == 0 || @page == CmsPage.root
   .form_element.text
-    = form.label :slug, 'Slug'
-    = form.text_field :slug
+    .label= form.label :slug, 'Slug'
+    .field= form.text_field :slug
   
   .form_element.select
-    = form.label :parent_id, 'Parent Page'
-    = form.select :parent_id, @page.ancestors_for_select
+    .label= form.label :parent_id, 'Parent Page'
+    .field= form.select :parent_id, @page.ancestors_for_select
     
 .form_element
-  = form.label :is_published, 'published?'
-  = form.check_box :is_published
+  .label= form.label :is_published, 'published?'
+  .field= form.check_box :is_published
 
 .form_element.select
-  = form.label :cms_layout_id, 'Layout'
-  = form.select :cms_layout_id, CmsLayout.options_for_select, {}, :onchange => remote_function(:url => {:action => :form_blocks, :id => (@page.try(:id) || 0)}, :with => "'layout_id=' + value")
+  .label= form.label :cms_layout_id, 'Layout'
+  .field= form.select :cms_layout_id, CmsLayout.options_for_select, {}, :onchange => remote_function(:url => {:action => :form_blocks, :id => (@page.try(:id) || 0)}, :with => "'layout_id=' + value")
   
 #form_blocks
 

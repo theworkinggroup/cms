@@ -2,4 +2,5 @@
 
 - form_for :snippet, @snippet, :url => {:action => :update}, :html => {:method => :put} do |form|
   = render :partial => form
-  = form.submit 'Edit Snippet'
+  .submit
+    = form.submit 'Edit Snippet'
