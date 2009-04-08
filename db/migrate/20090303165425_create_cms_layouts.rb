@@ -4,6 +4,7 @@ class CreateCmsLayouts < ActiveRecord::Migration
       t.integer :parent_id
       t.string :label
       t.text :content
+      t.string :app_layout
       t.integer :children_count,  :null => false, :default => 0
       t.boolean :is_extendable,   :null => false, :default => false
       t.integer :position,        :null => false, :default => 0

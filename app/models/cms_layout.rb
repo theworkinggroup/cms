@@ -35,6 +35,12 @@ class CmsLayout < ActiveRecord::Base
     [['---', nil]] + CmsLayout.all.collect{ |l| [l.label, l.id]}
   end
   
+  def self.app_layouts_for_select
+    path = "#{RAILS_ROOT}/app/views/layouts"
+    regex = /^([a-z0-9]\w+)\.html/i
+    [['---', nil]] + Dir.entries(path).collect{|l| l.match(regex).try(:captures)}.compact.flatten
+  end
+  
   
   # -- Instance Methods -----------------------------------------------------
   
@@ -43,6 +49,15 @@ class CmsLayout < ActiveRecord::Base
       parent.content.gsub(/\{\{\s*cms_block:default:.*?\}\}/, self.read_attribute(:content))
     else
       self.read_attribute(:content)
+    end
+  end
+  
+  def app_layout
+    this_layout = read_attribute(:app_layout)
+    if this_layout.blank?
+      parent && parent.app_layout
+    else
+      this_layout
     end
   end
   

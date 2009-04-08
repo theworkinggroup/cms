@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20090305174550) do
     t.integer  "parent_id"
     t.string   "label"
     t.text     "content"
+    t.string   "app_layout"
     t.integer  "children_count", :default => 0,     :null => false
     t.boolean  "is_extendable",  :default => false, :null => false
     t.integer  "position",       :default => 0,     :null => false
