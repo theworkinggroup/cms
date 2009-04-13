@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090305174550) do
+ActiveRecord::Schema.define(:version => 20090303165425) do
 
   create_table "cms_blocks", :force => true do |t|
     t.integer  "cms_page_id"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(:version => 20090305174550) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "cms_blocks", ["cms_page_id", "label"], :name => "index_cms_blocks_on_cms_page_id_and_label"
 
   create_table "cms_layouts", :force => true do |t|
     t.integer  "parent_id"

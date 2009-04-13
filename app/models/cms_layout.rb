@@ -2,7 +2,6 @@ class CmsLayout < ActiveRecord::Base
   
   include CmsTag::InstanceMethods
   
-  
   # -- Relationships --------------------------------------------------------
   
   acts_as_tree :counter_cache => :children_count

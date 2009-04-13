@@ -76,7 +76,7 @@ class CmsPage < ActiveRecord::Base
   
   def pages_for_select(page = CmsPage.root, level = 0, exclude_self = false)
     page ||= CmsPage.root
-    return [] if (page == self && exclude_self)
+    return [] if !page || (page == self && exclude_self)
     out = [["#{". . " * level} #{page.label}", page.id]]
     page.children.each do |child|
       if child.children.count > 0
