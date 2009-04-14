@@ -14,7 +14,6 @@ class CmsPage < ActiveRecord::Base
     :class_name   => 'CmsPage',
     :foreign_key  => :redirect_to_page_id
   
-  
   #-- Validations -----------------------------------------------------------
   
   validates_presence_of   :cms_layout_id,
@@ -22,13 +21,12 @@ class CmsPage < ActiveRecord::Base
   validates_presence_of   :label
   validates_presence_of   :slug,
     :unless => lambda{|p| CmsPage.count == 0 || p == CmsPage.root}
-  validates_format_of     :slug, 
+  validates_format_of     :slug,
     :with   => /^\w[a-z0-9_-]*$/i,
     :unless => lambda{|p| CmsPage.count == 0 || p == CmsPage.root}
   validates_uniqueness_of :full_path
   
   validate :validate_redirect_to
-  
   
   # -- AR Callbacks ---------------------------------------------------------
   
@@ -113,5 +111,4 @@ protected
       end
     end
   end
-  
 end

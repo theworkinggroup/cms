@@ -1,5 +1,7 @@
 class CmsAdmin::BaseController < ApplicationController
   
+  before_filter :authenticate
+  
   helper_method :application_name
   
   layout 'cms_admin'
@@ -18,6 +20,14 @@ class CmsAdmin::BaseController < ApplicationController
     m = %w( massive monster mini mighty morbid mexican moses machine mucus murder macabre macho maddening madly magenta magical magnificent majestic makeshift malicious mammoth maniacal many marked massive materialistic mature measly meek melodic merciful mere mighty mindless miniature minor miscreant moaning modern moldy momentous muddled mundane murky mushy mysterious)
     s = %w( scott sean sack sail salt sand scale scarecrow scarf scene scent school science scissors screw sea seashore seat secretary seed selection self sense servant shade shake shame shape sheep sheet shelf ship shirt shock shoe shoes shop show side sidewalk sign silk silver sink sister sisters size skate skin skirt sky slave sleep sleet slip slope smash smell smile smoke snail snails snake snakes sneeze snow soap society sock soda sofa son song songs sort sound soup space spade spark spiders sponge spoon spot spring spy square squirrel stage stamp star start statement station steam steel stem step stew stick sticks stitch stocking stomach stone stop store story stove stranger straw stream street stretch string structure substance sugar suggestion suit summer sun support surprise sweater swim swing system sangria)
     [c, m, s].collect{|a| a.sort_by{rand}.first.capitalize}.join
+  end
+  
+protected
+
+  def authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      username == CMS_USERNAME && password == CMS_PASSWORD
+    end
   end
   
 end
