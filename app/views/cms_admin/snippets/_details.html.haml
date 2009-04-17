@@ -1,0 +1,11 @@
+- snippet ||= details
+
+.details
+  
+  = link_to_function '+ show details', "$('snippet_details_#{snippet.id}').show(); $(this).hide()"
+  
+  %div{:id => "snippet_details_#{snippet.id}", :style => 'display: none'}
+    %table
+      %tr
+        %th Last Updated:
+        %td= "#{time_ago_in_words(snippet.updated_at)} ago"

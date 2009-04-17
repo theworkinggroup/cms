@@ -19,11 +19,7 @@
           
         .item
           = link_to snippet.label, edit_cms_admin_snippet_path(snippet), :class => 'label'
-          .item_properties
-            %span.property
-              %span.label Last Updated:
-              = "#{time_ago_in_words(snippet.updated_at)} ago"
-              
+          = render :partial => 'details', :object => snippet
               
   - if @snippets.size > 0
     = sortable_element "snippet_list", :url => {:action => :reorder}, :handle => 'dragger'
