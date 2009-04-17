@@ -22,11 +22,7 @@
       
       .item
         = link_to layout.label, edit_cms_admin_layout_path(layout), :class => 'label'
-        .item_properties
-          %span.property
-            %span.label Last Updated:
-            = "#{time_ago_in_words(layout.updated_at)} ago"
-      
+        = render :partial => 'details', :object => layout
       
       - if session[:cms_layout_tree] && session[:cms_layout_tree].member?(layout.id.to_s)
         %div{:id => "layout_#{layout.id}_children"}

@@ -1,5 +1,6 @@
 links:
-  label: links
+  label: Links Snippet
+  slug: links
   content: |-
     <div class='links'>
       <a href='http://google.com'>google.com</a>
@@ -8,6 +9,7 @@ links:
     </div>
     
 marquee:
-  label: marquee
+  label: Marquee Snippet
+  slug: marquee
   content: |-
     <marquee>Checkout my awesome marquee with <blink> blink tag </blink></marquee>

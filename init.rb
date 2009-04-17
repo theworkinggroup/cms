@@ -1,0 +1,1 @@
+require 'cms_rails_extensions'

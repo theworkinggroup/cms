@@ -21,7 +21,7 @@
       
       .item
         = link_to page.label, edit_cms_admin_page_path(page), :class => 'label'
-        = render :partial => 'page_details', :object => page
+        = render :partial => 'details', :object => page
         
       - if session[:cms_page_tree] && session[:cms_page_tree].member?(page.id.to_s)
         %div{:id => "page_#{page.id}_children"}
