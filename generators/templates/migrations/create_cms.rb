@@ -1,4 +1,4 @@
-class CreateCmsStructure < ActiveRecord::Migration
+class CreateCms < ActiveRecord::Migration
   def self.up
     create_table :cms_layouts do |t|
       t.integer :parent_id
