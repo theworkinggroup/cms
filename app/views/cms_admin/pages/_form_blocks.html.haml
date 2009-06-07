@@ -1,4 +1,4 @@
-- @layout.tags.select{|t| t.type == 'cms_block'}.each do |tag|
+- @layout.tags.select{|t| !t.type.match(/^cms_(.*?_)?block$/).blank? }.each do |tag|
   
   - block_content = @page.cms_blocks.with_label(tag.label).first.content rescue ''
   

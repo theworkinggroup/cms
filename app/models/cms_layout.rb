@@ -13,7 +13,6 @@ class CmsLayout < ActiveRecord::Base
   validates_presence_of :label
   validates_uniqueness_of :label
   validate  :validate_block_presence,
-            :validate_block_uniqueness,
             :validate_proper_relationship
   
   
@@ -69,12 +68,6 @@ protected
   def validate_block_presence
     if self.tags.select{|t| t.type == 'cms_block'}.empty?
       self.errors.add(:content, 'does not have any cms_blocks defined') 
-    end
-  end
-  
-  def validate_block_uniqueness
-    if !self.tags.unique_by{|t| [t.type, t.label]}
-      self.errors.add(:content, 'has mutilple identical cms_blocks')
     end
   end
   
