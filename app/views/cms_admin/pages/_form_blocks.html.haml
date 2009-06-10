@@ -1,6 +1,6 @@
 - @layout.tags.select{|t| !t.type.match(/^cms_(.*?_)?block$/).blank? }.each do |tag|
   
-  - block_content = @page.cms_blocks.with_label(tag.label).first.content rescue ''
+  - block_content = @page.send(tag.label).content rescue ''
   
   - case tag.datatype
     - when 'text'
