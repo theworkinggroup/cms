@@ -1,7 +1,3 @@
-log/*
-tmp/*/*
-tmp/restart.txt
-public/stylesheets
 .DS_Store
-db/development_structure.sql
-db/schema.rb
+pkg
+Manifest
