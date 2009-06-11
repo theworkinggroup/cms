@@ -13,6 +13,6 @@ ActionController::Routing::Routes.draw do |map|
       :collection => { :reorder   => :any }
   end
   
-  map.connect '/*path', :controller => 'cms_content', :action => 'show'
+  map.connect '*path', :controller => 'cms_content', :action => 'show'
   
 end

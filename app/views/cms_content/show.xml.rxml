@@ -1,0 +1,26 @@
+pub_date = @cms_page_children.first.try(:created_at) || Time.now
+
+xml.instruct!
+
+xml.rss(:version => '2.0') do
+  xml.channel do
+    xml.title @cms_page.label
+    xml.description ''#@cms_page.content
+    xml.link "http://#{request.host}"
+    xml.language 'en-US'
+    xml.pubDate pub_date.utc.strftime("%d %b %Y %H:%M:%S GMT")
+    xml.lastBuildDate Time.now.utc.strftime("%d %b %Y %H:%M:%S GMT")
+    
+    @cms_page_children.each do |page|
+      xml.item do
+        xml.title page.label
+        xml.link "http://#{request.host}#{url_for(request.request_uri)}"
+        xml.description do
+          xml.cdata! page.rendered_content
+        end
+        xml.pubDate page.created_at.utc.strftime("%d %b %Y %H:%M:%S GMT")
+        xml.guid page.id
+      end
+    end
+  end
+end
