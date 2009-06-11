@@ -1,3 +1,6 @@
 .DS_Store
 pkg
 Manifest
+test/rails_root/db
+test/rails_root/log
+test/rails_root/vendor

@@ -1,7 +1,6 @@
 default_page_default_block: &block
   cms_page: default_page
   label: default
-  block_type:
   content: Block content. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
   
 subpage_1_left_block:
@@ -29,14 +28,17 @@ subpage_1_3_default_block:
 subpage_2_left_block:
   <<: *block
   cms_page: subpage_2
+  label: left
   
 subpage_2_middle_block:
   <<: *block
   cms_page: subpage_2
+  label: middle
   
 subpage_2_right_block:
   <<: *block
   cms_page: subpage_2
+  label: right
   
 subpage_3_default_block:
   <<: *block

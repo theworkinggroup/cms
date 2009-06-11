@@ -2,6 +2,8 @@ require 'test_helper'
 
 class CmsLayoutTest < ActiveSupport::TestCase
   
+  fixtures :cms_layouts
+  
   def setup
     @cms_layout = cms_layouts(:two_column_layout)
     super
