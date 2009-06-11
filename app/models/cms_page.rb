@@ -45,7 +45,6 @@ class CmsPage < ActiveRecord::Base
   # -- Instance Methods -----------------------------------------------------
   
   def content
-    
     page_content = self.cms_layout.content
     
     # block replacements
@@ -58,7 +57,6 @@ class CmsPage < ActiveRecord::Base
       page_content.gsub!(/\{\{\s*cms_snippet:#{snippet.label}\s*\}\}/, snippet.content)
     end
     
-    # raise page_content.to_s
     page_content
   end
   

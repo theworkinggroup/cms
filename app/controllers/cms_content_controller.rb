@@ -15,7 +15,7 @@ class CmsContentController < ApplicationController
         render :inline => @cms_page.content, :layout => (@cms_page.cms_layout.app_layout || false)
       end
       format.xml do
-        @cms_page_children = @cms_page.children.collect do |p|
+        @cms_page_children = @cms_page.children[0...25].collect do |p|
           p.rendered_content = render_to_string(:inline => p.content, :layout => false)
           p
         end
