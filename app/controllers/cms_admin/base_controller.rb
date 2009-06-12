@@ -20,6 +20,7 @@ class CmsAdmin::BaseController < ApplicationController
   end
   
   def application_name
+    ComfortableMexicanSofa::Config.cms_title || 
     [CMS_C, CMS_M, CMS_S].collect{|a| a.sort_by{rand}.first.capitalize}.join
   end
   
@@ -27,8 +28,9 @@ protected
 
   def authenticate
     authenticate_or_request_with_http_basic do |username, password|
-      username == CMS_USERNAME && password == CMS_PASSWORD
-    end
+      username == ComfortableMexicanSofa::Config.http_auth_username && 
+      password == ComfortableMexicanSofa::Config.http_auth_password
+    end if ComfortableMexicanSofa::Config.http_auth_enabled
   end
   
 end
