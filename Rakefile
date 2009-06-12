@@ -2,22 +2,10 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-namespace :test do
-  Rake::TestTask.new(:all => ['generator:cleanup', 'generator:prepare']) do |task|
-    task.libs     << 'lib'
-    task.libs     << 'test'
-    task.pattern  = 'test/**/*_test.rb'
-    task.verbose  = false
-  end
-end
-
 namespace :generator do
-  
   desc "Cleans up test application"
   task :cleanup do
-    puts 'removing plugin ...'
     FileUtils.rm_rf("test/rails_root/vendor/plugins/comfortable_mexican_sofa")
-    puts 'removing database ...'
     FileUtils.rm_rf("test/rails_root/db")
   end
   
@@ -30,7 +18,7 @@ namespace :generator do
 end
 
 desc "Run the test suite"
-task :default => ['test:all']
+task :default => ['generator:cleanup', 'generator:prepare']
 
 Echoe.new('comfortable_mexican_sofa', '0.0.1') do |p|
   p.description    = "Open CMS Engine"
