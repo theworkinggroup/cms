@@ -1,3 +1,30 @@
-== Comfortable Mexican Sofa
+= Comfortable Mexican Sofa
 
-This is a CMS Engine... i think
+CMS Engine that allows direct interaction with Rails guts. Not intended for users that would put <% ActiveRecord::Base.connection.execute('DELETE FROM important_table_of_some_sort') %> as content of a page.
+
+== Install
+
+From local gem:
+  rake manifest && rake install
+  
+In your rails project:
+  # config/envionment.rb
+  config.gem 'comfortable_mexican_sofa'
+  
+Run the follwing in your console to generate migrations and update your database:
+  script/generate cms
+  rake db:migrate
+  
+Navigate to the following address to access cms admin page:
+  http://your_application/cms_admin
+  
+== Sample CMS Configuration
+  
+  ComfortableMexicanSofa.config do |config|
+    config.http_auth_username = 'username'
+    config.http_auth_password = 'secret_password'
+  end
+  
+== Setting up and Writing CMS Content
+
+To do
