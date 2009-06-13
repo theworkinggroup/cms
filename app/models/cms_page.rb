@@ -54,7 +54,7 @@ class CmsPage < ActiveRecord::Base
     
     # snippet replacements
     CmsSnippet.all.each do |snippet|
-      page_content.gsub!(/\{\{\s*cms_snippet:#{snippet.label}\s*\}\}/, snippet.content)
+      page_content.gsub!(/\{\{\s*cms_snippet:#{snippet.slug}\s*\}\}/, snippet.content)
     end
     
     page_content
