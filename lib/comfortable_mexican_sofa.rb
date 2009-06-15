@@ -11,7 +11,7 @@ module ComfortableMexicanSofa
     cattr_accessor_with_default :http_auth_enabled,   true
     cattr_accessor_with_default :http_auth_username,  'username'
     cattr_accessor_with_default :http_auth_password,  'password'
-    cattr_accessor_with_default :cms_title,           nil
+    cattr_accessor_with_default :cms_title
   end
   
   def self.config(&block)
@@ -26,6 +26,6 @@ class ActionController::Routing::RouteSet
     add_configuration_file(cms_routes) unless configuration_files.include? cms_routes
     load_routes_without_cms!
   end
- 
+  
   alias_method_chain :load_routes!, :cms
 end

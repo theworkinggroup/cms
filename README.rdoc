@@ -27,4 +27,10 @@ Navigate to the following address to access cms admin page:
   
 == Setting up and Writing CMS Content
 
-To do
+Here's some available type of tags that allow construction and insertion of page content:
+
+  cms_page_block  - block that gets rendered in the actual content of the page
+  cms_block       - block that is not automatically rendered
+  cms_snippet     - it's a snippet
+  cms_helper      - it's a helper method of some sort
+  cms_partial     - sometimes all we need is a partial
