@@ -1,5 +1,6 @@
 require 'comfortable_mexican_sofa/cms_rails_extensions'
 require 'comfortable_mexican_sofa/acts_as_tree'
+require 'comfortable_mexican_sofa/active_link_helper'
 
 module ComfortableMexicanSofa
   class Config
