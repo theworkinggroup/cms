@@ -1,4 +1,6 @@
-- @layout.tags.select{|t| !t.type.match(/^cms_(.*?_)?block$/).blank? }.each do |tag|
+- @layout ||= @page.cms_layout
+
+- @layout && @layout.tags.select{|t| !t.type.match(/^cms_(.*?_)?block$/).blank? }.each do |tag|
   
   - block_content = @page.send(tag.label).content rescue ''
   

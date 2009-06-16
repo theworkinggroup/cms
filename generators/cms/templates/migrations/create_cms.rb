@@ -28,7 +28,7 @@ class CreateCms < ActiveRecord::Migration
     end
     
     add_index :cms_pages, :parent_id
-    add_index :cms_pages, :slug, :unique => true
+    add_index :cms_pages, :slug
     add_index :cms_pages, :full_path, :unique => true
     
     create_table :cms_snippets do |t|

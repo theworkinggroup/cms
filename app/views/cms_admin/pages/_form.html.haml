@@ -26,6 +26,4 @@
   .field= form.select :cms_layout_id, CmsLayout.options_for_select, {}, :onchange => remote_function(:url => {:action => :form_blocks, :id => (@page.try(:id) || 0)}, :with => "'layout_id=' + value")
   
 #form_blocks
-
-  - if !@page.new_record?
-    = render :partial => 'form_blocks'
+  = render :partial => 'form_blocks'
