@@ -2,6 +2,9 @@ require 'comfortable_mexican_sofa/cms_rails_extensions'
 require 'comfortable_mexican_sofa/acts_as_tree'
 require 'comfortable_mexican_sofa/active_link_helper'
 
+# Helper inclusion
+ActionView::Base.send(:include, CmsHelper)
+
 module ComfortableMexicanSofa
   class Config
     def self.cattr_accessor_with_default(name, value = nil)
@@ -13,6 +16,7 @@ module ComfortableMexicanSofa
     cattr_accessor_with_default :http_auth_username,  'username'
     cattr_accessor_with_default :http_auth_password,  'password'
     cattr_accessor_with_default :cms_title
+    cattr_accessor_with_default :additional_cms_tabs, {}
   end
   
   def self.config(&block)
