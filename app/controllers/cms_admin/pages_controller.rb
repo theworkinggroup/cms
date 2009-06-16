@@ -16,7 +16,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   end
   
   def edit
-    @layout = @page.cms_layout
+    # ...
   end
   
   def create
@@ -27,8 +27,8 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     manage_session_array(:cms_page_tree, :add, @page.parent_id.to_s)
     redirect_to :action => :index
     
-  rescue ActiveRecord::RecordInvalid
-    new
+  rescue ActiveRecord::RecordInvalid => e
+    @page = e.record
     render :action => :new
   end
   
@@ -39,7 +39,6 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     redirect_to :action => :index
     
   rescue ActiveRecord::RecordInvalid
-    edit
     render :action => :edit
   end
   
@@ -51,8 +50,8 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   end
   
   def form_blocks
-    @layout = CmsLayout.find(params[:layout_id])
     @page = CmsPage.find_by_id(params[:id])
+    @layout = CmsLayout.find(params[:layout_id])
   end
   
   def reorder
