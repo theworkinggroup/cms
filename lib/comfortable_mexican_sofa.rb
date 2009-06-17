@@ -3,11 +3,12 @@ require 'comfortable_mexican_sofa/cms_acts_as_tree'
 require 'comfortable_mexican_sofa/cms_tag'
 
 unless defined?(ActiveLinkHelper)
-  require File.join(File.dirname(__FILE__), "..", "vendor", "active_link_helper", "init") 
+  require 'vendor/active_link_helper/lib/active_link_helper' 
 end
 
 unless defined?(Paperclip)
-  require File.join(File.dirname(__FILE__), "..", "vendor", "paperclip", "init")
+  $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[vendor paperclip lib]))
+  require 'vendor/paperclip/lib/paperclip' 
 end
 
 # Helper inclusion
