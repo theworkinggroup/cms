@@ -7,6 +7,7 @@ class CmsGenerator < Rails::Generator::Base
       m.directory sass_dir
       m.file "stylesheets/cms_master.sass", "#{sass_dir}/cms_master.sass", :collision => :skip
       m.file 'javascripts/cms_mce_init.js', 'public/javascripts/cms_mce_init.js', :collision => :skip
+      m.file 'initializers/paperclip.rb', 'config/initializers/paperclip.rb', :collision => :skip
       
       m.readme 'README'
     end

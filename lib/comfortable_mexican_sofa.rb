@@ -1,6 +1,14 @@
 require 'comfortable_mexican_sofa/cms_rails_extensions'
-require 'comfortable_mexican_sofa/acts_as_tree'
-require 'comfortable_mexican_sofa/active_link_helper'
+require 'comfortable_mexican_sofa/cms_acts_as_tree'
+require 'comfortable_mexican_sofa/cms_tag'
+
+unless defined?(ActiveLinkHelper)
+  require File.join(File.dirname(__FILE__), "..", "vendor", "active_link_helper", "init") 
+end
+
+unless defined?(Paperclip)
+  require File.join(File.dirname(__FILE__), "..", "vendor", "paperclip", "init")
+end
 
 # Helper inclusion
 ActionView::Base.send(:include, CmsHelper)
