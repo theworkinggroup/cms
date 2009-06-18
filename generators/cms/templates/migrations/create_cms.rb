@@ -74,5 +74,6 @@ class CreateCms < ActiveRecord::Migration
     drop_table :cms_pages
     drop_table :cms_snippets
     drop_table :cms_blocks
+    drop_table :cms_attachments
   end
 end

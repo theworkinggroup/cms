@@ -29,7 +29,7 @@
           = render :partial => 'tree_branch', :object => layout.children
       - else
         %div{:id => "layout_#{layout.id}_children", :style => 'display: none'}
-          Hold your horses woman. I'm loading stuff...
+          Please wait. I'm loading stuff...
           
     - if layout.siblings.size > 0         
       = sortable_element "layout_#{container_id}_branch", :url => {:action => :reorder, :id => container_id}, :handle => 'dragger'

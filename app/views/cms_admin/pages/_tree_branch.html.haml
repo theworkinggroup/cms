@@ -28,7 +28,7 @@
           = render :partial => 'tree_branch', :object => page.children
       - else
         %div{:id => "page_#{page.id}_children", :style => 'display: none'}
-          Hold your horses woman. I'm loading stuff...
+          Please wait. I'm loading stuff...
   
     - if page.siblings.size > 0         
       = sortable_element "page_#{container_id}_branch", :url => {:action => :reorder, :id => container_id}, :handle => 'dragger'
