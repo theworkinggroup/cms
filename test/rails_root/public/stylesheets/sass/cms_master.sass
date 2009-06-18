@@ -1,0 +1,226 @@
+body#cms_admin_layout
+  padding: 0px
+  margin: 0px
+  font: 13px arial, verdana, clean, sans-serif
+  background-color: #dedede
+  
+  .header
+    height: 50px
+    background: #0E518B
+    padding: 0px 25px
+    position: relative
+    h1
+      font: 200%/50px Georgia, serif
+      padding: 0px
+      margin: 0px
+      color: #fff
+    
+    ul.main_nav
+      position: absolute
+      bottom: 0px
+      left: 350px
+      list-style: none
+      margin: 0px
+      padding: 0px
+      li
+        float: left
+        a
+          float: left
+          margin-right: 5px
+          height: 30px
+          width: 100px
+          color: #fff
+          background: #2086C4
+          font: 123%/30px Helvetica, serif
+          text-decoration: none
+          text-align: center
+          -moz-border-radius-topleft: 4px
+          -moz-border-radius-topright: 4px
+        a.active
+          background-color: #fff
+          color: #000
+  .content
+    background-color: #fff
+    padding: 25px
+    .flash
+      -moz-border-radius: 4px
+      padding: 10px
+      text-align: center
+      font-size: 123%
+      margin-bottom: 25px
+      color: #fff
+    .flash.notice
+      background-color: #039C00
+    
+  .footer
+    color: #fff
+    text-align: center
+    padding: 10px
+
+    
+// ------------------------------------------------------------------- Common
+#cms_admin_layout
+
+  h2
+    margin: 0px
+    padding: 0px
+    margin-bottom: 15px
+  
+  a
+    color: #0E518B
+    outline: none
+  
+  a.big_button
+    float: right
+    background-color: #2086C4
+    font: 123%/30px Helvetica, serif
+    color: #fff
+    text-decoration: none
+    padding: 0px 10px
+    -moz-border-radius: 4px
+  
+  // --------------------------------------------------------- Tree Structure
+  .tree_structure
+    ul
+      list-style: none
+      margin: 0px
+      padding: 0px
+      li
+        position: relative
+        margin-bottom: 5px
+        background-color: #e6edf3
+        -moz-border-radius: 4px
+        padding: 10px 10px 10px 50px
+        
+        .controls
+          position: absolute
+          top: 0px 
+          left: 0px
+          background-color: #0E518B
+          -moz-border-radius-topleft: 4px
+          -moz-border-radius-bottomright: 4px
+          a.expander, .dragger
+            padding: 3px 5px
+            width: 30px
+            display: block
+            color: #fff
+          a.expander
+            text-decoration: none
+          a.expander:hover
+            font-weight: bold
+            -moz-border-radius-topleft: 4px
+          .dragger
+            cursor: move
+            background-color: #926492
+            -moz-border-radius-topleft: 4px
+            -moz-border-radius-bottomright: 4px
+            
+        .action_links
+          a
+            float: right
+            background-color: #fff
+            padding: 2px 5px
+            margin-left: 5px
+            -moz-border-radius: 2px
+            text-decoration: none
+            color: #0E518B
+          a:hover
+            background-color: #2086C4
+            color: #fff
+          a.remove:hover
+            background-color: #C33013
+            color: #fff
+            
+        .item
+          a.label
+            font: 123% Georgia, serif
+            color: #000
+            text-decoration: none
+          .details
+            font-size: 85%
+            margin-bottom: 5px
+            a
+              text-decoration: none
+            table
+              th, td
+                padding: 2px 5px
+              th
+                font-weight: normal
+                text-align: right
+                background-color: #e5e5e5
+                -moz-border-radius: 2px
+          
+        
+        
+        ul li
+          background-color: #cfdce8
+          ul li
+            background-color: #b6cadc
+            ul li
+              background-color: #9fb9d1
+              ul li
+                background-color: #86a8c5
+                ul li
+                  background-color: #6e97b9
+                  ul li
+                    background-color: #5785ae
+                    ul li
+                      background-color: #3e74a2
+                      ul li
+                        background-color: #266296
+                        ul li
+                          background-color: #0e518b
+                          
+  // ------------------------------------------------------------------ Forms
+  form
+    .errorExplanation
+      background-color: #9E0B0F
+      padding: 20px
+      margin-bottom: 30px
+      color: #fff
+      -moz-border-radius: 4px
+    
+    .submit
+      text-align: right
+    
+    .form_element
+      overflow: hidden
+      padding: 5px 0px
+      -moz-border-radius: 4px
+      .label
+        width: 10%
+        float: left
+        label
+          display: block
+          text-align: right
+          padding: 0px 10px
+          line-height: 162%
+        .fieldWithErrors
+          label
+            background-color: #9E0B0F
+            color: #fff
+            -moz-border-radius-topleft: 4px
+            -moz-border-radius-bottomleft: 4px
+      .field
+        width: 90%
+        float: right
+        input, select, textarea
+          width: 99%
+        
+    .form_element.text.large
+      label
+        font: 139%/185% Arial, sans-serif
+      input
+        font-size: 154%
+        
+    .form_element:hover
+      background-color: #e5e5e5
+        
+  // ------------------------------------------------------------------- Help
+  .help
+    background-color: #FBFEA0
+    padding: 20px
+    margin-bottom: 15px
+    border: 1px solid #e5e5e5
+    -moz-border-radius: 4px
+    

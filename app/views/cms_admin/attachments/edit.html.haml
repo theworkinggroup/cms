@@ -1,0 +1,6 @@
+%h2 Editing Attachment
+
+- form_for :attachment, @attachment, :url => {:action => :update}, :html => {:method => :put, :multipart => true} do |form|
+  = render :partial => form
+  .submit
+    = form.submit 'Edit Attachment'

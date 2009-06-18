@@ -26,6 +26,7 @@ module ComfortableMexicanSofa
     cattr_accessor_with_default :http_auth_password,  'password'
     cattr_accessor_with_default :cms_title
     cattr_accessor_with_default :additional_cms_tabs, {}
+    cattr_accessor_with_default :paperclip_options,   {}
   end
   
   def self.config(&block)

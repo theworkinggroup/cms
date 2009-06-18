@@ -51,6 +51,19 @@ class CreateCms < ActiveRecord::Migration
     
     add_index :cms_blocks, [:cms_page_id, :label], :unique => true
     
+    create_table :cms_attachments do |t|
+      t.string :file_file_name
+      t.string :file_content_type
+      t.string :file_file_size
+      t.string :label
+      t.text :description
+      t.timestamps
+    end
+    
+    add_index :cms_attachments, :created_at
+    add_index :cms_attachments, :file_content_type
+    add_index :cms_attachments, [:file_content_type, :created_at]
+    
   rescue
     self.down
     raise

@@ -1,0 +1,19 @@
+= form.error_messages
+
+.form_element.text.large
+  .label= form.label :label, 'Label'
+  .field= form.text_field :label
+
+- if @attachment && @attachment.file? && !@attachment.new_record?
+  .form_element
+    .label
+      %label Current File
+    .field= link_to @attachment.file_file_name, @attachment.file.url
+
+.form_element.text
+  .label= form.label :file, 'File'
+  .field= form.file_field :file
+
+.form_element.text_area
+  .label= form.label :description, 'Description'
+  .field= form.text_area :description

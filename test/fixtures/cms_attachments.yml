@@ -1,0 +1,6 @@
+attachment:
+  file_file_name: sample.txt
+  file_content_type: text/plain
+  file_file_size: 9999
+  label: My awesome file
+  description: This file has a lot of information within

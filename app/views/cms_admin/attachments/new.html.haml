@@ -1,0 +1,8 @@
+%h2 New Attachment
+
+- form_for :attachment, @attachment, :url => {:action => :create }, :html => { :multipart => true } do |form|
+  = render :partial => form
+  .submit
+    = form.submit 'Create Attachment'
+    or 
+    = link_to 'Cancel', cms_admin_attachments_path

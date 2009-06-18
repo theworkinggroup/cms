@@ -1,0 +1,193 @@
+body#cms_admin_layout {
+  padding: 0px;
+  margin: 0px;
+  font: 13px arial, verdana, clean, sans-serif;
+  background-color: #dedede; }
+  body#cms_admin_layout .header {
+    height: 50px;
+    background: #0E518B;
+    padding: 0px 25px;
+    position: relative; }
+    body#cms_admin_layout .header h1 {
+      font: 200%/50px Georgia, serif;
+      padding: 0px;
+      margin: 0px;
+      color: #fff; }
+    body#cms_admin_layout .header ul.main_nav {
+      position: absolute;
+      bottom: 0px;
+      left: 350px;
+      list-style: none;
+      margin: 0px;
+      padding: 0px; }
+      body#cms_admin_layout .header ul.main_nav li {
+        float: left; }
+        body#cms_admin_layout .header ul.main_nav li a {
+          float: left;
+          margin-right: 5px;
+          height: 30px;
+          width: 100px;
+          color: #fff;
+          background: #2086C4;
+          font: 123%/30px Helvetica, serif;
+          text-decoration: none;
+          text-align: center;
+          -moz-border-radius-topleft: 4px;
+          -moz-border-radius-topright: 4px; }
+        body#cms_admin_layout .header ul.main_nav li a.active {
+          background-color: #fff;
+          color: #000; }
+  body#cms_admin_layout .content {
+    background-color: #fff;
+    padding: 25px; }
+    body#cms_admin_layout .content .flash {
+      -moz-border-radius: 4px;
+      padding: 10px;
+      text-align: center;
+      font-size: 123%;
+      margin-bottom: 25px;
+      color: #fff; }
+    body#cms_admin_layout .content .flash.notice {
+      background-color: #039C00; }
+  body#cms_admin_layout .footer {
+    color: #fff;
+    text-align: center;
+    padding: 10px; }
+
+#cms_admin_layout h2 {
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 15px; }
+#cms_admin_layout a {
+  color: #0E518B;
+  outline: none; }
+#cms_admin_layout a.big_button {
+  float: right;
+  background-color: #2086C4;
+  font: 123%/30px Helvetica, serif;
+  color: #fff;
+  text-decoration: none;
+  padding: 0px 10px;
+  -moz-border-radius: 4px; }
+#cms_admin_layout .tree_structure ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px; }
+  #cms_admin_layout .tree_structure ul li {
+    position: relative;
+    margin-bottom: 5px;
+    background-color: #e6edf3;
+    -moz-border-radius: 4px;
+    padding: 10px 10px 10px 50px; }
+    #cms_admin_layout .tree_structure ul li .controls {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      background-color: #0E518B;
+      -moz-border-radius-topleft: 4px;
+      -moz-border-radius-bottomright: 4px; }
+      #cms_admin_layout .tree_structure ul li .controls a.expander, #cms_admin_layout .tree_structure ul li .controls .dragger {
+        padding: 3px 5px;
+        width: 30px;
+        display: block;
+        color: #fff; }
+      #cms_admin_layout .tree_structure ul li .controls a.expander {
+        text-decoration: none; }
+      #cms_admin_layout .tree_structure ul li .controls a.expander:hover {
+        font-weight: bold;
+        -moz-border-radius-topleft: 4px; }
+      #cms_admin_layout .tree_structure ul li .controls .dragger {
+        cursor: move;
+        background-color: #926492;
+        -moz-border-radius-topleft: 4px;
+        -moz-border-radius-bottomright: 4px; }
+    #cms_admin_layout .tree_structure ul li .action_links a {
+      float: right;
+      background-color: #fff;
+      padding: 2px 5px;
+      margin-left: 5px;
+      -moz-border-radius: 2px;
+      text-decoration: none;
+      color: #0E518B; }
+    #cms_admin_layout .tree_structure ul li .action_links a:hover {
+      background-color: #2086C4;
+      color: #fff; }
+    #cms_admin_layout .tree_structure ul li .action_links a.remove:hover {
+      background-color: #C33013;
+      color: #fff; }
+    #cms_admin_layout .tree_structure ul li .item a.label {
+      font: 123% Georgia, serif;
+      color: #000;
+      text-decoration: none; }
+    #cms_admin_layout .tree_structure ul li .item .details {
+      font-size: 85%;
+      margin-bottom: 5px; }
+      #cms_admin_layout .tree_structure ul li .item .details a {
+        text-decoration: none; }
+      #cms_admin_layout .tree_structure ul li .item .details table th, #cms_admin_layout .tree_structure ul li .item .details table td {
+        padding: 2px 5px; }
+      #cms_admin_layout .tree_structure ul li .item .details table th {
+        font-weight: normal;
+        text-align: right;
+        background-color: #e5e5e5;
+        -moz-border-radius: 2px; }
+    #cms_admin_layout .tree_structure ul li ul li {
+      background-color: #cfdce8; }
+      #cms_admin_layout .tree_structure ul li ul li ul li {
+        background-color: #b6cadc; }
+        #cms_admin_layout .tree_structure ul li ul li ul li ul li {
+          background-color: #9fb9d1; }
+          #cms_admin_layout .tree_structure ul li ul li ul li ul li ul li {
+            background-color: #86a8c5; }
+            #cms_admin_layout .tree_structure ul li ul li ul li ul li ul li ul li {
+              background-color: #6e97b9; }
+              #cms_admin_layout .tree_structure ul li ul li ul li ul li ul li ul li ul li {
+                background-color: #5785ae; }
+                #cms_admin_layout .tree_structure ul li ul li ul li ul li ul li ul li ul li ul li {
+                  background-color: #3e74a2; }
+                  #cms_admin_layout .tree_structure ul li ul li ul li ul li ul li ul li ul li ul li ul li {
+                    background-color: #266296; }
+                    #cms_admin_layout .tree_structure ul li ul li ul li ul li ul li ul li ul li ul li ul li ul li {
+                      background-color: #0e518b; }
+#cms_admin_layout form .errorExplanation {
+  background-color: #9E0B0F;
+  padding: 20px;
+  margin-bottom: 30px;
+  color: #fff;
+  -moz-border-radius: 4px; }
+#cms_admin_layout form .submit {
+  text-align: right; }
+#cms_admin_layout form .form_element {
+  overflow: hidden;
+  padding: 5px 0px;
+  -moz-border-radius: 4px; }
+  #cms_admin_layout form .form_element .label {
+    width: 10%;
+    float: left; }
+    #cms_admin_layout form .form_element .label label {
+      display: block;
+      text-align: right;
+      padding: 0px 10px;
+      line-height: 162%; }
+    #cms_admin_layout form .form_element .label .fieldWithErrors label {
+      background-color: #9E0B0F;
+      color: #fff;
+      -moz-border-radius-topleft: 4px;
+      -moz-border-radius-bottomleft: 4px; }
+  #cms_admin_layout form .form_element .field {
+    width: 90%;
+    float: right; }
+    #cms_admin_layout form .form_element .field input, #cms_admin_layout form .form_element .field select, #cms_admin_layout form .form_element .field textarea {
+      width: 99%; }
+#cms_admin_layout form .form_element.text.large label {
+  font: 139%/185% Arial, sans-serif; }
+#cms_admin_layout form .form_element.text.large input {
+  font-size: 154%; }
+#cms_admin_layout form .form_element:hover {
+  background-color: #e5e5e5; }
+#cms_admin_layout .help {
+  background-color: #FBFEA0;
+  padding: 20px;
+  margin-bottom: 15px;
+  border: 1px solid #e5e5e5;
+  -moz-border-radius: 4px; }
