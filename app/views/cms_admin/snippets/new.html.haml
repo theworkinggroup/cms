@@ -1,6 +1,6 @@
 %h2 New Snippet
 
-- form_for :snippet, @snippet, :url => {:action => :create } do |form|
+- form_for :snippet, :url => {:action => :create } do |form|
   = render :partial => form
   .submit
     = form.submit 'Create Snippet'

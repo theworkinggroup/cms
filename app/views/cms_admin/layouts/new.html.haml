@@ -1,6 +1,6 @@
 %h2 New Layout
 
-- form_for :layout, @layout, :url => {:action => :create } do |form|
+- form_for :layout, :url => {:action => :create } do |form|
   = render :partial => form
   .submit
     = form.submit 'Create Layout'

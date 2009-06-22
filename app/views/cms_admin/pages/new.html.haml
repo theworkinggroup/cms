@@ -1,6 +1,6 @@
 %h2 New Page
 
-- form_for :page, @page, :url => {:action => :create } do |form|
+- form_for :page, :url => {:action => :create } do |form|
   = render :partial => form
   .submit
     = form.submit 'Create Page'

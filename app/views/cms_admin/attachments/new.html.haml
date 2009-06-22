@@ -1,6 +1,6 @@
 %h2 New Attachment
 
-- form_for :attachment, @attachment, :url => {:action => :create }, :html => { :multipart => true } do |form|
+- form_for :attachment, :url => {:action => :create }, :html => { :multipart => true } do |form|
   = render :partial => form
   .submit
     = form.submit 'Create Attachment'

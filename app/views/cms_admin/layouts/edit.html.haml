@@ -1,6 +1,6 @@
 %h2 Editing Layout
 
-- form_for :layout, @layout, :url => {:action => :update}, :html => {:method => :put} do |form|
+- form_for :layout, :url => {:action => :update}, :html => {:method => :put} do |form|
   = render :partial => form
   .submit
     = form.submit 'Edit Layout'

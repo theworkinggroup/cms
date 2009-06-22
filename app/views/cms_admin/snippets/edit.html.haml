@@ -1,6 +1,6 @@
 %h2 Editing Snippet
 
-- form_for :snippet, @snippet, :url => {:action => :update}, :html => {:method => :put} do |form|
+- form_for :snippet, :url => {:action => :update}, :html => {:method => :put} do |form|
   = render :partial => form
   .submit
     = form.submit 'Edit Snippet'
