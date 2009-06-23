@@ -2,7 +2,5 @@
 - @layout && @layout.tags(:view => self, :page => @page).each do |tag|
   
   .form_element
-    .label
-      = tag.form_label
-    .field
-      = tag.form_input
+    .label= tag.form_label
+    .field= tag.form_input

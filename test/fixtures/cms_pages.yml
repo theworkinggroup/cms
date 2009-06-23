@@ -4,6 +4,6 @@ default: &page
   parent:
   slug:
   full_path: ''
-  children_count: 3
+  children_count: 0
   position: 0
   is_published: 1

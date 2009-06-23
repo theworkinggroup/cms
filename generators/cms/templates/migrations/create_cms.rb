@@ -44,13 +44,12 @@ class CreateCms < ActiveRecord::Migration
     
     create_table :cms_blocks do |t|
       t.integer :cms_page_id
-      t.string :block_type
       t.string :label
       t.text :content
       t.timestamps
     end
     
-    add_index :cms_blocks, [:cms_page_id, :label, :block_type], :unique => true
+    add_index :cms_blocks, [:cms_page_id, :label], :unique => true
     
     create_table :cms_attachments do |t|
       t.string :file_file_name

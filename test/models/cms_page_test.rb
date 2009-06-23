@@ -7,4 +7,10 @@ class CmsPageTest < ActiveSupport::TestCase
       assert block.valid?
     end
   end
+  
+  def test_rendering
+    page = cms_pages(:default)
+    raise page.content.to_yaml
+  end
+  
 end

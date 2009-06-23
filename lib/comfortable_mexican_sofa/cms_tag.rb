@@ -34,13 +34,18 @@ module CmsTag
     
     # regular expression that finds tag signature
     def self.regex
-      //
+      'tag regex not defined'
     end
     
     # Returns tag identifiers from passed content based on regex defined
     # for the particular tag
     def self.parse_tags(content)
       content.scan(regex).flatten
+    end
+    
+    # order at which tags get replaced with their content during page rendering
+    def self.render_priority
+      0
     end
     
     def initialize(*args)
@@ -76,9 +81,15 @@ module CmsTag
       "Form Field Undefined!"
     end
     
-    def to_s
+    def content
       'Undefined Tag'
     end
+    
+    # when cms_page renders its content this is what tag outputs on the page
+    def render
+      ''
+    end
+    
   end
   
 end
