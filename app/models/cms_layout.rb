@@ -1,6 +1,6 @@
 class CmsLayout < ActiveRecord::Base
   
-  include CmsTag::InstanceMethods
+  include CmsTag::Tags
   
   # -- Relationships --------------------------------------------------------
   
@@ -66,9 +66,7 @@ class CmsLayout < ActiveRecord::Base
 protected
 
   def validate_block_presence
-    if self.tags.select{|t| t.type == 'cms_block'}.empty?
-      self.errors.add(:content, 'does not have any cms_blocks defined') 
-    end
+    self.errors.add(:content, 'does not have any cms_blocks defined') if self.tags.empty?
   end
   
   def validate_proper_relationship

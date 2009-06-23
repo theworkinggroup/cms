@@ -1,45 +1,11 @@
-default_page_default_block: &block
-  cms_page: default_page
-  label: default
-  content: Block content. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
+default_page_block_html_title:
+  cms_page: default
+  block_type: cms_block
+  label: html_title
+  content: This is a html title
   
-subpage_1_left_block:
-  <<: *block
-  cms_page: subpage_1
-  label: left 
-  
-subpage_1_right_block:
-  <<: *block
-  cms_page: subpage_1
-  label: right
-  
-subpage_1_1_default_block:
-  <<: *block
-  cms_page: subpage_1_1
-  
-subpage_1_2_default_block:
-  <<: *block
-  cms_page: subpage_1_2
-  
-subpage_1_3_default_block:
-  <<: *block
-  cms_page: subpage_1_3
-  
-subpage_2_left_block:
-  <<: *block
-  cms_page: subpage_2
-  label: left
-  
-subpage_2_middle_block:
-  <<: *block
-  cms_page: subpage_2
-  label: middle
-  
-subpage_2_right_block:
-  <<: *block
-  cms_page: subpage_2
-  label: right
-  
-subpage_3_default_block:
-  <<: *block
-  cms_page: subpage_3
+default_page_block_meta_kewords:
+  cms_page: default
+  block_type: cms_block
+  label: meta_keywords
+  content: duck duck goose

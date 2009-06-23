@@ -115,6 +115,6 @@ protected
   end
   
   def method_missing(method)
-    self.cms_blocks.select{|b| b.label == method.to_s}.first || super
+    self.cms_blocks.select{|b| "cms_block_#{b.label}" == method.to_s}.first || super
   end
 end

@@ -1,58 +1,9 @@
-default_page: &page
+default: &page
   label: home page
-  cms_layout: default_layout
+  cms_layout: default
   parent:
   slug:
   full_path: ''
   children_count: 3
   position: 0
   is_published: 1
-  
-subpage_1:
-  <<: *page
-  label: subpage 1
-  cms_layout: two_column_layout
-  parent: default_page
-  slug: subpage-1
-  full_path: subpage-1
-  
-subpage_1_1:
-  <<: *page
-  label: subpage 1.1
-  parent: subpage_1
-  slug: subpage-1-1
-  full_path: subpage-1/subpage-1-1
-  children_count: 0
-
-subpage_1_2:
-  <<: *page
-  label: subpage 1.2
-  parent: subpage_1
-  slug: subpage-1-2
-  full_path: subpage-1/subpage-1-2
-  children_count: 0
-  
-subpage_1_3:
-  <<: *page
-  label: subpage 1.3
-  parent: subpage_1
-  slug: subpage-1-3
-  full_path: subpage-1/subpage-1-3
-  children_count: 0
-
-subpage_2:
-  label: subpage 2
-  <<: *page
-  cms_layout: three_column_layout
-  parent: default_page
-  slug: subpage-2
-  full_path: subpage-2
-  children_count: 0
-  
-subpage_3:
-  <<: *page
-  label: subpage 3
-  parent: default_page
-  slug: subpage-3
-  full_path: subpage-3
-  children_count: 0

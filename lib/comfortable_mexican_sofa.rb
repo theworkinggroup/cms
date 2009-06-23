@@ -1,6 +1,14 @@
 require 'comfortable_mexican_sofa/cms_rails_extensions'
 require 'comfortable_mexican_sofa/cms_acts_as_tree'
+
 require 'comfortable_mexican_sofa/cms_tag'
+require 'comfortable_mexican_sofa/cms_tags/block'
+# require 'comfortable_mexican_sofa/cms_tags/page_block'
+# require 'comfortable_mexican_sofa/cms_tags/snippet'
+# require 'comfortable_mexican_sofa/cms_tags/helper'
+# require 'comfortable_mexican_sofa/cms_tags/partial'
+# require 'comfortable_mexican_sofa/cms_tags/attachment'
+
 
 unless defined?(ActiveLinkHelper)
   require 'vendor/active_link_helper/lib/active_link_helper' 
