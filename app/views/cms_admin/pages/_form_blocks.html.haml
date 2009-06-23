@@ -1,5 +1,5 @@
 - @layout ||= @page.cms_layout
-- @layout && @layout.tags(:view => self, :page => @page).each do |tag|
+- @layout && @layout.tags(:view => self, :page => @page).reject{|t| !t.class.has_form?}.each do |tag|
   
   .form_element
     .label= tag.form_label

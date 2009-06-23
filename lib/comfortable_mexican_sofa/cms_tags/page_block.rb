@@ -1,5 +1,7 @@
 class CmsTag::PageBlock < CmsTag::Tag
   
+  attr_accessor :format
+  
   def self.regex
     /\{\{\s*?cms_page_block:(.*?)\s*?\}\}/
   end
@@ -8,6 +10,16 @@ class CmsTag::PageBlock < CmsTag::Tag
   # for some unforseen cases
   def self.render_priority
     1 
+  end
+  
+  def self.has_form?
+    true
+  end
+  
+  def assign_accessors
+    tokens = self.tag_signature.split(':')
+    self.label = tokens[0]
+    self.format = tokens[1]
   end
   
   def form_label
@@ -32,8 +44,7 @@ class CmsTag::PageBlock < CmsTag::Tag
   end
   
   def render
-    content
+    content.to_s
   end
-  
   
 end

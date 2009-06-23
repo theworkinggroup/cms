@@ -24,7 +24,7 @@ module CmsTag
   end
   
   class Tag
-    attr_accessor :label, :format, :view, :page
+    attr_accessor :tag_signature, :label, :view, :page
     
     # Returns tag type based on it's classname
     #   CmsTag::MyAwesomeTag.type => 'cms_my_awesome_tag'
@@ -48,13 +48,13 @@ module CmsTag
       0
     end
     
+    def self.has_form?
+      false
+    end
+    
     def initialize(*args)
       options = args.extract_options!
-      tag_signature = args.first
-      
-      tokens = tag_signature.split(':')
-      self.label = tokens[0]
-      self.format = tokens[1]
+      self.tag_signature = args.first
       
       # provides access to action view methods for rendering form elements
       if options[:view]
@@ -71,6 +71,15 @@ module CmsTag
         end
         self.page = options[:page]
       end
+      
+      tokens = self.tag_signature.split(':')
+      self.label = tokens[0]
+      
+      assign_accessors
+    end
+    
+    def assign_accessors
+      # ... FIX: looks retarded
     end
     
     def form_label

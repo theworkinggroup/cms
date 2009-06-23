@@ -48,7 +48,11 @@ class CmsPage < ActiveRecord::Base
     page_content = cms_layout.content
     
     cms_layout.tags(:page => self).sort_by{|t| t.class.render_priority}.each do |tag|
-      page_content.gsub!(tag.class.regex, tag.render)
+      begin
+        page_content.gsub!(tag.class.regex, tag.render)
+      rescue
+        raise [tag.class.regex, tag.render].to_yaml
+      end
     end
     
     page_content
