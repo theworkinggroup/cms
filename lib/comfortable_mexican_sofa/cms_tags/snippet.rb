@@ -8,6 +8,10 @@ class CmsTag::Snippet < CmsTag::Tag
     2
   end
   
+  def regex
+    /\{\{\s*?cms_snippet:#{label}.*?\s*?\}\}/
+  end
+  
   def render
     CmsSnippet.content_for(label)
   end

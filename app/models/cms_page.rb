@@ -46,32 +46,10 @@ class CmsPage < ActiveRecord::Base
   
   def content
     page_content = cms_layout.content
-    
     cms_layout.tags(:page => self).sort_by{|t| t.class.render_priority}.each do |tag|
-      begin
-        page_content.gsub!(tag.class.regex, tag.render)
-      rescue
-        raise [tag.class.regex, tag.render].to_yaml
-      end
+      page_content.gsub!(tag.regex, tag.render)
     end
-    
     page_content
-    
-    
-    
-    # page_content = self.cms_layout.content
-    # 
-    # # block replacements
-    # self.cms_blocks.each do |block|
-    #   page_content.gsub!(/\{\{\s*cms_block:#{block.label}:.*?s*\}\}/, block.content)
-    # end
-    # 
-    # # snippet replacements
-    # CmsSnippet.all.each do |snippet|
-    #   page_content.gsub!(/\{\{\s*cms_snippet:#{snippet.slug}\s*\}\}/, snippet.content)
-    # end
-    # 
-    # page_content
   end
   
   def blocks=(blocks)

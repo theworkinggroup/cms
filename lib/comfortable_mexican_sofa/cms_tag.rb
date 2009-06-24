@@ -82,6 +82,11 @@ module CmsTag
       # ... FIX: looks retarded
     end
     
+    # regex needed for content substitution
+    def regex
+      'tag regex not defined'
+    end
+    
     def form_label
       "Label Undefined!"
     end

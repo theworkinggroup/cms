@@ -20,6 +20,10 @@ class CmsTag::Block < CmsTag::Tag
     self.format = tokens[1]
   end
   
+  def regex
+    /\{\{\s*?cms_block:#{label}.*?\s*?\}\}/
+  end
+  
   def form_label
     view.label_tag label.titleize
   end
