@@ -38,6 +38,10 @@ class CmsTag::PageBlock < CmsTag::Tag
       view.text_area_tag "page[blocks][#{label}][content]", content, :rows => 20
     when 'rich_text'
       view.text_area_tag "page[blocks][#{label}][content]", content, :rows => 20, :class => 'mceEditor'
+    when 'code'
+      view.content_tag :div, :class => 'codemirror' do 
+        view.text_area_tag "page[blocks][#{label}][content]", content, :rows => 20, :class => 'codeTextArea'
+      end
     else
       'Unknown tag format'
     end
