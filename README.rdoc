@@ -16,7 +16,7 @@ Run the follwing in your console to generate migrations and update your database
   rake db:migrate
   
 Navigate to the following address to access cms admin page:
-  http://your_application/cms_admin
+  http://your_application/cms-admin
   
 == Sample CMS Configuration
   
@@ -34,3 +34,10 @@ Here's some available type of tags that allow construction and insertion of page
   cms_snippet     - it's a snippet
   cms_helper      - it's a helper method of some sort
   cms_partial     - sometimes all we need is a partial
+  
+Here are the different formats for page blocks and what they will generate in the CMS page editing form:
+  
+  string    - a single-line text input
+  text      - a textarea
+  rich_text - if TinyMCE is installed in the app, this will generate a TinyMCE enhanced textarea
+  code      - if CodeMirror is installed in the app, this will generate a CodeMirror editor with syntax highlighting for HTML, JavaScript and CSS
