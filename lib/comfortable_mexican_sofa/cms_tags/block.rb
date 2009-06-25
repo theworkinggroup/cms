@@ -1,5 +1,51 @@
 class CmsTag::Block < CmsTag::Tag
   
+  FORMAT = {
+    :text   => {
+      :db_column    => :content_text,
+      :description  => '',
+      :form_output  => lambda { |tag|
+        tag.view.text_area_tag "page[blocks][#{tag.label}][content_text]", tag.content, 
+          :rows => 20
+      }
+    },
+    :string => {
+      :db_column    => :content_string,
+      :description  => '',
+      :form_output  => lambda { |tag| 
+        tag.view.text_area_tag "page[blocks][#{tag.label}][content_string]", tag.content
+      }
+    },
+    :integer => {
+      :db_column    => :content_integer,
+      :description  => '',
+      :form_output  => lambda { |tag| 
+        tag.view.text_field_tag "page[blocks][#{tag.label}][content_integer]", tag.content
+      }
+    },
+    :boolean => {
+      :db_column    => :content_boolean,
+      :description  => '',
+      :form_output  => lambda { |tag| 
+        tag.view.check_box_tag "page[blocks][#{tag.label}][content_boolean]", tag.content
+      }
+    },
+    :date => {
+      :db_column   => :content_datetime,
+      :description => '',
+      :form_output => lambda { |tag| 
+        tag.view.date_select "page[blocks][#{tag.label}][content_datetime]", tag.content
+      }
+    },
+    :time => {
+      :db_column   => :content_datetime,
+      :description => '',
+      :form_output => lambda { |tag| 
+        tag.view.date_select "page[blocks][#{tag.label}][content_datetime]", tag.content
+      }
+    }
+  }
+  
   attr_accessor :format
   
   def self.regex
@@ -29,18 +75,15 @@ class CmsTag::Block < CmsTag::Tag
   end
   
   def form_input
-    case self.format
-    when 'string'
-      view.text_field_tag "page[blocks][#{label}][content]", content
-    when 'text'
-      view.text_area_tag "page[blocks][#{label}][content]", content, :rows => 20
+    if FORMAT.has_key? self.format.to_sym
+      FORMAT[self.format.to_sym][:form_output].call(self)
     else
       'Unknown tag format'
     end
   end
   
   def content
-    page.try("cms_block_#{self.label}").try(:content) || ''
+    page.try("cms_block_#{self.label}").try(FORMAT[self.format.to_sym][:db_column]) rescue ''
   end
   
   def render
