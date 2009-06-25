@@ -89,6 +89,10 @@ class CmsPage < ActiveRecord::Base
     "/#{read_attribute(:full_path)}"
   end
   
+  def method_missing(method)
+    self.cms_blocks.select{|b| "cms_block_#{b.label}" == method.to_s}.first || super
+  end
+  
 protected
   
   def assign_full_path
@@ -109,7 +113,4 @@ protected
     end
   end
   
-  def method_missing(method)
-    self.cms_blocks.select{|b| "cms_block_#{b.label}" == method.to_s}.first || super
-  end
 end

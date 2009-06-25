@@ -7,8 +7,8 @@ namespace :generator do
   task :cleanup do
     FileUtils.rm_rf("test/rails_root/vendor/plugins/comfortable_mexican_sofa")
     FileUtils.rm_rf("test/rails_root/db")
-    FileUtils.rm("test/rails_root/public/javascripts/cms_codemirror_init.js")
-    FileUtils.rm("test/rails_root/public/javascripts/cms_mce_init.js")
+    FileUtils.rm_rf("test/rails_root/public/javascripts/cms_codemirror_init.js")
+    FileUtils.rm_rf("test/rails_root/public/javascripts/cms_mce_init.js")
   end
   
   desc "Run the generator on the tests"

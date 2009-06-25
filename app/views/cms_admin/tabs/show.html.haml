@@ -1,0 +1,6 @@
+= link_to 'Add New Page', new_cms_admin_page_path + "?parent_id=#{@page.id}", :class => 'big_button'
+
+%h2= @page.label
+
+.tree_structure
+  = render :partial => 'tree_branch', :object => @pages
