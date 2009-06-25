@@ -3,7 +3,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   before_filter :load_page, :only => [:children, :edit, :update, :destroy, :reorder]
   
   def index
-    @pages = CmsPage.roots
+    params[:root] ? @pages = CmsPage.find(params[:root]).children : @pages = CmsPage.roots
   end
   
   def children

@@ -42,6 +42,9 @@ class CmsPage < ActiveRecord::Base
   named_scope :published,
     :conditions => {:is_published => true}
   
+  named_scope :with_own_tab,
+    :conditions => {:has_own_tab => true}
+    
   # -- Instance Methods -----------------------------------------------------
   
   def content

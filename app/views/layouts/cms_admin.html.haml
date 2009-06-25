@@ -17,6 +17,8 @@
         %li= active_link 'Pages', cms_admin_pages_path, {'cms_admin/pages' => %w(index new edit create update)}
         %li= active_link 'Snippets', cms_admin_snippets_path, :self
         %li= active_link 'Attachments', cms_admin_attachments_path, :self
+        - CmsPage.published.with_own_tab.all.each do |page|
+          %li= active_link page.label, cms_admin_pages_path(:root => page.id), :self
         
         - ComfortableMexicanSofa::Config.additional_cms_tabs.each do |label, url|
           %li= active_link label, url, :self
