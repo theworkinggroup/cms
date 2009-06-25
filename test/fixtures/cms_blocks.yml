@@ -1,11 +1,9 @@
 default_page_block_html_title:
   cms_page: default
-  block_type: cms_block
   label: html_title
-  content: This is a html title
+  content_string: This is a html title
   
 default_page_block_meta_kewords:
   cms_page: default
-  block_type: cms_block
   label: meta_keywords
-  content: duck duck goose
+  content_string: duck duck goose

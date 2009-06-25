@@ -1,7 +1,7 @@
-default:
+default: &layout
   label: Default Layout
   parent: 
-  children_count: 2
+  children_count: 0
   position: 0
   content: |-
     {{ cms_block:html_title:string }}
@@ -17,3 +17,20 @@ default:
     <div class="footer">
       {{ cms_page_block:footer:text }}
     </div>
+    
+identical_tags:
+  <<: *layout
+  label: Layout with identical tags
+  content: |-
+    This is a layout that has tags that share same signature
+    Techincally we need to report that there's only one tag
+    We don't really care how many times it's mentioned
+    {{ cms_block:my_block_1:text }}
+    {{ cms_block:my_block_1:string }}
+    and another set
+    {{ cms_block:my_block_2:integer }}
+    {{ cms_block:my_block_2:string }}
+    and a proper, singular one
+    {{ cms_block:my_block_3:boolean}}
+  
+  

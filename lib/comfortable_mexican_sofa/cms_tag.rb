@@ -8,18 +8,21 @@ module CmsTag
   #  @cms_layout.tags
   module Tags
     
-    # initializes all tags found in the provided content
+    # Initializes all tags found in the provided content
+    # Will ignore duplicate tags. Will use format definition of the first one.
     def tags(*args)
-      options = args.extract_options!
-      content = args.first || self.content
-      raise TagError, 'No content provided' if content.blank?
-      
-      tags = []
-      CmsTag::Tag.subclasses.each do |tag|
-        tag = tag.constantize
-        tags << tag.parse_tags(content).collect{|tag_string| tag.new(tag_string, options)}
+      @tags ||= begin
+        options = args.extract_options!
+        content = args.first || self.content
+        raise TagError, 'No content provided' if content.blank?
+        
+        @tags = []
+        CmsTag::Tag.subclasses.each do |tag|
+          tag = tag.constantize
+          @tags << tag.parse_tags(content).group_by{|s| s.split(':')[0...2].join(':')}.collect{|g, tag_signature| tag.new(tag_signature.first, options)}
+        end
+        @tags.flatten
       end
-      tags.flatten
     end
   end
   
@@ -27,13 +30,22 @@ module CmsTag
     attr_accessor :tag_signature, :label, :view, :page
     
     # Returns tag type based on it's classname
-    #   CmsTag::MyAwesomeTag.type => 'cms_my_awesome_tag'
-    def self.type
+    #   CmsTag::MyAwesomeTag.tag_type => 'cms_my_awesome_tag'
+    def self.tag_type
       'cms_' + to_s.split('::').last.underscore
+    end
+    
+    def tag_type
+      self.class.tag_type
     end
     
     # regular expression that finds tag signature
     def self.regex
+      'tag regex not defined'
+    end
+    
+    # regex needed for content substitution
+    def regex
       'tag regex not defined'
     end
     
@@ -73,7 +85,7 @@ module CmsTag
       end
       
       tokens = self.tag_signature.split(':')
-      self.label = tokens[0]
+      self.label = tokens[1]
       
       assign_accessors
     end
@@ -82,10 +94,7 @@ module CmsTag
       # ... FIX: looks retarded
     end
     
-    # regex needed for content substitution
-    def regex
-      'tag regex not defined'
-    end
+    
     
     def form_label
       "Label Undefined!"

@@ -49,7 +49,11 @@ class CmsTag::Block < CmsTag::Tag
   attr_accessor :format
   
   def self.regex
-    /\{\{\s*?cms_block:(.*?)\s*?\}\}/
+    /\{\{\s*?(cms_block:.*?)\s*?\}\}/
+  end
+  
+  def regex
+    /\{\{\s*?cms_block:#{label}.*?\s*?\}\}/
   end
   
   def self.render_priority
@@ -62,12 +66,8 @@ class CmsTag::Block < CmsTag::Tag
   
   def assign_accessors
     tokens = self.tag_signature.split(':')
-    self.label = tokens[0]
-    self.format = tokens[1]
-  end
-  
-  def regex
-    /\{\{\s*?cms_block:#{label}.*?\s*?\}\}/
+    self.label = tokens[1]
+    self.format = tokens[2]
   end
   
   def form_label

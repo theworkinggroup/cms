@@ -69,7 +69,11 @@ class CmsTag::PageBlock < CmsTag::Tag
   attr_accessor :format
   
   def self.regex
-    /\{\{\s*?cms_page_block:(.*?)\s*?\}\}/
+    /\{\{\s*?(cms_page_block:.*?)\s*?\}\}/
+  end
+  
+  def regex
+    /\{\{\s*?cms_page_block:#{label}.*?\s*?\}\}/
   end
   
   # this shold be the most important tag to render, but let's leave space
@@ -84,13 +88,11 @@ class CmsTag::PageBlock < CmsTag::Tag
   
   def assign_accessors
     tokens = self.tag_signature.split(':')
-    self.label = tokens[0]
-    self.format = tokens[1]
+    self.label = tokens[1]
+    self.format = tokens[2]
   end
   
-  def regex
-    /\{\{\s*?cms_page_block:#{label}.*?\s*?\}\}/
-  end
+  
   
   def form_label
     view.label_tag label.titleize
