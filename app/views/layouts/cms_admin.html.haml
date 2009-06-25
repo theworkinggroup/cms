@@ -3,14 +3,14 @@
   %head
     %title
     = stylesheet_link_tag 'cms_master'
-    = javascript_include_tag :defaults, 'tiny_mce/tiny_mce', 'cms_mce_init'
+    = javascript_include_tag :defaults, 'cms_utilities', 'tiny_mce/tiny_mce', 'cms_mce_init'
 
     = yield :head
     
   %body#cms_admin_layout
     
     .header
-      %h1= application_name
+      %h1= link_to application_name, '/cms-admin'
       
       %ul.main_nav
         %li= active_link 'Layouts', cms_admin_layouts_path, :self
