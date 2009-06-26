@@ -11,6 +11,7 @@ module CmsTag
     # Initializes all tags found in the provided content
     # Will ignore duplicate tags. Will use format definition of the first one.
     def tags(*args)
+      options = args.extract_options!
       content = args.first || self.content
       
       # content was changed. need to reload tags
@@ -20,8 +21,6 @@ module CmsTag
       end
       
       @tags ||= begin
-        options = args.extract_options!
-        
         raise TagError, 'No content provided' if @content.blank?
         
         @tags = []
