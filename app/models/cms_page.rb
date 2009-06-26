@@ -89,8 +89,8 @@ class CmsPage < ActiveRecord::Base
     "/#{read_attribute(:full_path)}"
   end
   
-  def method_missing(method)
-    self.cms_blocks.select{|b| "cms_block_#{b.label}" == method.to_s}.first || super
+  def cms_block_content(label, content)
+    self.cms_blocks.find_by_label(label.to_s).try(content)
   end
   
 protected

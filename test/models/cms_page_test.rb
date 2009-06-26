@@ -8,9 +8,10 @@ class CmsPageTest < ActiveSupport::TestCase
     end
   end
   
-  def test_rendering
+  def test_cms_block_content_method
     page = cms_pages(:default)
-    raise page.content.to_yaml
+    assert !page.cms_block_content(:html_title, :content_string).blank?
+    assert page.cms_block_content(:bogus_label, :content_string).blank?
   end
   
 end
