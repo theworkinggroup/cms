@@ -1,9 +1,20 @@
-default_page_block_html_title:
+default_block_html_title:
   cms_page: default
   label: html_title
   content_string: This is a html title
   
-default_page_block_meta_kewords:
+default_block_meta_kewords:
   cms_page: default
   label: meta_keywords
   content_string: duck duck goose
+  
+default_page_block_default:
+  cms_page: default
+  label: default
+  content_text: this is the main content
+  
+default_page_block_footer:
+  cms_page: default
+  label: footer
+  content_text: this is a content for the footer
+  

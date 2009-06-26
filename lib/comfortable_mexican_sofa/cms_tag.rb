@@ -11,15 +11,23 @@ module CmsTag
     # Initializes all tags found in the provided content
     # Will ignore duplicate tags. Will use format definition of the first one.
     def tags(*args)
+      content = args.first || self.content
+      
+      # content was changed. need to reload tags
+      if @content != content
+        @content = content
+        @tags = nil
+      end
+      
       @tags ||= begin
         options = args.extract_options!
-        content = args.first || self.content
-        raise TagError, 'No content provided' if content.blank?
+        
+        raise TagError, 'No content provided' if @content.blank?
         
         @tags = []
         CmsTag::Tag.subclasses.each do |tag|
           tag = tag.constantize
-          @tags << tag.parse_tags(content).group_by{|s| s.split(':')[0...2].join(':')}.collect{|g, tag_signature| tag.new(tag_signature.first, options)}
+          @tags << tag.parse_tags(@content).group_by{|s| s.split(':')[0...2].join(':')}.collect{|g, tag_signature| tag.new(tag_signature.first, options)}
         end
         @tags.flatten
       end

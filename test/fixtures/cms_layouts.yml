@@ -3,6 +3,7 @@ default: &layout
   parent: 
   children_count: 0
   position: 0
+  is_extendable: 1
   content: |-
     {{ cms_block:html_title:string }}
     {{ cms_block:meta_keywords:string }}

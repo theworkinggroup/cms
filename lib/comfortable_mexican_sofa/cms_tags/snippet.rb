@@ -1,7 +1,7 @@
 class CmsTag::Snippet < CmsTag::Tag
   
   def self.regex
-    /\{\{\s*?cms_snippet:(.*?)\s*?\}\}/
+    /\{\{\s*?(cms_snippet:.*?)\s*?\}\}/
   end
   
   def self.render_priority
