@@ -107,7 +107,7 @@ class CmsTag::PageBlock < CmsTag::Tag
   end
   
   def content
-    page.try("cms_block_#{self.label}").try(FORMAT[self.format.to_sym][:db_column]) rescue ''
+    page.cms_block_content(self.label, FORMAT[self.format.to_sym][:db_column])
   end
   
   def render
