@@ -33,5 +33,16 @@ identical_tags:
     {{ cms_block:my_block_2:string }}
     and a proper, singular one
     {{ cms_block:my_block_3:boolean}}
+    
+all_included_tags:
+  <<: *layout
+  label: Layout with all tags
+  content: |-
+    Block: {{ cms_block:test_block:string }} 
+    PageBlock: {{ cms_page_block:test_page_block:string }}
+    Snippet: {{ cms_snippet:test_snippet }}
+    Partial: {{ cms_partial:test_partial }}
+    Attachment: {{ cms_attachment:test_attachment }}
+    Helper: {{ cms_helper:test_helper }}
   
   

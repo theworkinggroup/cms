@@ -101,8 +101,6 @@ module CmsTag
       # ... FIX: looks retarded
     end
     
-    
-    
     def form_label
       "Label Undefined!"
     end
@@ -117,7 +115,7 @@ module CmsTag
     
     # when cms_page renders its content this is what tag outputs on the page
     def render
-      ''
+      content
     end
     
   end

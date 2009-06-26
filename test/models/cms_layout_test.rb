@@ -2,19 +2,9 @@ require 'test_helper'
 
 class CmsLayoutTest < ActiveSupport::TestCase
   
-  def test_tag_parcing
-    layout = cms_layouts(:default)
-    assert_equal 5, layout.tags.size
-    assert layout.is_extendable?
-  end
-  
-  def test_tag_uniqueness
-    layout = cms_layouts(:identical_tags)
-    assert_equal 3, layout.tags.size
-    tag_signatures = %w(cms_block:my_block_1:text cms_block:my_block_2:integer cms_block:my_block_3:boolean)
-    layout.tags.each do |tag|
-      assert tag_signatures.member?(tag.tag_signature)
-      assert_equal tag.class, CmsTag::Block
+  def test_fixtures_validity
+    CmsLayout.all.each do |layout|
+      assert layout.valid?, layout.errors.full_messages
     end
   end
   
@@ -28,7 +18,7 @@ class CmsLayoutTest < ActiveSupport::TestCase
     
     assert_difference ['layout.tags.size', 'page.cms_blocks.count'] do
       layout.content += "{{cms_block:new_block:string}}"
-      layout.save
+      layout.save!
       layout.reload
       page.reload
       

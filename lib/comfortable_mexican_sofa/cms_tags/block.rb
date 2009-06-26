@@ -57,7 +57,7 @@ class CmsTag::Block < CmsTag::Tag
   end
   
   def self.render_priority
-    2
+    1
   end
   
   def self.has_form?
