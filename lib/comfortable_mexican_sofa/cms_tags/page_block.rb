@@ -107,7 +107,7 @@ class CmsTag::PageBlock < CmsTag::Tag
   end
   
   def content
-    page.cms_block_content(self.label, FORMAT[self.format.to_sym][:db_column])
+    page && page.cms_block_content(self.label, FORMAT[self.format.to_sym][:db_column])
   end
   
   def render
