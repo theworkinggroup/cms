@@ -70,10 +70,6 @@ class CreateCms < ActiveRecord::Migration
     add_index :cms_attachments, :created_at
     add_index :cms_attachments, :file_content_type
     add_index :cms_attachments, [:file_content_type, :created_at]
-    
-  rescue
-    self.down
-    raise
   end
 
   def self.down
