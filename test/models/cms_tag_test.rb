@@ -4,7 +4,7 @@ class CmsTagTest < ActiveSupport::TestCase
   
   def test_tag_parsing
     layout = cms_layouts(:all_included_tags)
-    tags = layout.tags
+    tags = CmsTag::parse_tags(layout.content)
     assert_equal 4, tags.size
   end
   
@@ -48,13 +48,13 @@ class CmsTagTest < ActiveSupport::TestCase
   
   def test_partial_tag
     layout = cms_layouts(:all_included_tags)
-    tag = layout.tags.select{|t| t.tag_signature == 'cms_partial:test_partial'}.first
+    tag = layout.tags.select{|t| t.tag_signature == 'cms_partial:content/test_partial'}.first
     assert tag
     assert_equal 'cms_partial', tag.tag_type
-    assert_equal 'test_partial', tag.label
+    assert_equal 'content/test_partial', tag.label
     
     assert_equal 3, tag.class.render_priority
-    assert_equal "<%= render :partial => 'test_partial' %>", tag.content
+    assert_equal "<%= render :partial => 'content/test_partial' %>", tag.content
   end
   
   def test_tag_uniqueness

@@ -1,9 +1,18 @@
 default: &page
-  label: home page
+  label: Home Page
   cms_layout: default
   parent:
   slug:
   full_path: ''
-  children_count: 0
+  children_count: 1
   position: 0
   is_published: 1
+  
+complex:
+  <<: *page
+  parent: default
+  label: Complex Page
+  cms_layout: nested
+  slug: complex-page
+  full_path: '/complex-page'
+  

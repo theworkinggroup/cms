@@ -1,7 +1,5 @@
 class CmsLayout < ActiveRecord::Base
   
-  include CmsTag::Tags
-  
   # -- Relationships --------------------------------------------------------
   acts_as_tree :counter_cache => :children_count
   has_many :cms_pages, :dependent => :nullify
@@ -34,9 +32,9 @@ class CmsLayout < ActiveRecord::Base
   # -- Instance Methods -----------------------------------------------------
   def content
     if parent
-      parent.content.gsub(/\{\{\s*cms_block:default:.*?\}\}/, self.read_attribute(:content))
+      parent.content.gsub(/\{\{\s*cms_page_block:default:.*?\}\}/, self.read_attribute(:content))
     else
-      self.read_attribute(:content)
+      read_attribute(:content)
     end
   end
   
@@ -51,6 +49,10 @@ class CmsLayout < ActiveRecord::Base
   
   def extendable_for_select
     [['---', nil]] + CmsLayout.extendable.all.reject{|l| ([self]+self.descendants).member?(l)}.collect{ |l| [l.label, l.id] }
+  end
+  
+  def tags
+    CmsTag::parse_tags(self.content)
   end
   
 protected
@@ -70,15 +72,15 @@ protected
   end
   
   def flag_as_extendable
-    self.is_extendable = !self.tags.select{|t| t.tag_type == 'cms_block' && t.label == 'default'}.blank?
+    self.is_extendable = !self.tags.select{|t| t.tag_type == 'cms_page_block' && t.label == 'default'}.blank?
     true
   end
   
   def update_page_blocks
     return unless content_changed?
     
-    old_tags = self.tags(content_was).select{|t| ['cms_block', 'cms_page_block'].member?(t.tag_type)}.collect{|t| t.label}
-    new_tags = self.tags(content).select{|t| ['cms_block', 'cms_page_block'].member?(t.tag_type)}.collect{|t| t.label}
+    old_tags = CmsTag::parse_tags(content_was).select{|t| ['cms_block', 'cms_page_block'].member?(t.tag_type)}.collect{|t| t.label}
+    new_tags = CmsTag::parse_tags(content).select{|t| ['cms_block', 'cms_page_block'].member?(t.tag_type)}.collect{|t| t.label}
     
     # creating new cms_blocks for all pages using this layout
     labels_for_blocks = new_tags - old_tags

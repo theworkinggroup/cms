@@ -34,14 +34,12 @@ class CreateCms < ActiveRecord::Migration
     
     create_table :cms_snippets do |t|
       t.string  :label
-      t.string  :slug
       t.text    :content
       t.integer :position, :null => false, :default => 0
       t.timestamps
     end
     
-    add_index :cms_snippets, :slug, :unique => true
-    add_index :cms_snippets, :label
+    add_index :cms_snippets, :label, :unique => true
     
     create_table :cms_blocks do |t|
       t.integer   :cms_page_id

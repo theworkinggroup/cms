@@ -73,7 +73,7 @@ class CmsTag::PageBlock < CmsTag::Tag
   end
   
   def regex
-    /\{\{\s*?cms_page_block:#{label}.*?\s*?\}\}/
+    /\{\{\s*?cms_page_block:#{Regexp.escape(label)}.*?\s*?\}\}/
   end
   
   # this shold be the most important tag to render, but let's leave space

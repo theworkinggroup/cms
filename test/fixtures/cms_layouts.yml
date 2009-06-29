@@ -1,26 +1,19 @@
-default: &layout
+default:
   label: Default Layout
   parent: 
-  children_count: 0
+  children_count: 1
   position: 0
   is_extendable: 1
   content: |-
-    {{ cms_block:html_title:string }}
-    {{ cms_block:meta_keywords:string }}
-    
-    <div class="marquee"> {{ cms_snippet:marquee }} </div>
-    <h1> Hello and welcome to my site </h1>
-    
-    <div class="main">
-      {{ cms_page_block:default:text }}
-    </div>
-    
-    <div class="footer">
-      {{ cms_page_block:footer:text }}
-    </div>
+    {{ cms_block:header:string }}{{ cms_page_block:default:text }}{{ cms_page_block:footer:text }}
+  
+nested:
+  label: Nested Layout
+  parent: default
+  content: |-
+    {{ cms_page_block:left_column:text }}{{ cms_page_block:right_column:text }}{{ cms_snippet:complex_snippet }}
     
 identical_tags:
-  <<: *layout
   label: Layout with identical tags
   content: |-
     This is a layout that has tags that share same signature
@@ -35,14 +28,14 @@ identical_tags:
     {{ cms_block:my_block_3:boolean}}
     
 all_included_tags:
-  <<: *layout
   label: Layout with all tags
   content: |-
     Block: {{ cms_block:test_block:string }} 
     PageBlock: {{ cms_page_block:test_page_block:string }}
     Snippet: {{ cms_snippet:test_snippet }}
-    Partial: {{ cms_partial:test_partial }}
+    Partial: {{ cms_partial:content/test_partial }}
     Attachment: {{ cms_attachment:test_attachment }}
     Helper: {{ cms_helper:test_helper }}
+    Fake: {{ cms_fake:not_real:whatever }}
   
   

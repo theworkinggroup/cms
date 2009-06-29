@@ -3,7 +3,6 @@ class CmsPage < ActiveRecord::Base
   attr_accessor :rendered_content
   
   # -- Relationships --------------------------------------------------------
-  
   acts_as_tree :counter_cache => :children_count
   
   belongs_to  :cms_layout
@@ -17,7 +16,6 @@ class CmsPage < ActiveRecord::Base
     :foreign_key  => :redirect_to_page_id
   
   #-- Validations -----------------------------------------------------------
-  
   validates_presence_of   :cms_layout_id,
     :unless => lambda{|p| p.redirect_to_page}
   validates_presence_of   :label
@@ -31,28 +29,32 @@ class CmsPage < ActiveRecord::Base
   validate :validate_redirect_to
   
   # -- AR Callbacks ---------------------------------------------------------
-  
   before_validation :assign_full_path
   after_save        :sync_child_slugs
   
-  # -- Scopes ---------------------------------------------------------------
-  
+  # -- Scopes ---------------------------------------------------------------  
   default_scope :order => 'position ASC'
-  
   named_scope :published,
     :conditions => {:is_published => true}
-  
   named_scope :with_own_tab,
     :conditions => {:has_own_tab => true}
     
   # -- Instance Methods -----------------------------------------------------
-  
   def content
-    page_content = cms_layout.content
-    cms_layout.tags(:page => self).sort_by{|t| t.class.render_priority}.each do |tag|
-      page_content.gsub!(tag.regex, tag.render)
+    # TODO: Add column to cache the render output. pointless to run it all the time
+    render_content
+  end
+  
+  # Recursive Tag/Content Replacement
+  # Works, but potentionally dangerous and not particularly efficient
+  def render_content(content = nil)
+    content = cms_layout.content.dup if !content
+    while (!(tags = CmsTag::parse_tags(content, :page => self).sort_by{|t| t.class.render_priority}).blank?)
+      tags.each do |tag|
+        content.gsub!(tag.regex, tag.render)
+      end
     end
-    page_content
+    content
   end
   
   def blocks=(blocks)
@@ -112,5 +114,4 @@ protected
       end
     end
   end
-  
 end

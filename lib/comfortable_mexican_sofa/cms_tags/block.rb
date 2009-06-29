@@ -53,7 +53,7 @@ class CmsTag::Block < CmsTag::Tag
   end
   
   def regex
-    /\{\{\s*?cms_block:#{label}.*?\s*?\}\}/
+    /\{\{\s*?cms_block:#{Regexp.escape(label)}.*?\s*?\}\}/
   end
   
   def self.render_priority
