@@ -54,14 +54,18 @@ class CmsTag::PageBlock < CmsTag::Tag
       :db_column   => :content_datetime,
       :description => '',
       :form_output => lambda { |tag| 
-        tag.view.date_select "page[blocks][#{tag.label}][content_datetime]", tag.content
+        tag.view.fields_for "page[blocks][#{tag.label}]" do |field|
+          field.date_select :content_datetime, :default => tag.content
+        end
       }
     },
     :time => {
       :db_column   => :content_datetime,
       :description => '',
-      :form_output => lambda { |tag| 
-        tag.view.date_select "page[blocks][#{tag.label}][content_datetime]", tag.content
+      :form_output => lambda { |tag|
+        tag.view.fields_for "page[blocks][#{tag.label}]" do |field|
+          field.datetime_select :content_datetime, :default => tag.content
+        end
       }
     }
   }

@@ -27,8 +27,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     manage_session_array(:cms_page_tree, :add, @page.parent_id.to_s)
     redirect_to :action => :index
     
-  rescue ActiveRecord::RecordInvalid => e
-    @page = e.record
+  rescue ActiveRecord::RecordInvalid
     render :action => :new
   end
   
