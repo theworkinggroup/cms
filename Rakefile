@@ -35,4 +35,3 @@ Echoe.new('comfortable_mexican_sofa', '0.0.6') do |p|
 end
 
 Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }
-
