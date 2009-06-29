@@ -51,8 +51,8 @@ class CmsLayout < ActiveRecord::Base
     [['---', nil]] + CmsLayout.extendable.all.reject{|l| ([self]+self.descendants).member?(l)}.collect{ |l| [l.label, l.id] }
   end
   
-  def tags
-    CmsTag::parse_tags(self.content)
+  def tags(options = {})
+    CmsTag::parse_tags(self.content, options)
   end
   
 protected
