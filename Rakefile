@@ -32,6 +32,7 @@ Echoe.new('comfortable_mexican_sofa', '0.0.6') do |p|
   p.email          = "oleg@theworkinggroup.ca"
   p.ignore_pattern = ["tmp/*", "script/*"]
   p.development_dependencies = []
+  p.runtime_dependencies = ['thoughtbot-paperclip', 'theworkinggroup-active_link_helper']
 end
 
 Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }
