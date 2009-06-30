@@ -5,14 +5,14 @@ xml.instruct!
 xml.rss(:version => '2.0') do
   xml.channel do
     xml.title @cms_page.label
-    xml.description ''#@cms_page.content
+    xml.description '' # @cms_page.content
     xml.link "http://#{request.host}"
     xml.language 'en-US'
     xml.pubDate pub_date.utc.strftime("%d %b %Y %H:%M:%S GMT")
     xml.lastBuildDate Time.now.utc.strftime("%d %b %Y %H:%M:%S GMT")
     
     @cms_page_children.each do |page|
-      link = "http://#{request.host}#{url_for(request.request_uri.gsub(/\..*?$/, ''))}"
+      link = "http://#{request.host}#{page.full_path}"
       xml.item do
         xml.title page.label
         xml.link link
