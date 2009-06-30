@@ -11,8 +11,8 @@ class CmsLayout < ActiveRecord::Base
             :validate_proper_relationship
   
   # -- AR Callbacks ---------------------------------------------------------
-  before_save :flag_as_extendable
-  after_save :update_page_blocks
+  before_save :flag_as_extendable,
+              :update_page_blocks
   
   # -- Scopes ---------------------------------------------------------------
   default_scope :order => 'position ASC'
@@ -77,7 +77,7 @@ protected
   end
   
   def update_page_blocks
-    return unless content_changed?
+    return if new_record? || !content_changed?
     
     old_tags = CmsTag::parse_tags(content_was).select{|t| ['cms_block', 'cms_page_block'].member?(t.tag_type)}.collect{|t| t.label}
     new_tags = CmsTag::parse_tags(content).select{|t| ['cms_block', 'cms_page_block'].member?(t.tag_type)}.collect{|t| t.label}
