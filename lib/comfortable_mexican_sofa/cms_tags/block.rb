@@ -13,7 +13,7 @@ class CmsTag::Block < CmsTag::Tag
       :db_column    => :content_string,
       :description  => '',
       :form_output  => lambda { |tag| 
-        tag.view.text_area_tag "page[blocks][#{tag.label}][content_string]", tag.content
+        tag.view.text_field_tag "page[blocks][#{tag.label}][content_string]", tag.content
       }
     },
     :integer => {
