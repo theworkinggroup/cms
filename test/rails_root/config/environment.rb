@@ -35,6 +35,8 @@ Rails::Initializer.run do |config|
   # Run "rake -D time" for a list of tasks for finding time zone names.
   
   config.gem 'haml'
+  config.gem 'thoughtbot-paperclip', :lib => 'paperclip'
+  config.gem 'theworkinggroup-active_link_helper', :lib => 'active_link_helper'
   
   config.time_zone = 'UTC'
 

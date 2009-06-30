@@ -1,8 +1,17 @@
 ----------
-Hey, thanks for installing!
 
-Some other things you may want to install:
+Hey, thanks for being AWESOME!
 
-* TinyMCE Editor 
+Please make sure you got following in your environment.rb file:
+
+config.gem 'haml'
+config.gem 'thoughtbot-paperclip', :lib => 'paperclip'
+config.gem 'theworkinggroup-active_link_helper', :lib => 'active_link_helper'
+
+Some other things you may want to install if you want some fancy textarea
+replacements:
+
+TinyMCE Editor - http://tinymce.moxiecode.com/
+CodeMirror - http://marijn.haverbeke.nl/codemirror/
 
 ----------
