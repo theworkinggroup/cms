@@ -47,7 +47,6 @@ class CmsAdmin::CategoriesController < CmsAdmin::BaseController
   end
   
   def show
-    
   end
   
   def destroy

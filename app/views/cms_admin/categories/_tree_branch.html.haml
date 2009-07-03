@@ -16,7 +16,6 @@
       
       .item
         = link_to category.label, edit_cms_admin_category_path(category), :class => 'label'
-        = render :partial => 'details', :object => category
         
       - if session[:cms_category_tree] && session[:cms_category_tree].member?(category.id.to_s)
         %div{:id => "category_#{category.id}_children"}

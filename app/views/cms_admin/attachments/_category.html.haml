@@ -4,7 +4,7 @@
   - else
     - is_selected = attachment.cms_category_items.collect(&:cms_category_id).include?(category.id)
     
-  = check_box_tag "attachment[category_items][][cms_category_id]", category.id, is_selected, :id => dom_id(category, :checkbox)
+  = check_box_tag "attachment[category_items][][cms_category_id]", category.id, is_selected, :id => dom_id(category, :checkbox), :onchange => "check_parents_if_checked(this, new Array(#{category.ancestors.collect{|c| "'#{c.id}'"}*','}))"
 
   = category.label
   

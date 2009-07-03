@@ -24,9 +24,7 @@ class CmsCategoryItemTest < ActiveSupport::TestCase
   def test_validations
     assert_no_difference 'CmsCategoryItem.count' do
       c = CmsCategoryItem.create
-      assert c.errors.on(:item_id)
-      assert c.errors.on(:item_type)
-      assert c.errors.on(:cms_category_id)
+      assert_not_nil c.errors.on(:cms_category_id)
     end
   end
   
