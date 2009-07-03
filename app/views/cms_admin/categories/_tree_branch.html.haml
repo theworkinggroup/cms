@@ -1,0 +1,26 @@
+%ul
+  - tree_branch.each do |category|
+    
+    %li{:id => "category_#{category.id}"}
+      .controls
+        - if category.children.count > 0
+          - if session[:category_tree] && session[:category_tree].member?(category.id.to_s)
+            = render :partial => 'toggle_link', :object => category, :locals => { :state => 'open' }
+          - else
+            = render :partial => 'toggle_link', :object => category, :locals => { :state => 'closed' }
+
+      .action_links
+        = link_to 'Remove', cms_admin_category_path(category), :method => 'delete', :confirm => 'Are you sure you want to remove this category?', :class => 'remove'
+        = link_to 'Edit', edit_cms_admin_category_path(category), :class => 'edit'
+        = link_to 'Add Child Category', new_cms_admin_category_path + "?parent_id=#{category.id}", :class => 'new'
+      
+      .item
+        = link_to category.label, edit_cms_admin_category_path(category), :class => 'label'
+        = render :partial => 'details', :object => category
+        
+      - if session[:cms_category_tree] && session[:cms_category_tree].member?(category.id.to_s)
+        %div{:id => "category_#{category.id}_children"}
+          = render :partial => 'tree_branch', :object => category.children
+      - else
+        %div{:id => "category_#{category.id}_children", :style => 'display: none'}
+          Please wait. I'm loading stuff...

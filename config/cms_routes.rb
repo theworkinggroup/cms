@@ -12,6 +12,8 @@ ActionController::Routing::Routes.draw do |map|
     cms_admin.resources :snippets,
       :collection => { :reorder   => :any }
     cms_admin.resources :attachments
+    cms_admin.resources :categories,
+      :member => {  :children => :any }
   end
   
   map.connect '*path', :controller => 'cms_content', :action => 'show'

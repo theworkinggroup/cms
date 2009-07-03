@@ -1,0 +1,11 @@
+- category ||= details
+
+.details
+  
+  = link_to_function '+ show details', "$('category_details_#{category.id}').show(); $(this).hide()"
+  
+  %div{:id => "category_details_#{category.id}", :style => 'display: none'}
+    %table
+      %tr
+        %th Slug:
+        %td= category.slug

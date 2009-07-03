@@ -3,36 +3,33 @@ class CmsAdmin::AttachmentsController < CmsAdmin::BaseController
   before_filter :load_attachment, :only => [:edit, :update, :destroy]
   
   def index
-    @attachments = CmsAttachment.all(:order => 'created_at DESC')
+    @attachments = CmsAttachment.all
   end
   
   def new
-    # ...
+    @attachment = CmsAttachment.new
   end
   
   def edit
-    # ...
   end
   
   def create
     @attachment = CmsAttachment.new(params[:attachment])
-    @attachment.save!
-    
-    flash[:notice] = 'Attachment created'
-    redirect_to :action => :index
-    
-  rescue ActiveRecord::RecordInvalid
-    render :action => :new
+    if @attachment.save
+      flash[:notice] = 'Attachment created'
+      redirect_to :action => :index
+    else
+      render :action => :new
+    end
   end
   
   def update
-    @attachment.update_attributes!(params[:attachment])
-    
-    flash[:notice] = 'Attachment updated'
-    redirect_to :action => :index
-    
-  rescue ActiveRecord::RecordInvalid
-    render :action => :edit
+    if @attachment.update_attributes(params[:attachment])
+      flash[:notice] = 'Attachment updated'
+      redirect_to :action => :index
+    else
+      render :action => :edit
+    end
   end
   
   def destroy

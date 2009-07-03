@@ -1,0 +1,5 @@
+- case state
+- when 'closed'
+  = link_to_remote "+", :url => {:action => 'children', :id => toggle_link.id, :state => state}, :loading => "$('category_#{toggle_link.id}_children').show()", :html => {:id => "category_#{toggle_link.id}_link", :class => 'expander'}
+- when 'open'
+  = link_to_remote "-", :url => {:action => 'children', :id => toggle_link.id, :state => state}, :loading => "$('category_#{toggle_link.id}_children').show()", :html => {:id => "category_#{toggle_link.id}_link", :class => 'expander'}

@@ -16,6 +16,7 @@
         %li= active_link 'Layouts', cms_admin_layouts_path, :self
         %li= active_link 'Pages', cms_admin_pages_path, {'cms_admin/pages' => %w(index new edit create update)}
         %li= active_link 'Snippets', cms_admin_snippets_path, :self
+        %li= active_link 'Categories', cms_admin_categories_path, :self
         %li= active_link 'Attachments', cms_admin_attachments_path, :self
         
         - ComfortableMexicanSofa::Config.additional_cms_tabs.each do |label, url|

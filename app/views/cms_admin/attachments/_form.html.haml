@@ -17,3 +17,10 @@
 .form_element.text_area
   .label= form.label :description, 'Description'
   .field= form.text_area :description
+
+.form_element
+  .label Categories
+  .field
+    %ul#root_categories
+      - CmsCategory.roots.each do |category|
+        = render :partial => 'category', :locals => { :category => category, :attachment => @attachment }

@@ -64,6 +64,21 @@ class CreateCms < ActiveRecord::Migration
     add_index :cms_attachments, :file_content_type
     add_index :cms_attachments, [:file_content_type, :created_at]
     
+    create_table :cms_categories do |t|
+      t.integer :parent_id
+      t.string :slug
+      t.string :label
+      t.text :description
+      t.timestamps
+    end
+        
+    create_table :cms_category_items do |t|
+      t.integer :cms_category_id
+      t.integer :item_id
+      t.string :item_type
+      t.datetime :created_at
+    end
+    
   rescue
     self.down
     raise
@@ -75,5 +90,7 @@ class CreateCms < ActiveRecord::Migration
     drop_table :cms_snippets
     drop_table :cms_blocks
     drop_table :cms_attachments
+    drop_table :cms_categories
+    drop_table :cms_category_items
   end
 end

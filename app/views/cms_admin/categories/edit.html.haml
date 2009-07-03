@@ -1,0 +1,6 @@
+%h2 Editing Category
+
+- form_for :category, :url => {:action => :update}, :html => {:method => :put } do |form|
+  = render :partial => form
+  .submit
+    = form.submit 'Edit Category'

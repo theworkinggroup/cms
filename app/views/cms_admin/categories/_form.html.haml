@@ -1,0 +1,17 @@
+= form.error_messages
+
+.form_element.text.large
+  .label= form.label :label, 'Label'
+  .field= form.text_field :label
+
+.form_element.text.large
+  .label= form.label :slug, 'Slug'
+  .field= form.text_field :slug
+
+.form_element.select
+  .label= form.label :parent_id, 'Parent Category'
+  .field= form.select :parent_id, CmsCategory.categories_for_select, :include_blank => true
+
+.form_element.text_area
+  .label= form.label :description, 'Description'
+  .field= form.text_area :description

@@ -21,3 +21,7 @@
       %tr
         %th Created:
         %td= "#{time_ago_in_words(attachment.created_at)} ago"
+      %tr
+        %th Categories:
+        %td
+          = attachment.cms_categories.collect{|category| link_to(category.label, '')}.join(', ')
