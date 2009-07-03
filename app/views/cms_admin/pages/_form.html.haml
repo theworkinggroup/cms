@@ -21,6 +21,10 @@
   .label= form.label :is_published, 'Is published?'
   .field= form.check_box :is_published
 
+.form_element
+  .label= form.label :has_own_tab, 'Has own tab?'
+  .field= form.check_box :has_own_tab
+
 .form_element.select
   .label= form.label :cms_layout_id, 'Layout'
   .field= form.select :cms_layout_id, CmsLayout.options_for_select, {}, :onchange => remote_function(:url => {:action => :form_blocks, :id => (@page.try(:id) || 0)}, :with => "'layout_id=' + value")

@@ -2,10 +2,9 @@ class CmsContentController < ApplicationController
   
   unloadable
   
-  before_filter :parse_path
+  before_filter :parse_path, :only => :show
   
   def show
-    
     @cms_page = CmsPage.find_by_full_path(params[:path].join('/'))
     return (render :text => '404', :status => 404) if !@cms_page
     
@@ -19,6 +18,14 @@ class CmsContentController < ApplicationController
           p.rendered_content = render_to_string(:inline => p.content, :layout => false)
           p
         end
+      end
+    end
+  end
+  
+  def sitemap
+    respond_to do |format|
+      format.xml do
+        @cms_pages = CmsPage.all
       end
     end
   end

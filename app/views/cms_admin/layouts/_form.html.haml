@@ -15,25 +15,4 @@
 .form_element.text_area
   .label= form.label :content, 'Content'
   .field= form.text_area :content
-  
-.help
-  %h3 Content block definitions:
-  %ul
-    %strong {{ cms_block:block_name:block_type }}
-  %ul
-    %li
-      %em cms_block
-      &ndash; predefined keyword
-    %li
-      %em block_name
-      &ndash; any arbitrary name you want.
-      %strong left_column
-      is a good start. If you want to nest layouts make sure that parent layout has {{ cms_block:default:text }} block
-    %li
-      %em block_type
-      &ndash; this is the type of the block. It may be 
-      %strong text
-      or
-      %strong string
-      for the time being
     

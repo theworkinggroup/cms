@@ -1,13 +1,9 @@
-class CmsAdmin::PagesController < CmsAdmin::BaseController
+class CmsAdmin::TabsController < CmsAdmin::BaseController
   
-  before_filter :load_page, :only => [:children, :edit, :update, :destroy, :reorder]
+  before_filter :load_page, :only => [:children, :show, :edit, :update, :destroy, :reorder]
   
-  def index
-    params[:root] ? @pages = CmsPage.find(params[:root]).children : @pages = CmsPage.roots
-  end
-  
-  def children
-    manage_session_array(:cms_page_tree, (params[:state] == 'open' ? :remove : :add), params[:id])
+  def show
+    @pages = CmsPage.find(params[:id]).children
   end
   
   def new
@@ -27,7 +23,8 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     manage_session_array(:cms_page_tree, :add, @page.parent_id.to_s)
     redirect_to :action => :index
     
-  rescue ActiveRecord::RecordInvalid
+  rescue ActiveRecord::RecordInvalid => e
+    @page = e.record
     render :action => :new
   end
   

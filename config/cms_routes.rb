@@ -14,8 +14,12 @@ ActionController::Routing::Routes.draw do |map|
     cms_admin.resources :attachments
     cms_admin.resources :categories,
       :member => {  :children => :any }
+    cms_admin.resources :tabs, :only => [ :show ]
   end
   
-  map.connect '*path', :controller => 'cms_content', :action => 'show'
+  map.with_options :controller => 'cms_content' do |cms|
+    cms.connect '/sitemap.xml', :action => 'sitemap'
+    cms.connect '*path', :action => 'show'
+  end
   
 end

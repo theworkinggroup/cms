@@ -1,45 +1,38 @@
-default_page_default_block: &block
-  cms_page: default_page
+default_block_header:
+  cms_page: default
+  label: header
+  content_string: /block:header/
+
+default_page_block_default:
+  cms_page: default
   label: default
-  content: Block content. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
+  content_text: /page_block:default/
   
-subpage_1_left_block:
-  <<: *block
-  cms_page: subpage_1
-  label: left 
+default_page_block_footer:
+  cms_page: default
+  label: footer
+  content_text: /page_block:footer/
   
-subpage_1_right_block:
-  <<: *block
-  cms_page: subpage_1
-  label: right
+complex_page_block_header:
+  cms_page: complex
+  label: header
+  content_string: /block:header/
+
+complex_page_block_left_column:
+  cms_page: complex
+  label: left_column
+  content_text: |-
+    /page_block:left_column/ {{ cms_snippet:complex_snippet }}
+
+complex_page_block_right_column:
+  cms_page: complex
+  label: right_column
+  content_text: |-
+    /page_block:right_column/ {{ cms_partial:complex_page/example }}
   
-subpage_1_1_default_block:
-  <<: *block
-  cms_page: subpage_1_1
+complex_page_block_footer:
+  cms_page: complex
+  label: footer
+  content_text: /page_block:footer/
+
   
-subpage_1_2_default_block:
-  <<: *block
-  cms_page: subpage_1_2
-  
-subpage_1_3_default_block:
-  <<: *block
-  cms_page: subpage_1_3
-  
-subpage_2_left_block:
-  <<: *block
-  cms_page: subpage_2
-  label: left
-  
-subpage_2_middle_block:
-  <<: *block
-  cms_page: subpage_2
-  label: middle
-  
-subpage_2_right_block:
-  <<: *block
-  cms_page: subpage_2
-  label: right
-  
-subpage_3_default_block:
-  <<: *block
-  cms_page: subpage_3

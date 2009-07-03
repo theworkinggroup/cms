@@ -1,21 +1,27 @@
 - @layout ||= @page.cms_layout
+- @layout && tags = @layout.tags(:view => self, :page => @page).reject{|t| !t.class.has_form?}.group_by(&:tag_type)
 
-- @layout && @layout.tags.select{|t| !t.type.match(/^cms_(.*?_)?block$/).blank? }.each do |tag|
+- unless tags.blank?
+
+  - unless (cms_block_tags = tags.delete('cms_block')).blank?
+    .form_element_group.page_block
+      - cms_block_tags.each do |tag|
+        .form_element
+          .label= tag.form_label
+          .field= tag.form_input
+      
+      
+  - unless (cms_page_block_tags = tags.delete('cms_page_block')).blank?
+    .form_element_group.page_block
+      - cms_page_block_tags.each do |tag|
+        .form_element
+          .label= tag.form_label
+          .field= tag.form_input
   
-  - block_content = @page.send(tag.label).content  rescue ''
-  
-  - case tag.datatype
-    - when 'text'
-      .form_element.text_area
-        .label= label_tag tag.label.titleize
-        .field= text_area_tag "page[blocks][#{tag.label}][content]", block_content, :rows => 20
-        
-    - when 'string'
-      .form_element.text_area
-        .label= label_tag tag.label.titleize
-        .field= text_field_tag "page[blocks][#{tag.label}][content]", block_content
-        
-    - when 'rich_text'
-      .form_element.text_area
-        .label= label_tag tag.label.titleize
-        .field= text_area_tag "page[blocks][#{tag.label}][content]", block_content, :rows => 20, :class => 'mceEditor'
+  - # outputting any other tag that has a form element
+  - tags.each do |type, tags|
+    .form_element_group{:class => type.to_s}
+    - tags.each do |tag|
+      .form_element
+        .label= tag.form_label
+        .field= tag.form_input

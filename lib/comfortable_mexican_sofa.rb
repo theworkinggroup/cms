@@ -1,15 +1,13 @@
 require 'comfortable_mexican_sofa/cms_rails_extensions'
 require 'comfortable_mexican_sofa/cms_acts_as_tree'
+
 require 'comfortable_mexican_sofa/cms_tag'
-
-unless defined?(ActiveLinkHelper)
-  require 'vendor/active_link_helper/lib/active_link_helper' 
-end
-
-unless defined?(Paperclip)
-  $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[vendor paperclip lib]))
-  require 'vendor/paperclip/lib/paperclip' 
-end
+require 'comfortable_mexican_sofa/cms_tags/block'
+require 'comfortable_mexican_sofa/cms_tags/page_block'
+require 'comfortable_mexican_sofa/cms_tags/snippet'
+require 'comfortable_mexican_sofa/cms_tags/partial'
+# require 'comfortable_mexican_sofa/cms_tags/helper'
+# require 'comfortable_mexican_sofa/cms_tags/attachment'
 
 # Helper inclusion
 ActionView::Base.send(:include, CmsHelper)

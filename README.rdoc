@@ -1,13 +1,14 @@
 = Comfortable Mexican Sofa
 
-CMS Engine that allows direct interaction with Rails guts. Not intended for users that would put <% ActiveRecord::Base.connection.execute('DELETE FROM important_table_of_some_sort') %> as content of a page.
+ComfortableMexicanSofa is a CMS engine that provides CMS functionality to any Rails app. 
+It is not intended for users that would put <% ActiveRecord::Base.connection.execute('DROP DATABASE;') %> as content of a page.
 
 == Install
 
 From local gem:
   rake manifest && rake install
   
-In your rails project:
+In your Rails project:
   # config/envionment.rb
   config.gem 'comfortable_mexican_sofa'
   
@@ -15,8 +16,8 @@ Run the follwing in your console to generate migrations and update your database
   script/generate cms
   rake db:migrate
   
-Navigate to the following address to access cms admin page:
-  http://your_application/cms_admin
+Navigate to the following address to access CMS admin page:
+  http://your_application/cms-admin
   
 == Sample CMS Configuration
   
@@ -25,7 +26,7 @@ Navigate to the following address to access cms admin page:
     config.http_auth_password = 'secret_password'
   end
   
-== Setting up and Writing CMS Content
+== Setting Up Layouts and Writing CMS Content
 
 Here's some available type of tags that allow construction and insertion of page content:
 
@@ -34,3 +35,21 @@ Here's some available type of tags that allow construction and insertion of page
   cms_snippet     - it's a snippet
   cms_helper      - it's a helper method of some sort
   cms_partial     - sometimes all we need is a partial
+  
+Here are the different formats for page blocks and what they will generate in the CMS page editing form:
+  
+  string    - a single-line text input
+  text      - a textarea
+  rich_text - if TinyMCE is installed in the app, this will generate a TinyMCE enhanced textarea
+  code      - if CodeMirror is installed in the app, this will generate a CodeMirror editor with syntax highlighting for HTML, JavaScript and CSS
+  
+== Installing CodeMirror Support
+
+Download CodeMirror from: http://marijn.haverbeke.nl/codemirror
+
+To get CodeMirror support properly working, you need to place the CodeMirror files in specific folders in your app. The JavaScript initializer expects the CodeMirror .js files to be at /publib/javascripts/codemirrror/ and the CSS files at /public/stylesheets/codemirror/.
+
+To properly generate the .sass files, use the following command:
+
+  css2sass -a file.css > file.sass
+

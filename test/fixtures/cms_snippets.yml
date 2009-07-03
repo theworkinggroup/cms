@@ -1,15 +1,7 @@
-links:
-  label: Links Snippet
-  slug: links
-  content: |-
-    <div class='links'>
-      <a href='http://google.com'>google.com</a>
-      <a href='http://google.com'>google.com</a>
-      <a href='http://google.com'>google.com</a>
-    </div>
-    
-marquee:
-  label: Marquee Snippet
-  slug: marquee
-  content: |-
-    <marquee>Checkout my awesome marquee with <blink> blink tag </blink></marquee>
+default:
+  label: default_snippet
+  content: snippet content
+
+complex:
+  label: complex_snippet
+  content: /complex snippet/
