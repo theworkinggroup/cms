@@ -6,7 +6,8 @@ default: &page
   full_path: ''
   children_count: 1
   position: 0
-  is_published: 1
+  published_at: <%= 10.days.ago %>
+  unpublished_at:
   
 complex:
   <<: *page

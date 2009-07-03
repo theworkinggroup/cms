@@ -23,8 +23,9 @@ class CreateCms < ActiveRecord::Migration
       t.string  :full_path
       t.integer :children_count,  :null => false, :default => 0
       t.integer :position,        :null => false, :default => 0
-      t.boolean :is_published,    :null => false, :default => true
       t.boolean :has_own_tab,     :null => false, :default => false
+      t.datetime :published_at
+      t.datetime :unpublished_at
       t.timestamps
     end
     

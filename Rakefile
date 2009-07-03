@@ -25,7 +25,7 @@ task :default => ['generator:cleanup', 'generator:prepare']
 
 task :manifest => ['generator:cleanup']
 
-Echoe.new('comfortable_mexican_sofa', '0.0.7') do |p|
+Echoe.new('comfortable_mexican_sofa', '0.0.8') do |p|
   p.description    = "Open CMS Engine"
   p.url            = "http://www.theworkinggroup.ca"
   p.author         = "Oleg Khabarov"

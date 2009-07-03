@@ -1,5 +1,6 @@
 require 'comfortable_mexican_sofa/cms_rails_extensions'
 require 'comfortable_mexican_sofa/cms_acts_as_tree'
+require 'comfortable_mexican_sofa/acts_as_published'
 
 require 'comfortable_mexican_sofa/cms_tag'
 require 'comfortable_mexican_sofa/cms_tags/block'
