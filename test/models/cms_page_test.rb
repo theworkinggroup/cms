@@ -31,4 +31,20 @@ class CmsPageTest < ActiveSupport::TestCase
     assert page.cms_block_content(:bogus_label, :content_string).blank?
   end
   
+  def test_publishing
+    page = cms_pages(:default)
+    assert page.published_at < Time.now.utc
+    assert page.unpublished_at.nil?
+    assert page.is_published?
+    
+    page.update_attribute(:published_at, 5.days.from_now)
+    assert !page.is_published?
+    
+    page.publish!
+    assert page.is_published?
+    
+    page.unpublish!
+    assert !page.is_published?
+  end
+  
 end

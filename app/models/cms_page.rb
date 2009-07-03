@@ -4,6 +4,7 @@ class CmsPage < ActiveRecord::Base
   
   # -- Relationships --------------------------------------------------------
   acts_as_tree :counter_cache => :children_count
+  acts_as_published
   
   belongs_to  :cms_layout
   has_many    :cms_blocks,
@@ -34,8 +35,6 @@ class CmsPage < ActiveRecord::Base
   
   # -- Scopes ---------------------------------------------------------------  
   default_scope :order => 'position ASC'
-  named_scope :published,
-    :conditions => {:is_published => true}
   named_scope :with_own_tab,
     :conditions => {:has_own_tab => true}
     
