@@ -1,3 +1,7 @@
+default:
+  label: default_snippet
+  content: snippet content
+
 complex:
   label: complex_snippet
   content: /complex snippet/
