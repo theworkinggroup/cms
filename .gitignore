@@ -6,3 +6,5 @@ test/rails_root/log
 test/rails_root/vendor
 test/rails_root/config/initializers/paperclip.rb
 test/rails_root/public/javascripts/cms_mce_init.js
+test/rails_root/public/javascripts/cms_codemirror_init.js
+test/rails_root/public/javascripts/cms_utilities.js
