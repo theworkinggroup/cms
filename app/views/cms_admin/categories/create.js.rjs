@@ -1,8 +1,8 @@
 if @category.valid?
   if @category.parent.blank?
-    page.insert_html :bottom, 'root_categories', :partial => 'cms_admin/attachments/category', :locals => { :category => @category, :attachment => nil }
+    page.insert_html :bottom, 'root_categories', :partial => 'category', :locals => { :category => @category, :item_type => params[:item_type] }
   else
-    page.insert_html :bottom, dom_id(@category.parent), :partial => 'cms_admin/attachments/category', :locals => { :category => @category, :attachment => nil }
+    page.insert_html :bottom, dom_id(@category.parent), :partial => 'category', :locals => { :category => @category, :item_type => params[:item_type] }
   end
 end
-page.replace_html 'new_category', render(:partial => 'cms_admin/categories/new')
+page.replace 'new_category', render(:partial => 'cms_admin/categories/new', :locals => {:item_type => params[:item_type]})

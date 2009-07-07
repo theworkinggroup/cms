@@ -1,5 +1,6 @@
-= error_messages_for :category
-- remote_form_for :category, :url => cms_admin_categories_path, :html => { :method => :post } do |f|
-  = f.text_field :label
-  = f.select :parent_id, CmsCategory.categories_for_select, :include_blank => true
-  = f.submit 'Save'
+#new_category
+  = error_messages_for :category
+  - remote_form_for :category, :url => cms_admin_categories_path(:item_type => item_type), :html => { :method => :post } do |f|
+    = f.text_field :label
+    = f.select :parent_id, CmsCategory.categories_for_select, :include_blank => true
+    = f.submit 'Save'

@@ -3,19 +3,19 @@ class CmsAdmin::AttachmentsController < CmsAdmin::BaseController
   before_filter :load_attachment, :only => [:edit, :update, :destroy]
   
   def index
-    @attachments = CmsAttachment.all
+    @cms_attachments = CmsAttachment.all
   end
   
   def new
-    @attachment = CmsAttachment.new
+    @cms_attachment = CmsAttachment.new
   end
   
   def edit
   end
   
   def create
-    @attachment = CmsAttachment.new(params[:attachment])
-    if @attachment.save
+    @cms_attachment = CmsAttachment.new(params[:cms_attachment])
+    if @cms_attachment.save
       flash[:notice] = 'Attachment created'
       redirect_to :action => :index
     else
@@ -24,7 +24,7 @@ class CmsAdmin::AttachmentsController < CmsAdmin::BaseController
   end
   
   def update
-    if @attachment.update_attributes(params[:attachment])
+    if @cms_attachment.update_attributes(params[:cms_attachment])
       flash[:notice] = 'Attachment updated'
       redirect_to :action => :index
     else
@@ -33,7 +33,7 @@ class CmsAdmin::AttachmentsController < CmsAdmin::BaseController
   end
   
   def destroy
-    @attachment.destroy
+    @cms_attachment.destroy
     
     flash[:notice] = 'Attachment removed'
     redirect_to :action => :index
@@ -42,7 +42,7 @@ class CmsAdmin::AttachmentsController < CmsAdmin::BaseController
 protected
 
   def load_attachment
-    @attachment = CmsAttachment.find_by_id(params[:id])
+    @cms_attachment = CmsAttachment.find_by_id(params[:id])
   end
   
 end
