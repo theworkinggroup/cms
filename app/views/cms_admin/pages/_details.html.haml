@@ -1,32 +1,25 @@
 - page ||= details
 
-.details
+%table{:class => 'details', :id => "page_details_#{page.id}", :style => 'display: none'}
   
-  = link_to_function '+ show details', "$('page_details_#{page.id}').show(); $(this).hide()"
+  - if page.redirect_to_page
+    %tr 
+      %th Redirecting To:
+      %td
+        = link_to page.redirect_to_page.label, cms_admin_page_path(page.redirect_to_page)
+        = "(#{link_to page.redirect_to_page.full_path, page.redirect_to_page.full_path})"
   
-  %div{:id => "page_details_#{page.id}", :style => 'display: none'}
-    %table
-      %tr
-        %th Path:
-        %td= link_to page.full_path, page.full_path
-      - if page.redirect_to_page
-        %tr 
-          %th Redirecting To:
-          %td=link_to page.redirect_to_page.full_path, page.redirect_to_page.full_path
-      - if page.redirected_from_page
-        %tr 
-          %th Redirected From:
-          %td=link_to page.redirected_from_page.full_path, page.redirected_from_page.full_path
-          
-      - if page.cms_layout
-        %tr
-          %th Layout:
-          %td= page.cms_layout.label
-        %tr
-          %th CMS Tags:
-          %td= page.cms_layout.tags.collect{|t| t.to_s}.join(', ')
+  - if page.redirected_from_page
+    %tr 
+      %th Redirected From:
+      %td
+        = link_to page.redirected_from_page.label, cms_admin_page_path(page.redirected_from_page)
+        = "(#{link_to page.redirected_from_page.full_path, page.redirected_from_page.full_path})"
       
-      %tr
-        %th Last Updated:
-        %td= "#{time_ago_in_words(page.updated_at)} ago"
-  
+  - if page.cms_layout
+    %tr
+      %th Layout:
+      %td= link_to page.cms_layout.label, cms_admin_layout_path(page.cms_layout)
+    %tr
+      %th Blocks:
+      %td= page.cms_blocks.collect(&:label).join(', ')

@@ -7,26 +7,31 @@
 
     = yield :head
     
-  %body#cms_admin_layout
+  %body{ :id => "#{params[:controller]}_#{params[:action]}".idify }
     
     .header
       %h1= link_to application_name, '/cms-admin'
       
-      %ul.main_nav
-        %li= active_link 'Layouts', cms_admin_layouts_path, :self
-        %li= active_link 'Pages', cms_admin_pages_path, {'cms_admin/pages' => %w(index new edit create update)}
-        %li= active_link 'Snippets', cms_admin_snippets_path, :self
-        %li= active_link 'Attachments', cms_admin_attachments_path, :self
-        - CmsPage.published.with_own_tab.all.each do |page|
-          %li= active_link page.label, cms_admin_tab_path(page.id), :self
+    .main_content
+      .left_column
+      
+        %ul.primary
+          %li= active_link 'Layouts', cms_admin_layouts_path, :self
+          %li= active_link 'Pages', cms_admin_pages_path, {'cms_admin/pages' => %w(index new edit create update)}
+          %li= active_link 'Snippets', cms_admin_snippets_path, :self
+          %li= active_link 'Attachments', cms_admin_attachments_path, :self
+        
+        %ul.secondary
+          - CmsPage.with_own_tab.all.each do |page|
+            %li= active_link page.label, cms_admin_tab_path(page.id), :self
           
-    .content
-      
-      - flash.each do |type, value|
-        .flash{:class => type.to_s}
-          = value
-      
-      = yield
+      .center_column
+        
+        - flash.each do |type, value|
+          .flash{:class => type.to_s}
+            = value
+        
+        = yield
     
     .footer
       The Working Group &copy; 2009

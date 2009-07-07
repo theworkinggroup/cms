@@ -36,7 +36,6 @@ class CreateCms < ActiveRecord::Migration
     create_table :cms_snippets do |t|
       t.string  :label
       t.text    :content
-      t.integer :position, :null => false, :default => 0
       t.timestamps
     end
     

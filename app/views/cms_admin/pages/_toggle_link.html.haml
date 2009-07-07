@@ -1,5 +1,10 @@
-- case state
-- when 'closed'
-  = link_to_remote "+ #{toggle_link.children.count}", :url => {:action => 'children', :id => toggle_link.id, :state => state}, :loading => "$('page_#{toggle_link.id}_children').show()", :html => {:id => "page_#{toggle_link.id}_link", :class => 'expander', :title => 'expand level'}
-- when 'open'
-  = link_to_remote "- #{toggle_link.children.count}", :url => {:action => 'children', :id => toggle_link.id, :state => state}, :loading => "$('page_#{toggle_link.id}_children').show()", :html => {:id => "page_#{toggle_link.id}_link", :class => 'expander', :title => 'collapse level'}
+- page ||= toggle_link
+
+- if page.children.count > 0
+
+  - if session[:cms_page_tree] && session[:cms_page_tree].member?(page.id.to_s)
+    = link_to_remote page.children.count, :url => {:action => 'children', :id => page.id, :state => 'open'}, :loading => "$('page_#{page.id}_children').show()", :html => {:id => "page_#{page.id}_link", :class => 'tree_toggle open', :title => 'collapse level'}
+
+  - else
+    = link_to_remote page.children.count, :url => {:action => 'children', :id => page.id, :state => 'closed'}, :loading => "$('page_#{page.id}_children').show()", :html => {:id => "page_#{page.id}_link", :class => 'tree_toggle closed', :title => 'expand level'}
+  

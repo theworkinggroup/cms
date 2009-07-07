@@ -6,13 +6,10 @@ class CmsSnippet < ActiveRecord::Base
   validates_format_of     :label,
     :with   => /^\w[a-z0-9_-]*$/i
   
-  # -- Scopes ---------------------------------------------------------------
-  default_scope :order => 'position ASC'
-  
   # -- Class Methods --------------------------------------------------------
   def self.content_for(label)
     s = find_by_label(label)
     s.blank? ? '' : s.content
   end
-    
+  
 end

@@ -3,7 +3,7 @@ class CmsAdmin::SnippetsController < CmsAdmin::BaseController
   before_filter :load_snippet, :only => [:edit, :update, :destroy]
   
   def index
-    @snippets = CmsSnippet.all
+    @snippets = CmsSnippet.paginate :page => params[:page]
   end
   
   def new
