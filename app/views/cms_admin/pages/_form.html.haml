@@ -18,8 +18,8 @@
   .field= form.select :redirect_to_page_id, [['---', nil]] + @page.pages_for_select
 
 .form_element
-  .label= form.label :has_own_tab, 'Has own tab?'
-  .field= form.check_box :has_own_tab
+  .label= form.label :is_section, 'Children of this page have their own section'
+  .field= form.check_box :is_section
 
 .form_element.select
   .label= form.label :cms_layout_id, 'Layout'

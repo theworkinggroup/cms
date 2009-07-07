@@ -1,0 +1,27 @@
+- attachment ||= details
+
+.details
+  
+  = link_to_function '+ show details', "$('attachment_details_#{attachment.id}').show(); $(this).hide()"
+  
+  %div{:id => "attachment_details_#{attachment.id}", :style => 'display: none'}
+    %table
+      %tr
+        %th Filename:
+        %td= attachment.file.url
+      %tr
+        %th Type:
+        %td= attachment.file_content_type
+      %tr
+        %th Filesize:
+        %td= number_to_human_size(attachment.file_file_size)
+      %tr
+        %th Description:
+        %td= h attachment.description
+      %tr
+        %th Created:
+        %td= "#{time_ago_in_words(attachment.created_at)} ago"
+      %tr
+        %th Categories:
+        %td
+          = attachment.cms_categories.collect{|category| link_to(category.label, '')}.join(', ')

@@ -25,14 +25,19 @@ task :default => ['generator:cleanup', 'generator:prepare']
 
 task :manifest => ['generator:cleanup']
 
-Echoe.new('comfortable_mexican_sofa', '0.0.9') do |p|
-  p.description    = "Open CMS Engine"
+Echoe.new('comfortable_mexican_sofa', '0.0.10') do |p|
+  p.description    = "Ruby on Rails CMS Engine"
   p.url            = "http://www.theworkinggroup.ca"
   p.author         = "Oleg Khabarov"
   p.email          = "oleg@theworkinggroup.ca"
   p.ignore_pattern = ["tmp/*", "script/*"]
   p.development_dependencies = []
-  p.runtime_dependencies = ['haml', 'mislav-will_paginate', 'thoughtbot-paperclip', 'theworkinggroup-active_link_helper']
+  p.runtime_dependencies = [
+    'haml',
+    'mislav-will_paginate',
+    'thoughtbot-paperclip',
+    'theworkinggroup-active_link_helper'
+  ]
 end
 
 Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }

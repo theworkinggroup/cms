@@ -22,8 +22,8 @@
           %li= active_link 'Attachments', cms_admin_attachments_path, :self
         
         %ul.secondary
-          - CmsPage.with_own_tab.all.each do |page|
-            %li= active_link page.label, cms_admin_tab_path(page.id), :self
+          - CmsPage.sections.all.each do |page|
+            %li= active_link page.label, cms_admin_section_path(page.id), :self
           
       .center_column
         

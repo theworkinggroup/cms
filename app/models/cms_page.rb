@@ -35,8 +35,8 @@ class CmsPage < ActiveRecord::Base
   
   # -- Scopes ---------------------------------------------------------------  
   default_scope :order => 'position ASC'
-  named_scope :with_own_tab,
-    :conditions => {:has_own_tab => true}
+  named_scope :sections,
+    :conditions => {:is_section => true}
     
   # -- Instance Methods -----------------------------------------------------
   def content

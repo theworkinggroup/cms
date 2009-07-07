@@ -23,7 +23,7 @@ class CreateCms < ActiveRecord::Migration
       t.string  :full_path
       t.integer :children_count,  :null => false, :default => 0
       t.integer :position,        :null => false, :default => 0
-      t.boolean :has_own_tab,     :null => false, :default => false
+      t.boolean :is_section,      :null => false, :default => false
       t.datetime :published_at
       t.datetime :unpublished_at
       t.timestamps
@@ -31,6 +31,7 @@ class CreateCms < ActiveRecord::Migration
     
     add_index :cms_pages, :parent_id
     add_index :cms_pages, :slug
+    add_index :cms_pages, :is_section
     add_index :cms_pages, :full_path, :unique => true
     
     create_table :cms_snippets do |t|
@@ -70,6 +71,28 @@ class CreateCms < ActiveRecord::Migration
     add_index :cms_attachments, :created_at
     add_index :cms_attachments, :file_content_type
     add_index :cms_attachments, [:file_content_type, :created_at]
+    
+    create_table :cms_categories do |t|
+      t.integer :parent_id
+      t.string :slug
+      t.string :label
+      t.text :description
+      t.timestamps
+    end
+    
+    add_index :cms_categories, :slug
+    add_index :cms_categories, [:parent_id, :slug]
+    
+    create_table :cms_category_items do |t|
+      t.integer :cms_category_id
+      t.integer :item_id
+      t.string :item_type
+      t.datetime :created_at
+    end
+    
+    add_index :cms_category_items, [:cms_category_id, :item_id, :item_type], 
+      :name => 'index_category_items_on_category_id_and_item_id_and_item_type'
+    
   end
 
   def self.down
@@ -78,5 +101,7 @@ class CreateCms < ActiveRecord::Migration
     drop_table :cms_snippets
     drop_table :cms_blocks
     drop_table :cms_attachments
+    drop_table :cms_categories
+    drop_table :cms_category_items
   end
 end

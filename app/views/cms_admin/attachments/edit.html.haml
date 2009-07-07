@@ -1,6 +1,8 @@
 %h2 Editing Attachment
 
-- form_for :attachment, :url => {:action => :update}, :html => {:method => :put, :multipart => true} do |form|
+- form_for :cms_attachment, :url => {:action => :update}, :html => {:method => :put, :multipart => true} do |form|
   = render :partial => form
   .submit
     = form.submit 'Edit Attachment'
+    
+= render :partial => 'cms_admin/categories/new', :locals => {:item_type => 'cms_attachment'}

@@ -1,0 +1,7 @@
+= link_to 'Add New Category', new_cms_admin_category_path, :class => 'big_button'
+
+%h2 Categories
+
+.tree_structure
+
+  = render :partial => 'tree_branch', :object => @categories

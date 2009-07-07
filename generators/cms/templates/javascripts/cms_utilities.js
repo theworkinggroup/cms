@@ -22,3 +22,11 @@ function slugify(str) {
     .toLowerCase();
   return str;
 }
+
+function check_parents_if_checked(obj, parents) {
+  if (obj.checked == true) {  
+    parents.each(function(id) {
+      $('checkbox_cms_category_'+id).checked = true;      
+    });
+  }
+}

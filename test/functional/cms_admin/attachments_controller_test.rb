@@ -20,12 +20,12 @@ class CmsAdmin::AttachmentsControllerTest < ActionController::TestCase
   def test_get_edit
     get :edit, :id => cms_attachments(:attachment)
     assert_response :success
-    assert assigns(:attachment)
+    assert assigns(:cms_attachment)
   end
   
   def test_create
     assert_difference 'CmsAttachment.count', 1 do
-      post :create, :attachment => {
+      post :create, :cms_attachment => {
         :label => 'Test File',
         :description => 'This is a file',
         :file => fixture_file_upload('files/upload_file.txt', 'text/plain')
@@ -38,7 +38,7 @@ class CmsAdmin::AttachmentsControllerTest < ActionController::TestCase
   
   def test_update
     attachment = cms_attachments(:attachment)
-    put :update, :id => attachment, :attachment => {
+    put :update, :id => attachment, :cms_attachment => {
       :label => 'New Label',
       :description => 'New Description'
     }
