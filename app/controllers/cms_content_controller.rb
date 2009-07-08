@@ -6,7 +6,16 @@ class CmsContentController < ApplicationController
   
   def show
     @cms_page = CmsPage.find_by_full_path(params[:path].join('/'))
-    return (render :text => '404', :status => 404) if !@cms_page
+    
+    if !@cms_page
+      @cms_page = CmsPage.find_by_full_path('404')
+      if !@cms_page
+        render :text => '404 Page Not Found', :status => 404
+      else
+        render :inline => @cms_page.content, :layout => (@cms_page.cms_layout.app_layout || false), :status => 404
+      end
+      return
+    end
     
     respond_to do |format|
       format.html do
