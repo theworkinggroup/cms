@@ -78,14 +78,14 @@ body
         font: 18px/45px Georgia, serif
         color: #fff
         text-decoration: none
-  .main_content
+  .content_wrapper
     overflow: hidden
     background: #ccc
-    .left_column
+    .left_navigation_column
       width: 145px
       padding: 5px 0px 5px 5px
       float: left
-    .center_column
+    .content_column
       background-color: #fff
       margin-left: 150px
       padding: 15px
@@ -94,8 +94,9 @@ body
   .footer
     padding: 15px
     color: #fff
+    
 // -------------------------------------------------------------- Left Column
-.left_column
+.left_navigation_column
   ul
     -moz-border-radius-topleft: 4px
     -moz-border-radius-bottomleft: 4px
@@ -209,6 +210,74 @@ table.formatted
     -moz-border-radius-topright: 4px
   tr:hover
     background-color: #f5f5f5
+
+// -------------------------------------------------------------------- Forms
+.form_element_group
+  background-color: #e5e5e5
+  -moz-border-radius: 4px
+  padding: 10px
+  margin-bottom: 15px
+  .form_element
+    margin-bottom: 5px
+    overflow: hidden
+    .label
+      text-transform: uppercase
+      font-size: 11px
+    .field
+      input, select, textarea
+        width: 100%
+      .codemirror
+        background-color: #fff
+        border: 1px inset #e5e5e5
+    .fieldWithErrors label
+      color: #9E0B0F
+  .form_element.time, .form_element.date
+    select
+      width: auto
+  
+.form_element_group.horizontal
+  .form_element
+    .label
+      width: 90px
+      float: left
+      text-align: right
+      line-height: 20px
+    .field
+      margin-left: 100px
+  .form_element.large
+    label
+      font-size: 16px
+      line-height: 26px
+    .field
+      input
+        font-size: 16px
+        
+        
+.form_left_column
+  margin-right: 260px
+.form_right_column
+  float: right
+  width: 250px
+  outline: 1px dotted red
+    
+    
+form
+  .errorExplanation
+    background-color: #9E0B0F
+    padding: 10px
+    margin-bottom: 15px
+    color: #fff
+    -moz-border-radius: 4px
+    font-size: 12px
+    h2
+      padding: 0px 5px
+      margin: -5px -5px 5px -5px
+      -moz-border-radius: 4px
+      background-color: #000
+      font-size: 16px
+      border: none
+  .submit
+    text-align: right
     
 // --------------------------------------------------------------- Pagination
 .pagination
@@ -273,54 +342,3 @@ table.formatted
     background: url(/images/cms/icon_draft.gif)
   .icon.published
     background-image: url(/images/cms/icon_regular.gif)
-  
-  
-
-//  // ------------------------------------------------------------------ Forms
-//  form
-//    .errorExplanation
-//      background-color: #9E0B0F
-//      padding: 20px
-//      margin-bottom: 30px
-//      color: #fff
-//      -moz-border-radius: 4px
-//    
-//    .submit
-//      text-align: right
-//    
-//    .form_element
-//      overflow: hidden
-//      padding: 5px 0px
-//      -moz-border-radius: 4px
-//      .label
-//        width: 10%
-//        float: left
-//        label
-//          display: block
-//          text-align: right
-//          padding: 0px 10px
-//          line-height: 162%
-//        .fieldWithErrors
-//          label
-//            background-color: #9E0B0F
-//            color: #fff
-//            -moz-border-radius-topleft: 4px
-//            -moz-border-radius-bottomleft: 4px
-//      .field
-//        width: 90%
-//        float: right
-//        input, select, textarea
-//          width: 99%
-//        .codemirror
-//          border: 1px solid #909090
-//          iframe
-//            background-color: #fff
-//        
-//    .form_element.text.large
-//      label
-//        font: 139%/185% Arial, sans-serif
-//      input
-//        font-size: 154%
-//        
-//    .form_element:hover
-//      background-color: #e5e5e5
