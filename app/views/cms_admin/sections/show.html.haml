@@ -5,11 +5,6 @@
 = will_paginate @pages
 
 %table.formatted
-  %tr
-    %th.first{:colspan => 2}
-      = "#{@section_label} Label"
-    %th.last
-
   - @pages.each do |page|
     %tr
       %td

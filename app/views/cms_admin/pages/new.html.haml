@@ -1,11 +1,8 @@
 %h2 New Page
 
-= render :partial => 'form_right_column'
-
-.form_left_column
-  - form_for :page, :url => {:action => :create } do |form|
-    = render :partial => form
-    .submit
-      = form.submit 'Create Page'
-      or 
-      = link_to 'Cancel', cms_admin_pages_path
+- form_for :page, :url => {:action => :create } do |form|
+  = render :partial => form
+  .submit
+    = form.submit 'Create Page'
+    or 
+    = link_to 'Cancel', cms_admin_pages_path

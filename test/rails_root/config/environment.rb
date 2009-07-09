@@ -37,6 +37,7 @@ Rails::Initializer.run do |config|
   config.gem 'haml'
   config.gem 'thoughtbot-paperclip', :lib => 'paperclip'
   config.gem 'mislav-will_paginate', :lib => 'will_paginate'
+  config.gem 'calendar_date_select'
   config.gem 'theworkinggroup-active_link_helper', :lib => 'active_link_helper'
   
   config.time_zone = 'UTC'

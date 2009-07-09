@@ -12,6 +12,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   
   def new
     @page = CmsPage.new(params.slice(:parent_id))
+    @page.published_at = Time.now.utc
     @page.cms_layout = @page.parent.cms_layout if @page.parent
   end
   

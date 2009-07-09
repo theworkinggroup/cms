@@ -91,6 +91,7 @@ body
       padding: 15px
       border-left: 1px solid #aaa
       overflow: hidden
+      min-height: 300px
   .footer
     padding: 15px
     color: #fff
@@ -109,7 +110,9 @@ body
         padding: 5px 10px
         font: 13px Georgia, serif
         color: #fff
-      a.active
+        border: 1px solid transparent
+      a.active, a:hover
+        text-decoration: none
         background-color: #fff
         -moz-border-radius-topleft: 4px
         -moz-border-radius-bottomleft: 4px
@@ -120,8 +123,13 @@ body
         padding-left: 5px
         color: #000
       a:hover
-        text-decoration: none
-        
+        color: #fff
+        background-color: #888
+        border-color: transparent
+      a.active:hover
+        border-color: #aaa
+        background-color: #fff
+        color: #000
 // ----------------------------------------------------------- Tree Structure
 .tree_structure
   ul
@@ -252,13 +260,16 @@ table.formatted
       input
         font-size: 16px
         
+.form_element_group.publishing
+  .form_element .field
+    input
+      width: 200px  
         
 .form_left_column
   margin-right: 260px
 .form_right_column
   float: right
   width: 250px
-  outline: 1px dotted red
     
     
 form
@@ -276,8 +287,6 @@ form
       background-color: #000
       font-size: 16px
       border: none
-  .submit
-    text-align: right
     
 // --------------------------------------------------------------- Pagination
 .pagination
@@ -300,6 +309,12 @@ form
 #cms_admin_layouts_index
   .icon
     background-image: url(/images/cms/icon_layout.gif)
+    
+// --------------------------------------------------------------- Categories
+#cms_admin_categories_index
+  .icon
+    background-image: url(/images/cms/icon_category.gif)
+    
 // -------------------------------------------------------------------- Pages
 #cms_admin_pages_index
   .icon.published

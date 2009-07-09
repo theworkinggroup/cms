@@ -5,11 +5,20 @@ require 'echoe'
 namespace :generator do
   desc "Cleans up test application"
   task :cleanup do
-    FileUtils.rm_rf("test/rails_root/vendor/plugins/comfortable_mexican_sofa")
-    FileUtils.rm_rf("test/rails_root/db")
-    FileUtils.rm_rf("test/rails_root/public/javascripts/cms_codemirror_init.js")
-    FileUtils.rm_rf("test/rails_root/public/javascripts/cms_mce_init.js")
-    FileUtils.rm_rf("test/rails_root/public/javascripts/cms_utilities.js")
+    files = [
+      'test/rails_root/vendor/plugins/comfortable_mexican_sofa',
+      'test/rails_root/db',
+      'test/rails_root/public/javascripts/cms_codemirror_init.js',
+      'test/rails_root/public/javascripts/cms_mce_init.js',
+      'test/rails_root/public/javascripts/cms_utilities.js',
+      'test/rails_root/public/blank_iframe.html',
+      'test/rails_root/public/images/calendar_date_select',
+      'test/rails_root/public/javascripts/calendar_date_select/',
+      'test/rails_root/public/stylesheets/calendar_date_select/',
+    ]
+    files.each do |file|
+      FileUtils.rm_rf(file)
+    end
   end
   
   desc "Run the generator on the tests"
@@ -25,7 +34,7 @@ task :default => ['generator:cleanup', 'generator:prepare']
 
 task :manifest => ['generator:cleanup']
 
-Echoe.new('comfortable_mexican_sofa', '0.0.11') do |p|
+Echoe.new('comfortable_mexican_sofa', '0.0.12') do |p|
   p.description    = "Ruby on Rails CMS Engine"
   p.url            = "http://www.theworkinggroup.ca"
   p.author         = "Oleg Khabarov"
@@ -36,6 +45,7 @@ Echoe.new('comfortable_mexican_sofa', '0.0.11') do |p|
     'haml',
     'mislav-will_paginate',
     'thoughtbot-paperclip',
+    'calendar_date_select',
     'theworkinggroup-active_link_helper'
   ]
 end

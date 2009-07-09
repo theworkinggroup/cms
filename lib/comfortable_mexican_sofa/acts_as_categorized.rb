@@ -2,30 +2,22 @@ module ActsAsCategorized
   module StubMethods
     def acts_as_categorized
       
-      extend ClassMethods
       include InstanceMethods
-
-      # -- Attributes -----------------------------------------------------------
       
+      # -- Attributes -------------------------------------------------------
       attr_accessor :category_items
       
-      # -- Relationships --------------------------------------------------------
-      
+      # -- Relationships ----------------------------------------------------
       has_many :cms_category_items,
         :as => :item,
         :dependent => :destroy
-
+        
       has_many :cms_categories, 
         :through => :cms_category_items
         
-      # -- Callbacks ------------------------------------------------------------
+      # -- Callbacks --------------------------------------------------------
       after_save :save_category_items
-      
     end
-  end
-  
-  module ClassMethods
-
   end
   
   module InstanceMethods
