@@ -1,6 +1,11 @@
 %h2 Editing Page
 
-- form_for :page, :url => {:action => :update}, :html => {:method => :put} do |form|
-  = render :partial => form
-  .submit
-    = form.submit 'Edit Page'
+= render :partial => 'form_right_column'
+
+.form_left_column
+  - form_for :page, :url => {:action => :update}, :html => {:method => :put} do |form|
+    = render :partial => form
+    .submit
+      = form.submit 'Edit Page'
+      or 
+      = link_to 'Cancel', cms_admin_pages_path

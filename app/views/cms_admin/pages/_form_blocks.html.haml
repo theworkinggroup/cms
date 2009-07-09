@@ -4,9 +4,9 @@
 - unless tags.blank?
 
   - unless (cms_block_tags = tags.delete('cms_block')).blank?
-    .form_element_group.page_block
+    .form_element_group.block
       - cms_block_tags.each do |tag|
-        .form_element
+        .form_element{:class => tag.format}
           .label= tag.form_label
           .field= tag.form_input
       
@@ -14,7 +14,7 @@
   - unless (cms_page_block_tags = tags.delete('cms_page_block')).blank?
     .form_element_group.page_block
       - cms_page_block_tags.each do |tag|
-        .form_element
+        .form_element{:class => tag.format}
           .label= tag.form_label
           .field= tag.form_input
   

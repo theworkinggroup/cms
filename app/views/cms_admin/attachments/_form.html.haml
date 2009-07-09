@@ -1,21 +1,22 @@
 = form.error_messages
 
-.form_element.text.large
-  .label= form.label :label, 'Label'
-  .field= form.text_field :label
+.form_element_group.horizontal
+  .form_element.text.large
+    .label= form.label :label, 'Label'
+    .field= form.text_field :label
 
-- if @cms_attachment && @cms_attachment.file? && !@cms_attachment.new_record?
-  .form_element
-    .label
-      %label Current File
-    .field= link_to @cms_attachment.file_file_name, @cms_attachment.file.url
+  - if @cms_attachment && @cms_attachment.file? && !@cms_attachment.new_record?
+    .form_element
+      .label
+        %label Current File
+      .field= link_to @cms_attachment.file_file_name, @cms_attachment.file.url
 
-.form_element.text
-  .label= form.label :file, 'File'
-  .field= form.file_field :file
+  .form_element.text
+    .label= form.label :file, 'File'
+    .field= form.file_field :file
 
-.form_element.text_area
-  .label= form.label :description, 'Description'
-  .field= form.text_area :description
+  .form_element.text_area
+    .label= form.label :description, 'Description'
+    .field= form.text_area :description
 
 = render :partial => 'cms_admin/categories/category_sub_form', :locals => { :item => @cms_attachment }

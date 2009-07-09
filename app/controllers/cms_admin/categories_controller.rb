@@ -6,7 +6,7 @@ class CmsAdmin::CategoriesController < CmsAdmin::BaseController
   end
   
   def children
-    manage_session_array(:category_tree, (params[:state] == 'open' ? :remove : :add), params[:id])
+    manage_session_array(:cms_category_tree, (params[:state] == 'open' ? :remove : :add), params[:id])
   end
   
   def new
