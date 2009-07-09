@@ -8,7 +8,8 @@ module CmsTag
     options = args.extract_options!
     content = args.first
     
-    raise TagError, 'No content provided' if content.blank?
+    # bailing out if nothing was sent for parsing
+    return [] if content.blank?
       
     tags = []
     CmsTag::Tag.subclasses.each do |tag|

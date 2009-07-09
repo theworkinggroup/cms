@@ -7,6 +7,7 @@ class CmsContentController < ApplicationController
   def show
     @cms_page = CmsPage.find_by_full_path(params[:path].join('/'))
     
+    # Rendering 404 page
     if !@cms_page
       @cms_page = CmsPage.find_by_full_path('404')
       if !@cms_page

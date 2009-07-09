@@ -29,7 +29,7 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
         post :create, :page => {
           :label  => 'Test Page',
           :slug   => 'test_page',
-          :cms_layout_id  => cms_layouts(:default),
+          :cms_layout => cms_layouts(:default),
           :blocks => {
             :header   => { :content_string => 'Test Header' },
             :default  => { :content_text => 'Test Content' },
@@ -55,7 +55,7 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
       put :update, :id => page, :page => {
         :label  => 'New Test Page',
         :slug   => 'new_test_page',
-        :cms_layout_id => cms_layouts(:default),
+        :cms_layout => cms_layouts(:default),
         :blocks => {
           :header   => { :content_string => 'New Test Header' },
           :default  => { :content_text => 'New Test Content' },

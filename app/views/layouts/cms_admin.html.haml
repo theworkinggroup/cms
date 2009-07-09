@@ -12,21 +12,21 @@
     .header
       %h1= link_to application_name, '/cms-admin'
       
-    .main_content
-      .left_column
+    .content_wrapper
+      .left_navigation_column
       
         %ul.primary
           %li= active_link 'Layouts', cms_admin_layouts_path, :self
           %li= active_link 'Pages', cms_admin_pages_path, {'cms_admin/pages' => %w(index new edit create update)}
           %li= active_link 'Snippets', cms_admin_snippets_path, :self
           %li= active_link 'Attachments', cms_admin_attachments_path, :self
+          %li= active_link 'Categories', cms_admin_categories_path, :self
         
         %ul.secondary
           - CmsPage.sections.all.each do |page|
             %li= active_link page.label, cms_admin_section_path(page.id), :self
           
-      .center_column
-        
+      .content_column
         - flash.each do |type, value|
           .flash{:class => type.to_s}
             = value
