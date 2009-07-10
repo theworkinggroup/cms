@@ -14,7 +14,7 @@
   .form_element_group.horizontal
     .form_element.text.large
       .label= form.label :label, 'Title'
-      .field= form.text_field :label
+      .field= form.text_field :label, :onkeyup => (@page.new_record? ? "slugify_field('page_slug', this.value)" : nil)
 
     - unless CmsPage.count == 0 || @page == CmsPage.root
       .form_element.text

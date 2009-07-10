@@ -1,25 +1,16 @@
-document.observe("dom:loaded", function() {
-    try{
-        Event.observe($('page_label'), 'keyup', function(e){
-            $('page_slug').value = slugify( $('page_label').value );
-        });
-    } catch(e){ }
-});
+function slugify_field(id, value) {
+  $(id).value = slugify(value)
+}
 
 // slugify was found at http://dense13.com/blog/2009/05/03/converting-string-to-slug-javascript
 function slugify(str) {
-  str = str.replace(/^\s+|\s+$/g, ''); // trim
-  
-  // remove accents, swap ñ for n, etc
+  str = str.replace(/^\s+|\s+$/g, '');
   var from = "ÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛàáäâèéëêìíïîòóöôùúüûÑñÇç·/_,:;";
   var to   = "aaaaeeeeiiiioooouuuuaaaaeeeeiiiioooouuuunncc------";
   for (var i=0, l=from.length ; i<l ; i++) {
     str = str.replace(new RegExp(from[i], "g"), to[i]);
   }
-
-  str = str.replace(/[^a-zA-Z0-9 -]/g, '') // remove invalid chars
-    .replace(/\s+/g, '-') // collapse whitespace and replace by -
-    .toLowerCase();
+  str = str.replace(/[^a-zA-Z0-9 -]/g, '').replace(/\s+/g, '-').toLowerCase();
   return str;
 }
 
