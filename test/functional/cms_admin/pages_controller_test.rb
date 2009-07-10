@@ -9,7 +9,7 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
   def test_get_index
     get :index
     assert_response :success
-    assert assigns(:pages)
+    assert assigns(:cms_pages)
   end
   
   def test_get_new
@@ -20,7 +20,7 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
   def test_get_edit
     get :edit, :id => cms_pages(:default)
     assert_response :success
-    assert assigns(:page)
+    assert assigns(:cms_page)
   end
   
   def test_create

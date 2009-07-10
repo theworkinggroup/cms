@@ -1,5 +1,5 @@
-- @layout ||= @page.cms_layout
-- @layout && tags = @layout.tags(:view => self, :page => @page).reject{|t| !t.class.has_form?}.group_by(&:tag_type)
+- @layout ||= @cms_page.cms_layout
+- @layout && tags = @layout.tags(:view => self, :page => @cms_page).reject{|t| !t.class.has_form?}.group_by(&:tag_type)
 
 - unless tags.blank?
 

@@ -15,6 +15,7 @@ namespace :generator do
       'test/rails_root/public/images/calendar_date_select',
       'test/rails_root/public/javascripts/calendar_date_select/',
       'test/rails_root/public/stylesheets/calendar_date_select/',
+      'test/rails_root/config/initializers/cms.rb'
     ]
     files.each do |file|
       FileUtils.rm_rf(file)

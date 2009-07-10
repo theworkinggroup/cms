@@ -1,6 +1,6 @@
 %h2 Editing Page
 
-- form_for :page, :url => {:action => :update}, :html => {:method => :put} do |form|
+- form_for :cms_page, :url => {:action => :update}, :html => {:method => :put} do |form|
   = render :partial => form
   .submit
     = form.submit 'Edit Page'
