@@ -16,6 +16,16 @@ complex:
   label: Complex Page
   cms_layout: nested
   slug: complex-page
-  full_path: '/complex-page'
+  full_path: 'complex-page'
   is_section: 1
+  
+unpublished:
+  <<: *page
+  parent: default
+  label: Unpublished Page
+  cms_layout: default
+  slug: unpublished
+  full_path: 'unpublished'
+  published_at: <%= 10.days.from_now %>
+  
   
