@@ -13,6 +13,7 @@ class CmsGenerator < Rails::Generator::Base
         m.file 'javascripts/cms_mce_init.js', 'public/javascripts/cms_mce_init.js', :collision => :skip
         m.file 'javascripts/cms_codemirror_init.js', 'public/javascripts/cms_codemirror_init.js', :collision => :skip
         m.file 'initializers/paperclip.rb', 'config/initializers/paperclip.rb', :collision => :skip
+        m.file 'initializers/cms.rb', 'config/initializers/cms.rb', :collision => :skip
         
         m.readme 'README'
       end

@@ -21,6 +21,8 @@ Please make sure you got following in your environment.rb file:
   
   config.gem 'comfortable_mexican_sofa'
 
+Be sure to check out config/initializers/cms.rb for configuration options!
+
 Some other things you may want to install if you want some fancy textarea
 replacements:
 
