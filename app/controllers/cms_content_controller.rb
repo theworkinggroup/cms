@@ -5,11 +5,11 @@ class CmsContentController < ApplicationController
   before_filter :parse_path, :only => :show
   
   def show
-    @cms_page = CmsPage.find_by_full_path(params[:path].join('/'))
+    @cms_page = CmsPage.published.find_by_full_path(params[:path].join('/'))
     
     # Rendering 404 page
     if !@cms_page
-      @cms_page = CmsPage.find_by_full_path('404')
+      @cms_page = CmsPage.published.find_by_full_path('404')
       if !@cms_page
         render :text => '404 Page Not Found', :status => 404
       else
