@@ -3,7 +3,7 @@
 .form_element_group.horizontal
   .form_element.text.large
     .label= form.label :label, 'Label'
-    .field= form.text_field :label
+    .field= form.text_field :label, :onkeyup => (@cms_category.new_record? ? "slugify_field($('cms_category_slug'), this.value)" : nil)
 
   .form_element.text
     .label= form.label :slug, 'Slug'

@@ -8,9 +8,9 @@ namespace :generator do
     files = [
       'test/rails_root/vendor/plugins/comfortable_mexican_sofa',
       'test/rails_root/db',
-      'test/rails_root/public/javascripts/cms_codemirror_init.js',
-      'test/rails_root/public/javascripts/cms_mce_init.js',
-      'test/rails_root/public/javascripts/cms_utilities.js',
+      'test/rails_root/public/javascripts/cms',
+      'test/rails_root/public/images/cms',
+      'test/rails_root/tmp/',
       'test/rails_root/public/blank_iframe.html',
       'test/rails_root/public/images/calendar_date_select',
       'test/rails_root/public/javascripts/calendar_date_select/',

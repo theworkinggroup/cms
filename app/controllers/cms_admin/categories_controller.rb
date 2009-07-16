@@ -2,7 +2,7 @@ class CmsAdmin::CategoriesController < CmsAdmin::BaseController
   before_filter :load_category, :except => [:create, :new, :index]
   
   def index
-    @categories = CmsCategory.roots
+    @cms_categories = CmsCategory.roots
   end
   
   def children
@@ -10,18 +10,18 @@ class CmsAdmin::CategoriesController < CmsAdmin::BaseController
   end
   
   def new
-    @category = CmsCategory.new(params.slice(:parent_id))
+    @cms_category = CmsCategory.new(params.slice(:parent_id))
   end
   
   def create
-    @category = CmsCategory.create!(params[:category])
+    @cms_category = CmsCategory.create!(params[:cms_category])
     flash[:notice] = 'Category created'
     respond_to do |format|
       format.html { redirect_to cms_admin_categories_path }
       format.js
     end
   rescue ActiveRecord::RecordInvalid => e
-    @category = e.record
+    @cms_category = e.record
     respond_to do |format|
       format.html { render :action => 'new' }
       format.js
@@ -32,14 +32,14 @@ class CmsAdmin::CategoriesController < CmsAdmin::BaseController
   end
 
   def update
-    @category.update_attributes!(params[:category])
+    @cms_category.update_attributes!(params[:cms_category])
     flash[:notice] = 'Category updated'
     respond_to do |format|
       format.html { redirect_to cms_admin_categories_path }
       format.js
     end
   rescue ActiveRecord::RecordInvalid => e
-    @category = e.record
+    @cms_category = e.record
     respond_to do |format|
       format.html { render :action => 'edit' }
       format.js
@@ -50,7 +50,7 @@ class CmsAdmin::CategoriesController < CmsAdmin::BaseController
   end
   
   def destroy
-    @category.destroy
+    @cms_category.destroy
     flash[:notice] = 'Category deleted'
     redirect_to cms_admin_categories_path
   end
@@ -58,7 +58,7 @@ class CmsAdmin::CategoriesController < CmsAdmin::BaseController
 protected
   
   def load_category
-    @category = CmsCategory.find(params[:id])
+    @cms_category = CmsCategory.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render :text => 'Item not found', :status => 404
   end

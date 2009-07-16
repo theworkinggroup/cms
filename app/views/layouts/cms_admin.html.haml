@@ -3,7 +3,7 @@
   %head
     %title
     = stylesheet_link_tag 'cms_master'
-    = javascript_include_tag :defaults, 'cms_utilities', 'tiny_mce/tiny_mce', 'cms_mce_init', 'codemirror/codemirror', 'cms_codemirror_init'
+    = javascript_include_tag :defaults, 'cms/utilities', 'cms/mce_init', 'cms/codemirror_init', 'codemirror/codemirror', 'tiny_mce/tiny_mce'
     = calendar_date_select_includes
 
     = yield :head
@@ -23,9 +23,10 @@
           %li= active_link 'Attachments', cms_admin_attachments_path, :self
           %li= active_link 'Categories', cms_admin_categories_path, :self
         
-        %ul.secondary
-          - CmsPage.sections.all.each do |page|
-            %li= active_link page.label, cms_admin_section_path(page.id), :self
+        - unless CmsPage.sections.blank?
+          %ul.secondary
+            - CmsPage.sections.all.each do |page|
+              %li= active_link page.label, cms_admin_section_path(page.id), :self
           
       .content_column
         - flash.each do |type, value|

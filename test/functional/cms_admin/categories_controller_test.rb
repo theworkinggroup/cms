@@ -9,7 +9,7 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
   def test_get_index
     get :index
     assert_response :success
-    assert assigns(:categories)
+    assert assigns(:cms_categories)
   end
   
   
@@ -21,12 +21,12 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
   def test_get_edit
     get :edit, :id => cms_categories(:default)
     assert_response :success
-    assert assigns(:category)
+    assert assigns(:cms_category)
   end
   
   def test_create
     assert_difference 'CmsCategory.count', 1 do
-      post :create, :category => {
+      post :create, :cms_category => {
         :label => 'Category 1',
         :description => 'This is a category',
       }
@@ -37,19 +37,19 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
   
   def test_create_fail
     assert_no_difference 'CmsCategory.count' do
-      post :create, :category => {
+      post :create, :cms_category => {
         :label => '',
         :description => 'This is a category',
       }
     end
     assert_response :success
     assert_template 'new'
-    assert assigns(:category).errors.on(:label)
+    assert assigns(:cms_category).errors.on(:label)
   end
   
   def test_update
     category = cms_categories(:default)
-    put :update, :id => category, :category => {
+    put :update, :id => category, :cms_category => {
       :label => 'Category 2',
       :description => 'New Description'
     }
@@ -62,13 +62,13 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
   
   def test_update_fail
     category = cms_categories(:default)
-    put :update, :id => category, :category => {
+    put :update, :id => category, :cms_category => {
       :label => '',
       :description => 'New Description'
     }
     assert_response :success
     assert_template 'edit'
-    assert assigns(:category).errors.on(:label)
+    assert assigns(:cms_category).errors.on(:label)
   end
   
   def test_destroy

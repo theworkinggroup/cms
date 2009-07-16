@@ -1,226 +1,359 @@
-body#cms_admin_layout
-  padding: 0px
-  margin: 0px
-  font: 13px arial, verdana, clean, sans-serif
-  background-color: #dedede
+// -------------------------------------------------------------------- Reset
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
+  margin: 0
+  padding: 0
+  border: 0
+  outline: 0
+  font-size: 100%
+  vertical-align: baseline
+  background: transparent
+  font-weight: normal
+body
+  line-height: 1
+ol, ul
+  list-style: none
+blockquote, q
+  quotes: none
+blockquote:before, blockquote:after, q:before, q:after
+  content: ''
+  content: none
+*:focus
+  outline: 0
+ins
+  text-decoration: none
+del
+  text-decoration: line-through
+table
+  border-collapse: collapse
+  border-spacing: 0
+caption, th
+  text-align: left
   
-  .header
-    height: 50px
-    background: #0E518B
-    padding: 0px 25px
-    position: relative
-    h1
-      font: 200%/50px Georgia, serif
-      padding: 0px
-      margin: 0px
-      color: #fff
-    
-    ul.main_nav
-      position: absolute
-      bottom: 0px
-      left: 350px
-      list-style: none
-      margin: 0px
-      padding: 0px
-      li
-        float: left
-        a
-          float: left
-          margin-right: 5px
-          height: 30px
-          width: 100px
-          color: #fff
-          background: #2086C4
-          font: 123%/30px Helvetica, serif
-          text-decoration: none
-          text-align: center
-          -moz-border-radius-topleft: 4px
-          -moz-border-radius-topright: 4px
-        a.active
-          background-color: #fff
-          color: #000
-  .content
-    background-color: #fff
-    padding: 25px
-    .flash
-      -moz-border-radius: 4px
-      padding: 10px
-      text-align: center
-      font-size: 123%
-      margin-bottom: 25px
-      color: #fff
-    .flash.notice
-      background-color: #039C00
-    
-  .footer
-    color: #fff
-    text-align: center
-    padding: 10px
+// --------------------------------------------------------------- Typography
+body
+  font: 13px Tahoma, "Lucida Grande", arial, verdana, clean, sans-serif
+  _font-size: small
+  _font: x-small
+table
+  font-size: inherit 
+  font: 100%
+  th
+    font-weight: bold
+pre, code 
+  font: 115% monospace
+  _font-size: 100%
 
-    
+a
+  color: #083792
+  text-decoration: none
+a:hover
+  text-decoration: underline
+  
+h2
+  font: 20px/30px Georgia, serif
+  margin-bottom: 15px
+  border-bottom: 2px solid #444
+  
 // ------------------------------------------------------------------- Common
-#cms_admin_layout
-
-  h2
-    margin: 0px
-    padding: 0px
-    margin-bottom: 15px
+a.big_button
+  float: right
+  background-color: #404040
+  color: #fff
+  text-decoration: none
+  padding: 0px 10px
+  -moz-border-radius: 4px
+  font: 12px/24px Tahoma, "Lucida Grande", sans-serif
   
-  a
-    color: #0E518B
-    outline: none
-  
-  a.big_button
-    float: right
-    background-color: #2086C4
-    font: 123%/30px Helvetica, serif
-    color: #fff
-    text-decoration: none
-    padding: 0px 10px
-    -moz-border-radius: 4px
-  
-  // --------------------------------------------------------- Tree Structure
-  .tree_structure
-    ul
-      list-style: none
-      margin: 0px
+// ---------------------------------------------------------------- Structure
+body
+  background-color: #404040
+  .header
+    height: 45px
+    background: #404040
+    padding: 0px 15px
+    h1
       padding: 0px
-      li
-        position: relative
-        margin-bottom: 5px
-        background-color: #e6edf3
-        -moz-border-radius: 4px
-        padding: 10px 10px 10px 50px
-        
-        .controls
-          position: absolute
-          top: 0px 
-          left: 0px
-          background-color: #0E518B
-          -moz-border-radius-topleft: 4px
-          -moz-border-radius-bottomright: 4px
-          a.expander, .dragger
-            padding: 3px 5px
-            width: 30px
-            display: block
-            color: #fff
-          a.expander
-            text-decoration: none
-          a.expander:hover
-            font-weight: bold
-            -moz-border-radius-topleft: 4px
-          .dragger
-            cursor: move
-            background-color: #926492
-            -moz-border-radius-topleft: 4px
-            -moz-border-radius-bottomright: 4px
-            
-        .action_links
-          a
-            float: right
-            background-color: #fff
-            padding: 2px 5px
-            margin-left: 5px
-            -moz-border-radius: 2px
-            text-decoration: none
-            color: #0E518B
-          a:hover
-            background-color: #2086C4
-            color: #fff
-          a.remove:hover
-            background-color: #C33013
-            color: #fff
-            
-        .item
-          a.label
-            font: 123% Georgia, serif
-            color: #000
-            text-decoration: none
-          .details
-            font-size: 85%
-            margin-bottom: 5px
-            a
-              text-decoration: none
-            table
-              th, td
-                padding: 2px 5px
-              th
-                font-weight: normal
-                text-align: right
-                background-color: #e5e5e5
-                -moz-border-radius: 2px
-          
-        
-        
-        ul li
-          background-color: #cfdce8
-          ul li
-            background-color: #b6cadc
-            ul li
-              background-color: #9fb9d1
-              ul li
-                background-color: #86a8c5
-                ul li
-                  background-color: #6e97b9
-                  ul li
-                    background-color: #5785ae
-                    ul li
-                      background-color: #3e74a2
-                      ul li
-                        background-color: #266296
-                        ul li
-                          background-color: #0e518b
-                          
-  // ------------------------------------------------------------------ Forms
-  form
-    .errorExplanation
-      background-color: #9E0B0F
-      padding: 20px
-      margin-bottom: 30px
-      color: #fff
-      -moz-border-radius: 4px
-    
-    .submit
-      text-align: right
-    
-    .form_element
+      margin: 0px
+      a
+        font: 18px/45px Georgia, serif
+        color: #fff
+        text-decoration: none
+  .content_wrapper
+    overflow: hidden
+    background: #ccc
+    .left_navigation_column
+      width: 145px
+      padding: 5px 0px 5px 5px
+      float: left
+    .content_column
+      background-color: #fff
+      margin-left: 150px
+      padding: 15px
+      border-left: 1px solid #aaa
       overflow: hidden
-      padding: 5px 0px
-      -moz-border-radius: 4px
-      .label
-        width: 10%
-        float: left
-        label
-          display: block
-          text-align: right
-          padding: 0px 10px
-          line-height: 162%
-        .fieldWithErrors
-          label
-            background-color: #9E0B0F
-            color: #fff
-            -moz-border-radius-topleft: 4px
-            -moz-border-radius-bottomleft: 4px
-      .field
-        width: 90%
-        float: right
-        input, select, textarea
-          width: 99%
-        
-    .form_element.text.large
-      label
-        font: 139%/185% Arial, sans-serif
-      input
-        font-size: 154%
-        
-    .form_element:hover
-      background-color: #e5e5e5
-        
-  // ------------------------------------------------------------------- Help
-  .help
-    background-color: #FBFEA0
-    padding: 20px
-    margin-bottom: 15px
-    border: 1px solid #e5e5e5
-    -moz-border-radius: 4px
+      min-height: 300px
+  .footer
+    padding: 15px
+    color: #fff
     
+// -------------------------------------------------------------- Left Column
+.left_navigation_column
+  ul
+    -moz-border-radius-topleft: 4px
+    -moz-border-radius-bottomleft: 4px
+    margin-bottom: 5px
+    padding: 5px 0px
+    background-color: #7b7b7b
+    li 
+      a
+        display: block
+        padding: 5px 10px
+        font: 13px Georgia, serif
+        color: #fff
+        border: 1px solid transparent
+      a.active, a:hover
+        text-decoration: none
+        background-color: #fff
+        -moz-border-radius-topleft: 4px
+        -moz-border-radius-bottomleft: 4px
+        border: 1px solid #aaa
+        border-right: none
+        margin-right: -1px
+        margin-left: 5px
+        padding-left: 5px
+        color: #000
+      a:hover
+        color: #fff
+        background-color: #888
+        border-color: transparent
+      a.active:hover
+        border-color: #aaa
+        background-color: #fff
+        color: #000
+// ----------------------------------------------------------- Tree Structure
+.tree_structure
+  ul
+    li
+      margin-left: 35px
+      border-top: 1px solid #eee
+    
+    a.tree_toggle
+      margin-top: 5px
+      width: 20px
+      height: 28px
+      float: left
+      margin-left: -35px
+      font: 10px/25px Arial, sans-serif
+      background: url(/images/cms/arrow_bottom.gif) right center no-repeat
+      padding-right: 15px
+      color: #ccc
+      text-align: right
+    a.tree_toggle.closed
+      background-image: url(/images/cms/arrow_right.gif)
+    a.tree_toggle:hover
+      text-decoration: none
+      color: #000
+      
+    .item
+      padding: 5px 0px 5px 35px
+      overflow: hidden
+      
+      .icon
+        margin-left: -35px
+        float: left
+        width: 28px
+        height: 28px
+        background: url(/images/cms/icon_draft.gif)
+        .dragger
+          width: 28px
+          height: 28px
+          cursor: move
+        .dragger:hover
+          background: url(/images/cms/icon_move.gif)
+      
+      a.label
+        font: 14px Georgia, serif
+        color: #000
+      .url
+        font-size: 10px
+        
+      .action_links
+        visibility: hidden
+        font-size: 10px
+        
+      table.details
+        font-size: 10px
+        margin: 5px 15px
+        border-left: 3px solid #ccc
+        th
+          padding: 0px 5px 0px 10px
+          font-weight: normal
+        
+    .item:hover
+      background-color: #f5f5f5
+      .action_links
+        visibility: visible
+
+// ---------------------------------------------------------- Formatted Table
+table.formatted
+  width: 100%
+  margin-bottom: 15px
+  th, td
+    padding: 5px
+    vertical-align: top
+    border-bottom: 1px solid #eee
+  th
+    background-color: #eee
+    font-size: 10px
+    text-transform: uppercase
+    border-bottom: 1px solid #444
+  td.main, th.main
+    width: 100%
+    white-space: normal
+  td, th
+    white-space: nowrap
+  th.first
+    -moz-border-radius-topleft: 4px
+  th.last
+    -moz-border-radius-topright: 4px
+  tr:hover
+    background-color: #f5f5f5
+
+// -------------------------------------------------------------------- Forms
+.form_element_group
+  background-color: #e5e5e5
+  -moz-border-radius: 4px
+  padding: 10px
+  margin-bottom: 15px
+  .form_element
+    margin-bottom: 5px
+    overflow: hidden
+    .label
+      text-transform: uppercase
+      font-size: 11px
+    .field
+      input, select, textarea
+        width: 100%
+      .codemirror
+        background-color: #fff
+        border: 1px inset #e5e5e5
+    .fieldWithErrors label
+      color: #9E0B0F
+  .form_element.time, .form_element.date
+    select
+      width: auto
+  
+.form_element_group.horizontal
+  .form_element
+    .label
+      width: 90px
+      float: left
+      text-align: right
+      line-height: 20px
+    .field
+      margin-left: 100px
+  .form_element.large
+    label
+      font-size: 16px
+      line-height: 26px
+    .field
+      input
+        font-size: 16px
+        
+.form_element_group.publishing
+  .form_element .field
+    input
+      width: 200px  
+        
+.form_left_column
+  margin-right: 260px
+.form_right_column
+  float: right
+  width: 250px
+    
+    
+form
+  .errorExplanation
+    background-color: #9E0B0F
+    padding: 10px
+    margin-bottom: 15px
+    color: #fff
+    -moz-border-radius: 4px
+    font-size: 12px
+    h2
+      padding: 0px 5px
+      margin: -5px -5px 5px -5px
+      -moz-border-radius: 4px
+      background-color: #000
+      font-size: 16px
+      border: none
+    
+// --------------------------------------------------------------- Pagination
+.pagination
+  margin-bottom: 15px
+  float: right
+  a, span
+    background: #404040
+    color: #fff
+    padding: 2px 5px
+    font-size: 11px
+    -moz-border-radius: 2px
+  a:hover
+    text-decoration: none
+  span.disabled
+    display: none
+  span.current
+    background-color: #999
+    
+// ------------------------------------------------------------------ Layouts
+#cms_admin_layouts_index
+  .icon
+    background-image: url(/images/cms/icon_layout.gif)
+    
+// --------------------------------------------------------------- Categories
+#cms_admin_categories_index
+  .icon
+    background-image: url(/images/cms/icon_category.gif)
+    
+// -------------------------------------------------------------------- Pages
+#cms_admin_pages_index
+  .icon.published
+    background-image: url(/images/cms/icon_regular.gif)
+    
+// ----------------------------------------------------------------- Snippets
+#cms_admin_snippets_index
+  a.label
+    font: 14px Georgia, serif
+    color: #000
+  a.slug
+    font-size: 10px
+  .icon
+    width: 28px
+    height: 28px
+    background: url(/images/cms/icon_snippet.gif)
+    
+// -------------------------------------------------------------- Attachments
+#cms_admin_attachments_index
+  a.label
+    font: 14px Georgia, serif
+    color: #000
+  a.url
+    font-size: 10px
+  .icon
+    width: 28px
+    height: 28px
+    background: url(/images/cms/icon_attachment.gif)
+    
+// ----------------------------------------------------------------- Sections
+#cms_admin_sections_show
+  a.label
+    font: 14px Georgia, serif
+    color: #000
+  a.url
+    font-size: 10px
+  .icon
+    width: 28px
+    height: 28px
+    background: url(/images/cms/icon_draft.gif)
+  .icon.published
+    background-image: url(/images/cms/icon_regular.gif)

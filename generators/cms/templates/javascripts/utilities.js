@@ -1,5 +1,5 @@
-function slugify_field(id, value) {
-  $(id).value = slugify(value)
+function slugify_field(field, value) {
+  field.value = slugify(value)
 }
 
 // slugify was found at http://dense13.com/blog/2009/05/03/converting-string-to-slug-javascript

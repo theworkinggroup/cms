@@ -7,7 +7,7 @@
     - is_selected = item.cms_category_items.collect(&:cms_category_id).include?(category.id)
     - item_type = item.class.name.underscore
     
-  = check_box_tag "#{item_type}[category_items][][cms_category_id]", category.id, is_selected, :id => dom_id(category, :checkbox), :onchange => "check_parents_if_checked(this, new Array(#{category.ancestors.collect{|c| "'#{c.id}'"}*','}))"
+  = check_box_tag "#{item_type}[cms_category_items][][cms_category_id]", category.id, is_selected, :id => dom_id(category, :checkbox), :onchange => "check_parents_if_checked(this, new Array(#{category.ancestors.collect{|c| "'#{c.id}'"}*','}))"
 
   = category.label
   
