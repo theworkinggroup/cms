@@ -26,7 +26,7 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
   def test_create
     assert_difference 'CmsPage.count' do
       assert_difference 'CmsBlock.count', 3 do
-        post :create, :page => {
+        post :create, :cms_page => {
           :label  => 'Test Page',
           :slug   => 'test_page',
           :cms_layout => cms_layouts(:default),
@@ -52,7 +52,7 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
     page = cms_pages(:complex)
     
     assert_difference 'CmsBlock.count' do
-      put :update, :id => page, :page => {
+      put :update, :id => page, :cms_page => {
         :label  => 'New Test Page',
         :slug   => 'new_test_page',
         :cms_layout => cms_layouts(:default),

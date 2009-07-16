@@ -21,7 +21,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   end
   
   def create
-    @cms_page = CmsPage.new(params[:page])
+    @cms_page = CmsPage.new(params[:cms_page])
     @cms_page.save!
     
     flash[:notice] = 'Page created'
@@ -33,7 +33,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   end
   
   def update
-    @cms_page.update_attributes!(params[:page])
+    @cms_page.update_attributes!(params[:cms_page])
     
     flash[:notice] = 'Page updated'
     redirect_to :action => :index
