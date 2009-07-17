@@ -30,7 +30,7 @@ class CmsCategorizationTest < ActiveSupport::TestCase
   end
   
   def test_cascading_removal
-    categorization = cms_page_categorizations(:page_category_2)
+    categorization = cms_page_categorizations(:page_category_1)
     assert_difference 'CmsPageCategorization.count', -3 do
       categorization.destroy
     end

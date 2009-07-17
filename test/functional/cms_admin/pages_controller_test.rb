@@ -90,4 +90,29 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
     end
   end
   
+  def test_adding_categorizations
+    page = cms_pages(:default)
+    
+    assert_difference 'CmsPageCategorization.count' do
+      put :update, :id => page, :cms_page => {
+        :attr_category_ids => {
+          cms_categories(:category_1).id => 1
+        }
+      }
+    end
+  end
+  
+  def test_removing_categorizations
+    page = cms_pages(:default)
+    
+    assert_difference 'CmsPageCategorization.count', -3 do
+      put :update, :id => page, :cms_page => {
+        :attr_category_ids => {
+          cms_categories(:category_2).id => 0
+        }
+      }
+    end
+    
+  end
+  
 end
