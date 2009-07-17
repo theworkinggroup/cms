@@ -31,7 +31,7 @@ class CmsAdmin::AttachmentsControllerTest < ActionController::TestCase
         :file => fixture_file_upload('files/upload_file.txt', 'text/plain')
       }
       assert_response :redirect
-      assert_redirected_to :action => :index
+      assert_redirected_to :action => :edit
       assert_equal 'Attachment created', flash[:notice]
     end
   end
@@ -45,6 +45,9 @@ class CmsAdmin::AttachmentsControllerTest < ActionController::TestCase
     attachment.reload
     assert_equal 'New Label', attachment.label
     assert_equal 'New Description', attachment.description
+    
+    assert_response :redirect
+    assert_redirected_to :action => :edit
     assert_equal 'Attachment updated', flash[:notice]
   end
   

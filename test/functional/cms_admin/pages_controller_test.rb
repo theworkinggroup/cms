@@ -37,7 +37,7 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
           }
         }
         assert_response :redirect
-        assert_redirected_to :action => :index
+        assert_redirected_to :action => :edit
         assert_equal 'Page created', flash[:notice]
         
         assert page = CmsPage.find_by_slug('test_page')
@@ -63,7 +63,7 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
         }
       }
       assert_response :redirect
-      assert_redirected_to :action => :index
+      assert_redirected_to :action => :edit
       assert_equal 'Page updated', flash[:notice]
     
       assert page = CmsPage.find_by_slug('new_test_page')
@@ -112,7 +112,5 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
         }
       }
     end
-    
   end
-  
 end

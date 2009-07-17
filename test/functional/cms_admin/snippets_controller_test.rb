@@ -30,7 +30,7 @@ class CmsAdmin::SnippetsControllerTest < ActionController::TestCase
         :content  => 'test content'
       }
       assert_response :redirect
-      assert_redirected_to :action => :index
+      assert_redirected_to :action => :edit
       assert_equal 'Snippet created', flash[:notice]
     end
   end
@@ -43,7 +43,7 @@ class CmsAdmin::SnippetsControllerTest < ActionController::TestCase
       :content  => 'new test content'
     }
     assert_response :redirect
-    assert_redirected_to :action => :index
+    assert_redirected_to :action => :edit
     assert_equal 'Snippet updated', flash[:notice]
       
     snippet.reload

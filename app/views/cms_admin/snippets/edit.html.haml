@@ -1,3 +1,5 @@
+= link_to 'Add New Snippet', new_cms_admin_snippet_path, :class => 'big_button'
+
 %h2 Editing Snippet
 
 - form_for :snippet, :url => {:action => :update}, :html => {:method => :put} do |form|
@@ -5,4 +7,4 @@
   .submit
     = form.submit 'Edit Snippet'
     or 
-    = link_to 'Cancel', cms_admin_snippets_path
+    = link_to 'Return to List', cms_admin_snippets_path

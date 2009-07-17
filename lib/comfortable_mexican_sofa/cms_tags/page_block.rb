@@ -5,7 +5,7 @@ class CmsTag::PageBlock < CmsTag::Tag
       :db_column    => :content_text,
       :description  => '',
       :form_output  => lambda { |tag|
-        tag.view.text_area_tag "page[blocks][#{tag.label}][content_text]", tag.content, 
+        tag.view.text_area_tag "cms_page[blocks][#{tag.label}][content_text]", tag.content, 
           :rows => 20
       }
     },
@@ -13,7 +13,7 @@ class CmsTag::PageBlock < CmsTag::Tag
       :db_column    => :content_text,
       :description  => '',
       :form_output  => lambda { |tag| 
-        tag.view.text_area_tag "page[blocks][#{tag.label}][content_text]", tag.content,
+        tag.view.text_area_tag "cms_page[blocks][#{tag.label}][content_text]", tag.content,
           :rows   => 20, 
           :class  => 'mceEditor'
       }
@@ -23,7 +23,7 @@ class CmsTag::PageBlock < CmsTag::Tag
       :description  => '',
       :form_output  => lambda { |tag| 
         tag.view.content_tag :div, :class => 'codemirror' do 
-          tag.view.text_area_tag "page[blocks][#{tag.label}][content_text]", tag.content,
+          tag.view.text_area_tag "cms_page[blocks][#{tag.label}][content_text]", tag.content,
             :rows   => 20, 
             :class  => 'codeTextArea'
         end
@@ -33,28 +33,28 @@ class CmsTag::PageBlock < CmsTag::Tag
       :db_column    => :content_string,
       :description  => '',
       :form_output  => lambda { |tag| 
-        tag.view.text_field_tag "page[blocks][#{tag.label}][content_string]", tag.content
+        tag.view.text_field_tag "cms_page[blocks][#{tag.label}][content_string]", tag.content
       }
     },
     :integer => {
       :db_column    => :content_integer,
       :description  => '',
       :form_output  => lambda { |tag| 
-        tag.view.text_field_tag "page[blocks][#{tag.label}][content_integer]", tag.content
+        tag.view.text_field_tag "cms_page[blocks][#{tag.label}][content_integer]", tag.content
       }
     },
     :boolean => {
       :db_column    => :content_boolean,
       :description  => '',
       :form_output  => lambda { |tag| 
-        tag.view.check_box_tag "page[blocks][#{tag.label}][content_boolean]", tag.content
+        tag.view.check_box_tag "cms_page[blocks][#{tag.label}][content_boolean]", tag.content
       }
     },
     :date => {
       :db_column   => :content_datetime,
       :description => '',
       :form_output => lambda { |tag| 
-        tag.view.fields_for "page[blocks][#{tag.label}]" do |field|
+        tag.view.fields_for "cms_page[blocks][#{tag.label}]" do |field|
           field.date_select :content_datetime, :default => tag.content
         end
       }
@@ -63,7 +63,7 @@ class CmsTag::PageBlock < CmsTag::Tag
       :db_column   => :content_datetime,
       :description => '',
       :form_output => lambda { |tag|
-        tag.view.fields_for "page[blocks][#{tag.label}]" do |field|
+        tag.view.fields_for "cms_page[blocks][#{tag.label}]" do |field|
           field.datetime_select :content_datetime, :default => tag.content
         end
       }

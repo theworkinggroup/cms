@@ -12,7 +12,6 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
     assert assigns(:cms_categories)
   end
   
-  
   def test_get_new
     get :new
     assert_response :success
@@ -31,7 +30,7 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
         :description => 'This is a category',
       }
     end
-    assert_redirected_to cms_admin_categories_path
+    assert_redirected_to :action => :edit
     assert_equal 'Category created', flash[:notice]
   end
   
@@ -53,7 +52,7 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
       :label => 'Category 2',
       :description => 'New Description'
     }
-    assert_redirected_to cms_admin_categories_path
+    assert_redirected_to :action => :edit
     category.reload
     assert_equal 'Category 2', category.label
     assert_equal 'New Description', category.description

@@ -15,21 +15,23 @@ class CmsAdmin::AttachmentsController < CmsAdmin::BaseController
   
   def create
     @cms_attachment = CmsAttachment.new(params[:cms_attachment])
-    if @cms_attachment.save
-      flash[:notice] = 'Attachment created'
-      redirect_to :action => :index
-    else
-      render :action => :new
-    end
+    @cms_attachment.save!
+    
+    flash[:notice] = 'Attachment created'
+    redirect_to :action => :edit, :id => @cms_attachment
+  
+  rescue ActiveRecord::RecordInvalid
+    render :action => :new
   end
   
   def update
-    if @cms_attachment.update_attributes(params[:cms_attachment])
-      flash[:notice] = 'Attachment updated'
-      redirect_to :action => :index
-    else
-      render :action => :edit
-    end
+    @cms_attachment.update_attributes!(params[:cms_attachment])
+    
+    flash[:notice] = 'Attachment updated'
+    redirect_to :action => :edit, :id => @cms_attachment
+  
+  rescue ActiveRecord::RecordInvalid
+    render :action => :edit
   end
   
   def destroy

@@ -19,7 +19,7 @@ class CmsAdmin::SnippetsController < CmsAdmin::BaseController
     @snippet.save!
     
     flash[:notice] = 'Snippet created'
-    redirect_to :action => :index
+    redirect_to :action => :edit, :id => @snippet
     
   rescue ActiveRecord::RecordInvalid
     render :action => :new
@@ -29,7 +29,7 @@ class CmsAdmin::SnippetsController < CmsAdmin::BaseController
     @snippet.update_attributes!(params[:snippet])
     
     flash[:notice] = 'Snippet updated'
-    redirect_to :action => :index
+    redirect_to :action => :edit, :id => @snippet
     
   rescue ActiveRecord::RecordInvalid
     render :action => :edit

@@ -1,3 +1,5 @@
+= link_to 'Add New Page', new_cms_admin_page_path, :class => 'big_button'
+
 %h2 Editing Page
 
 - form_for :cms_page, :url => {:action => :update}, :html => {:method => :put} do |form|
@@ -5,4 +7,4 @@
   .submit
     = form.submit 'Edit Page'
     or 
-    = link_to 'Cancel', cms_admin_pages_path
+    = link_to 'Return to List', cms_admin_pages_path

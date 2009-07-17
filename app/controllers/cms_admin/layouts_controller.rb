@@ -24,7 +24,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
     
     flash[:notice] = 'Layout created'
     manage_session_array(:cms_layout_tree, :add, @layout.parent_id.to_s)
-    redirect_to :action => :index
+    redirect_to :action => :edit, :id => @layout
     
   rescue ActiveRecord::RecordInvalid
     render :action => :new
@@ -34,7 +34,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
     @layout.update_attributes!(params[:layout])
     
     flash[:notice] = 'Layout updated'
-    redirect_to :action => :index
+    redirect_to :action => :edit, :id => @layout
     
   rescue ActiveRecord::RecordInvalid
     render :action => :edit
