@@ -1,15 +1,16 @@
 - item ||= nil
+- if item.blank?
+  - is_checked = true
+- else  
+  - is_checked = item.cms_categories.collect(&:id).include?(category.id)
+  - item_type = item.class.to_s.underscore
 
 %li
-  - if item.blank?
-    - is_selected = true
-  - else
-    - is_selected = item.cms_category_items.collect(&:cms_category_id).include?(category.id)
-    - item_type = item.class.name.underscore
-    
-  = check_box_tag "#{item_type}[cms_category_items][][cms_category_id]", category.id, is_selected, :id => dom_id(category, :checkbox), :onchange => "check_parents_if_checked(this, new Array(#{category.ancestors.collect{|c| "'#{c.id}'"}*','}))"
-
-  = category.label
+  = hidden_field_tag "#{item_type}[attr_category_ids][#{category.id}]", 0
+  
+  %label
+    = check_box_tag "#{item_type}[attr_category_ids][#{category.id}]", 1, is_checked, :id => dom_id(category, :checkbox), :onchange => "check_parents_if_checked(this, new Array(#{category.ancestors.collect{|c| "'#{c.id}'"}*','}))"
+    = category.label
   
   %ul{:id => dom_id(category)}  
     - unless category.children.empty?

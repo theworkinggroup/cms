@@ -3,7 +3,7 @@ class CmsAdmin::AttachmentsController < CmsAdmin::BaseController
   before_filter :load_attachment, :only => [:edit, :update, :destroy]
   
   def index
-    @attachments = CmsAttachment.paginate :page => params[:page], :order => 'created_at DESC'
+    @cms_attachments = CmsAttachment.paginate :page => params[:page], :order => 'created_at DESC'
   end
   
   def new

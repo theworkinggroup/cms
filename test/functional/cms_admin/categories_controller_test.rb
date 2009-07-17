@@ -19,7 +19,7 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
   end
   
   def test_get_edit
-    get :edit, :id => cms_categories(:default)
+    get :edit, :id => cms_categories(:category_1)
     assert_response :success
     assert assigns(:cms_category)
   end
@@ -48,7 +48,7 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
   end
   
   def test_update
-    category = cms_categories(:default)
+    category = cms_categories(:category_1)
     put :update, :id => category, :cms_category => {
       :label => 'Category 2',
       :description => 'New Description'
@@ -61,7 +61,7 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
   end
   
   def test_update_fail
-    category = cms_categories(:default)
+    category = cms_categories(:category_1)
     put :update, :id => category, :cms_category => {
       :label => '',
       :description => 'New Description'
@@ -73,7 +73,7 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
   
   def test_destroy
     assert_difference 'CmsCategory.count', -1 do
-      delete :destroy, :id => cms_categories(:default)
+      delete :destroy, :id => cms_categories(:category_1)
       assert_redirected_to cms_admin_categories_path
       assert_equal 'Category deleted', flash[:notice]
     end

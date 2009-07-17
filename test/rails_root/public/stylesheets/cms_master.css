@@ -251,6 +251,19 @@ table.formatted {
 .form_element_group.publishing .form_element .field input {
   width: 200px; }
 
+.form_element_group.categories .label {
+  border-bottom: 2px solid #fff;
+  padding-bottom: 5px;
+  margin-bottom: 5px; }
+.form_element_group.categories ul#root_categories {
+  margin-bottom: 10px; }
+  .form_element_group.categories ul#root_categories li li {
+    padding-left: 15px; }
+.form_element_group.categories #new_category input, .form_element_group.categories #new_category select {
+  margin-bottom: 5px; }
+.form_element_group.categories #new_category input.submit_button {
+  width: auto; }
+
 .form_left_column {
   margin-right: 260px; }
 

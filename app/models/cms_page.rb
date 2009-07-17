@@ -45,7 +45,7 @@ class CmsPage < ActiveRecord::Base
     render_content
   end
   
-  # Recursive Tag/Content Replacement
+  # FIX: Recursive Tag/Content Replacement
   # Works, but potentionally dangerous and not particularly efficient
   def render_content(content = nil)
     content = cms_layout.content.dup if !content

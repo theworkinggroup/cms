@@ -5,37 +5,35 @@ module ActsAsCategorized
       include InstanceMethods
       
       # -- Attributes -------------------------------------------------------
-      attr_accessor :category_items
+      attr_accessor :attr_category_ids # hash that comes from the form
       
       # -- Relationships ----------------------------------------------------
-      has_many :cms_category_items,
-        :as => :item,
-        :dependent => :destroy
-        
+      has_many "#{self.to_s.underscore}_categorizations",
+        :dependent  => :destroy
       has_many :cms_categories, 
-        :through => :cms_category_items
-        
+        :through    => "#{self.to_s.underscore}_categorizations"
+      
       # -- Callbacks --------------------------------------------------------
-      after_save :save_category_items
+      after_save :save_categorizations
     end
   end
   
   module InstanceMethods
     
-    # REFACTOR ME
-    def save_category_items
-      self.cms_category_items.destroy_all
-      return if self.category_items.blank?
-      self.category_items.each do |category_item|
-        category = CmsCategory.find(category_item[:cms_category_id])
-        self.cms_category_items.create(:cms_category_id => category.id)
-        while category.parent do
-          category = category.parent
-          self.cms_category_items.create(:cms_category_id => category.id)
-        end
+    def save_categorizations
+      return if attr_category_ids.blank?
+      
+      category_ids_to_remove = attr_category_ids.select{ |k, v| v.to_i == 0}.collect{|k, v| k }
+      category_ids_to_create = attr_category_ids.select{ |k, v| v.to_i == 1}.collect{|k, v| k }
+      
+      # removing unchecked categories
+      send("#{self.class.to_s.underscore}_categorizations").all(:conditions => { :cms_category_id => category_ids_to_remove}).collect(&:destroy)
+      
+      # creating categorizations
+      category_ids_to_create.each do |category_id|
+        send("#{self.class.to_s.underscore}_categorizations").create(:cms_category_id => category_id)
       end
     end
-
   end
 end
 

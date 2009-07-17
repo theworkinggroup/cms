@@ -9,7 +9,7 @@ class CmsAdmin::AttachmentsControllerTest < ActionController::TestCase
   def test_get_index
     get :index
     assert_response :success
-    assert assigns(:attachments)
+    assert assigns(:cms_attachments)
   end
   
   def test_get_new
@@ -18,7 +18,7 @@ class CmsAdmin::AttachmentsControllerTest < ActionController::TestCase
   end
   
   def test_get_edit
-    get :edit, :id => cms_attachments(:attachment)
+    get :edit, :id => cms_attachments(:default)
     assert_response :success
     assert assigns(:cms_attachment)
   end
@@ -37,7 +37,7 @@ class CmsAdmin::AttachmentsControllerTest < ActionController::TestCase
   end
   
   def test_update
-    attachment = cms_attachments(:attachment)
+    attachment = cms_attachments(:default)
     put :update, :id => attachment, :cms_attachment => {
       :label => 'New Label',
       :description => 'New Description'
@@ -50,7 +50,7 @@ class CmsAdmin::AttachmentsControllerTest < ActionController::TestCase
   
   def test_destroy
     assert_difference 'CmsAttachment.count', -1 do
-      delete :destroy, :id => cms_attachments(:attachment)
+      delete :destroy, :id => cms_attachments(:default)
       assert_response :redirect
       assert_redirected_to :action => :index
       assert_equal 'Attachment removed', flash[:notice]
