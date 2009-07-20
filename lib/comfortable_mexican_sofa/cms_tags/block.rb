@@ -16,6 +16,17 @@ class CmsTag::Block < CmsTag::Tag
         tag.view.text_field_tag "cms_page[blocks][#{tag.label}][content_string]", tag.content
       }
     },
+    :code => {
+      :db_column    => :content_text,
+      :description  => '',
+      :form_output  => lambda { |tag| 
+        tag.view.content_tag :div, :class => 'codemirror' do 
+          tag.view.text_area_tag "cms_page[blocks][#{tag.label}][content_text]", tag.content,
+            :rows   => 20, 
+            :class  => 'codeTextArea'
+        end
+      }
+    },
     :integer => {
       :db_column    => :content_integer,
       :description  => '',
