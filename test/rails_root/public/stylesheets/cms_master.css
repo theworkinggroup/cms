@@ -83,6 +83,9 @@ body {
       padding: 0px;
       margin: 0px; }
       body .header h1 a {
+        display: block;
+        background: url(/images/cms/logo.png) left center no-repeat;
+        padding-left: 60px;
         font: 18px/45px Georgia, serif;
         color: #fff;
         text-decoration: none; }
@@ -100,6 +103,13 @@ body {
       border-left: 1px solid #aaa;
       overflow: hidden;
       min-height: 300px; }
+      body .content_wrapper .content_column .flash.notice {
+        padding: 10px;
+        text-align: center;
+        background-color: #2E9442;
+        color: #fff;
+        margin-bottom: 15px;
+        font-size: 16px; }
   body .footer {
     padding: 15px;
     color: #fff; }

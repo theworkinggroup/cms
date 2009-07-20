@@ -42,6 +42,7 @@ class CmsGenerator < Rails::Generator::Base
         icon_move.gif
         icon_regular.gif
         icon_snippet.gif
+        logo.png
       ).each do |f|
         m.file "images/#{f}", "public/images/cms/#{f}", :collision => :ask
       end
