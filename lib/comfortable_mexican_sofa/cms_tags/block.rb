@@ -21,7 +21,7 @@ class CmsTag::Block < CmsTag::Tag
       :description  => '',
       :form_output  => lambda { |tag| 
         tag.view.content_tag :div, :class => 'codemirror' do 
-          tag.view.text_area_tag "page[blocks][#{tag.label}][content_text]", tag.content,
+          tag.view.text_area_tag "cms_page[blocks][#{tag.label}][content_text]", tag.content,
             :rows   => 20, 
             :class  => 'codeTextArea'
         end
