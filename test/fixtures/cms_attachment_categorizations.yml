@@ -1,0 +1,7 @@
+attachment_category_1:
+  cms_attachment: default
+  cms_category: category_2
+    
+attachment_category_2:
+  cms_attachment: default
+  cms_category: category_2_1

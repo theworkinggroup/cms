@@ -14,14 +14,16 @@ class CmsAdmin::CategoriesController < CmsAdmin::BaseController
   end
   
   def create
-    @cms_category = CmsCategory.create!(params[:cms_category])
+    @cms_category = CmsCategory.new(params[:cms_category])
+    @cms_category.save!
+    
     flash[:notice] = 'Category created'
     respond_to do |format|
-      format.html { redirect_to cms_admin_categories_path }
+      format.html { redirect_to :action => :edit, :id => @cms_category}
       format.js
     end
-  rescue ActiveRecord::RecordInvalid => e
-    @cms_category = e.record
+  
+  rescue ActiveRecord::RecordInvalid
     respond_to do |format|
       format.html { render :action => 'new' }
       format.js
@@ -29,17 +31,18 @@ class CmsAdmin::CategoriesController < CmsAdmin::BaseController
   end
   
   def edit
+    # ...
   end
 
   def update
     @cms_category.update_attributes!(params[:cms_category])
     flash[:notice] = 'Category updated'
     respond_to do |format|
-      format.html { redirect_to cms_admin_categories_path }
+      format.html { redirect_to :action => :edit, :id => @cms_category }
       format.js
     end
-  rescue ActiveRecord::RecordInvalid => e
-    @cms_category = e.record
+  
+  rescue ActiveRecord::RecordInvalid
     respond_to do |format|
       format.html { render :action => 'edit' }
       format.js

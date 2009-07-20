@@ -26,7 +26,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     
     flash[:notice] = 'Page created'
     manage_session_array(:cms_page_tree, :add, @cms_page.parent_id.to_s)
-    redirect_to :action => :index
+    redirect_to :action => :edit, :id => @cms_page
     
   rescue ActiveRecord::RecordInvalid
     render :action => :new
@@ -36,7 +36,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     @cms_page.update_attributes!(params[:cms_page])
     
     flash[:notice] = 'Page updated'
-    redirect_to :action => :index
+    redirect_to :action => :edit, :id => @cms_page
     
   rescue ActiveRecord::RecordInvalid
     render :action => :edit

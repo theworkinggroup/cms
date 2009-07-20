@@ -75,6 +75,9 @@ body
       padding: 0px
       margin: 0px
       a
+        display: block
+        background: url(/images/cms/logo.png) left center no-repeat
+        padding-left: 60px
         font: 18px/45px Georgia, serif
         color: #fff
         text-decoration: none
@@ -92,6 +95,13 @@ body
       border-left: 1px solid #aaa
       overflow: hidden
       min-height: 300px
+      .flash.notice
+        padding: 10px
+        text-align: center
+        background-color: #2E9442
+        color: #fff
+        margin-bottom: 15px
+        font-size: 16px
   .footer
     padding: 15px
     color: #fff
@@ -263,7 +273,22 @@ table.formatted
 .form_element_group.publishing
   .form_element .field
     input
-      width: 200px  
+      width: 200px
+      
+.form_element_group.categories
+  .label
+    border-bottom: 2px solid #fff
+    padding-bottom: 5px
+    margin-bottom: 5px
+  ul#root_categories 
+    margin-bottom: 10px
+    li li
+      padding-left: 15px
+  #new_category
+    input, select
+      margin-bottom: 5px
+    input.submit_button
+      width: auto
         
 .form_left_column
   margin-right: 260px

@@ -1,9 +1,19 @@
-default: &default
-  label: Default Category
-  slug: default-category
+category_1: &category
+  label: Category 1
+  slug: category_1
   parent_id:
-  description: Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore
+  description: Some Category Description
   
-documents:
-  label: Documents
-  slug: documents
+category_2:
+  label: Category 2
+  slug: category_2
+  
+category_2_1:
+  label: Category 2.1
+  slug: category_2_1
+  parent: category_2
+  
+category_2_2:
+  label: Category 2.2
+  slug: category_2_2
+  parent: category_2

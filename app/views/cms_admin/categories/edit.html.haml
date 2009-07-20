@@ -1,6 +1,10 @@
+= link_to 'Add New Category', new_cms_admin_category_path, :class => 'big_button'
+
 %h2 Editing Category
 
 - form_for :cms_category, :url => {:action => :update}, :html => {:method => :put } do |form|
   = render :partial => form
   .submit
     = form.submit 'Edit Category'
+    or 
+    = link_to 'Cancel', cms_admin_categories_path

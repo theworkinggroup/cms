@@ -1,4 +1,0 @@
-sample_category_item:
-  cms_category: default
-  item: attachment (CmsAttachment)
-  created_at: <%= 1.month.ago %> 

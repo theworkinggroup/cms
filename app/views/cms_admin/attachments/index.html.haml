@@ -2,7 +2,7 @@
 
 %h2 Attachments
 
-= will_paginate @attachments
+= will_paginate @cms_attachments
 
 %table.formatted
   %tr
@@ -11,7 +11,7 @@
     %th Filesize
     %th.last
   
-  - @attachments.each do |attachment|
+  - @cms_attachments.each do |attachment|
     %tr
       %td
         .icon
@@ -29,4 +29,4 @@
         |
         = link_to 'Remove', cms_admin_attachment_path(attachment), :method => 'delete', :confirm => 'Are you sure you want to remove this attachment?'
         
-= will_paginate @attachments
+= will_paginate @cms_attachments
