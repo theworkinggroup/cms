@@ -14,10 +14,7 @@ function slugify(str) {
   return str;
 }
 
-function check_parents_if_checked(obj, parents) {
-  if (obj.checked == true) {  
-    parents.each(function(id) {
-      $('checkbox_cms_category_'+id).checked = true;      
-    });
-  }
+function toggle_category_selections(obj){
+  // todo
+  // this js is kicking my ass
 }
