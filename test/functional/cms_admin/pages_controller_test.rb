@@ -113,4 +113,41 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
       }
     end
   end
+  
+  def test_preview_for_create
+    assert_no_difference 'CmsPage.count' do
+      assert_no_difference 'CmsBlock.count' do
+        post :create, :preview  => 'Preview Button', :cms_page => {
+          :label    => 'Test Page',
+          :slug     => 'test_page',
+          :cms_layout => cms_layouts(:default),
+          :blocks => {
+            :header   => { :content_string => 'Test Header' },
+            :default  => { :content_text => 'Test Content' },
+            :footer   => { :content_text => 'Test Footer' }
+          }
+        }
+        assert_response :success
+      end
+    end
+  end
+  
+  def test_preview_for_update
+    page = cms_pages(:complex)
+    
+    assert_no_difference 'CmsBlock.count' do
+      put :update, :preview => 'Preview Button', :id => page, :cms_page => {
+        :label  => 'New Test Page',
+        :slug   => 'new_test_page',
+        :cms_layout => cms_layouts(:default),
+        :blocks => {
+          :header   => { :content_string => 'New Test Header' },
+          :default  => { :content_text => 'New Test Content' },
+          :footer   => { :content_text => 'New Test Footer' }
+        }
+      }
+      assert_response :success
+    end
+  end
+  
 end

@@ -5,6 +5,7 @@
 - form_for :cms_page, :url => {:action => :update}, :html => {:method => :put} do |form|
   = render :partial => form
   .submit
-    = form.submit 'Edit Page'
+    = form.submit 'Edit Page', :onclick => 'this.form.target = ""'
+    = form.submit 'Preview Page', :onclick => 'this.form.target = "_blank"', :name => 'preview'
     or 
     = link_to 'Return to List', cms_admin_pages_path

@@ -1,5 +1,7 @@
 class CmsAdmin::PagesController < CmsAdmin::BaseController
   
+  include CmsCommon::RenderPage
+  
   before_filter :load_page, :only => [:children, :edit, :update, :destroy, :reorder]
   
   def index
@@ -22,6 +24,9 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   
   def create
     @cms_page = CmsPage.new(params[:cms_page])
+    
+    return render_page if !params[:preview].blank? && @cms_page.valid?
+    
     @cms_page.save!
     
     flash[:notice] = 'Page created'
@@ -33,7 +38,11 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   end
   
   def update
-    @cms_page.update_attributes!(params[:cms_page])
+    @cms_page.attributes = params[:cms_page]
+    
+    return render_page if !params[:preview].blank? && @cms_page.valid?
+    
+    @cms_page.save!
     
     flash[:notice] = 'Page updated'
     redirect_to :action => :edit, :id => @cms_page

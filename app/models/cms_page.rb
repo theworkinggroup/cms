@@ -32,7 +32,8 @@ class CmsPage < ActiveRecord::Base
   
   # -- AR Callbacks ---------------------------------------------------------
   before_validation :assign_full_path
-  after_save        :sync_child_slugs
+  after_save        :save_blocks,
+                    :sync_child_slugs
   
   # -- Scopes ---------------------------------------------------------------  
   default_scope :order => 'position ASC'
@@ -59,14 +60,10 @@ class CmsPage < ActiveRecord::Base
   
   def blocks=(blocks)
     blocks.each do |label, params|
-      if self.new_record? 
-        self.cms_blocks.build({:label => label}.merge(params))
+      if !self.new_record? && !(block = self.cms_blocks.select{|b| b.label == label}.first).blank?
+        block.attributes = params
       else
-        if block = self.cms_blocks.with_label(label).try(:first)
-          block.update_attributes!(params)
-        else
-          self.cms_blocks.create!({:label => label}.merge(params))
-        end
+        self.cms_blocks.build({:label => label}.merge(params))
       end
     end
   end
@@ -92,7 +89,7 @@ class CmsPage < ActiveRecord::Base
   end
   
   def cms_block_content(label, content)
-    self.cms_blocks.find_by_label(label.to_s).try(content)
+    self.cms_blocks.select{|b| b.label.to_s == label.to_s}.first.try(content)
   end
   
 protected
@@ -104,6 +101,12 @@ protected
   def validate_redirect_to
     if self.redirect_to_page && (self == self.redirect_to_page || self.redirect_to_page.redirect_to_page)
       self.errors.add(:redirect_to_page_id) 
+    end
+  end
+  
+  def save_blocks
+    self.cms_blocks.each do |b|
+      b.save! if b.changed?
     end
   end
   

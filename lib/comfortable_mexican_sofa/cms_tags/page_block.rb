@@ -96,8 +96,6 @@ class CmsTag::PageBlock < CmsTag::Tag
     self.format = tokens[2]
   end
   
-  
-  
   def form_label
     view.label_tag label.titleize
   end
