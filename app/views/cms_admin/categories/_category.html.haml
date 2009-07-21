@@ -12,7 +12,7 @@
   = hidden_field_tag "#{item_type}[attr_category_ids][#{category.id}]", 0, :id => nil
   
   %label
-    = check_box_tag "#{item_type}[attr_category_ids][#{category.id}]", 1, is_checked, :onchange => "toggle_category_selections(this, new Array(#{category_parent_ids}), new Array(#{category_child_ids}))"
+    = check_box_tag "#{item_type}[attr_category_ids][#{category.id}]", 1, is_checked, :onchange => "toggle_category_selections(this, new Array(#{category_parent_ids}), new Array(#{category_child_ids}))", :id => "cms_category_id_#{category.id}"
     = category.label
   
   %ul{:id => dom_id(category)}  

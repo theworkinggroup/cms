@@ -17,11 +17,11 @@ function slugify(str) {
 function toggle_category_selections(obj, parents, children){
   if (obj.checked == true){
     parents.each(function(id){
-      $('cms_page_attr_category_ids_' + id).checked = true
+      $('cms_category_id_' + id).checked = true
     })
   } else {
     children.each(function(id){
-      $('cms_page_attr_category_ids_' + id).checked = false
+      $('cms_category_id_' + id).checked = false
     })
   }
 }
