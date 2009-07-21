@@ -14,7 +14,14 @@ function slugify(str) {
   return str;
 }
 
-function toggle_category_selections(obj){
-  // todo
-  // this js is kicking my ass
+function toggle_category_selections(obj, parents, children){
+  if (obj.checked == true){
+    parents.each(function(id){
+      $('cms_page_attr_category_ids_' + id).checked = true
+    })
+  } else {
+    children.each(function(id){
+      $('cms_page_attr_category_ids_' + id).checked = false
+    })
+  }
 }
