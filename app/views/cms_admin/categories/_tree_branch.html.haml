@@ -23,9 +23,9 @@
           
         .categorizations
           Categorized Pages/Attachments:
-          = link_to category.cms_page_categorizations.count, cms_admin_category_path(category)
+          = link_to category.cms_page_categorizations.count, cms_admin_category_path(category) + '#pages'
           \/
-          = link_to category.cms_attachment_categorizations.count, cms_admin_category_path(category)
+          = link_to category.cms_attachment_categorizations.count, cms_admin_category_path(category) + '#attachments'
         
         
       - if session[:cms_category_tree] && session[:cms_category_tree].member?(category.id.to_s)
