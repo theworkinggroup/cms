@@ -10,8 +10,8 @@
     .field= form.text_field :slug
 
   .form_element.select
-    .label= form.label :parent_id, 'Parent Category'
-    .field= form.select :parent_id, CmsCategory.categories_for_select, :include_blank => true
+    .label= form.label :parent_id, 'Parent'
+    .field= form.select :parent_id, [['---', nil]] + CmsCategory.categories_for_select
 
   .form_element.text_area
     .label= form.label :description, 'Description'

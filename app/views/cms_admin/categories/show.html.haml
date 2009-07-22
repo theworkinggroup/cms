@@ -1,0 +1,17 @@
+%h2= "Category: #{@cms_category.label}"
+  
+%h3#pages= "Pages (#{@cms_category.cms_pages.count})"
+.pages
+  - @cms_category.cms_pages.each do |page|
+    = link_to page.label, edit_cms_admin_page_path(page), :class => 'page'
+      
+  - if @cms_category.cms_pages.empty?
+    %p No Pages
+
+%h3#attachments= "Attachments (#{@cms_category.cms_attachments.count})"
+.attachments
+  - @cms_category.cms_attachments.each do |attachment|
+    = link_to attachment.label, edit_cms_admin_attachment_path(attachment), :class => 'attachment'
+  
+  - if @cms_category.cms_attachments.empty?
+    %p No Attachments

@@ -17,6 +17,12 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
     assert_response :success
   end
   
+  def test_get_show
+    get :show, :id => cms_categories(:category_2)
+    assert_response :success
+    assert assigns(:cms_category)
+  end
+  
   def test_get_edit
     get :edit, :id => cms_categories(:category_1)
     assert_response :success
