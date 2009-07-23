@@ -3,7 +3,7 @@
   %head
     %title
     = stylesheet_link_tag 'cms_master'
-    = javascript_include_tag 'prototype', 'controls', 'dragdrop', 'effects', 'cms/utilities', 'cms/mce_init', 'cms/codemirror_init', 'codemirror/codemirror', 'tiny_mce/tiny_mce', :cache => 'cms_admin'
+    = javascript_include_tag 'prototype', 'effects', 'controls', 'dragdrop', 'cms/utilities', 'cms/mce_init', 'cms/codemirror_init', 'codemirror/codemirror', 'tiny_mce/tiny_mce', :cache => 'cms_admin'
     = calendar_date_select_includes
 
     = yield :head
