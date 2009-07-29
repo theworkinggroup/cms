@@ -1,11 +1,20 @@
 - @layout ||= @cms_page.cms_layout
 - @layout && tags = @layout.tags(:view => self, :page => @cms_page).reject{|t| !t.class.has_form?}.group_by(&:tag_type)
 
+//use these to see if we need to re-initiliaze CodeMirror or TinyMCE.
+- init_codemirror = false
+- init_tinymce = false
+
 - unless tags.blank?
 
   - unless (cms_block_tags = tags.delete('cms_block')).blank?
     .form_element_group.block
       - cms_block_tags.each do |tag|
+
+        //check the format to see if it needs JS initialization.
+        - init_codemirror = true if tag.format == 'code'
+        - init_tinymce = true if tag.format == 'rich_text'
+        
         .form_element{:class => tag.format}
           .label= tag.form_label
           .field= tag.form_input
@@ -14,6 +23,11 @@
   - unless (cms_page_block_tags = tags.delete('cms_page_block')).blank?
     .form_element_group.page_block
       - cms_page_block_tags.each do |tag|
+        
+        //check the format to see if it needs JS initialization.
+        - init_codemirror = true if tag.format == 'code'
+        - init_tinymce = true if tag.format == 'rich_text'
+        
         .form_element{:class => tag.format}
           .label= tag.form_label
           .field= tag.form_input
@@ -25,3 +39,10 @@
       .form_element
         .label= tag.form_label
         .field= tag.form_input
+
+- if init_codemirror
+  :javascript
+    init_CodeMirror();
+- if init_tinymce
+  :javascript
+    init_TinyMCE();

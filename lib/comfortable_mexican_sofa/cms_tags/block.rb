@@ -16,6 +16,15 @@ class CmsTag::Block < CmsTag::Tag
         tag.view.text_field_tag "cms_page[blocks][#{tag.label}][content_string]", tag.content
       }
     },
+    :rich_text => {
+      :db_column    => :content_text,
+      :description  => '',
+      :form_output  => lambda { |tag| 
+        tag.view.text_area_tag "cms_page[blocks][#{tag.label}][content_text]", tag.content,
+          :rows   => 20, 
+          :class  => 'mceEditor'
+      }
+    },
     :code => {
       :db_column    => :content_text,
       :description  => '',
