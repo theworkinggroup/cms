@@ -12,6 +12,6 @@ function init_TinyMCE(){
     });
 }
 
-$(document).ready(function(){
-    init_TinyMCE();
+Event.observe(window, 'load', function() {
+  init_TinyMCE();
 });

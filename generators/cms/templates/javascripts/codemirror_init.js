@@ -11,6 +11,6 @@ function init_CodeMirror(){
       });
 }
 
-$(document).ready(function(){
-    init_CodeMirror();
+Event.observe(window, 'load', function() {
+  init_CodeMirror();
 });
