@@ -8,9 +8,10 @@ function init_TinyMCE(){
       theme_advanced_buttons3 : '',
       theme_advanced_toolbar_location : "top",
       theme_advanced_toolbar_align : "left",
+      auto_reset_designmode : true
     });
 }
 
-try{
+$(document).ready(function(){
     init_TinyMCE();
-}catch(e){}
+});

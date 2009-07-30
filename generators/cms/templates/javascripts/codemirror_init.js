@@ -11,6 +11,6 @@ function init_CodeMirror(){
       });
 }
 
-document.observe("dom:loaded", function() {
-  init_CodeMirror();
+$(document).ready(function(){
+    init_CodeMirror();
 });
