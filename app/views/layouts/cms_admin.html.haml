@@ -27,7 +27,12 @@
           %ul.secondary
             - CmsPage.sections.all.each do |page|
               %li= active_link page.label, cms_admin_section_path(page.id), :self
-          
+        
+        - unless ComfortableMexicanSofa::Config.additional_cms_tabs.blank?
+          %ul.secondary
+            - ComfortableMexicanSofa::Config.additional_cms_tabs.each do |label, url|
+              %li= active_link label, url, :self
+      
       .content_column
         - flash.each do |type, value|
           .flash{:class => type.to_s}
