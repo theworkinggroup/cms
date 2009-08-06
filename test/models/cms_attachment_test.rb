@@ -8,4 +8,9 @@ class CmsAttachmentTest < ActiveSupport::TestCase
     end
   end
   
+  def test_named_scope_in_category
+    assert_equal 1, CmsAttachment.in_category(cms_categories(:category_2)).size
+    assert_equal 1, CmsAttachment.in_category(cms_categories(:category_2).id).size
+  end
+  
 end
