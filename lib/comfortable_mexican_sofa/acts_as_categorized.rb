@@ -18,6 +18,13 @@ module ActsAsCategorized
       # -- Callbacks --------------------------------------------------------
       after_save :save_categorizations
       
+      # -- Named Scopes -----------------------------------------------------
+      
+      named_scope :in_category, lambda { |category| {
+        :joins => __categorizations,
+        :conditions => { __categorizations => {:cms_category_id => (category.is_a?(CmsCategory) ? category.id : category) } }
+      }}
+      
       # -- Instance Methods -------------------------------------------------
       define_method :save_categorizations do
         return if attr_category_ids.blank?

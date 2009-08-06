@@ -1,7 +1,11 @@
 = link_to 'Add New Attachment', new_cms_admin_attachment_path, :class => 'big_button'
-
+  
 %h2 Attachments
 
+- form_for :filter, :url => cms_admin_attachments_path, :html => {:method => :get, :class => 'filter_form'} do |f|
+  = f.select :category_id, CmsCategory.categories_for_select, { :include_blank => '-- All Categories --', :selected => @category_id.to_i }
+  = f.submit 'Filter'
+  
 = will_paginate @cms_attachments
 
 %table.formatted
