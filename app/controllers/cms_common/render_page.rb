@@ -17,8 +17,11 @@ module CmsCommon::RenderPage
     
     respond_to do |format|
       format.html do
-        @cms_page = @cms_page.redirect_to_page if @cms_page.redirect_to_page
-        render :inline => @cms_page.content, :layout => (@cms_page.cms_layout.app_layout || false)
+        if @cms_page.redirect_to_page
+          redirect_to @cms_page.redirect_to_page.full_path
+        else
+          render :inline => @cms_page.content, :layout => (@cms_page.cms_layout.app_layout || false)
+        end
       end
       format.xml do
         @cms_page_children = @cms_page.children[0...25].collect do |p|
