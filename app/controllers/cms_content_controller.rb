@@ -7,7 +7,8 @@ class CmsContentController < ApplicationController
   before_filter :parse_path, :only => :show
   
   def show
-    @cms_page = CmsPage.published.find_by_full_path(params[:path].join('/'))
+    @cms_page_slug = params[:path].join('/')
+    @cms_page = CmsPage.published.find_by_full_path(@cms_page_slug)
     render_page
   end
   

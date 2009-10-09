@@ -20,7 +20,19 @@ module CmsCommon::RenderPage
         if @cms_page.redirect_to_page
           redirect_to @cms_page.redirect_to_page.full_path
         else
-          render :inline => @cms_page.content, :layout => (@cms_page.cms_layout.app_layout || false)
+          
+          layout = (@cms_page.cms_layout.app_layout || false)
+          
+          if Rails.env.development? || Rails.env.test?
+            # attempt to load content from the filesystem first
+            begin
+              @cms_page_slug = @cms_page_slug.blank? ? 'index' : @cms_page_slug
+              render :template => "/cms/#{@cms_page_slug}", :layout => layout
+              return
+            rescue ; end
+          end
+          
+          render :inline => @cms_page.content, :layout => layout
         end
       end
       format.xml do

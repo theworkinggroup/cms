@@ -11,7 +11,7 @@ class CmsContentControllerTest < ActionController::TestCase
   
   def test_get_a_unpublished_page
     assert !cms_pages(:unpublished).is_published?
-    get :show, :path => %w(unpubuplished)
+    get :show, :path => %w(unpublished)
     assert_response 404
   end
   
@@ -37,6 +37,16 @@ class CmsContentControllerTest < ActionController::TestCase
     get :show, :path => %w(some non existing page)
     assert_response 404
     assert assigns(:cms_page)
+  end
+  
+  def test_get_a_page_with_local_file_load
+    page = CmsPage.find_by_slug('under-development')
+    assert page
+    assert_equal '', page.content
+    
+    get :show, :path => %w(under-development)
+    assert_response :success
+    assert_equal "file content\n", @response.body.to_s
   end
   
 end

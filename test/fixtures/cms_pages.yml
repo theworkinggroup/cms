@@ -28,4 +28,11 @@ unpublished:
   full_path: 'unpublished'
   published_at: <%= 10.days.from_now %>
   
+under_development:
+  <<: *page
+  parent: default
+  label: Page under development
+  slug: 'under-development'
+  full_path: 'under-development'
+  
   
