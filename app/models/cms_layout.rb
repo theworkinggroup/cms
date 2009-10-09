@@ -26,7 +26,14 @@ class CmsLayout < ActiveRecord::Base
   def self.app_layouts_for_select
     path = "#{RAILS_ROOT}/app/views/layouts"
     regex = /^([a-z0-9]\w+)\.html/i
-    [['---', nil]] + Dir.entries(path).collect{|l| l.match(regex).try(:captures)}.compact.flatten
+    
+    app_layouts = begin
+      Dir.entries(path).collect{|l| l.match(regex).try(:captures)}.compact.flatten
+    rescue
+      # no app layouts
+    end
+    
+    !app_layouts.blank? ? [['---', nil]] + app_layouts : [['---', nil]]
   end
   
   # -- Instance Methods -----------------------------------------------------
