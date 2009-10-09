@@ -29,7 +29,7 @@ module CmsCommon::RenderPage
               @cms_page_slug = @cms_page_slug.blank? ? 'index' : @cms_page_slug
               render :template => "/cms/#{@cms_page_slug}", :layout => layout
               return
-            rescue ; end
+            rescue ActionView::MissingTemplate ; end
           end
           
           render :inline => @cms_page.content, :layout => layout
