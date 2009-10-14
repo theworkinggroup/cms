@@ -8,6 +8,11 @@ class CmsPageTest < ActiveSupport::TestCase
     end
   end
   
+  def test_page_finder_helper
+    page = cms_pages(:default)
+    assert_equal page, CmsPage[page.slug]
+  end
+  
   def test_page_rendering
     page = cms_pages(:default)
     assert_equal 3, page.cms_blocks.count

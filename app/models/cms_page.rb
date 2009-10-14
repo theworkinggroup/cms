@@ -35,10 +35,15 @@ class CmsPage < ActiveRecord::Base
   after_save        :save_blocks,
                     :sync_child_slugs
   
-  # -- Scopes ---------------------------------------------------------------  
+  # -- Scopes ---------------------------------------------------------------
   default_scope :order => 'position ASC'
   named_scope :sections,
     :conditions => {:is_section => true}
+    
+  # -- Class Methods --------------------------------------------------------
+  def self.[](slug)
+    CmsPage.find_by_slug!(slug)
+  end
     
   # -- Instance Methods -----------------------------------------------------
   def content
