@@ -84,6 +84,7 @@ Gem::Specification.new do |s|
      "app/views/cms_content/show.xml.rxml",
      "app/views/cms_content/sitemap.xml.rxml",
      "app/views/layouts/cms_admin.html.haml",
+     "comfortable_mexican_sofa.gemspec",
      "config/cms_routes.rb",
      "generators/cms/cms_generator.rb",
      "generators/cms/templates/README",
@@ -218,14 +219,11 @@ Gem::Specification.new do |s|
      "test/rails_root/config/environments/production.rb",
      "test/rails_root/config/environments/test.rb",
      "test/rails_root/config/initializers/backtrace_silencers.rb",
-     "test/rails_root/config/initializers/cms.rb",
      "test/rails_root/config/initializers/inflections.rb",
      "test/rails_root/config/initializers/mime_types.rb",
      "test/rails_root/config/initializers/new_rails_defaults.rb",
      "test/rails_root/config/initializers/session_store.rb",
      "test/rails_root/config/routes.rb",
-     "test/rails_root/db/migrate/20091014153717_create_cms.rb",
-     "test/rails_root/db/schema.rb",
      "test/test_helper.rb"
   ]
 
