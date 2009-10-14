@@ -1,6 +1,40 @@
 require 'rubygems'
 require 'rake'
-require 'echoe'
+
+
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |gem|
+    gem.name = 'comfortable_mexican_sofa'
+    gem.summary = 'ComfortableMexicanSofa is a Rails Engine CMS gem'
+    gem.description = ''
+    gem.email = "oleg@theworkinggroup.ca"
+    gem.homepage = "http://theworkinggroup.ca"
+    gem.authors = ["Oleg Khabarov, The Working Group Inc"]
+    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.rubyforge_project = 'cms-sofa'
+    gem.add_dependency('haml')
+    gem.add_dependency('will_paginate')
+    gem.add_dependency('paperclip')
+    gem.add_dependency('calendar_date_select')
+    gem.add_dependency('active_link_to')
+  end
+  
+  Jeweler::RubyforgeTasks.new do |rubyforge|
+    rubyforge.doc_task = "rdoc"
+  end
+  
+  Jeweler::GemcutterTasks.new
+rescue LoadError
+  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
+end
+
+require 'rake/testtask'
+Rake::TestTask.new(:test) do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/**/*_test.rb'
+  test.verbose = true
+end
 
 namespace :generator do
   desc "Cleans up test application"
@@ -33,24 +67,8 @@ namespace :generator do
 end
 
 desc "Run the test suite"
-task :default => ['generator:cleanup', 'generator:prepare']
-
-task :manifest => ['generator:cleanup']
-
-Echoe.new('comfortable_mexican_sofa', '0.0.17') do |p|
-  p.description    = "Ruby on Rails CMS Engine"
-  p.url            = "http://www.theworkinggroup.ca"
-  p.author         = "Oleg Khabarov"
-  p.email          = "oleg@theworkinggroup.ca"
-  p.ignore_pattern = ["tmp/*", "script/*"]
-  p.development_dependencies = []
-  p.runtime_dependencies = [
-    'haml',
-    'mislav-will_paginate',
-    'thoughtbot-paperclip',
-    'calendar_date_select',
-    'active_link_to'
-  ]
-end
+task :default => ['generator:cleanup', 'generator:prepare', :test]
+task :test => :check_dependencies
+task :gemspec => ['generator:cleanup']
 
 Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }
