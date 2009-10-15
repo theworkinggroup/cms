@@ -57,7 +57,7 @@ class CmsPage < ActiveRecord::Base
     content = cms_layout.content.dup if !content
     while (!(tags = CmsTag::parse_tags(content, :page => self).sort_by{|t| t.class.render_priority}).blank?)
       tags.each do |tag|
-        content.gsub!(tag.regex, tag.render)
+        content.gsub!(tag.regex) { tag.render }
       end
     end
     content
