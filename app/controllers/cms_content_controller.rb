@@ -15,7 +15,7 @@ class CmsContentController < ApplicationController
   def sitemap
     respond_to do |format|
       format.xml do
-        @cms_pages = CmsPage.all
+        @cms_pages = CmsPage.published
       end
     end
   end
