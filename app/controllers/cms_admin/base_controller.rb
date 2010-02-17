@@ -1,4 +1,4 @@
-class CmsAdmin::BaseController < ApplicationController
+class CmsAdmin::BaseController < ActionController::Base
   
   before_filter :authenticate
   
