@@ -32,17 +32,39 @@ Here's some available type of tags that allow construction and insertion of page
 
   cms_page_block  - block that gets rendered in the actual content of the page
   cms_block       - block that is not automatically rendered
-  cms_snippet     - it's a snippet
-  cms_helper      - it's a helper method of some sort
-  cms_partial     - sometimes all we need is a partial
+  cms_snippet     - it's a snippet, a small reusable piece you can put around your site. not tied to a page.
+  cms_helper      - it's a helper method of some sort, ill-defined at this point.
+  cms_partial     - renders a Rails partial into the page.
   
+Layouts define the input fields a user will see when editing a page that uses that template.
+For example, your primary layout uses the 'application' Rails layout and has as content:
+
+{{cms_block:meta_title:string}}
+{{cms_page_block:main_content:code}}
+{{cms_block:date_stamp:date}}
+
+This will give you a single-line text field, a text area, and a date field with day/month/year.
+Only the main_content will be rendered to the page. You can use cms_block's to add attributes to pages that aren't necessarily rendered into the final output.
+
 Here are the different formats for page blocks and what they will generate in the CMS page editing form:
   
   string    - a single-line text input
   text      - a textarea
+  datetime  - a date field
   rich_text - if TinyMCE is installed in the app, this will generate a TinyMCE enhanced textarea
   code      - if CodeMirror is installed in the app, this will generate a CodeMirror editor with syntax highlighting for HTML, JavaScript and CSS
-  
+
+== Layout inheritance
+
+There must be at least one layout. Layouts can inherit input fields from their parents.
+If the parent layout defines one textarea and its child defines a timestamp field, then a page that uses the child layout will have two input fields - the textare and the timestamp.
+
+However, the layouts DO NOT nest their Rails layouts. The child Rails layout will not be nested inside the parent Rails layout. Also, both layouts can use the SAME Rails layout, if you wish.
+
+== Snippets
+
+Once you have a bunch of snippets defined, you can render them into your layouts however you'd like. In your Rails layouts, put in : CmsSnippet.content_for('the-slug-of-the-snippet')
+
 == Installing CodeMirror Support
 
 Download CodeMirror from: http://marijn.haverbeke.nl/codemirror
