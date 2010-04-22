@@ -7,8 +7,8 @@ class CmsContentController < ApplicationController
   before_filter :parse_path, :only => :show
   
   def show
-    @cms_page_slug = [ @cms_root_path, params[:path] ].flatten.compact.join('/')
-    @cms_page = CmsPage.visible_scope.find_by_full_path(@cms_page_slug)
+    @cms_page_slug = params[:path].join('/')
+    @cms_page = (@cms_site ? @cms_site.cms_pages : CmsPage).find_by_full_path(@cms_page_slug)
 
     render_page
   end
@@ -24,7 +24,7 @@ class CmsContentController < ApplicationController
 protected
   def assign_cms_root
     if (ComfortableMexicanSofa::Config.multiple_sites)
-      @cms_root_path = [ request.host.slugify ]
+      @cms_site = CmsSite.find_by_hostname(request.host.downcase)
     end
   end
 

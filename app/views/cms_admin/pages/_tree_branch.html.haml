@@ -26,7 +26,7 @@
           ]
         
         %br/
-        = link_to page.full_path, page.full_path, :class => 'url'
+        = link_to(page.full_path_with_site, page.full_path_with_site, :class => 'url')
         
         = render :partial => 'details', :object => page
         

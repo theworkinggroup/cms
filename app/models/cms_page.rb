@@ -111,6 +111,10 @@ class CmsPage < ActiveRecord::Base
     "/#{read_attribute(:full_path)}"
   end
   
+  def full_path_with_site
+    (self.cms_site ? "http://#{self.cms_site.hostname}" : '') + full_path
+  end
+  
   def cms_block_content(label, content)
     self.cms_blocks.select{|b| b.label.to_s == label.to_s}.first.try(content)
   end
