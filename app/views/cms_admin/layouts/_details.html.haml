@@ -3,4 +3,8 @@
 %table{:class => 'details', :id => "layout_details_#{layout.id}", :style => 'display: none'}
   %tr
     %th Last Updated:
-    %td= "#{time_ago_in_words(layout.updated_at)} ago"
+    %td
+      - if (layout.updated_at?)
+        = "#{time_ago_in_words(layout.updated_at)} ago"
+      - else
+        Never

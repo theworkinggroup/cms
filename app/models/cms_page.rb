@@ -3,6 +3,7 @@ class CmsPage < ActiveRecord::Base
   attr_accessor :rendered_content
   
   # -- Relationships --------------------------------------------------------
+
   acts_as_tree :counter_cache => :children_count
   acts_as_published
   
@@ -35,13 +36,19 @@ class CmsPage < ActiveRecord::Base
                     :sync_child_slugs
   
   # -- Scopes ---------------------------------------------------------------
+
   default_scope :order => 'position ASC'
   named_scope :sections,
     :conditions => {:is_section => true}
     
   # -- Class Methods --------------------------------------------------------
+
   def self.[](slug)
     CmsPage.find_by_slug!(slug)
+  end
+  
+  def self.visible_scope
+    ComfortableMexicanSofa::Config.pubishing_schedule ? self.published : self
   end
     
   # -- Instance Methods -----------------------------------------------------

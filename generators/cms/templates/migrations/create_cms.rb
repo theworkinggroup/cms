@@ -1,5 +1,18 @@
 class CreateCms < ActiveRecord::Migration
   def self.up
+    create_table :cms_site do |t|
+      t.string :label
+    end
+    
+    add_index :cms_site, :label
+
+    create_table :cms_site_mapping do |t|
+      t.integer :cms_site_id, :null => false
+      t.string :hostname, :null => false
+    end
+    
+    add_index :cms_site_mapping, :hostname
+    add_index :cms_site_mapping, [ :cms_site_id, :hostname ]
     
     create_table :cms_layouts do |t|
       t.integer :parent_id
@@ -14,6 +27,7 @@ class CreateCms < ActiveRecord::Migration
     add_index :cms_layouts, :parent_id
     add_index :cms_layouts, :label
     
+    execute "INSERT INTO cms_layouts (id, label, app_layout, content) VALUES (1, 'Default Layout', 'application', '{{cms_page_block:default:code}}')"
     
     create_table :cms_pages do |t|
       t.integer   :cms_layout_id
@@ -31,15 +45,8 @@ class CreateCms < ActiveRecord::Migration
     add_index :cms_pages, :parent_id
     add_index :cms_pages, :slug
     add_index :cms_pages, :full_path, :unique => true
-    
-    
-    create_table :cms_snippets do |t|
-      t.string  :label
-      t.text    :content
-      t.timestamps
-    end
-    add_index :cms_snippets, :label, :unique => true
-    
+
+    execute "INSERT INTO cms_pages (id, cms_layout_id, label, slug, full_path) VALUES (1, 1, 'Default Page', NULL, '')"
     
     create_table :cms_blocks do |t|
       t.integer   :cms_page_id
@@ -57,6 +64,14 @@ class CreateCms < ActiveRecord::Migration
     add_index :cms_blocks, [:cms_page_id, :label, :content_boolean], :unique => true
     add_index :cms_blocks, [:cms_page_id, :label, :content_datetime], :unique => true        
 
+    execute "INSERT INTO cms_blocks (id, cms_page_id, content_text) VALUES (1, 1, 'Default home page')"
+
+    create_table :cms_snippets do |t|
+      t.string  :label
+      t.text    :content
+      t.timestamps
+    end
+    add_index :cms_snippets, :label, :unique => true
   end
   
   def self.down

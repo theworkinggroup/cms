@@ -1,42 +1,63 @@
 class CmsLayout < ActiveRecord::Base
   
   # -- Relationships --------------------------------------------------------
+
   acts_as_tree :counter_cache => :children_count
   has_many :cms_pages, :dependent => :nullify
   
   # -- Validations ----------------------------------------------------------
+
   validates_presence_of :label
   validates_uniqueness_of :label
-  validate  :validate_block_presence,
-            :validate_proper_relationship
+  validate :validate_block_presence,
+           :validate_proper_relationship
   
   # -- AR Callbacks ---------------------------------------------------------
+
   before_save :flag_as_extendable,
               :update_page_blocks
   
   # -- Scopes ---------------------------------------------------------------
+
   default_scope :order => 'position ASC'
-  named_scope :extendable, :conditions => { :is_extendable => true }
+
+  named_scope :extendable,
+    :conditions => { :is_extendable => true }
   
   # -- Class Methods --------------------------------------------------------
+  
+  def self.create_default_layout!(options = { })
+    create({
+      :label => "Default Layout",
+      :app_layout => "application",
+      :content => "{{cms_page_block:default:code}}"
+    }.merge(options))
+  end
+
   def self.options_for_select
-    [['---', nil]] + CmsLayout.all.collect{ |l| [l.label, l.id]}
+    # REFACTOR: This loads all the BLOB fields, too, when only the
+    #           two columns are required.
+    [ [ '---', nil ] ] + CmsLayout.all.collect { |l| [ l.label, l.id ] }
   end
   
   def self.app_layouts_for_select
     path = "#{RAILS_ROOT}/app/views/layouts"
     regex = /^([a-z0-9]\w+)\.html/i
     
-    app_layouts = begin
-      Dir.entries(path).collect{|l| l.match(regex).try(:captures)}.compact.flatten
-    rescue
-      # no app layouts
-    end
+    app_layouts =
+      begin
+        Dir.entries(path).collect do |l|
+          l.match(regex).try(:captures)
+        end.compact.flatten
+      rescue
+        # No application layouts are present
+      end
     
-    !app_layouts.blank? ? [['---', nil]] + app_layouts : [['---', nil]]
+    [ [ '---', nil ] ] + (app_layouts.blank? ? [ ] : app_layouts)
   end
   
   # -- Instance Methods -----------------------------------------------------
+
   def content
     if parent
       parent.content.gsub(/\{\{\s*cms_page_block:default:.*?\}\}/, self.read_attribute(:content))

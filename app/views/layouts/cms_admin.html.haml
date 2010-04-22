@@ -4,7 +4,6 @@
     %title
     = stylesheet_link_tag 'cms_master'
     = javascript_include_tag 'prototype', 'effects', 'controls', 'dragdrop', 'cms/utilities', 'codemirror/codemirror', 'ckeditor/ckeditor', 'cms/ckeditor_init', 'cms/codemirror_init'
-    = calendar_date_select_includes
 
     = yield :head
     
@@ -28,7 +27,7 @@
       
       .content_column
         - flash.each do |type, value|
-          .flash{:class => type.to_s}
+          .flash{ :class => type.to_s }
             = value
         
         = yield

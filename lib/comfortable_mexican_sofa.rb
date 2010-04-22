@@ -25,6 +25,8 @@ module ComfortableMexicanSofa
     cattr_accessor_with_default :cms_title
     cattr_accessor_with_default :additional_cms_tabs, {}
     cattr_accessor_with_default :paperclip_options,   {}
+    cattr_accessor_with_default :multiple_sites,      false
+    cattr_accessor_with_default :pubishing_schedule,  false
   end
   
   def self.config(&block)
