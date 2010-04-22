@@ -4,7 +4,7 @@ module CmsCommon::RenderPage
     
     # Rendering 404 page
     if !@cms_page
-      @cms_page = CmsPage.visible_scope.find_by_full_path('404')
+      @cms_page = CmsPage.published.find_by_full_path('404')
 
       if @cms_page
         render :inline => @cms_page.content, :layout => (@cms_page.cms_layout.app_layout || false), :status => 404

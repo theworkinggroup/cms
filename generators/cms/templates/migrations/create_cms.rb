@@ -44,9 +44,9 @@ class CreateCms < ActiveRecord::Migration
       t.string    :full_path
       t.integer   :children_count,    :null => false, :default => 0
       t.integer   :position,          :null => false, :default => 0
-      t.boolean   :published,         :null => false, :default => 0
-      t.boolean   :excluded_from_nav, :null => false, :default => 0
-      t.boolean   :site_root, :null => false, :default => false
+      t.boolean   :published,         :null => false, :default => false
+      t.boolean   :excluded_from_nav, :null => false, :default => false
+      t.boolean   :site_root,         :null => false, :default => false
       t.timestamps
     end
     add_index :cms_pages, [:parent_id, :slug]

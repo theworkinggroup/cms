@@ -6,8 +6,8 @@ default: &page
   full_path: ''
   children_count: 1
   position: 0
-  published: 1
-  excluded_from_nav: 0
+  published: true
+  excluded_from_nav: false
   
 complex:
   <<: *page

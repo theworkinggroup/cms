@@ -6,10 +6,6 @@
     .field= form.text_field :label
 
   .form_element.select
-    .label= form.label :site_id, 'Parent Layout'
-    .field= form.select :site_id, @layout.extendable_for_select
-
-  .form_element.select
     .label= form.label :parent_id, 'Parent Layout'
     .field= form.select :parent_id, @layout.extendable_for_select
   
