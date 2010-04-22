@@ -11,7 +11,6 @@ ActionController::Routing::Routes.draw do |map|
                     :reorder      => :any }
     cms_admin.resources :snippets,
       :collection => { :reorder   => :any }
-    cms_admin.resources :sections, :only => [ :show ]
   end
   
   map.with_options :controller => 'cms_content' do |cms|

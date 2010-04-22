@@ -8,7 +8,6 @@ default: &page
   position: 0
   published_at: <%= 10.days.ago %>
   unpublished_at:
-  is_section: 0
   
 complex:
   <<: *page
@@ -17,7 +16,6 @@ complex:
   cms_layout: nested
   slug: complex-page
   full_path: 'complex-page'
-  is_section: 1
   
 unpublished:
   <<: *page

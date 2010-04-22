@@ -21,11 +21,6 @@
           %li= active_link_to 'Pages', cms_admin_pages_path, :active => {:when => [['cms_admin/pages'], %w(index new edit create update)]}
           %li= active_link_to 'Snippets', cms_admin_snippets_path
         
-        - unless CmsPage.sections.blank?
-          %ul.secondary
-            - CmsPage.sections.all.each do |page|
-              %li= active_link_to page.label, cms_admin_section_path(page.id)
-        
         - unless ComfortableMexicanSofa::Config.additional_cms_tabs.blank?
           %ul.secondary
             - ComfortableMexicanSofa::Config.additional_cms_tabs.each do |label, url|

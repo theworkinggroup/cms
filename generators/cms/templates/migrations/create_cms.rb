@@ -24,14 +24,12 @@ class CreateCms < ActiveRecord::Migration
       t.string    :full_path
       t.integer   :children_count,  :null => false, :default => 0
       t.integer   :position,        :null => false, :default => 0
-      t.boolean   :is_section,      :null => false, :default => false
       t.datetime  :published_at
       t.datetime  :unpublished_at
       t.timestamps
     end
     add_index :cms_pages, :parent_id
     add_index :cms_pages, :slug
-    add_index :cms_pages, :is_section
     add_index :cms_pages, :full_path, :unique => true
     
     
