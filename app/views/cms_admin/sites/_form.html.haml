@@ -9,8 +9,6 @@
 
   .form_element
     .label
-      = form.label(:hostnames, 'Hostnames')
+      = form.label(:hostname, 'Hostname')
     .field.narrow
-      - form.fields_for(:hostnames) do |hostname_form|
-        = hostname_form.text_field(:hostname)
-        = link_to('Remove', '#')
+      = form.text_field(:hostname)

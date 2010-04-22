@@ -82,6 +82,9 @@ protected
     @parent_page = (params[:parent_id] and CmsPage.find_by_id(params[:parent_id]))
     
     @cms_page = CmsPage.new(params[:cms_page])
-    @cms_page.parent = @parent_page
+
+    if (@cms_page.parent ||= @parent_page)
+      @cms_page.cms_site = @cms_page.parent.cms_site
+    end
   end
 end

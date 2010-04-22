@@ -24,11 +24,13 @@ class CmsPage < ActiveRecord::Base
   validates_presence_of   :cms_layout_id,
     :unless => lambda{|p| p.redirect_to_page}
   validates_presence_of   :label
+
   validates_presence_of   :slug,
-    :unless => lambda{|p| CmsPage.count == 0 || p == CmsPage.root}
+    :if => :slug_required?
   validates_format_of     :slug,
-    :with   => /^\w[a-z0-9_-]*$/i,
-    :unless => lambda{|p| CmsPage.count == 0 || p == CmsPage.root}
+    :if => :slug_required?,
+    :with   => /^\w[a-z0-9_-]*$/i
+
   validates_uniqueness_of :full_path,
     :scope => :cms_site_id
   
@@ -88,8 +90,9 @@ class CmsPage < ActiveRecord::Base
     end
   end
   
-  def pages_for_select(page = CmsPage.root, level = 0, exclude_self = false)
-    page ||= CmsPage.root
+  def pages_for_select(page = nil, level = 0, exclude_self = false)
+    page ||= self.cms_site ? self.cms_site.cms_pages.root : CmsPage.root
+    
     return [] if !page || (page == self && exclude_self)
     out = [["#{". . " * level} #{page.label}", page.id]]
     page.children.each do |child|
@@ -110,6 +113,14 @@ class CmsPage < ActiveRecord::Base
   
   def cms_block_content(label, content)
     self.cms_blocks.select{|b| b.label.to_s == label.to_s}.first.try(content)
+  end
+  
+  def slug_required?
+    if (self.cms_site_id?)
+      return !self.site_root?
+    else
+      return (self != CmsPage.root or CmsPage.count == 0)
+    end
   end
   
 protected

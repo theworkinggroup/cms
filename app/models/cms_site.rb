@@ -1,7 +1,8 @@
 class CmsSite < ActiveRecord::Base
   # -- Relationships --------------------------------------------------------
 
-  belongs_to :cms_page
+  has_many :cms_pages,
+    :dependent => :destroy
 
   has_many :hostnames,
     :class_name => 'CmsSiteHostname',
@@ -15,6 +16,9 @@ class CmsSite < ActiveRecord::Base
 
   validates_presence_of :label
   validates_uniqueness_of :label
+
+  validates_presence_of :hostname
+  validates_uniqueness_of :hostname
   
   # -- Scopes ---------------------------------------------------------------
 
@@ -22,8 +26,7 @@ class CmsSite < ActiveRecord::Base
   
   # -- Callbacks ------------------------------------------------------------
   
-  before_save :create_page
-  after_save :backlink_page
+  after_create :create_page
   
   # -- Class Methods --------------------------------------------------------
 
@@ -35,16 +38,12 @@ class CmsSite < ActiveRecord::Base
   
 protected
   def create_page
-    self.cms_page ||= CmsPage.create(
+    self.cms_pages.create!(
       :label => self.label,
-      :cms_site => self
+      :cms_layout => CmsLayout.first,
+      :site_root => true
     )
-  end
-  
-  def backlink_page
-    if (self.cms_page.cms_site_id != self.id)
-      self.cms_page.cms_site_id = self.id
-      self.cms_page.save(false)
-    end
+    
+    self.save(false) if (self.changed?)
   end
 end

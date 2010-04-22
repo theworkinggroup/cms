@@ -2,21 +2,11 @@ class CreateCms < ActiveRecord::Migration
   def self.up
     create_table :cms_sites do |t|
       t.string :label
-      t.integer :cms_page_id
+      t.string :hostname
     end
     
     add_index :cms_sites, :label
-    add_index :cms_sites, :cms_page_id
-
-    create_table :cms_site_hostnames do |t|
-      t.integer :cms_site_id, :null => false
-      t.string :hostname, :null => false
-      t.string :environment
-      t.boolean :redirect, :null => false, :default => false
-    end
-    
-    add_index :cms_site_hostnames, [ :environment, :hostname ]
-    add_index :cms_site_hostnames, [ :cms_site_id, :hostname ]
+    add_index :cms_sites, :hostname, :unique => true
     
     create_table :cms_layouts do |t|
       t.integer :cms_site_id

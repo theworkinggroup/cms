@@ -11,7 +11,9 @@ class CmsAdmin::SitesController < CmsAdmin::BaseController
   end
   
   def new
-    @site.hostnames.build(:hostname => (CmsSite.count == 0) ? request.host : nil)
+    if (CmsSite.count == 0)
+      @site.hostname = request.host
+    end
   end
   
   def edit

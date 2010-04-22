@@ -5,7 +5,14 @@
 - if (@sites)
   - @sites.each do |site|
     .tree_structure
+      %h3
+        = h(site.label)
       = render(:partial => 'tree_branch', :object => @cms_pages[site.id])
+  - if (@cms_pages[nil])
+    .tree_structure
+      %h3
+        Default Site
+      = render(:partial => 'tree_branch', :object => @cms_pages[nil])
 - else
   .tree_structure
     = render(:partial => 'tree_branch', :object => @cms_pages)
