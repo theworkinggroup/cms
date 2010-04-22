@@ -1,0 +1,9 @@
+- site ||= details
+
+%table{ :class => 'details', :id => "site_details_#{site.id}", :style => 'display:none' }
+  - site.hostnames.each do |hostname|
+    %tr
+      %th Hostname:
+      %td
+        - url = "http://#{hostname.hostname}/"
+        = link_to(h(url), url)

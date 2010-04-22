@@ -1,20 +1,25 @@
 class CreateCms < ActiveRecord::Migration
   def self.up
-    create_table :cms_site do |t|
+    create_table :cms_sites do |t|
       t.string :label
+      t.integer :cms_page_id
     end
     
-    add_index :cms_site, :label
+    add_index :cms_sites, :label
+    add_index :cms_sites, :cms_page_id
 
-    create_table :cms_site_mapping do |t|
+    create_table :cms_site_hostnames do |t|
       t.integer :cms_site_id, :null => false
       t.string :hostname, :null => false
+      t.string :environment
+      t.boolean :redirect, :null => false, :default => false
     end
     
-    add_index :cms_site_mapping, :hostname
-    add_index :cms_site_mapping, [ :cms_site_id, :hostname ]
+    add_index :cms_site_hostnames, [ :environment, :hostname ]
+    add_index :cms_site_hostnames, [ :cms_site_id, :hostname ]
     
     create_table :cms_layouts do |t|
+      t.integer :cms_site_id
       t.integer :parent_id
       t.string  :label
       t.text    :content
@@ -27,9 +32,10 @@ class CreateCms < ActiveRecord::Migration
     add_index :cms_layouts, :parent_id
     add_index :cms_layouts, :label
     
-    execute "INSERT INTO cms_layouts (id, label, app_layout, content) VALUES (1, 'Default Layout', 'application', '{{cms_page_block:default:code}}')"
+    execute "INSERT INTO cms_layouts (id, label, app_layout, content) VALUES (1, 'Default Layout', 'application', '{{cms_page_block:default:text}}')"
     
     create_table :cms_pages do |t|
+      t.integer   :cms_site_id
       t.integer   :cms_layout_id
       t.integer   :parent_id
       t.integer   :redirect_to_page_id
@@ -38,13 +44,14 @@ class CreateCms < ActiveRecord::Migration
       t.string    :full_path
       t.integer   :children_count,  :null => false, :default => 0
       t.integer   :position,        :null => false, :default => 0
+      t.boolean   :site_root, :null => false, :default => false
       t.datetime  :published_at
       t.datetime  :unpublished_at
       t.timestamps
     end
     add_index :cms_pages, :parent_id
     add_index :cms_pages, :slug
-    add_index :cms_pages, :full_path, :unique => true
+    add_index :cms_pages, [ :cms_site_id, :full_path ], :unique => true
 
     execute "INSERT INTO cms_pages (id, cms_layout_id, label, slug, full_path) VALUES (1, 1, 'Default Page', NULL, '')"
     
@@ -62,9 +69,9 @@ class CreateCms < ActiveRecord::Migration
     add_index :cms_blocks, [:cms_page_id, :label, :content_string], :unique => true
     add_index :cms_blocks, [:cms_page_id, :label, :content_integer], :unique => true
     add_index :cms_blocks, [:cms_page_id, :label, :content_boolean], :unique => true
-    add_index :cms_blocks, [:cms_page_id, :label, :content_datetime], :unique => true        
+    add_index :cms_blocks, [:cms_page_id, :label, :content_datetime], :unique => true
 
-    execute "INSERT INTO cms_blocks (id, cms_page_id, content_text) VALUES (1, 1, 'Default home page')"
+    execute "INSERT INTO cms_blocks (id, cms_page_id, label, content_text) VALUES (1, 1, 'default', 'Default home page')"
 
     create_table :cms_snippets do |t|
       t.string  :label

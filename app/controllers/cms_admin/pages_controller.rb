@@ -3,9 +3,15 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   include CmsCommon::RenderPage
   
   before_filter :load_page, :only => [:children, :edit, :update, :destroy, :reorder]
+  before_filter :build_page, :only => [ :new, :create ]
   
   def index
-    params[:root] ? @cms_pages = CmsPage.find(params[:root]).children : @cms_pages = CmsPage.roots
+    if (ComfortableMexicanSofa::Config.multiple_sites)
+      @sites = CmsSite.all
+      @cms_pages = CmsPage.roots.group_by(&:cms_site_id)
+    else
+      params[:root] ? @cms_pages = CmsPage.find(params[:root]).children : @cms_pages = CmsPage.roots
+    end
   end
   
   def children
@@ -13,7 +19,6 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   end
   
   def new
-    @cms_page = CmsPage.new(params.slice(:parent_id))
     @cms_page.published_at = Time.now.utc
     @cms_page.cms_layout = @cms_page.parent.cms_layout if @cms_page.parent
   end
@@ -23,8 +28,6 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   end
   
   def create
-    @cms_page = CmsPage.new(params[:cms_page])
-    
     return render_page if !params[:preview].blank? && @cms_page.valid?
     
     @cms_page.save!
@@ -71,9 +74,14 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   end
   
 protected
-
   def load_page
     @cms_page = CmsPage.find_by_id(params[:id])
   end
   
+  def build_page
+    @parent_page = (params[:parent_id] and CmsPage.find_by_id(params[:parent_id]))
+    
+    @cms_page = CmsPage.new(params[:cms_page])
+    @cms_page.parent = @parent_page
+  end
 end

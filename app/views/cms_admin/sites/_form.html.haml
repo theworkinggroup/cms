@@ -1,0 +1,16 @@
+= form.error_messages
+
+.form_element_group.horizontal
+  .form_element.text.large
+    .label
+      = form.label(:label, 'Title')
+    .field
+      = form.text_field(:label)
+
+  .form_element
+    .label
+      = form.label(:hostnames, 'Hostnames')
+    .field.narrow
+      - form.fields_for(:hostnames) do |hostname_form|
+        = hostname_form.text_field(:hostname)
+        = link_to('Remove', '#')
