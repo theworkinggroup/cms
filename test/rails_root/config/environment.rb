@@ -35,8 +35,6 @@ Rails::Initializer.run do |config|
   # Run "rake -D time" for a list of tasks for finding time zone names.
   
   config.gem 'haml'
-  config.gem 'will_paginate'
-  config.gem 'calendar_date_select'
   config.gem 'active_link_to'
   
   config.time_zone = 'UTC'

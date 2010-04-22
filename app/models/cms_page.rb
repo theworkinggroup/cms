@@ -5,7 +5,6 @@ class CmsPage < ActiveRecord::Base
   # -- Relationships --------------------------------------------------------
 
   acts_as_tree :counter_cache => :children_count
-  acts_as_published
   
   belongs_to  :cms_layout
   has_many    :cms_blocks,
@@ -38,19 +37,15 @@ class CmsPage < ActiveRecord::Base
   # -- Scopes ---------------------------------------------------------------
 
   default_scope :order => 'position ASC'
-  named_scope :sections,
-    :conditions => {:is_section => true}
+  named_scope :published,
+    :conditions => { :published => true }
     
   # -- Class Methods --------------------------------------------------------
 
   def self.[](slug)
     CmsPage.find_by_slug!(slug)
   end
-  
-  def self.visible_scope
-    ComfortableMexicanSofa::Config.pubishing_schedule ? self.published : self
-  end
-    
+      
   # -- Instance Methods -----------------------------------------------------
   def content
     # TODO: Add column to cache the render output. pointless to run it all the time
@@ -101,6 +96,10 @@ class CmsPage < ActiveRecord::Base
   
   def cms_block_content(label, content)
     self.cms_blocks.select{|b| b.label.to_s == label.to_s}.first.try(content)
+  end
+  
+  def published_status
+    self.published? ? 'published' : 'draft'
   end
   
 protected

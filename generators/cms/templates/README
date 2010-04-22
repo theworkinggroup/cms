@@ -14,8 +14,6 @@ Hey, thanks for being AWESOME!
 Please make sure you got following in your environment.rb file:
 
   config.gem 'haml'
-  config.gem 'calendar_date_select'
-  config.gem 'will_paginate'
   config.gem 'active_link_to'
   
   config.gem 'comfortable_mexican_sofa'

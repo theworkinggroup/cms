@@ -38,18 +38,15 @@ class CmsPageTest < ActiveSupport::TestCase
   
   def test_publishing
     page = cms_pages(:default)
-    assert page.published_at < Time.now.utc
-    assert page.unpublished_at.nil?
-    assert page.is_published?
-    
-    page.update_attribute(:published_at, 5.days.from_now)
-    assert !page.is_published?
-    
-    page.publish!
-    assert page.is_published?
-    
-    page.unpublish!
-    assert !page.is_published?
+    assert page.published?
+    page.update_attribute(:published, false)
+    assert !page.published?
   end
   
+  def test_excluding_from_nav
+    page = cms_pages(:default)
+    assert !page.excluded_from_nav?
+    page.update_attribute(:excluded_from_nav, true)
+    assert page.excluded_from_nav?
+  end
 end
