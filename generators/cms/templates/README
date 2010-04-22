@@ -15,8 +15,8 @@ Please make sure you got following in your environment.rb file:
 
   config.gem 'haml'
   config.gem 'calendar_date_select'
-  config.gem 'mislav-will_paginate',                :lib => 'will_paginate'
-  config.gem 'active_link_helper'
+  config.gem 'will_paginate'
+  config.gem 'active_link_to'
   
   config.gem 'comfortable_mexican_sofa'
 
@@ -27,5 +27,3 @@ replacements:
 
 TinyMCE Editor - http://tinymce.moxiecode.com/
 CodeMirror - http://marijn.haverbeke.nl/codemirror/
-
-
