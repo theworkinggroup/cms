@@ -1,8 +1,0 @@
-%h2 New Category
-
-- form_for :cms_category, :url => {:action => :create } do |form|
-  = render :partial => form
-  .submit
-    = form.submit 'Create Category'
-    or 
-    = link_to 'Cancel', cms_admin_categories_path

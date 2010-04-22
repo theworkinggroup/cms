@@ -1,7 +1,0 @@
-#new_category      
-  = error_messages_for :cms_category
-  = text_field :cms_category, :label
-  = select :cms_category, :parent_id, [['---', nil]] + CmsCategory.categories_for_select
-  = submit_to_remote 'submit-btn', 'Add Category', :url => cms_admin_categories_path(:item_type => item_type), :with => "Form.Element.serialize('cms_category_label') + '&' +  Form.Element.serialize('cms_category_parent_id')", :html => {:class => 'submit_button'}
-  or
-  = link_to 'Manage Categories', cms_admin_categories_path
