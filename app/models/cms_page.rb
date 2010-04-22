@@ -128,7 +128,7 @@ class CmsPage < ActiveRecord::Base
   
 protected
   def assign_full_path
-    self.full_path = (self.ancestors.reverse.collect{|p| p.slug}.compact + [self.slug]).join('/')
+    self.full_path = (self.ancestors.reverse.collect{ |p| p.slug }.reject { |p| p.blank? } + [ self.slug ]).join('/')
   end
   
   def assign_site
