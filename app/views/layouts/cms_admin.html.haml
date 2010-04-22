@@ -41,4 +41,6 @@
         = yield
     
     .footer
-      The Working Group &copy; 2009
+      = link_to('The Working Group', 'http://twg.ca/', :target => '_twg')
+      &copy;
+      = [ 2009, Date.today.year ].uniq.join(' - ')
