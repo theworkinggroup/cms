@@ -31,7 +31,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     
     flash[:notice] = 'Page created'
     manage_session_array(:cms_page_tree, :add, @cms_page.parent_id.to_s)
-    redirect_to :action => :edit, :id => @cms_page
+    redirect_to edit_cms_admin_page_path(@cms_page)
     
   rescue ActiveRecord::RecordInvalid
     render :action => :new
@@ -45,7 +45,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     @cms_page.save!
     
     flash[:notice] = 'Page updated'
-    redirect_to :action => :edit, :id => @cms_page
+    redirect_to edit_cms_admin_page_path(@cms_page)
     
   rescue ActiveRecord::RecordInvalid
     render :action => :edit
@@ -55,7 +55,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     @cms_page.destroy
     
     flash[:notice] = 'Page removed'
-    redirect_to :action => :index
+    redirect_to cms_admin_pages_path
   end
   
   def form_blocks

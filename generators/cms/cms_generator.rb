@@ -26,7 +26,7 @@ class CmsGenerator < Rails::Generator::Base
       
       # moving initializers
       m.directory 'config/initializers'
-      %w(paperclip.rb cms.rb).each do |f|
+      %w(cms.rb).each do |f|
         m.file "initializers/#{f}", "config/initializers/#{f}", :collision => :ask
       end
       
@@ -35,8 +35,6 @@ class CmsGenerator < Rails::Generator::Base
       %w(
         arrow_bottom.gif
         arrow_right.gif
-        icon_attachment.gif
-        icon_category.gif
         icon_draft.gif
         icon_layout.gif
         icon_move.gif

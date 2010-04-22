@@ -13,15 +13,3 @@ function slugify(str) {
   str = str.replace(/[^a-zA-Z0-9 -]/g, '').replace(/\s+/g, '-').toLowerCase();
   return str;
 }
-
-function toggle_category_selections(obj, parents, children){
-  if (obj.checked == true){
-    parents.each(function(id){
-      $('cms_category_id_' + id).checked = true
-    })
-  } else {
-    children.each(function(id){
-      $('cms_category_id_' + id).checked = false
-    })
-  }
-}

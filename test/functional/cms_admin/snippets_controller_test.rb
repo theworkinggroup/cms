@@ -30,7 +30,7 @@ class CmsAdmin::SnippetsControllerTest < ActionController::TestCase
         :content  => 'test content'
       }
       assert_response :redirect
-      assert_redirected_to :action => :edit
+      assert_redirected_to edit_cms_admin_snippet_path(assigns(:snippet))
       assert_equal 'Snippet created', flash[:notice]
     end
   end
@@ -43,7 +43,7 @@ class CmsAdmin::SnippetsControllerTest < ActionController::TestCase
       :content  => 'new test content'
     }
     assert_response :redirect
-    assert_redirected_to :action => :edit
+    assert_redirected_to edit_cms_admin_snippet_path(assigns(:snippet))
     assert_equal 'Snippet updated', flash[:notice]
       
     snippet.reload
@@ -55,7 +55,7 @@ class CmsAdmin::SnippetsControllerTest < ActionController::TestCase
     assert_difference 'CmsSnippet.count', -1 do
       delete :destroy, :id => cms_snippets(:default)
       assert_response :redirect
-      assert_redirected_to :action => :index
+      assert_redirected_to cms_admin_snippets_path
       assert_equal 'Snippet removed', flash[:notice]
     end
   end

@@ -32,7 +32,7 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
         :content    => 'Test content {{ cms_block:test_block:text }}'
       }
       assert_response :redirect
-      assert_redirected_to :action => :edit
+      assert_redirected_to edit_cms_admin_layout_path(assigns(:layout))
       assert_equal 'Layout created', flash[:notice]
     end
   end
@@ -46,7 +46,7 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
         :content => '{{ cms_block:completely_new_block:string }}'
       }
       assert_response :redirect
-      assert_redirected_to :action => :edit
+      assert_redirected_to edit_cms_admin_layout_path(assigns(:layout))
       assert_equal 'Layout updated', flash[:notice]
       
       layout.reload
@@ -65,7 +65,7 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
       assert_no_difference ['CmsPage.count', 'CmsBlock.count'] do
         delete :destroy, :id => layout
         assert_response :redirect
-        assert_redirected_to :action => :index
+        assert_redirected_to cms_admin_layouts_path
         assert_equal 'Layout removed', flash[:notice]
         
         layout_pages.each do |page|

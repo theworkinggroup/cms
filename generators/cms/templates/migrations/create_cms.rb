@@ -57,47 +57,8 @@ class CreateCms < ActiveRecord::Migration
     add_index :cms_blocks, [:cms_page_id, :label, :content_string], :unique => true
     add_index :cms_blocks, [:cms_page_id, :label, :content_integer], :unique => true
     add_index :cms_blocks, [:cms_page_id, :label, :content_boolean], :unique => true
-    add_index :cms_blocks, [:cms_page_id, :label, :content_datetime], :unique => true
-    
-    
-    create_table :cms_attachments do |t|
-      t.string  :file_file_name
-      t.string  :file_content_type
-      t.string  :file_file_size
-      t.string  :label
-      t.text    :description
-      t.timestamps
-    end
-    add_index :cms_attachments, :created_at
-    add_index :cms_attachments, :file_content_type
-    add_index :cms_attachments, [:file_content_type, :created_at]
-    
-    
-    create_table :cms_categories do |t|
-      t.integer :parent_id
-      t.string  :slug
-      t.string  :label
-      t.text    :description
-    end
-    add_index :cms_categories, :slug
-    add_index :cms_categories, [:parent_id, :slug]
-    
-    
-    create_table :cms_page_categorizations do |t|
-      t.integer :cms_category_id
-      t.integer :cms_page_id
-    end
-    add_index :cms_page_categorizations, [:cms_category_id, :cms_page_id], :unique => true, 
-      :name => 'index_page_categorizations_on_category_id_and_page_id' #auto-generated name was too long.
-    
-    
-    create_table :cms_attachment_categorizations do |t|
-      t.integer :cms_category_id
-      t.integer :cms_attachment_id
-    end
-    add_index :cms_attachment_categorizations, [:cms_category_id, :cms_attachment_id], :unique => true,
-      :name => 'index_attach_categorizations_on_category_id_and_attachment_id' #auto-generated name was too long.
-    
+    add_index :cms_blocks, [:cms_page_id, :label, :content_datetime], :unique => true        
+
   end
   
   def self.down
@@ -105,9 +66,5 @@ class CreateCms < ActiveRecord::Migration
     drop_table :cms_pages
     drop_table :cms_snippets
     drop_table :cms_blocks
-    drop_table :cms_attachments
-    drop_table :cms_categories
-    drop_table :cms_page_categorizations
-    drop_table :cms_attachment_categorizations
   end
 end

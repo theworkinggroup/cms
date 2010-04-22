@@ -10,8 +10,6 @@
       .label= form.label :unpublished_at, 'Unpublish at'
       .field= form.calendar_date_select :unpublished_at, :time => true
       
-  = render :partial => 'cms_admin/categories/category_subform', :locals => { :item => @cms_page }
-
 .form_left_column
   .form_element_group.horizontal
     .form_element.text.large

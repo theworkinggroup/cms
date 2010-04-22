@@ -34,7 +34,6 @@ all_included_tags:
     PageBlock: {{ cms_page_block:test_page_block:string }}
     Snippet: {{ cms_snippet:test_snippet }}
     Partial: {{ cms_partial:content/test_partial }}
-    Attachment: {{ cms_attachment:test_attachment }}
     Helper: {{ cms_helper:test_helper }}
     Fake: {{ cms_fake:not_real:whatever }}
   

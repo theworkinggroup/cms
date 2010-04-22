@@ -2,7 +2,7 @@
 
 %h2 Editing Page
 
-- form_for :cms_page, :url => {:action => :update}, :html => {:method => :put} do |form|
+- form_for @cms_page, :url => cms_admin_page_path(@cms_page) do |form|
   = render :partial => form
   .submit
     = form.submit 'Edit Page', :onclick => 'this.form.target = ""'

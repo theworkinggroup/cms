@@ -11,9 +11,6 @@ ActionController::Routing::Routes.draw do |map|
                     :reorder      => :any }
     cms_admin.resources :snippets,
       :collection => { :reorder   => :any }
-    cms_admin.resources :attachments
-    cms_admin.resources :categories,
-      :member => {  :children => :any }
     cms_admin.resources :sections, :only => [ :show ]
   end
   

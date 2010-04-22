@@ -24,7 +24,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
     
     flash[:notice] = 'Layout created'
     manage_session_array(:cms_layout_tree, :add, @layout.parent_id.to_s)
-    redirect_to :action => :edit, :id => @layout
+    redirect_to edit_cms_admin_layout_path(@layout)
     
   rescue ActiveRecord::RecordInvalid
     render :action => :new
@@ -34,7 +34,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
     @layout.update_attributes!(params[:layout])
     
     flash[:notice] = 'Layout updated'
-    redirect_to :action => :edit, :id => @layout
+    redirect_to edit_cms_admin_layout_path(@layout)
     
   rescue ActiveRecord::RecordInvalid
     render :action => :edit
@@ -44,7 +44,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
     @layout.destroy
     
     flash[:notice] = 'Layout removed'
-    redirect_to :action => :index
+    redirect_to cms_admin_layouts_path
   end
   
   def reorder

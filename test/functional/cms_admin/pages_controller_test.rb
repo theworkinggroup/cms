@@ -37,7 +37,7 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
           }
         }
         assert_response :redirect
-        assert_redirected_to :action => :edit
+        assert_redirected_to edit_cms_admin_page_path(assigns(:cms_page))
         assert_equal 'Page created', flash[:notice]
         
         assert page = CmsPage.find_by_slug('test_page')
@@ -63,7 +63,7 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
         }
       }
       assert_response :redirect
-      assert_redirected_to :action => :edit
+      assert_redirected_to edit_cms_admin_page_path(assigns(:cms_page))
       assert_equal 'Page updated', flash[:notice]
     
       assert page = CmsPage.find_by_slug('new_test_page')
@@ -84,33 +84,9 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
       assert_difference 'CmsBlock.count', -7 do
         delete :destroy, :id => page
         assert_response :redirect
-        assert_redirected_to :action => :index
+        assert_redirected_to cms_admin_pages_path
         assert_equal 'Page removed', flash[:notice]
       end
-    end
-  end
-  
-  def test_adding_categorizations
-    page = cms_pages(:default)
-    
-    assert_difference 'CmsPageCategorization.count' do
-      put :update, :id => page, :cms_page => {
-        :attr_category_ids => {
-          cms_categories(:category_1).id => 1
-        }
-      }
-    end
-  end
-  
-  def test_removing_categorizations
-    page = cms_pages(:default)
-    
-    assert_difference 'CmsPageCategorization.count', -3 do
-      put :update, :id => page, :cms_page => {
-        :attr_category_ids => {
-          cms_categories(:category_2).id => 0
-        }
-      }
     end
   end
   

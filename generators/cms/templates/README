@@ -15,7 +15,6 @@ Please make sure you got following in your environment.rb file:
 
   config.gem 'haml'
   config.gem 'calendar_date_select'
-  config.gem 'thoughtbot-paperclip',                :lib => 'paperclip'
   config.gem 'mislav-will_paginate',                :lib => 'will_paginate'
   config.gem 'active_link_helper'
   

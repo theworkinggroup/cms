@@ -5,7 +5,6 @@ class CmsPage < ActiveRecord::Base
   # -- Relationships --------------------------------------------------------
   acts_as_tree :counter_cache => :children_count
   acts_as_published
-  acts_as_categorized
   
   belongs_to  :cms_layout
   has_many    :cms_blocks,
