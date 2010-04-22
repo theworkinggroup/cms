@@ -1,15 +1,14 @@
 = form.error_messages
 
 .form_right_column
-  - if (ComfortableMexicanSofa::Config.pubishing_schedule)
-    .form_element_group.publishing
-      .form_element
-        .label= form.label :published_at, 'Publish at'
-        .field= form.calendar_date_select :published_at, :time => true
-      
-      .form_element
-        .label= form.label :unpublished_at, 'Unpublish at'
-        .field= form.calendar_date_select :unpublished_at, :time => true
+  .form_element_group.publishing
+    .form_element.checkbox
+      = form.check_box :published
+      = form.label :published, 'Publish?'
+    
+    .form_element.checkbox
+      = form.check_box :excluded_from_nav
+      = form.label :excluded_from_nav, 'Exclude from navigation?'
       
 .form_left_column
   .form_element_group.horizontal

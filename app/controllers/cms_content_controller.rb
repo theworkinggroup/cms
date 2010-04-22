@@ -8,7 +8,7 @@ class CmsContentController < ApplicationController
   
   def show
     @cms_page_slug = params[:path].join('/')
-    @cms_page = (@cms_site ? @cms_site.cms_pages : CmsPage).find_by_full_path(@cms_page_slug)
+    @cms_page = (@cms_site ? @cms_site.cms_pages : CmsPage).published.find_by_full_path(@cms_page_slug)
 
     render_page
   end
@@ -16,7 +16,7 @@ class CmsContentController < ApplicationController
   def sitemap
     respond_to do |format|
       format.xml do
-        @cms_pages = CmsPage.visible_scope
+        @cms_pages = CmsPage.published
       end
     end
   end

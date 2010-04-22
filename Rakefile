@@ -14,9 +14,6 @@ begin
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
     gem.rubyforge_project = 'cms-sofa'
     gem.add_dependency('haml')
-    gem.add_dependency('will_paginate')
-    gem.add_dependency('paperclip')
-    gem.add_dependency('calendar_date_select')
     gem.add_dependency('active_link_to')
   end
   

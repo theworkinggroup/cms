@@ -6,8 +6,8 @@ default: &page
   full_path: ''
   children_count: 1
   position: 0
-  published_at: <%= 10.days.ago %>
-  unpublished_at:
+  published: true
+  excluded_from_nav: false
   
 complex:
   <<: *page
@@ -24,7 +24,7 @@ unpublished:
   cms_layout: default
   slug: unpublished
   full_path: 'unpublished'
-  published_at: <%= 10.days.from_now %>
+  published: 0
   
 under_development:
   <<: *page

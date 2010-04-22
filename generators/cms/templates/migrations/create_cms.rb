@@ -32,16 +32,17 @@ class CreateCms < ActiveRecord::Migration
       t.string    :label
       t.string    :slug
       t.string    :full_path
-      t.integer   :children_count,  :null => false, :default => 0
-      t.integer   :position,        :null => false, :default => 0
-      t.boolean   :site_root, :null => false, :default => false
-      t.datetime  :published_at
-      t.datetime  :unpublished_at
+      t.integer   :children_count,    :null => false, :default => 0
+      t.integer   :position,          :null => false, :default => 0
+      t.boolean   :published,         :null => false, :default => false
+      t.boolean   :excluded_from_nav, :null => false, :default => false
+      t.boolean   :site_root,         :null => false, :default => false
       t.timestamps
     end
-    add_index :cms_pages, :parent_id
-    add_index :cms_pages, :slug
+    add_index :cms_pages, [:parent_id, :slug]
     add_index :cms_pages, [ :cms_site_id, :full_path ], :unique => true
+    add_index :cms_pages, [:published, :full_path]
+    add_index :cms_pages, [:excluded_from_nav, :parent_id]
 
     execute "INSERT INTO cms_pages (id, cms_layout_id, label, slug, full_path) VALUES (1, 1, 'Default Page', NULL, '')"
     
@@ -56,10 +57,10 @@ class CreateCms < ActiveRecord::Migration
       t.timestamps
     end
     add_index :cms_blocks, [:cms_page_id, :label], :unique => true
-    add_index :cms_blocks, [:cms_page_id, :label, :content_string], :unique => true
-    add_index :cms_blocks, [:cms_page_id, :label, :content_integer], :unique => true
-    add_index :cms_blocks, [:cms_page_id, :label, :content_boolean], :unique => true
-    add_index :cms_blocks, [:cms_page_id, :label, :content_datetime], :unique => true
+    add_index :cms_blocks, [:label, :content_string]
+    add_index :cms_blocks, [:label, :content_integer]
+    add_index :cms_blocks, [:label, :content_boolean]
+    add_index :cms_blocks, [:label, :content_datetime]        
 
     execute "INSERT INTO cms_blocks (id, cms_page_id, label, content_text) VALUES (1, 1, 'default', 'Default home page')"
 
@@ -76,5 +77,7 @@ class CreateCms < ActiveRecord::Migration
     drop_table :cms_pages
     drop_table :cms_snippets
     drop_table :cms_blocks
+    drop_table :cms_sites
+    drop_table :cms_site_hostnames
   end
 end
