@@ -1,4 +1,5 @@
 class CmsPage < ActiveRecord::Base
+  # -- Properties -----------------------------------------------------------
   
   attr_accessor :rendered_content
   
@@ -6,6 +7,7 @@ class CmsPage < ActiveRecord::Base
 
   acts_as_tree :counter_cache => :children_count
   
+  belongs_to  :cms_site
   belongs_to  :cms_layout
   has_many    :cms_blocks,
     :dependent    => :destroy
@@ -17,6 +19,7 @@ class CmsPage < ActiveRecord::Base
     :foreign_key  => :redirect_to_page_id
   
   #-- Validations -----------------------------------------------------------
+
   validates_presence_of   :cms_layout_id,
     :unless => lambda{|p| p.redirect_to_page}
   validates_presence_of   :label
@@ -25,14 +28,19 @@ class CmsPage < ActiveRecord::Base
   validates_format_of     :slug,
     :with   => /^\w[a-z0-9_-]*$/i,
     :unless => lambda{|p| CmsPage.count == 0 || p == CmsPage.root}
-  validates_uniqueness_of :full_path
+  validates_uniqueness_of :full_path,
+    :scope => :cms_site_id
   
   validate :validate_redirect_to
   
   # -- AR Callbacks ---------------------------------------------------------
+
   before_validation :assign_full_path
-  after_save        :save_blocks,
-                    :sync_child_slugs
+
+  before_save :assign_site
+
+  after_save :save_blocks,
+    :sync_child_slugs
   
   # -- Scopes ---------------------------------------------------------------
 
@@ -47,6 +55,7 @@ class CmsPage < ActiveRecord::Base
   end
       
   # -- Instance Methods -----------------------------------------------------
+
   def content
     # TODO: Add column to cache the render output. pointless to run it all the time
     render_content
@@ -103,11 +112,16 @@ class CmsPage < ActiveRecord::Base
   end
   
 protected
-  
   def assign_full_path
     self.full_path = (self.ancestors.reverse.collect{|p| p.slug}.compact + [self.slug]).join('/')
   end
   
+  def assign_site
+    return if (self.cms_site_id.present?)
+    
+    self.cms_site_id = (self.parent and self.parent.cms_site_id)
+  end
+
   def validate_redirect_to
     if self.redirect_to_page && (self == self.redirect_to_page || self.redirect_to_page.redirect_to_page)
       self.errors.add(:redirect_to_page_id) 

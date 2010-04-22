@@ -1,0 +1,8 @@
+%h2 Edit Site
+
+- form_for(@site, :url => { :action => :update }) do |form|
+  = render(:partial => form)
+  .submit
+    = form.submit 'Save Site'
+    or 
+    = link_to('Return to List', cms_admin_sites_path)

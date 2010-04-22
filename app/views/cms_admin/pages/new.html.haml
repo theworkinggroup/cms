@@ -1,7 +1,11 @@
-%h2 New Page
+%h2
+  New Page
+  - if (@parent_page and @parent_page.cms_site)
+    for
+    = h(@parent_page.cms_site.label)
 
 - form_for :cms_page, :url => {:action => :create } do |form|
-  = render :partial => form
+  = render(:partial => form)
   .submit
     = form.submit 'Create Page', :onclick => 'this.form.target = ""'
     = form.submit 'Preview Page', :onclick => 'this.form.target = "_blank"', :name => 'preview'

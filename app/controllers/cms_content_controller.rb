@@ -23,7 +23,9 @@ class CmsContentController < ApplicationController
   
 protected
   def assign_cms_root
-    @cms_root_path = [ request.host.slugify ]
+    if (ComfortableMexicanSofa::Config.multiple_sites)
+      @cms_root_path = [ request.host.slugify ]
+    end
   end
 
   def parse_path

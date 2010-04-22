@@ -1,0 +1,17 @@
+%ul#sites_listing
+  - @sites.each do |site|
+    %li{ :id => "site_#{site.id}" }
+      .item
+        .icon
+        = link_to site.label, edit_cms_admin_site_path(site), :class => 'label'
+        
+        %span.action_links
+          [
+          = link_to_function 'Toggle Details', "$('site_details_#{site.id}').toggle()"
+          |
+          = link_to 'Edit', edit_cms_admin_site_path(site)
+          |
+          = link_to 'Remove', cms_admin_site_path(site), :method => 'delete', :confirm => 'Are you sure you want to remove this site?'
+          ]
+        
+        = render(:partial => 'details', :object => site)
