@@ -25,7 +25,7 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
   
   def test_create
     assert_difference 'CmsLayout.count' do
-      post :create, :layout => {
+      post :create, :cms_layout => {
         :label      => 'Test Layout',
         :parent_id  => '',
         :app_layout => '',
@@ -41,7 +41,7 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
     layout = cms_layouts(:default)
     
     assert_difference 'CmsBlock.count', layout.cms_pages.count do
-      put :update, :id => layout, :layout => {
+      put :update, :id => layout, :cms_layout => {
         :label => 'New Test Label',
         :content => '{{ cms_block:completely_new_block:string }}'
       }

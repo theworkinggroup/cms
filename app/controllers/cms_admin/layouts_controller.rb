@@ -19,7 +19,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   end
   
   def create
-    @layout = CmsLayout.new(params[:layout])
+    @layout = CmsLayout.new(params[:cms_layout])
     @layout.save!
     
     flash[:notice] = 'Layout created'
@@ -31,7 +31,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   end
   
   def update
-    @layout.update_attributes!(params[:layout])
+    @layout.update_attributes!(params[:cms_layout])
     
     flash[:notice] = 'Layout updated'
     redirect_to edit_cms_admin_layout_path(@layout)
