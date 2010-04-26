@@ -7,7 +7,12 @@
     .tree_structure
       %h3
         = h(site.label)
-      = render(:partial => 'tree_branch', :object => @cms_pages[site.id])
+      - if (@cms_pages[site.id])
+        = render(:partial => 'tree_branch', :object => @cms_pages[site.id])
+      - else
+        %ul
+          %li.empty_state
+            No pages defined.
   - if (@cms_pages[nil])
     .tree_structure
       %h3
