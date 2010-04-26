@@ -2,7 +2,7 @@
 
 %h2 Editing Layout
 
-- form_for @layout, :url => cms_admin_layout_path(@layout) do |form|
+- form_for @cms_layout, :url => cms_admin_layout_path(@cms_layout) do |form|
   = render :partial => form
   .submit
     = form.submit 'Edit Layout'

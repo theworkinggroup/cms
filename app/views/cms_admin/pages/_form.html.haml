@@ -10,6 +10,13 @@
       = form.check_box :excluded_from_nav
       = form.label :excluded_from_nav, 'Exclude from navigation?'
       
+  - if (@cms_page.published? and !@cms_page.new_record?)
+    .form_element_group
+      .form_element
+        .label
+          URL
+        = link_to(@cms_page.full_path_with_site, @cms_page.full_path_with_site)
+    
 .form_left_column
   .form_element_group.horizontal
     .form_element.text.large
