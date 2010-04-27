@@ -1,6 +1,6 @@
-= link_to 'Add New Layout', new_cms_admin_layout_path, :class => 'big_button'
+= link_to 'Add New Layout', new_cms_admin_layout_path, :class => 'top_button'
 
 %h2 Layouts
-
+= render :partial => 'cms_admin/flash_message'
 .tree_structure
   = render :partial => 'tree_branch', :object => @layouts

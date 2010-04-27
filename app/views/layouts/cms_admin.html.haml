@@ -4,17 +4,15 @@
     %title
     = stylesheet_link_tag 'cms_master'
     = javascript_include_tag 'prototype', 'effects', 'controls', 'dragdrop', 'cms/utilities', 'codemirror/codemirror', 'ckeditor/ckeditor', 'cms/ckeditor_init', 'cms/codemirror_init'
-
     = yield :head
     
   %body{ :id => "#{params[:controller]}_#{params[:action]}".idify }
-    
-    .header
-      %h1= link_to application_name, '/cms-admin'
-      
     .content_wrapper
-      .left_navigation_column
-      
+      .left_column
+        .header
+          %h1= application_name
+          = link_to image_tag('/images/cms/logo-test.gif'), '/cms-admin'
+          
         %ul.primary
           - if (ComfortableMexicanSofa::Config.multiple_sites)
             %li= active_link_to 'Sites', cms_admin_sites_path
@@ -28,13 +26,9 @@
               %li= active_link_to label, url
       
       .content_column
-        - flash.each do |type, value|
-          .flash{ :class => type.to_s }
-            = value
-        
         = yield
-    
-    .footer
-      = link_to('The Working Group', 'http://twg.ca/', :target => '_twg')
-      &copy;
-      = [ 2009, Date.today.year ].uniq.join(' - ')
+        
+      .footer
+        = link_to('The Working Group', 'http://twg.ca/', :target => '_twg')
+        &copy;
+        = [ 2009, Date.today.year ].uniq.join(' - ')

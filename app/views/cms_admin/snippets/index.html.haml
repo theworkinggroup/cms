@@ -1,7 +1,7 @@
-= link_to 'Add New Snippet', new_cms_admin_snippet_path, :class => 'big_button'
+= link_to 'Add New Snippet', new_cms_admin_snippet_path, :class => 'top_button'
 
 %h2 Snippets
-
+= render :partial => 'cms_admin/flash_message'
 %table.formatted
   %tr
     %th.first{:colspan => 2} Snippet Label

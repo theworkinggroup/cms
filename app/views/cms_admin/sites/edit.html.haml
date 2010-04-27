@@ -1,5 +1,7 @@
-%h2 Edit Site
+= link_to('Add New Site', new_cms_admin_site_path, :class => 'top_button')
 
+%h2 Edit Site
+= render :partial => 'cms_admin/flash_message'
 - form_for(@site, :url => { :action => :update }) do |form|
   = render(:partial => form)
   .submit

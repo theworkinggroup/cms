@@ -1,6 +1,6 @@
-= link_to('Add New Site', new_cms_admin_site_path, :class => 'big_button')
+= link_to('Add New Site', new_cms_admin_site_path, :class => 'top_button')
 
 %h2 Sites
-
+= render :partial => 'cms_admin/flash_message'
 .tree_structure
   = render(:partial => 'site', :object => @sites)

@@ -1,7 +1,7 @@
-= link_to 'Add New Snippet', new_cms_admin_snippet_path, :class => 'big_button'
+= link_to 'Add New Snippet', new_cms_admin_snippet_path, :class => 'top_button'
 
 %h2 Editing Snippet
-
+= render :partial => 'cms_admin/flash_message'
 - form_for :snippet, :url => {:action => :update}, :html => {:method => :put} do |form|
   = render :partial => form
   .submit
