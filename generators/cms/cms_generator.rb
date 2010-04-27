@@ -19,7 +19,7 @@ class CmsGenerator < Rails::Generator::Base
       
       # moving javascript
       m.directory 'public/javascripts/cms'
-      %w(utilities.js rte_init.js codemirror_init.js jquery.js).each do |f|
+      %w(utilities.js rte_init.js codemirror_init.js jquery.js jquery-ui.js).each do |f|
         m.file "javascripts/#{f}", "public/javascripts/cms/#{f}", :collision => :ask
       end
       

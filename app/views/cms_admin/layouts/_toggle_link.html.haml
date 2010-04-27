@@ -1,9 +1,0 @@
-- layout ||= toggle_link
-
-- if layout.children.count > 0
-
-  - if session[:cms_layout_tree] && session[:cms_layout_tree].member?(layout.id.to_s)
-    = link_to_remote layout.children.count, :url => {:action => 'children', :id => layout.id, :state => 'open'}, :loading => "$('layout_#{layout.id}_children').show()", :html => {:id => "layout_#{layout.id}_link", :class => 'tree_toggle open'}
-    
-  - else
-    = link_to_remote layout.children.count, :url => {:action => 'children', :id => layout.id, :state => 'closed'}, :loading => "$('layout_#{layout.id}_children').show()", :html => {:id => "layout_#{layout.id}_link", :class => 'tree_toggle closed'}

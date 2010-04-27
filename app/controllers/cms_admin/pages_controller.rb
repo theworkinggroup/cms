@@ -15,7 +15,6 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   end
   
   def children
-    manage_session_array(:cms_page_tree, (params[:state] == 'open' ? :remove : :add), params[:id])
   end
   
   def new
@@ -32,7 +31,6 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     @cms_page.save!
     
     flash[:notice] = 'Page created'
-    manage_session_array(:cms_page_tree, :add, @cms_page.parent_id.to_s)
     redirect_to edit_cms_admin_page_path(@cms_page)
     
   rescue ActiveRecord::RecordInvalid

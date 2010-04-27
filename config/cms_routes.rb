@@ -3,8 +3,9 @@ ActionController::Routing::Routes.draw do |map|
     cms_admin.connect '/', :controller => 'pages', :action => 'index'
 
     cms_admin.resources :layouts,
+      :collection => { :reorder      => :put },
       :member => {  :children     => :any,
-                    :reorder      => :any }
+                    :toggle       => :any }
     cms_admin.resources :pages,
       :member => {  :children     => :any,
                     :form_blocks  => :any,

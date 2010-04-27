@@ -9,7 +9,7 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
   def test_get_index
     get :index
     assert_response :success
-    assert assigns(:layouts)
+    assert assigns(:cms_layouts)
   end
   
   def test_get_new
@@ -20,7 +20,7 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
   def test_get_edit
     get :edit, :id => cms_layouts(:default)
     assert_response :success
-    assert assigns(:layout)
+    assert assigns(:cms_layout)
   end
   
   def test_create
@@ -32,7 +32,7 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
         :content    => 'Test content {{ cms_block:test_block:text }}'
       }
       assert_response :redirect
-      assert_redirected_to edit_cms_admin_layout_path(assigns(:layout))
+      assert_redirected_to edit_cms_admin_layout_path(assigns(:cms_layout))
       assert_equal 'Layout created', flash[:notice]
     end
   end
@@ -46,7 +46,7 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
         :content => '{{ cms_block:completely_new_block:string }}'
       }
       assert_response :redirect
-      assert_redirected_to edit_cms_admin_layout_path(assigns(:layout))
+      assert_redirected_to edit_cms_admin_layout_path(assigns(:cms_layout))
       assert_equal 'Layout updated', flash[:notice]
       
       layout.reload

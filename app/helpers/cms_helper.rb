@@ -7,8 +7,11 @@ module CmsHelper
     ComfortableMexicanSofa::Config.cms_title || 
     [CMS_C, CMS_M, CMS_S].collect{|a| a.sort_by{rand}.first.capitalize}.join
   end
-
-  def cms_dom_id(model, type = nil)
-    (model.new_record? ? "new_#{model.object_id}" : model.id.to_s) + (type ? "_#{type}" : '')
+  
+  def tree_state(object)
+    name = object.class.name.underscore.to_sym
+    if session[name].present?
+      session[name].include?(object.id) ? '' : 'closed'
+    end
   end
 end

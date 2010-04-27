@@ -4,12 +4,13 @@ class CmsAdmin::BaseController < ActionController::Base
   
   layout 'cms_admin'
   
-  def manage_session_array(name, action, value)
-    session[name] = case action
-    when :add
-      (session[name] || []) + [value]
-    when :remove
-      (session[name] || []) - [value]
+  def save_tree_state(object)
+    name = object.class.name.underscore.to_sym
+    session[name] ||= []
+    if session[name].include?(object.id)
+      session[name].reject!{|v| v==object.id}
+    else
+      session[name] << object.id
     end
   end
   

@@ -1,39 +1,30 @@
-- container_id = tree_branch.first.try(:parent).try(:id).to_i
+- layout = tree_branch
+- children = layout.children
 
-%ul{:id => "layout_#{container_id}_branch"}
-  - tree_branch.each do |layout|
+%li[layout]{:title => 'layouts'}
+  - if children.size > 0
+    = link_to_function children.count, "", :class => "tree_toggle #{tree_state(layout)}", :title => 'Show/Hide'
+  
+  .item
+    .icon
+      - if layout.siblings.size > 0 
+        .dragger
+        
+    = link_to layout.label, edit_cms_admin_layout_path(layout), :class => 'label'
     
-    %li{:id => "layout_#{layout.id}"}
-      
-      = render :partial => 'toggle_link', :object => layout
-      
-      .item
-        .icon
-          - if layout.siblings.size > 0 
-            .dragger
-            
-        = link_to layout.label, edit_cms_admin_layout_path(layout), :class => 'label'
-        
-        %span.action_links
-          [
-          = link_to_function 'Toggle Details', "$('layout_details_#{layout.id}').toggle()"
-          |
-          - if layout.is_extendable?
-            = link_to 'Add Child Layout', new_cms_admin_layout_path + "?parent_id=#{layout.id}"
-            |
-          = link_to 'Edit', edit_cms_admin_layout_path(layout)
-          |
-          = link_to 'Remove', cms_admin_layout_path(layout), :method => 'delete', :confirm => 'Are you sure you want to remove this layout?'
-          ]
-        
-        = render :partial => 'details', :object => layout
-        
-      - if session[:cms_layout_tree] && session[:cms_layout_tree].member?(layout.id.to_s)
-        %div{:id => "layout_#{layout.id}_children"}
-          = render :partial => 'tree_branch', :object => layout.children
-      - else
-        %div{:id => "layout_#{layout.id}_children", :style => 'display: none'}
-          Please wait. I'm loading stuff...
-          
-    - if layout.siblings.size > 0         
-      = sortable_element "layout_#{container_id}_branch", :url => {:action => :reorder, :id => container_id}, :handle => 'dragger'
+    %span.action_links
+      [
+      = link_to_function 'Toggle Details', "", :class => 'details_toggle'
+      |
+      - if layout.is_extendable?
+        = link_to 'Add Child Layout', new_cms_admin_layout_path(:parent_id => layout.id)
+        |
+      = link_to 'Edit', edit_cms_admin_layout_path(layout)
+      |
+      = link_to 'Remove', cms_admin_layout_path(layout), :method => 'delete', :confirm => 'Are you sure you want to remove this layout?'
+      ]
+    = render :partial => 'details', :object => layout
+
+  - if children.size > 0
+    %ul{:id => dom_id(layout, :children), :class => "sortable #{tree_state(layout)}"}
+      = render :partial => 'tree_branch', :collection => children
