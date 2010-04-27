@@ -2,6 +2,7 @@
 .center_column
   = link_to 'Add New Page', new_cms_admin_page_path, :class => 'top_button'
 
+<<<<<<< HEAD
   %h2 Pages
   = render :partial => 'cms_admin/flash_message'
   - if (@sites)
@@ -16,5 +17,21 @@
           Default Site
         = render(:partial => 'tree_branch', :object => @cms_pages[nil])
   - else
+=======
+%h2 Pages
+
+- if (@sites)
+  - @sites.each do |site|
+    .tree_structure
+      %h3
+        = h(site.label)
+      - if (@cms_pages[site.id])
+        = render(:partial => 'tree_branch', :object => @cms_pages[site.id])
+      - else
+        %ul
+          %li.empty_state
+            No pages defined.
+  - if (@cms_pages[nil])
+>>>>>>> 7ae6e2924bc8b50dea51d64a152f9057a1961821
     .tree_structure
       = render(:partial => 'tree_branch', :object => @cms_pages)

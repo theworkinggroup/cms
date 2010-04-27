@@ -3,7 +3,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   before_filter :load_layout, :only => [:children, :edit, :update, :destroy, :reorder]
   
   def index
-    @layouts = CmsLayout.roots
+    @cms_layouts = CmsLayout.roots
   end
   
   def children
@@ -11,7 +11,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   end
   
   def new
-    @layout = CmsLayout.new(params.slice(:parent_id))
+    @cms_layout = CmsLayout.new(params.slice(:parent_id))
   end
   
   def edit
@@ -19,38 +19,38 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   end
   
   def create
-    @layout = CmsLayout.new(params[:layout])
-    @layout.save!
+    @cms_layout = CmsLayout.new(params[:cms_layout])
+    @cms_layout.save!
     
     flash[:notice] = 'Layout created'
-    manage_session_array(:cms_layout_tree, :add, @layout.parent_id.to_s)
-    redirect_to edit_cms_admin_layout_path(@layout)
+    manage_session_array(:cms_layout_tree, :add, @cms_layout.parent_id.to_s)
+    redirect_to edit_cms_admin_layout_path(@cms_layout)
     
   rescue ActiveRecord::RecordInvalid
     render :action => :new
   end
   
   def update
-    @layout.update_attributes!(params[:layout])
+    @cms_layout.update_attributes!(params[:cms_layout])
     
     flash[:notice] = 'Layout updated'
-    redirect_to edit_cms_admin_layout_path(@layout)
+    redirect_to edit_cms_admin_layout_path(@cms_layout)
     
   rescue ActiveRecord::RecordInvalid
     render :action => :edit
   end
   
   def destroy
-    @layout.destroy
+    @cms_layout.destroy
     
     flash[:notice] = 'Layout removed'
     redirect_to cms_admin_layouts_path
   end
   
   def reorder
-    if @layout
-      layout_id = @layout.id
-      find_scope = @layout.children
+    if @cms_layout
+      layout_id = @cms_layout.id
+      find_scope = @cms_layout.children
     else
       layout_id = 0
       find_scope = CmsLayout
@@ -65,7 +65,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
 protected
 
   def load_layout
-    @layout = CmsLayout.find_by_id(params[:id])
+    @cms_layout = CmsLayout.find_by_id(params[:id])
   end
   
 end
