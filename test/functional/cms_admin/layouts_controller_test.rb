@@ -9,7 +9,7 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
   def test_get_index
     get :index
     assert_response :success
-    assert assigns(:layouts)
+    assert assigns(:cms_layouts)
   end
   
   def test_get_new
@@ -20,19 +20,19 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
   def test_get_edit
     get :edit, :id => cms_layouts(:default)
     assert_response :success
-    assert assigns(:layout)
+    assert assigns(:cms_layout)
   end
   
   def test_create
     assert_difference 'CmsLayout.count' do
-      post :create, :layout => {
+      post :create, :cms_layout => {
         :label      => 'Test Layout',
         :parent_id  => '',
         :app_layout => '',
         :content    => 'Test content {{ cms_block:test_block:text }}'
       }
       assert_response :redirect
-      assert_redirected_to edit_cms_admin_layout_path(assigns(:layout))
+      assert_redirected_to edit_cms_admin_layout_path(assigns(:cms_layout))
       assert_equal 'Layout created', flash[:notice]
     end
   end
@@ -41,12 +41,12 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
     layout = cms_layouts(:default)
     
     assert_difference 'CmsBlock.count', layout.cms_pages.count do
-      put :update, :id => layout, :layout => {
+      put :update, :id => layout, :cms_layout => {
         :label => 'New Test Label',
         :content => '{{ cms_block:completely_new_block:string }}'
       }
       assert_response :redirect
-      assert_redirected_to edit_cms_admin_layout_path(assigns(:layout))
+      assert_redirected_to edit_cms_admin_layout_path(assigns(:cms_layout))
       assert_equal 'Layout updated', flash[:notice]
       
       layout.reload

@@ -1,1 +1,2 @@
-= render(:partial => 'form')
+- form_for @cms_page, :url => cms_admin_page_path(@cms_page) do |form|
+  = render :partial => 'form', :locals => {:f => form }

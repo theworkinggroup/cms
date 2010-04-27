@@ -1,10 +1,2 @@
-= link_to 'Add New Layout', new_cms_admin_layout_path, :class => 'top_button'
-
-%h2 Editing Layout
-= render :partial => 'cms_admin/flash_message'
 - form_for @cms_layout, :url => cms_admin_layout_path(@cms_layout) do |form|
-  = render :partial => form
-  .submit
-    = form.submit 'Edit Layout'
-    or 
-    = link_to 'Return to List', cms_admin_layouts_path
+  = render :partial => 'form', :locals => {:f => form}
