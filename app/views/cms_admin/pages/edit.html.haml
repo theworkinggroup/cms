@@ -1,11 +1,2 @@
-= link_to 'Add New Page', new_cms_admin_page_path, :class => 'big_button'
-
-%h2 Editing Page
-
 - form_for @cms_page, :url => cms_admin_page_path(@cms_page) do |form|
-  = render :partial => form
-  .submit
-    = form.submit 'Edit Page', :onclick => 'this.form.target = ""'
-    = form.submit 'Preview Page', :onclick => 'this.form.target = "_blank"', :name => 'preview'
-    or 
-    = link_to 'Return to List', cms_admin_pages_path
+  = render :partial => 'form', :locals => {:f => form }

@@ -1,8 +1,2 @@
-%h2 New Snippet
-
-- form_for :snippet, :url => {:action => :create } do |form|
-  = render :partial => form
-  .submit
-    = form.submit 'Create Snippet'
-    or 
-    = link_to 'Return to List', cms_admin_snippets_path
+- form_for :cms_snippet, :url => {:action => :create } do |form|
+  = render :partial => 'form', :locals => {:f => form}

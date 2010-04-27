@@ -1,14 +1,21 @@
-= form.error_messages
+.right_column
+.center_column
+  %h2= @site.new_record? ? "New Site" : "Editing \"#{@site.label}\""
+  = render :partial => 'cms_admin/flash_message'
+  = f.error_messages
+  .form_element_group.horizontal
+    .form_element.text.large
+      .label
+        = f.label(:label, 'Title')
+      .field
+        = f.text_field(:label)
 
-.form_element_group.horizontal
-  .form_element.text.large
-    .label
-      = form.label(:label, 'Title')
-    .field
-      = form.text_field(:label)
-
-  .form_element
-    .label
-      = form.label(:hostname, 'Hostname')
-    .field.narrow
-      = form.text_field(:hostname)
+    .form_element
+      .label
+        = f.label(:hostname, 'Hostname')
+      .field.narrow
+        = f.text_field(:hostname)
+  .submit
+    = f.submit 'Save All Changes', :onclick => 'this.f.target = ""'
+    or 
+    = link_to 'Return to List', cms_admin_sites_path

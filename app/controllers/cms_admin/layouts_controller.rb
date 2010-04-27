@@ -24,8 +24,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
     @cms_layout.save!
     
     flash[:notice] = 'Layout created'
-    redirect_to edit_cms_admin_layout_path(@cms_layout)
-    
+    redirect_to edit_cms_admin_layout_path(@cms_layout)    
   rescue ActiveRecord::RecordInvalid
     render :action => :new
   end

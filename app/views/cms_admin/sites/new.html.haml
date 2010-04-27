@@ -1,8 +1,2 @@
-%h2 New Site
-
 - form_for(@site, :url => {:action => :create }) do |form|
-  = render(:partial => form)
-  .submit
-    = form.submit 'Create Site'
-    or 
-    = link_to('Return to List', cms_admin_sites_path)
+  = render :partial => 'form', :locals => {:f => form}
