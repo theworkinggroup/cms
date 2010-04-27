@@ -40,6 +40,11 @@ class CmsGenerator < Rails::Generator::Base
         icon_regular.gif
         icon_snippet.gif
         logo.png
+        bg-button-green-34.gif
+        body-background.gif
+        left-background.gif
+        logo-test.gif
+        right-background.gif
       ).each do |f|
         m.file "images/#{f}", "public/images/cms/#{f}", :collision => :ask
       end
