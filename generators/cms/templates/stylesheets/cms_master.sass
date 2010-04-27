@@ -213,82 +213,84 @@ body
         border-radius: 7px 0px 0px 7px
 
 // ----------------------------------------------------------- Tree Structure
-.tree_structure
+ul.closed
+  display: none
+  
+ul.tree_structure
   background-color: #fff
   padding: 25px
   margin-top: 15px
-  ul
-    li
-      margin-left: 25px
-      border-top: 1px solid #eee
+  li
+    margin-left: 25px
+    border-top: 1px solid #eee
+  
+  a.tree_toggle
+    margin-top: 5px
+    width: 20px
+    height: 28px
+    float: left
+    margin-left: -35px
+    font: bold 14px/25px Arial, sans-serif
+    background: url(/images/cms/arrow_bottom.gif) right center no-repeat
+    padding-right: 15px
+    color: #ccc
+    text-align: right
+    text-decoration: none
+  a.tree_toggle.closed
+    background-image: url(/images/cms/arrow_right.gif)
+  a.tree_toggle:hover
+    border: 0px
+    color: #000
     
-    a.tree_toggle
-      margin-top: 5px
-      width: 20px
-      height: 28px
-      float: left
-      margin-left: -35px
-      font: bold 14px/25px Arial, sans-serif
-      background: url(/images/cms/arrow_bottom.gif) right center no-repeat
-      padding-right: 15px
-      color: #ccc
-      text-align: right
+  .item
+    padding: 7px 0px 7px 35px
+    overflow: hidden
+    
+    a
+      color: #26A9E0
       text-decoration: none
-    a.tree_toggle.closed
-      background-image: url(/images/cms/arrow_right.gif)
-    a.tree_toggle:hover
-      border: 0px
-      color: #000
-      
-    .item
-      padding: 7px 0px 7px 35px
-      overflow: hidden
-      
-      a
-        color: #26A9E0
-        text-decoration: none
 
-      a:hover
-        text-decoration: none
-        border-bottom: 1px dotted #26A9E0
-      
-      .icon
-        margin-left: -30px
-        float: left
+    a:hover
+      text-decoration: none
+      border-bottom: 1px dotted #26A9E0
+    
+    .icon
+      margin-left: -30px
+      float: left
+      width: 28px
+      height: 28px
+      background: url(/images/cms/icon_draft.gif)
+      .dragger
         width: 28px
         height: 28px
-        background: url(/images/cms/icon_draft.gif)
-        .dragger
-          width: 28px
-          height: 28px
-          cursor: move
-        .dragger:hover
-          background: url(/images/cms/icon_move.gif)
+        cursor: move
+      .dragger:hover
+        background: url(/images/cms/icon_move.gif)
+    
+    a.label
+      font-size: 14px
+      color: #000
+    a.label:hover
+      border-bottom: 1px dotted #000
+    .url
+      font-size: 10px
       
-      a.label
-        font-size: 14px
-        color: #000
-      a.label:hover
-        border-bottom: 1px dotted #000
-      .url
-        font-size: 10px
-        
-      .action_links
-        visibility: hidden
-        font-size: 10px
-        
-      table.details
-        font-size: 10px
-        margin: 5px 15px
-        border-left: 3px solid #ccc
-        th
-          padding: 0px 5px 0px 10px
-          font-weight: normal
-        
-    .item:hover
-      background-color: #ebf5fc
-      .action_links
-        visibility: visible
+    .action_links
+      visibility: hidden
+      font-size: 10px
+      
+    table.details
+      font-size: 10px
+      margin: 5px 15px
+      border-left: 3px solid #ccc
+      th
+        padding: 0px 5px 0px 10px
+        font-weight: normal
+      
+  .item:hover
+    background-color: #ebf5fc
+    .action_links
+      visibility: visible
 
 // ---------------------------------------------------------- Formatted Table
 table.formatted
