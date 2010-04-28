@@ -20,15 +20,10 @@ class CmsAdmin::BaseController < ActionController::Base
     end
   end
   
-  def rte_installed?
-    File.exists?(File.expand_path("public/javascripts/ckeditor/ckeditor.js", Rails.root))
+  def js_helper_installed?(name, library = nil)
+    File.exists?(File.expand_path("public/javascripts/#{name}/#{library||name}.js", Rails.root))
   end
-  helper_method :rte_installed?
-  
-  def codemirror_installed?
-    File.exists?(File.expand_path("public/javascripts/codemirror/codemirror.js", Rails.root))
-  end
-  helper_method :codemirror_installed?
+  helper_method :js_helper_installed?
   
 protected
 
