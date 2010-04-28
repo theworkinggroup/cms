@@ -23,5 +23,5 @@ Be sure to check out config/initializers/cms.rb for configuration options!
 Some other things you may want to install if you want some fancy textarea
 replacements:
 
-TinyMCE Editor - http://tinymce.moxiecode.com/
+CKEditor Editor - http://ckeditor.com/
 CodeMirror - http://marijn.haverbeke.nl/codemirror/

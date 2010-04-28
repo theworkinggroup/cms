@@ -12,6 +12,13 @@ module CmsHelper
     name = object.class.name.underscore.to_sym
     if session[name].present?
       session[name].include?(object.id) ? '' : 'closed'
+    else
+      'closed'
     end
   end
+  
+  def link_to_toggle(object, children_count)
+    link_to_function(children_count, "", :class => ['tree_toggle', tree_state(object)].join(' '), :title => 'Expand/Collapse', :onclick => "object_id = '#{object.id}'")
+  end
+  
 end

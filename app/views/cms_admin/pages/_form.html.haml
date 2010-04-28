@@ -16,11 +16,11 @@
   .form_element_group.vertical
     .form_element.text
       .label= f.label :label, 'Title'
-      .field= f.text_field :label, :onkeyup => (@cms_page.new_record? ? "slugify_field($('cms_page_slug'), this.value)" : nil)
+      .field= f.text_field :label, :id => (@cms_page.new_record? ? "slugify" : nil)
     - unless CmsPage.count == 0 || @cms_page == CmsPage.root
       .form_element.text
         .label= f.label :slug, 'Slug'
-        .field= f.text_field :slug
+        .field= f.text_field :slug, :id => 'slug'
         
   .form_element_group.vertical
     - unless CmsPage.count == 0 || @cms_page == CmsPage.root
@@ -34,11 +34,11 @@
       
     .form_element.select
       .label= f.label :cms_layout_id, 'Layout'
-      .field= f.select :cms_layout_id, CmsLayout.options_for_select, {}, :onchange => remote_function(:url => {:action => :form_blocks, :id => (@cms_page.try(:id) || 0)}, :with => "'layout_id=' + value")
+      .field= f.select :cms_layout_id, CmsLayout.options_for_select, {}, :onchange => "page_id = #{(@cms_page.try(:id) || 0)}"
   #form_blocks
     = render :partial => 'form_blocks'
   .submit
-    = f.submit 'Save All Changes', :onclick => 'this.f.target = ""'
-    = f.submit 'Preview Page', :onclick => 'this.f.target = "_blank"', :name => 'preview'
+    = f.submit 'Save All Changes', :id => 'save'
+    = f.submit 'Preview Page', :id => 'preview', :name => 'preview'
     or 
     = link_to 'Return to List', cms_admin_pages_path

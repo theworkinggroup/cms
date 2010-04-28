@@ -1,10 +1,10 @@
 - layout = tree_branch
 - children = layout.children
 
-%li[layout]{:title => 'layouts'}
+%li[layout]
   - if children.size > 0
-    = link_to_function children.count, "", :class => "tree_toggle #{tree_state(layout)}", :title => 'Show/Hide'
-  
+    = link_to_toggle(layout, children.size)
+    
   .item
     .icon
       - if layout.siblings.size > 0 

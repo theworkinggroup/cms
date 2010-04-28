@@ -39,7 +39,6 @@ class CmsGenerator < Rails::Generator::Base
         icon_move.gif
         icon_regular.gif
         icon_snippet.gif
-        logo.png
         bg-button-green-34.gif
         body-background.gif
         left-background.gif

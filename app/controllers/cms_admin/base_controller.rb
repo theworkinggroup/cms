@@ -4,13 +4,19 @@ class CmsAdmin::BaseController < ActionController::Base
   
   layout 'cms_admin'
   
+  def index
+    # the jQuery in utilities.js uses the current path to define the scope (i.e: layouts vs. pages).
+    # So having /cms-admin as a path for pages will break the js.
+    redirect_to cms_admin_pages_path
+  end
+  
   def save_tree_state(object)
     name = object.class.name.underscore.to_sym
     session[name] ||= []
-    if session[name].include?(object.id)
-      session[name].reject!{|v| v==object.id}
+    session[name] = if session[name].include?(object.id)
+      session[name] - [object.id]
     else
-      session[name] << object.id
+      session[name] + [object.id]
     end
   end
   

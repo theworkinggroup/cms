@@ -126,4 +126,13 @@ class CmsAdmin::PagesControllerTest < ActionController::TestCase
     end
   end
   
+  def test_toggle
+    assert !session[:cms_page]
+    # Expand
+    post :toggle, :id => cms_pages(:default)
+    assert session[:cms_page].include?(cms_pages(:default).id)
+    # Collapse
+    post :toggle, :id => cms_pages(:default)
+    assert !session[:cms_page].include?(cms_pages(:default).id)
+  end
 end
