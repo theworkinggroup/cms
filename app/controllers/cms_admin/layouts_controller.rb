@@ -1,6 +1,5 @@
 class CmsAdmin::LayoutsController < CmsAdmin::BaseController
-  
-  before_filter :load_layout, :only => [:children, :edit, :update, :destroy, :reorder]
+  before_filter :load_layout, :only => [ :children, :edit, :update, :destroy, :reorder ]
   
   def index
     @cms_layouts = CmsLayout.roots
@@ -63,9 +62,7 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   end
   
 protected
-
   def load_layout
     @cms_layout = CmsLayout.find_by_id(params[:id])
   end
-  
 end
