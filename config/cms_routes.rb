@@ -1,14 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
   map.namespace :cms_admin, :path_prefix => 'cms-admin' do |cms_admin|
-    cms_admin.connect '/', :controller => 'pages', :action => 'index'
+    cms_admin.connect '/', :controller => 'base', :action => 'index'
 
     cms_admin.resources :layouts,
+      :collection => { :reorder      => :put },
       :member => {  :children     => :any,
-                    :reorder      => :any }
+                    :toggle       => :any }
     cms_admin.resources :pages,
-      :member => {  :children     => :any,
-                    :form_blocks  => :any,
-                    :reorder      => :any }
+    :collection => { :reorder      => :put },
+      :member => {  :toggle       => :any,
+                    :form_blocks  => :any }
+                    
     cms_admin.resources :snippets,
       :collection => { :reorder   => :any }
     cms_admin.resources :sites

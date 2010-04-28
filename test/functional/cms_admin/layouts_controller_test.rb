@@ -74,4 +74,14 @@ class CmsAdmin::LayoutsControllerTest < ActionController::TestCase
       end
     end
   end
+  
+  def test_toggle
+    assert !session[:cms_layout]
+    # Expand
+    post :toggle, :id => cms_layouts(:default)
+    assert session[:cms_layout].include?(cms_layouts(:default).id)
+    # Collapse
+    post :toggle, :id => cms_layouts(:default)
+    assert !session[:cms_layout].include?(cms_layouts(:default).id)
+  end
 end

@@ -2,7 +2,7 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   
   include CmsCommon::RenderPage
   
-  before_filter :load_page, :only => [:children, :edit, :update, :destroy, :reorder]
+  before_filter :load_page, :only => [:toggle, :edit, :update, :destroy, :reorder]
   before_filter :build_page, :only => [ :new, :create ]
   
   def index
@@ -14,8 +14,9 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     end
   end
   
-  def children
-    manage_session_array(:cms_page_tree, (params[:state] == 'open' ? :remove : :add), params[:id])
+  def toggle
+    save_tree_state(@cms_page)
+    render :nothing => true
   end
   
   def new
@@ -32,7 +33,6 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
     @cms_page.save!
     
     flash[:notice] = 'Page created'
-    manage_session_array(:cms_page_tree, :add, @cms_page.parent_id.to_s)
     redirect_to edit_cms_admin_page_path(@cms_page)
     
   rescue ActiveRecord::RecordInvalid
@@ -66,8 +66,8 @@ class CmsAdmin::PagesController < CmsAdmin::BaseController
   end
   
   def reorder
-    params["page_#{@cms_page.id}_branch"].each_with_index do |id, position|
-      @cms_page.children.find(id).update_attribute(:position, position)
+    params[:cms_page].each_with_index do |id, index|
+      CmsPage.update_all(['position = %d', index], ['id = %d', id])
     end
     render :nothing => true
   end

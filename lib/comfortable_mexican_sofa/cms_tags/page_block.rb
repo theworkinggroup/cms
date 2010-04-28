@@ -15,7 +15,7 @@ class CmsTag::PageBlock < CmsTag::Tag
       :form_output  => lambda { |tag| 
         tag.view.text_area_tag "cms_page[blocks][#{tag.label}][content_text]", tag.content,
           :rows   => 20, 
-          :class  => 'mceEditor'
+          :class  => 'richText'
       }
     },
     :code => {
