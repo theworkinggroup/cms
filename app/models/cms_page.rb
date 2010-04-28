@@ -49,6 +49,8 @@ class CmsPage < ActiveRecord::Base
   default_scope :order => 'position ASC'
   named_scope :published,
     :conditions => { :published => true }
+  named_scope :nav_visible,
+    :conditions => { :excluded_from_nav => false }
     
   # -- Class Methods --------------------------------------------------------
 
