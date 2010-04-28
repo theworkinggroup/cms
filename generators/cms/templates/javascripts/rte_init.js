@@ -9,7 +9,7 @@ function config_toolbars() {
   ])
 }
 
-$(document).ready(function() { 
+function init_RTE() {
   if(typeof $('textarea.richText').ckeditor == 'function') { 
     config_toolbars();
     $('textarea.richText').ckeditor( function() { /* callbacks */ }, {
@@ -18,4 +18,8 @@ $(document).ready(function() {
       toolbar_CmsFull: cms_full_toolbars
     });
   }
+}
+
+$(document).ready(function() { 
+  init_RTE();
 });

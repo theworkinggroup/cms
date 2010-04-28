@@ -3,7 +3,7 @@
 
 - #use these to see if we need to re-initiliaze CodeMirror or TinyMCE.
 - init_codemirror = false
-- init_tinymce = false
+- init_rte = false
 
 - unless tags.blank?
 
@@ -13,7 +13,7 @@
 
         - #check the format to see if it needs JS initialization.
         - init_codemirror = true if tag.format == 'code'
-        - init_tinymce = true if tag.format == 'rich_text'
+        - init_rte = true if tag.format == 'rich_text'
         
         .form_element{:class => tag.format}
           .label= tag.form_label
@@ -26,7 +26,7 @@
         
         - #check the format to see if it needs JS initialization.
         - init_codemirror = true if tag.format == 'code'
-        - init_tinymce = true if tag.format == 'rich_text'
+        - init_rte = true if tag.format == 'rich_text'
         
         .form_element{:class => tag.format}
           .label= tag.form_label
@@ -43,6 +43,6 @@
 - if init_codemirror && request.xhr?
   :javascript
     init_CodeMirror();
-- if init_tinymce && request.xhr?
+- if init_rte && request.xhr?
   :javascript
-    init_TinyMCE();
+    init_RTE();
