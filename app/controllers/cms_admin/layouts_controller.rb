@@ -1,6 +1,6 @@
 class CmsAdmin::LayoutsController < CmsAdmin::BaseController
-  
   before_filter :load_layout, :only => [:toggle, :edit, :update, :destroy]
+  before_filter :build_layout, :only => [ :new, :create ]
   
   def index
     @cms_layouts = CmsLayout.roots
@@ -12,21 +12,19 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
   end
   
   def new
-    @cms_layout = CmsLayout.new(params.slice(:parent_id))
-  end
-  
-  def edit
-    # ...
   end
   
   def create
-    @cms_layout = CmsLayout.new(params[:cms_layout])
     @cms_layout.save!
     
     flash[:notice] = 'Layout created'
     redirect_to edit_cms_admin_layout_path(@cms_layout)    
   rescue ActiveRecord::RecordInvalid
     render :action => :new
+  end
+  
+  def edit
+    # ...
   end
   
   def update
@@ -50,13 +48,21 @@ class CmsAdmin::LayoutsController < CmsAdmin::BaseController
     params[:cms_layout].each_with_index do |id, index|
       CmsLayout.update_all(['position = %d', index], ['id = %d', id])
     end
+
     render :nothing => true
   end
   
 protected
+  def build_layout
+    params[:cms_layout] ||= {
+      :parent_id => params[:parent_id],
+      :content => '{{cms_page_block:default:text}}'
+    }
+    
+    @cms_layout = CmsLayout.new(params[:cms_layout])
+  end
 
   def load_layout
     @cms_layout = CmsLayout.find_by_id(params[:id])
   end
-  
 end

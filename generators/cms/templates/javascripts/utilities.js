@@ -1,8 +1,3 @@
-function slugify_field(field, value) {
-  field.value = slugify(value)
-}
-
-// slugify was found at http://dense13.com/blog/2009/05/03/converting-string-to-slug-javascript
 function slugify(str) {
   str = str.replace(/^\s+|\s+$/g, '');
   var from = "ÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛàáäâèéëêìíïîòóöôùúüûÑñÇç·/_,:;";
@@ -15,27 +10,47 @@ function slugify(str) {
 }
 
 $(document).ready(function() {
-
+  current_path = window.location.pathname
+  
   // Expand/Collapse tree function
-  $('.tree_toggle').bind('click', function() {
+  $('a.tree_toggle').bind('click.cms', function() {
     $(this).siblings('ul').toggle();
     $(this).toggleClass('closed');
-    element_id = $(this).parent().attr('id').split('_')[2];
-    element_type = $(this).parent().attr('title');
-    $.ajax({url: ['/cms-admin', element_type, element_id, 'toggle'].join('/')});
+    // oject_id are set in the helper (check cms_helper.rb)
+    $.ajax({url: [current_path, object_id, 'toggle'].join('/')});
   })
   
   // Show/hide details
-  $('.details_toggle').bind('click', function() {
+  $('a.details_toggle').bind('click.cms', function() {
     $(this).parent().siblings('table.details').toggle();
   })
 
   // Sortable trees
-  $('.sortable').each(function(){
+  $('ul.sortable').each(function(){
     $(this).sortable({  handle: 'div.dragger', 
                         update: function() {
-                          $.post('/cms-admin/layouts/reorder', '_method=put&'+$(this).sortable('serialize'));
+                          $.post(current_path + '/reorder', '_method=put&'+$(this).sortable('serialize'));
                         } 
     })
   })
+  
+  // Slugify fields
+  $('input#slugify').bind('keyup.cms', function() {
+    $('input#slug').val(slugify($(this).val()))
+  })
+  
+  // Setting form targets
+  $('input#save').bind('click.cms', function() {
+    $(this).form().target('')
+  })
+  
+  $('input#preview').bind('click.cms', function() {
+    $(this).form().target('_blank')
+  })
+  
+  $('select#cms_page_cms_layout_id').bind('change.cms', function() {
+    // page_id is set in the view
+    $.ajax({url: [current_path, page_id, 'form_blocks'].join('/'), data: ({ layout_id: $(this).val()})})
+  })
+  
 });
