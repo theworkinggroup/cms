@@ -30,7 +30,8 @@ class CmsLayout < ActiveRecord::Base
     create({
       :label => "Default Layout",
       :app_layout => "application",
-      :content => "{{cms_page_block:default:code}}"
+      :content => "{{cms_page_block:default:code}}",
+      :is_extendable => true
     }.merge(options))
   end
 

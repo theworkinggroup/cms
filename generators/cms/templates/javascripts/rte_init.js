@@ -10,10 +10,12 @@ function config_toolbars() {
 }
 
 $(document).ready(function() { 
-  config_toolbars();
-  $('textarea.richText').ckeditor( function() { /* callbacks */ }, {
-    toolbar: 'CmsFull',
-    toolbar_CmsBasic: cms_basic_toolbars,
-    toolbar_CmsFull: cms_full_toolbars
-  });
+  if(typeof $('textarea.richText').ckeditor == 'function') { 
+    config_toolbars();
+    $('textarea.richText').ckeditor( function() { /* callbacks */ }, {
+      toolbar: 'CmsFull',
+      toolbar_CmsBasic: cms_basic_toolbars,
+      toolbar_CmsFull: cms_full_toolbars
+    });
+  }
 });

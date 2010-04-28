@@ -49,8 +49,7 @@ $(document).ready(function() {
   })
   
   $('select#cms_page_cms_layout_id').bind('change.cms', function() {
-    // page_id is set in the view
-    $.ajax({url: [current_path, page_id, 'form_blocks'].join('/'), data: ({ layout_id: $(this).val()})})
+    $.ajax({url: [current_path.replace('/edit', ''), 'form_blocks'].join('/'), data: ({ layout_id: $(this).val()})})
   })
   
 });

@@ -34,7 +34,7 @@
       
     .form_element.select
       .label= f.label :cms_layout_id, 'Layout'
-      .field= f.select :cms_layout_id, CmsLayout.options_for_select, {}, :onchange => "page_id = #{(@cms_page.try(:id) || 0)}"
+      .field= f.select :cms_layout_id, CmsLayout.options_for_select, {}
   #form_blocks
     = render :partial => 'form_blocks'
   .submit
