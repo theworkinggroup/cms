@@ -10,8 +10,9 @@
     .content_wrapper
       .left_column
         .header
-          %h1= application_name
-          = link_to image_tag('/images/cms/logo-test.gif'), '/cms-admin'
+          %h1
+            = h(application_name)
+          = link_to(image_tag(ComfortableMexicanSofa::Config.logo_path), cms_admin_pages_path)
           
         %ul.primary
           - if (ComfortableMexicanSofa::Config.multiple_sites)
