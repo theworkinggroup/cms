@@ -28,10 +28,7 @@ table
   border-spacing: 0
 caption, th
   text-align: left
-  
-html, body
-  height: 100%
-  
+
 // --------------------------------------------------------------- Typography
 body
   font: 13px Arial, Verdana, clean, sans-serif
@@ -114,13 +111,13 @@ a.top_button:hover
   margin-bottom: 15px
   
 // ---------------------------------------------------------------- Structure
+
 body
-  background-color: #fff
+  background: #fff url('/images/cms/background.png') top left repeat-y
   .content_wrapper
+    width: 1195px
     .left_column
-      background: #fff url('/images/cms/left-background.gif') top right repeat-y
-      width: 200px 
-      padding: 5px 0px 5px 5px
+      width: 205px 
       float: left
       .header
         text-align: center
@@ -129,8 +126,7 @@ body
         h1
           padding: 0px
           margin: 0px
-          font-size: 0px
-          line-height: 0px
+          display: none
         a
           font-size: 0px
           line-height: 0px
@@ -138,8 +134,8 @@ body
           text-decoration: none
       
     .content_column
-      overflow: hidden
-      height: 100%
+      width: 990px
+      float: left
       .flash.notice
         padding: 10px
         text-align: center
@@ -147,13 +143,10 @@ body
         color: #fff
         margin-bottom: 15px
         font-size: 16px
-      form
-        height: 100%
       .center_column
-        height: 100%
-        background: #fff url('/images/cms/body-background.gif') top left
         padding: 30px
-        margin-right: 30%
+        float: left
+        width: 680px
         #form_blocks
           float: left
           width: 100%
@@ -164,10 +157,7 @@ body
             letter-spacing: 0px
       .right_column
         float: right
-        overflow: hidden
-        width: 30%
-        height: 100%
-        background: #fff url('/images/cms/right-background.gif') top left repeat-y
+        width: 250px
         .form_element_group
           padding: 30px 20px 20px 20px
         .form_element_group + .form_element_group
@@ -179,6 +169,7 @@ body
           margin-bottom: 10px
           
   .footer
+    display: none
     padding: 15px
     color: #fff
     a
@@ -186,10 +177,7 @@ body
     
 // -------------------------------------------------------------- Left Column
 .left_column
-  height: 100%
   ul
-    -moz-border-radius-topleft: 4px
-    -moz-border-radius-bottomleft: 4px
     margin-bottom: 5px
     padding: 5px 0px
     li
@@ -206,9 +194,11 @@ body
         color: #fff
         height: 34px
         background-color: #231F20
-        -moz-border-radius: 7px 0px 0px 7px
-        -webkit-border-radius: 7px 0px 0px 7px
         border-radius: 7px 0px 0px 7px
+        -moz-border-radius: 7px 0px 0px 7px
+        -webkit-border-top-left-radius: 7px
+        -webkit-border-bottom-left-radius: 7px
+        
 
 // ----------------------------------------------------------- Tree Structure
 ul.closed
@@ -362,7 +352,6 @@ table.formatted
   
 .form_element_group.vertical
   float: left
-  width: 50%
   .label
     text-align: right
     width: 40px
@@ -386,13 +375,6 @@ table.formatted
   .form_element .field
     input
       width: 200px
-        
-.form_right_column
-  float: right
-  overflow: hidden
-  width: 30%
-  height: 100%
-  background: #fff url('/images/cms/right-background.gif') top left repeat-y
 
 .submit
   float: left
