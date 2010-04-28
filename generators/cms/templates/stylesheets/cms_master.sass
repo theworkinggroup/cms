@@ -126,8 +126,7 @@ body
         h1
           padding: 0px
           margin: 0px
-          font-size: 0px
-          line-height: 0px
+          display: none
         a
           font-size: 0px
           line-height: 0px
@@ -179,8 +178,6 @@ body
 // -------------------------------------------------------------- Left Column
 .left_column
   ul
-    -moz-border-radius-topleft: 4px
-    -moz-border-radius-bottomleft: 4px
     margin-bottom: 5px
     padding: 5px 0px
     li
@@ -197,9 +194,11 @@ body
         color: #fff
         height: 34px
         background-color: #231F20
-        -moz-border-radius: 7px 0px 0px 7px
-        -webkit-border-radius: 7px 0px 0px 7px
         border-radius: 7px 0px 0px 7px
+        -moz-border-radius: 7px 0px 0px 7px
+        -webkit-border-top-left-radius: 7px
+        -webkit-border-bottom-left-radius: 7px
+        
 
 // ----------------------------------------------------------- Tree Structure
 .tree_structure
