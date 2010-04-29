@@ -20,6 +20,11 @@ class CmsAdmin::BaseController < ActionController::Base
     end
   end
   
+  def js_helper_installed?(name, library = nil)
+    File.exists?(File.expand_path("public/javascripts/#{name}/#{library||name}.js", Rails.root))
+  end
+  helper_method :js_helper_installed?
+  
 protected
 
   def authenticate

@@ -41,11 +41,11 @@ $(document).ready(function() {
   
   // Setting form targets
   $('input#save').bind('click.cms', function() {
-    $(this).form().target('')
+    $(this).parents('form:first').attr('target', '')
   })
   
   $('input#preview').bind('click.cms', function() {
-    $(this).form().target('_blank')
+    $(this).parents('form:first').attr('target', '_blank')
   })
   
   $('select#cms_page_cms_layout_id').bind('change.cms', function() {
