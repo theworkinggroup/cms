@@ -4,5 +4,9 @@
 
   %h2 Sites
   = render :partial => 'cms_admin/flash_message'
-  .tree_structure
-    = render(:partial => 'site', :object => @sites)
+  %ul.tree_structure
+    - if @sites.blank?
+      %li No Sites Defined
+    - else
+      = render(:partial => 'site', :collection => @sites)
+    
