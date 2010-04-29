@@ -32,10 +32,8 @@
     .form_element_group{:class => type.to_s}
     - tags.each do |tag|
       .form_element
-        .label
-          = tag.form_label
-        .value
-          = tag.form_input
+        .label= tag.form_label
+        .value= tag.form_input
 
 - if init_codemirror && request.xhr?
   :javascript
