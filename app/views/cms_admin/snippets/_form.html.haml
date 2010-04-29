@@ -4,13 +4,8 @@
   = render :partial => 'cms_admin/flash_message'
   = f.error_messages
   .form_element_group.horizontal
-    .form_element.text.large
-      .label= f.label :label, 'Label'
-      .field= f.text_field :label
-
-    .form_element.text_area
-      .label= f.label :content, 'Content'
-      .field= f.text_area :content
+    = f.text_field :label, :label => "Snippet Name"
+    = f.text_area :content
   .submit
     = f.submit 'Save All Changes', :onclick => 'this.f.target = ""'
     or 

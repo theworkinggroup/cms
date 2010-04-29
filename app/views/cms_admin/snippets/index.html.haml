@@ -4,11 +4,7 @@
 
   %h2 Snippets
   = render :partial => 'cms_admin/flash_message'
-  %table.formatted
-    %tr
-      %th.first{:colspan => 2} Snippet Label
-      %th.last
-  
+  %table.formatted  
     - @cms_snippets.each do |snippet|
       %tr
         %td
@@ -18,6 +14,5 @@
           %br/
           = link_to snippet.label, edit_cms_admin_snippet_path(snippet), :class => 'slug'
         %td.action_links
-          = link_to 'Edit', edit_cms_admin_snippet_path(snippet)
-          |
-          = link_to 'Remove', cms_admin_snippet_path(snippet), :method => 'delete', :confirm => 'Are you sure you want to remove this snippet?'
+          = link_to 'Edit', edit_cms_admin_snippet_path(snippet), :class => 'button'
+          = link_to 'Remove', cms_admin_snippet_path(snippet), :class => 'button', :method => 'delete', :confirm => 'Are you sure you want to remove this snippet?'
