@@ -35,6 +35,8 @@
     .form_element.select
       .label= f.label :cms_layout_id, 'Layout'
       .field= f.select :cms_layout_id, CmsLayout.options_for_select, {}
+      :javascript
+        page_id = #{@cms_page.new_record? ? 0 : @cms_page.id}
   #form_blocks
     = render :partial => 'form_blocks'
   .submit

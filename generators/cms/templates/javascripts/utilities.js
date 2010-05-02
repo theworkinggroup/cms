@@ -49,7 +49,11 @@ $(document).ready(function() {
   })
   
   $('select#cms_page_cms_layout_id').bind('change.cms', function() {
-    $.ajax({url: [current_path.replace('/edit', ''), 'form_blocks'].join('/'), data: ({ layout_id: $(this).val()})})
+    // Remove all existing ckeditor instances first
+    try { 
+      $('textarea.richText').ckeditorGet().destroy(); } 
+    catch(e) {}
+    $.ajax({url: ['/cms-admin/pages', page_id, 'form_blocks'].join('/'), data: ({ layout_id: $(this).val()})})
   })
   
 });

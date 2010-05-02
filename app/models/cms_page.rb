@@ -1,4 +1,13 @@
 class CmsPage < ActiveRecord::Base
+  
+  def initialize(options = {})
+    super(options)
+    # Set default page layout
+    if self.cms_layout.blank?
+      self.cms_layout = self.parent ? self.parent.cms_layout : CmsLayout.first
+    end
+  end
+  
   # -- Properties -----------------------------------------------------------
   
   attr_accessor :rendered_content

@@ -36,9 +36,7 @@ class CmsLayout < ActiveRecord::Base
   end
 
   def self.options_for_select
-    # REFACTOR: This loads all the BLOB fields, too, when only the
-    #           two columns are required.
-    [ [ '---', nil ] ] + CmsLayout.all.collect { |l| [ l.label, l.id ] }
+    CmsLayout.all(:select => 'id, label').collect { |l| [ l.label, l.id ] }
   end
   
   def self.app_layouts_for_select
