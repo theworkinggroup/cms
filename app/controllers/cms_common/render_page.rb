@@ -1,5 +1,6 @@
 module CmsCommon::RenderPage
   def render_page(options = { })
+    # REFACTOR AND CLEANUP REQUIRED
     @cms_page_preview_mode = options[:preview]
     
     # Rendering 404 page

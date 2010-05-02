@@ -56,4 +56,8 @@ $(document).ready(function() {
     $.ajax({url: ['/cms-admin/pages', page_id, 'form_blocks'].join('/'), data: ({ layout_id: $(this).val()})})
   })
   
+  $('a#more_options').bind('click.cms', function() {
+    $('.advanced').toggle();
+  })
+  
 });

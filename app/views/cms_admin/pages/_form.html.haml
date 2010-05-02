@@ -21,8 +21,11 @@
       .form_element.text
         .label= f.label :slug, 'Slug'
         .field= f.text_field :slug, :id => 'slug'
-        
-  .form_element_group.vertical
+    .form_element
+      .label
+      .field= link_to_function 'More options &raquo;', '', :id => 'more_options'
+      
+  .form_element_group.vertical.advanced
     - unless CmsPage.count == 0 || @cms_page == CmsPage.root
       .form_element.select
         .label= f.label :parent_id, 'Parent Page'
