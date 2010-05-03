@@ -45,7 +45,10 @@ pre, code
 p
   font: 12px/15px Arial, sans-serif
   color: #000
-  
+
+h1, h2, h3
+  margin: 0.8em 0em
+
 h2
   font: bold 25px/30px Arial, sans-serif
   color: #000
@@ -55,6 +58,15 @@ h3
   color: #000
   
 // ------------------------------------------------------------------- Common
+
+a
+  color: #26A9E0
+  text-decoration: none
+
+a:hover
+  text-decoration: none
+  border-bottom: 1px dotted #26A9E0
+
 a.button
   -moz-border-radius: 5px
   -webkit-border-radius: 5px
@@ -67,6 +79,7 @@ a.button
   
 a.button:hover
   background-color: #629700
+  border: 0px
   
 a.big_button
   float: left
@@ -82,7 +95,8 @@ a.big_button
   
 a.big_button:hover
   background-position: 0 -34px
-
+  border: 0px
+  
 a.button + a.button, a.big_button + a.big_button
   margin-right: 8px
 
@@ -102,7 +116,8 @@ a.top_button
 
 a.top_button:hover
   background-position: 0 -34px
-    
+  border: 0px
+  
 .filter_form
   float: right
   margin-bottom: 15px
@@ -129,17 +144,18 @@ body
           line-height: 0px
           color: #fff
           text-decoration: none
+        a:hover
+          border: 0px
       
     .content_column
       width: 990px
       float: left
       .flash.notice
-        padding: 10px
-        text-align: center
-        background-color: #7CAE00
-        color: #fff
-        margin-bottom: 15px
-        font-size: 16px
+        padding: 6px
+        background-color: #c7e03d
+        color: #000
+        margin: 15px 0px
+        font-size: 14px
       .center_column
         padding: 30px
         float: left
@@ -148,7 +164,7 @@ body
           float: left
           width: 100%
           label
-            font: bold 18px/24px Arial, sans-serif
+            font: bold 16px/24px Arial, sans-serif
             color: #000
             text-transform: none
             letter-spacing: 0px
@@ -194,6 +210,7 @@ body
         -moz-border-radius: 7px 0px 0px 7px
         -webkit-border-top-left-radius: 7px
         -webkit-border-bottom-left-radius: 7px
+        border: 0px
         
 
 // ----------------------------------------------------------- Tree Structure
@@ -204,8 +221,13 @@ ul.tree_structure
   background-color: #fff
   padding: 25px
   margin-top: 15px
+  box-shadow: 0px 2px 8px #ddd
+  -moz-box-shadow: 0px 2px 8px #ddd
+  -webkit-box-shadow: 0px 2px 8px #ddd
+  
   li
     margin-left: 25px
+  li + li, li > ul
     border-top: 1px solid #eee
   
   a.tree_toggle
@@ -229,14 +251,6 @@ ul.tree_structure
   .item
     padding: 7px 0px 7px 35px
     overflow: hidden
-    
-    a
-      color: #26A9E0
-      text-decoration: none
-
-    a:hover
-      text-decoration: none
-      border-bottom: 1px dotted #26A9E0
     
     .icon
       margin-left: -30px
@@ -278,12 +292,17 @@ ul.tree_structure
 
 // ---------------------------------------------------------- Formatted Table
 table.formatted
-  width: 680px
   margin-bottom: 15px
+  background-color: #fff
+  border: 10px solid #fff
+  box-shadow: 0px 2px 8px #ddd
+  -moz-box-shadow: 0px 2px 8px #ddd
+  -webkit-box-shadow: 0px 2px 8px #ddd
+ 
   th, td
-    padding: 5px
+    padding: 10px
     vertical-align: top
-    border-bottom: 1px solid #eee
+    white-space: nowrap
   th
     background-color: #eee
     font-size: 10px
@@ -292,14 +311,8 @@ table.formatted
   td.main, th.main
     width: 100%
     white-space: normal
-  td, th
-    white-space: nowrap
-  th.first
-    -moz-border-radius-topleft: 4px
-  th.last
-    -moz-border-radius-topright: 4px
-  tr:hover
-    background-color: #f5f5f5
+  tr
+    border-bottom: 1px solid #eee
     
 // -------------------------------------------------------------------- Forms
 .form_element_group
@@ -315,17 +328,28 @@ table.formatted
         color: #000
         text-transform: uppercase
         letter-spacing: 1px
-    .field
+    .value
       input, select, textarea
-        width: 99%
+        width: 97%
+        border: 1px solid #ccc
+        padding: 3px
+      input[type=checkbox]
+        width: auto
+        border: 0
+        float: left
+        margin: 1px 4px 0px 0px
+        
       .codemirror
         background-color: #fff
         border: 1px inset #e5e5e5
-    .field.narrow
+    .value.narrow
       input, select, textarea
         width: 80%
     .fieldWithErrors label
       color: #9E0B0F
+    .errors
+      color: #9E0B0F
+      margin: 3px 0px
     .select
       .label
         label
@@ -334,37 +358,34 @@ table.formatted
     label
       font-size: 16px
       line-height: 26px
-    .field
+    .value
       input
         font-size: 16px
   .form_element.time, .form_element.date, .form_element.checkbox
     select, input
       width: auto
-  
-.form_element_group.horizontal
-  .form_element
-    .label
-    .field
-  
+      
 .form_element_group.vertical
   float: left
-  .label
-    text-align: right
-    width: 40px
-    float: left
-  .field
-    float: left
-    width: 80%
-    margin-left: 10px
-    select
-      width: 100%
-    input[type=text]
-      width: 100%
+  width: 50%
+  .form_element
+    .label
+      text-align: right
+      width: 40px
+      float: left
+    .value
+      float: left
+      width: 80%
+      margin-left: 10px
+      select
+        width: 100%
+      input[type=text]
+        width: 100%
 .vertical + .vertical
   .form_element
     .label
       width: 100px
-    .field
+    .value
       width: 60%
 
 .form_element_group.publishing
@@ -374,26 +395,26 @@ table.formatted
 
 .submit
   float: left
-
+  line-height: 30px
+  .submit_element
+    margin: 5px 5px 5px 0px
+    float: left
 form
   .errorExplanation
     background-color: #9E0B0F
     padding: 10px
-    margin-bottom: 15px
     color: #fff
-    -moz-border-radius: 4px
     font-size: 12px
     h2
-      padding: 0px 5px
-      margin: -5px -5px 5px -5px
-      -moz-border-radius: 4px
-      background-color: #000
+      margin: 0.1em 0em
       font-size: 16px
-      border: none
+    h2, p
+      color: #fff
+    ul
+      margin: 10px 10px 0px 10px
 
 .form_element_group.advanced
   display: none
-  
 // --------------------------------------------------------------- Pagination
 .pagination
   margin-bottom: 15px
@@ -424,7 +445,7 @@ form
 // ----------------------------------------------------------------- Snippets
 #cms_admin_snippets_index
   a.label
-    font: 14px Georgia, serif
+    font-size: 14px
     color: #000
   a.slug
     font-size: 10px

@@ -21,4 +21,10 @@ module CmsHelper
     link_to_function(children_count, "", :class => ['tree_toggle', tree_state(object)].join(' '), :title => 'Expand/Collapse', :onclick => "object_id = '#{object.id}'")
   end
   
+  def cms_form_for(record_or_name_or_array, *args, &proc)
+    options = args.extract_options!
+    options.merge!(:builder => CmsFormBuilder)    
+    form_for(record_or_name_or_array, *(args << options), &proc)
+  end
+  
 end

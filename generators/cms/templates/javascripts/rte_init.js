@@ -20,7 +20,7 @@ function init_RTE() {
                               this.dataProcessor.writer.indentationChars = '  ';
                               this.dataProcessor.writer.setRules( '#',
                                 {
-                                   breakBeforeClose : true,
+                                   breakBeforeClose: true,
                                 });
                             }
           }

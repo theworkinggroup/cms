@@ -39,15 +39,6 @@ $(document).ready(function() {
     $('input#slug').val(slugify($(this).val()))
   })
   
-  // Setting form targets
-  $('input#save').bind('click.cms', function() {
-    $(this).parents('form:first').attr('target', '')
-  })
-  
-  $('input#preview').bind('click.cms', function() {
-    $(this).parents('form:first').attr('target', '_blank')
-  })
-  
   $('select#cms_page_cms_layout_id').bind('change.cms', function() {
     // Remove all existing ckeditor instances first
     try { 
@@ -57,6 +48,7 @@ $(document).ready(function() {
   })
   
   $('a#more_options').bind('click.cms', function() {
+    $(this).toggle()
     $('.advanced').toggle();
   })
   

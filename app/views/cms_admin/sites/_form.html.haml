@@ -4,17 +4,8 @@
   = render :partial => 'cms_admin/flash_message'
   = f.error_messages
   .form_element_group.horizontal
-    .form_element.text.large
-      .label
-        = f.label(:label, 'Title')
-      .field
-        = f.text_field(:label)
-
-    .form_element
-      .label
-        = f.label(:hostname, 'Hostname')
-      .field.narrow
-        = f.text_field(:hostname)
+    = f.text_field :label, :label => "Site Name"
+    = f.text_field :hostname, :label => "Hostname"
   .submit
     = f.submit 'Save All Changes', :onclick => 'this.f.target = ""'
     or 

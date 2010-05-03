@@ -69,7 +69,7 @@ Once you have a bunch of snippets defined, you can render them into your layouts
 
 Download CodeMirror from: http://marijn.haverbeke.nl/codemirror
 
-To get CodeMirror support properly working, you need to place the CodeMirror files in specific folders in your app. The JavaScript initializer expects the CodeMirror .js files to be at /publib/javascripts/codemirrror/ and the CSS files at /public/stylesheets/codemirror/.
+To get CodeMirror support properly working, you need to place the CodeMirror files in specific folders in your app. The JavaScript initializer expects the CodeMirror .js files to be at /public/javascripts/codemirrror/ and the CSS files at /public/stylesheets/codemirror/.
 
 To properly generate the .sass files, use the following command:
 
