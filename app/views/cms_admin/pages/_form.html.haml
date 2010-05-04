@@ -17,7 +17,7 @@
     = f.text_field :label, :id => (@cms_page.new_record? ? "slugify" : nil)
     - unless CmsPage.count == 0 || @cms_page == CmsPage.root
       = f.text_field :slug, :id => 'slug'
-    = f.custom_element('&nbsp;', link_to_function('More options &raquo;', '', :id => 'more_options'))
+    = f.custom_element('&nbsp;', link_to_function('Show more', '', :id => 'more_options'))
   .form_element_group.vertical.advanced
     - unless CmsPage.count == 0 || @cms_page == CmsPage.root
       = f.select :parent_id, @cms_page.pages_for_select(nil, 0, true)

@@ -23,7 +23,10 @@ function init_RTE() {
                                    breakBeforeClose: true,
                                 });
                             }
-          }
+          },
+      resize_maxWidth: 668,
+      resize_minWidth: 668
+
     });
   }
 }

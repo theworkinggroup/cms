@@ -48,7 +48,7 @@ $(document).ready(function() {
   })
   
   $('a#more_options').bind('click.cms', function() {
-    $(this).toggle()
+    $(this).text(($(this).text() == 'Show more') ? 'Show less' : 'Show more');
     $('.advanced').toggle();
   })
   
