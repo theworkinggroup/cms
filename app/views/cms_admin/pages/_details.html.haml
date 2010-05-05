@@ -19,7 +19,7 @@
   - if page.cms_layout
     %tr
       %th Layout:
-      %td= link_to page.cms_layout.label, cms_admin_layout_path(page.cms_layout)
+      %td= link_to page.cms_layout.label, edit_cms_admin_layout_path(page.cms_layout)
     %tr
       %th Blocks:
       %td= page.cms_blocks.collect(&:label).join(', ')

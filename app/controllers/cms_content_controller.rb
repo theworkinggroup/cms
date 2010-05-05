@@ -29,6 +29,7 @@ protected
   end
 
   def parse_path
+    # FIX: Crashes if the slug contains '.'
     params[:format] = (params[:path].last && params[:path].last.match(/\.(.*?)$/) && $1) || 'html'
     params[:path].last and params[:path].last.gsub!(/\.(.*?)$/, '')
   end

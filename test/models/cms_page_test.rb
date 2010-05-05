@@ -2,6 +2,20 @@ require 'test_helper'
 
 class CmsPageTest < ActiveSupport::TestCase
   
+  def test_initialization
+    page = CmsPage.new
+    assert page.cms_layout
+    assert_equal cms_layouts(:default), CmsLayout.first
+    assert_equal cms_layouts(:default), page.cms_layout
+  end
+    
+  def test_initialization_with_parent_page
+    assert cms_layouts(:nested), cms_pages(:complex).cms_layout
+    page = CmsPage.new(:parent => cms_pages(:complex))
+    assert page.cms_layout
+    assert_equal cms_pages(:complex).cms_layout, page.cms_layout
+  end
+    
   def test_fixtures_validity
     CmsPage.all.each do |page|
       assert page.valid?, page.errors.full_messages

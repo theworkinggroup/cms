@@ -17,12 +17,14 @@
     = f.text_field :label, :id => (@cms_page.new_record? ? "slugify" : nil)
     - unless CmsPage.count == 0 || @cms_page == CmsPage.root
       = f.text_field :slug, :id => 'slug'
-        
-  .form_element_group.vertical
+    = f.custom_element('&nbsp;', link_to_function('Show more', '', :id => 'more_options'))
+  .form_element_group.vertical.advanced
     - unless CmsPage.count == 0 || @cms_page == CmsPage.root
       = f.select :parent_id, @cms_page.pages_for_select(nil, 0, true)
     = f.select :redirect_to_page_id, [['---', nil]] + @cms_page.pages_for_select
     = f.select :cms_layout_id, CmsLayout.options_for_select, {}
+    :javascript
+      page_id = #{@cms_page.new_record? ? 0 : @cms_page.id}
   #form_blocks
     = render :partial => 'form_blocks', :locals => {:f => f}
   .submit

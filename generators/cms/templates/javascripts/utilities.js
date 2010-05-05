@@ -39,17 +39,17 @@ $(document).ready(function() {
     $('input#slug').val(slugify($(this).val()))
   })
   
-  // Setting form targets
-  $('input#save').bind('click.cms', function() {
-    $(this).parents('form:first').attr('target', '')
-  })
-  
-  $('input#preview').bind('click.cms', function() {
-    $(this).parents('form:first').attr('target', '_blank')
-  })
-  
   $('select#cms_page_cms_layout_id').bind('change.cms', function() {
-    $.ajax({url: [current_path.replace('/edit', ''), 'form_blocks'].join('/'), data: ({ layout_id: $(this).val()})})
+    // Remove all existing ckeditor instances first
+    try { 
+      $('textarea.richText').ckeditorGet().destroy(); } 
+    catch(e) {}
+    $.ajax({url: ['/cms-admin/pages', page_id, 'form_blocks'].join('/'), data: ({ layout_id: $(this).val()})})
+  })
+  
+  $('a#more_options').bind('click.cms', function() {
+    $(this).text(($(this).text() == 'Show more') ? 'Show less' : 'Show more');
+    $('.advanced').toggle();
   })
   
 });
