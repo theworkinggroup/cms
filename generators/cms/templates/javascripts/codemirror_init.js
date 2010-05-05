@@ -1,5 +1,5 @@
 function init_CodeMirror(){
-    $('.codeTextArea').each(function(el){
+    $('.codeTextArea').each(function(i, el){
         try{
           CodeMirror.fromTextArea(el, {
             parserfile: ["parsexml.js", "parsecss.js", "tokenizejavascript.js", "parsejavascript.js", "parsehtmlmixed.js"],
