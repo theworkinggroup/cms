@@ -121,7 +121,7 @@ class CmsFormBuilder < ActionView::Helpers::FormBuilder
   
   def error_messages_for(method)
     if (!@object.nil? and @object.respond_to?(:errors) and errors = @object.errors.on(method))
-      "<div class=\'errors\'>#{method.to_s.capitalize} #{errors.is_a?(Array) ? errors.first : errors}</div>"
+      "<div class=\'errors\'>#{method.to_s.humanize} #{errors.is_a?(Array) ? errors.first : errors}</div>"
     else
       ''
     end

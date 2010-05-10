@@ -9,7 +9,7 @@ class CmsTag::Snippet < CmsTag::Tag
   end
   
   def regex
-    /\{\{\s*?cms_snippet:#{Regexp.escape(label)}.*?\s*?\}\}/
+    /\{\{\s*?cms_snippet:#{Regexp.escape(label)}\s*?\}\}/
   end
   
   def render

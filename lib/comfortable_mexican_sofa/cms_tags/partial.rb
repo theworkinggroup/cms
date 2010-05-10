@@ -9,7 +9,7 @@ class CmsTag::Partial < CmsTag::Tag
   end
 
   def regex
-    /\{\{\s*?cms_partial:#{Regexp.escape(label)}.*?\s*?\}\}/
+    /\{\{\s*?cms_partial:#{Regexp.escape(label)}\s*?\}\}/
   end
   
   def content
