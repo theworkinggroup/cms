@@ -18,6 +18,4 @@ $.CMS.CodeMirror = function(){
         });
       }
     }
-  }
-  
 }();
