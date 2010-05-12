@@ -23,10 +23,3 @@
       .form_element
         .label= tag.form_label
         .value= tag.form_input
-
-- if js_helper_installed?('ckeditor')
-  :javascript
-    init_RTE();
-- if js_helper_installed?('codemirror')  
-  :javascript
-    init_CodeMirror();

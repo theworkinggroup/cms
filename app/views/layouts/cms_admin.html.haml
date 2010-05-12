@@ -3,11 +3,11 @@
   %head
     %title
     = stylesheet_link_tag 'cms_master'
-    = javascript_include_tag 'cms/jquery', 'cms/jquery-ui', 'cms/utilities'
+    = javascript_include_tag 'cms/jquery', 'cms/jquery-ui', 'cms/cms'
     - if js_helper_installed?('ckeditor')
-      = javascript_include_tag 'ckeditor/ckeditor', 'ckeditor/adapters/jquery', 'cms/rte_init'
+      = javascript_include_tag 'ckeditor/ckeditor', 'ckeditor/adapters/jquery', 'cms/rteditor'
     - if js_helper_installed?('codemirror')
-      = javascript_include_tag 'codemirror/codemirror', 'cms/codemirror_init'
+      = javascript_include_tag 'codemirror/codemirror', 'cms/codemirror'
 
     = yield :head
     
