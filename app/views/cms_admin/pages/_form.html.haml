@@ -3,12 +3,16 @@
     %h2 Publishing Options
     = f.check_box :published, :label => 'Is Published?'
     = f.check_box :excluded_from_nav, :label => 'Exclude from Navigation?'
-    
+  
+  .form_element_group
     %h2 W3C Validation
     - if (ComfortableMexicanSofa::Config.multiple_sites)
       = link_to 'Check Validation', 'http://validator.w3.org/check?uri='+@cms_page.full_path_with_site, :popup => true
     - else
       = link_to 'Check Validation', 'http://validator.w3.org/check?uri=http://'+request.host+@cms_page.full_path, :popup => true
+
+  = render :partial => 'cms_admin/categories/category_subform', :locals => { :item => @cms_page }
+      
 .center_column
   %h2= @cms_page.new_record? ? "New Page" : "Editing \"#{@cms_page.label}\""
   = render :partial => 'cms_admin/flash_message'

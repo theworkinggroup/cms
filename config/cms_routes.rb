@@ -14,6 +14,8 @@ ActionController::Routing::Routes.draw do |map|
     cms_admin.resources :snippets,
       :collection => { :reorder   => :any }
     cms_admin.resources :sites
+    cms_admin.resources :categories,
+      :member => { :children => :any, :toggle => :any }
   end
   
   map.with_options :controller => 'cms_content' do |cms|

@@ -39,8 +39,16 @@ $.CMS = function(){
     $('select#cms_page_cms_layout_id').bind('change.cms', function() {
       $.ajax({url: ['/cms-admin/pages', page_id, 'form_blocks'].join('/'), data: ({ layout_id: $(this).val()})})
     })
-    
+
+/*
+<input type="button" value="Add Category" onclick="new Ajax.Request('/cms-admin/categories?item_type=cms_page', {asynchronous:true, evalScripts:true, parameters:Form.Element.serialize('cms_category_label') + '&amp;' +  Form.Element.serialize('cms_category_parent_id') + '&amp;authenticity_token=' + encodeURIComponent('FKKVBan512QA+KxeuoTBO4SxjE215ixCl0oLNuZg4+w=')});" name="submit-btn" class="submit_button">
+*/
+
+    // Add Category Subform
+    $.CMS.category_subform_submit();
   }); // End $(document).ready()
+
+    
   
   return {
     slugify: function(str){
@@ -52,6 +60,33 @@ $.CMS = function(){
       }
       str = str.replace(/[^a-zA-Z0-9 -]/g, '').replace(/\s+/g, '-').toLowerCase();
       return str;
-    }    
+    },
+    toggle_category_selections: function(obj, parents, children) {
+      if (obj.checked == true){
+        for (var i = 0; i < parents.length; i++) {
+          $('#cms_category_id_' + parents[i]).attr('checked',true)
+        }
+      } else {
+        for (var i = 0; i < children.length; i++) {
+          $('#cms_category_id_' + children[i]).attr('checked',false)
+        }
+      }
+    },
+    category_subform_submit: function(){
+      $('#new_category input[type=submit]').bind('click.cms', function() {
+        var currently_selected = [];
+        $.post(
+          '/cms-admin/categories.js', 
+          $("#new_category [name^=cms_category]")
+            .add("input[name='authenticity_token']")
+            .serialize(),
+          function(data) {
+            $("#cms_category_label").val("").focus();
+            $.CMS.category_subform_submit();
+          }
+        );
+        return false;
+      })
+    }
   }
 }();

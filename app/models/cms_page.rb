@@ -15,6 +15,7 @@ class CmsPage < ActiveRecord::Base
   # -- Relationships --------------------------------------------------------
 
   acts_as_tree :counter_cache => :children_count
+  acts_as_categorized
   
   belongs_to  :cms_site
   belongs_to  :cms_layout

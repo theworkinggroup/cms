@@ -1,5 +1,6 @@
 require 'comfortable_mexican_sofa/cms_rails_extensions'
 require 'comfortable_mexican_sofa/cms_acts_as_tree'
+require 'comfortable_mexican_sofa/acts_as_categorized'
 
 require 'comfortable_mexican_sofa/cms_tag'
 require 'comfortable_mexican_sofa/cms_tags/block'
@@ -7,7 +8,6 @@ require 'comfortable_mexican_sofa/cms_tags/page_block'
 require 'comfortable_mexican_sofa/cms_tags/snippet'
 require 'comfortable_mexican_sofa/cms_tags/partial'
 # require 'comfortable_mexican_sofa/cms_tags/helper'
-
 # Helper inclusion
 ActionView::Base.send(:include, CmsHelper)
 
@@ -15,7 +15,7 @@ module ComfortableMexicanSofa
   class Config
     def self.cattr_accessor_with_default(name, value = nil)
       cattr_accessor name
-      self.send("#{name}=", value) if value
+      self.send("#{name}=", value) unless value === nil
     end
     
     cattr_accessor_with_default :http_auth_enabled, true
@@ -31,6 +31,8 @@ module ComfortableMexicanSofa
   def self.config(&block)
     yield ComfortableMexicanSofa::Config
   end
+
+  #raise (self.methods - Class.methods).to_yaml
 end
 
 # loading engine routes
