@@ -99,6 +99,7 @@ class CreateCms < ActiveRecord::Migration
     drop_table :cms_snippets
     drop_table :cms_blocks
     drop_table :cms_sites
-    drop_table :cms_site_hostnames
+    drop_table :cms_categories
+    drop_table :cms_page_categorizations
   end
 end
