@@ -38,5 +38,32 @@ class CmsCategory < ActiveRecord::Base
     end
     model_names
   end
+
+  def self.categorized_model_types
+    models_types = []
+    CmsCategory.categorized_model_names.each do |model_name|
+      models_types << model_name.constantize
+    end
+    models_types
+  end
+
+  # -- Instance Methods -----------------------------------------------------
+  def number_of_records
+    # returns the number of records (of all types) under a certain category
+    count = 0
+    CmsCategory.categorized_model_names.each do |model_name|
+      count += self.send(model_name.underscore.pluralize.to_sym).length
+    end
+    count
+  end
+
+  def records
+    things = {}
+    CmsCategory.categorized_model_names.each do |model_name|
+      model_sym = model_name.underscore.pluralize.to_sym
+      things[model_sym] = self.send(model_sym)
+    end
+    things
+  end
 end
 

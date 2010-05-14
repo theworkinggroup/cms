@@ -59,9 +59,32 @@ class CmsCategoryTest < ActiveSupport::TestCase
   def test_categorized_model_names
     model_names = CmsCategory.categorized_model_names
     assert model_names.include?("CmsPage"), "CmsPage was not listed as categorized"
-    assert !model_names.include?("CmsPageCategorizations"), "CmsPageCategorizations was listed as categorized"
+    assert !model_names.include?("CmsPageCategorization"), "CmsPageCategorizations was listed as categorized"
     assert !model_names.include?("CmsCategory"), "CmsCategory was listed as categorized"
   end
+
+  def test_categorized_model_types
+    model_types = CmsCategory.categorized_model_types
+    assert model_types.include?(CmsPage), "CmsPage was not listed as categorized"
+    assert !model_types.include?(CmsPageCategorization), "CmsPageCategorizations was listed as categorized"
+    assert !model_types.include?(CmsCategory), "CmsCategory was listed as categorized"
+  end
+
+  def test_number_of_records
+    assert_equal 2, cms_categories(:category_2).number_of_records
+    assert_equal 1, cms_categories(:category_2_1).number_of_records
+    assert_equal 1, cms_categories(:category_2_2).number_of_records
+    assert_equal 0, cms_categories(:category_1).number_of_records
+  end
+
+  def test_records
+    assert cms_categories(:category_2).records[:cms_pages].include?(cms_pages(:default))
+    assert cms_categories(:category_2).records[:cms_pages].include?(cms_pages(:complex))
+    assert cms_categories(:category_2_1).records[:cms_pages].include?(cms_pages(:default))
+    assert cms_categories(:category_2_2).records[:cms_pages].include?(cms_pages(:default))
+    assert cms_categories(:category_1).records[:cms_pages].empty?
+  end
+    
   
   def test_should_set_slug_if_blank
     c = CmsCategory.new(

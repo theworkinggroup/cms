@@ -1,9 +1,11 @@
-%h2= "Category: #{@cms_category.label}"
-  
-%h3#pages= "Pages (#{@cms_category.cms_pages.count})"
-.pages
-  - @cms_category.cms_pages.each do |page|
-    = link_to page.label, edit_cms_admin_page_path(page), :class => 'page'
-      
-  - if @cms_category.cms_pages.empty?
-    %p No Pages
+.center_column
+  %h2= "Category: #{@cms_category.label}"
+  - @cms_category.records.each_pair do |model_sym,records|
+    - model_type = model_sym.to_s
+    %h3
+      = "#{model_type[4..-1].humanize} (#{records.length})"
+
+    - records.each do |record|
+      = link_to record.label, {:controller => model_type[4..-1], :action => :edit, :id => record}, :class => model_type[4..-1].singularize
+    - if records.empty?
+      %p No #{model_type[4..-1]} in this category

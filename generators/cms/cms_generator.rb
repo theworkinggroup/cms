@@ -36,6 +36,7 @@ class CmsGenerator < Rails::Generator::Base
         arrow_right.gif
         icon_draft.gif
         icon_layout.gif
+        icon_category.gif
         icon_move.gif
         icon_regular.gif
         icon_snippet.gif
