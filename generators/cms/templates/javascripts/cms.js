@@ -61,19 +61,23 @@ $.CMS = function(){
       str = str.replace(/[^a-zA-Z0-9 -]/g, '').replace(/\s+/g, '-').toLowerCase();
       return str;
     },
-    toggle_category_selections: function(obj, parents, children) {
+    toggle_category_selections: function(obj) {
       if (obj.checked == true){
-        for (var i = 0; i < parents.length; i++) {
-          $('#cms_category_id_' + parents[i]).attr('checked',true)
-        }
+        $(obj).parents("ul#root_categories li")
+          .children("div.form_element")
+          .find("input[type=checkbox]")
+          .each(function() {
+            this.checked = true;
+          });
       } else {
-        for (var i = 0; i < children.length; i++) {
-          $('#cms_category_id_' + children[i]).attr('checked',false)
-        }
+        // NOT WORKING
+        $(obj).parent().parent().parent().find("input[type=checkbox]").each(function() {
+          this.checked = false;
+        });
       }
     },
     category_subform_submit: function(){
-      $('#new_category input[type=submit]').bind('click.cms', function() {
+      $('#new_category input[type=button]').bind('click.cms', function() {
         var currently_selected = [];
         $.post(
           '/cms-admin/categories.js', 
@@ -87,6 +91,13 @@ $.CMS = function(){
           }
         );
         return false;
+      })
+
+      $('#new_category input[name^=cms_category]').bind('keypress.cms', function(event) {
+        if (event.keyCode == '13') {
+          event.preventDefault();
+          $('#new_category input[type=button]').trigger('click.cms');
+        }
       })
     }
   }
