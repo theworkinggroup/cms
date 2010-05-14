@@ -9,7 +9,7 @@ From local gem:
   rake manifest && rake install
   
 In your Rails project:
-  # config/envionment.rb
+  # config/environment.rb
   config.gem 'comfortable_mexican_sofa'
   
 Run the follwing in your console to generate migrations and update your database:
@@ -74,4 +74,82 @@ To get CodeMirror support properly working, you need to place the CodeMirror fil
 To properly generate the .sass files, use the following command:
 
   css2sass -a file.css > file.sass
+
+== Adding Categorization Support for Plugins
+
+1. Add acts_as_categorized to the model definition
+
+  # app/models/cms_model_name.rb
+  class CmsModelName < ActiveRecord::Base
+    acts_as_categorized
+    # The rest of the actual model definition goes here
+  end
+ 
+2. Create the join model
+
+  # app/models/cms_model_name_categorizations.rb
+  class CmsModelNameCategorization < ActiveRecord::Base
+    acts_as_categorization
+  end
+  
+3. Modify the migration generator
+
+  # generators/cms_plugin_name/migrations/create_cms_plugin_name.rb
+  class CreateCmsPluginName < ActiveRecord::Migration
+    def self.up
+      # migrations ups for actual plugin go here
+
+      create_table :cms_model_name_categorizations do |t|
+        t.integer :cms_category_id
+        t.integer :cms_model_name_id
+        t.timestamps
+      end
+      add_index :cms_model_name_categorizations, [:cms_category_id, :cms_attachment_id], :unique => true,
+        :name => 'index_model_name_cats_on_cat_id_and_model_name_id'
+    end
+
+    def self.down
+      # migration downs for actual plugin go here
+      drop_table :cms_model_name_categorizations
+    end
+  end
+
+4. Add a module to update CmsCategory to connect it to your plugin
+
+  # lib/add_to_category.rb
+  # makes sure this is required either in init.rb or somewhere else in lib
+  module AddToCategory
+    module InstanceMethods
+      def apply_model_name_methods
+        has_many :cms_model_name_categorizations
+        has_many :cms_model_names, :through => :cms_model_name_categorizations
+      end
+    end
+  end
+
+  CmsCategory.extend(AddToCategory::InstanceMethods)
+  CmsCategory.apply_mode_name_methods
+
+5. Add css/sass for the category show view
+
+  / generators/cms_plugin_name/templates/stylesheets/cms_plugin_name.sass
+  #cms_admin_categories_show
+    h3
+    .model_name
+      margin-bottom: 15px
+      overflow: hidden
+    a.model_name
+      width: 150px
+      float: left
+      height: 30px
+      padding-left: 35px
+      font: 14px/30px Georgia, serif
+      color: #000
+      margin: 0px 5px 5px 0px
+      background: url(/images/cms/icon_model_name.gif) left center no-repeat
+
+6. Add subform for inline category editing
+
+  # views/cms_admin/controller_name/_form.html.haml
+  = render :partial => 'cms_admin/categories/category_subform', :locals => { :item => @cms_page }
 
