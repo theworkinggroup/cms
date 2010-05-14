@@ -78,6 +78,7 @@ $.CMS = function(){
         $.post(
           '/cms-admin/categories.js', 
           $("#new_category [name^=cms_category]")
+            .add("input[name=item_type]")
             .add("input[name='authenticity_token']")
             .serialize(),
           function(data) {

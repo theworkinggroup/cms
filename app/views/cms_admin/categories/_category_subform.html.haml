@@ -9,4 +9,4 @@
   .form_element
     .label Add Category
     .field
-      = render :partial => 'cms_admin/categories/new', :locals => { :item_type => item.class.name }
+      = render :partial => 'cms_admin/categories/new', :locals => { :item_type => item.class.name.underscore }
