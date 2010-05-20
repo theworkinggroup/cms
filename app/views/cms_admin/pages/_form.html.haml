@@ -33,6 +33,6 @@
     = render :partial => 'form_blocks', :locals => {:f => f}
   .submit
     = f.submit 'Save All Changes', :id => 'save'
-    = f.submit 'Preview Page', :id => 'preview', :name => 'preview'
+    -# f.submit 'Preview Page', :id => 'preview', :name => 'preview'
     or 
     = link_to 'Return to List', cms_admin_pages_path
