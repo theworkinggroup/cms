@@ -63,4 +63,27 @@ class CmsPageTest < ActiveSupport::TestCase
     page.update_attribute(:excluded_from_nav, true)
     assert page.excluded_from_nav?
   end
+  
+  def test_slug_changes_on_all_descendants
+    page = cms_pages(:complex)
+    assert_equal '/complex-page', page.full_path
+    
+    first_descendant = cms_pages(:descendant1)
+    assert_equal '/complex-page/first-descendant', first_descendant.full_path
+    
+    second_descendant = cms_pages(:descendant2)
+    assert_equal '/complex-page/first-descendant/second-descendant', second_descendant.full_path
+    
+    page.slug = 'complex'
+    page.save!
+    
+    page.reload
+    first_descendant.reload
+    second_descendant.reload
+    
+    assert_equal '/complex', page.full_path
+    assert_equal '/complex/first-descendant', first_descendant.full_path
+    assert_equal '/complex/first-descendant/second-descendant', second_descendant.full_path
+    
+  end
 end

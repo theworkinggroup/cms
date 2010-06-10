@@ -51,8 +51,7 @@ class CmsPage < ActiveRecord::Base
 
   before_save :assign_site
 
-  after_save :save_blocks,
-    :sync_child_slugs
+  after_save :save_blocks, :sync_child_slugs
   
   # -- Scopes ---------------------------------------------------------------
 
@@ -162,7 +161,7 @@ protected
   end
   
   def sync_child_slugs
-    if slug_changed?
+    if full_path_changed?
       children.each do |child|
         child.save!
       end

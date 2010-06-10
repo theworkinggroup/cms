@@ -33,4 +33,18 @@ under_development:
   slug: 'under-development'
   full_path: 'under-development'
   
+descendant1:
+  <<: *page
+  parent: complex
+  label: First Descendant Page
+  cms_layout: default
+  slug: first-descendant
+  full_path: 'complex-page/first-descendant'
   
+descendant2:
+  <<: *page
+  parent: descendant1
+  label: Second Descendant Page
+  cms_layout: default
+  slug: second-descendant
+  full_path: 'complex-page/first-descendant/second-descendant'
