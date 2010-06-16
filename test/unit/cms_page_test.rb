@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class CmsPageTest < ActiveSupport::TestCase
   
@@ -11,9 +11,18 @@ class CmsPageTest < ActiveSupport::TestCase
     
   def test_initialization_with_parent_page
     assert cms_layouts(:nested), cms_pages(:complex).cms_layout
-    page = CmsPage.new(:parent => cms_pages(:complex))
-    assert page.cms_layout
-    assert_equal cms_pages(:complex).cms_layout, page.cms_layout
+
+    assert_difference 'CmsPage.find_by_slug("complex-page").children_count', 1 do
+      page = CmsPage.new(
+        :label => "test child",
+        :slug => "test-child",
+        :parent => cms_pages(:complex)
+      )
+      page.save!
+      assert page.cms_layout
+      assert_equal cms_pages(:complex).cms_layout, page.cms_layout
+
+    end
   end
     
   def test_fixtures_validity
@@ -85,5 +94,38 @@ class CmsPageTest < ActiveSupport::TestCase
     assert_equal '/complex/first-descendant', first_descendant.full_path
     assert_equal '/complex/first-descendant/second-descendant', second_descendant.full_path
     
+  end
+
+  def test_child_count_updates_on_create
+    assert_difference 'CmsPage.find_by_slug("complex-page").children_count', 1 do
+      CmsPage.create!(
+        :label => "test child",
+        :slug => "test-child",
+        :parent => cms_pages(:complex)
+      )
+    end
+  end
+
+  def test_child_count_updates_on_destroy
+    assert_difference 'CmsPage.find_by_slug("complex-page").children_count', -1 do
+      cms_pages(:descendant1).destroy
+    end
+  end
+
+  def test_child_count_updates_on_parent_change
+    CmsPage.repair_children_count
+
+    assert_equal cms_pages(:complex2).children.count, cms_pages(:complex2).children_count
+    assert_equal cms_pages(:complex).children.count, cms_pages(:complex).children_count
+
+    assert_difference 'CmsPage.find_by_slug("complex-page").children_count', -1 do
+      assert_difference 'CmsPage.find_by_slug("complex-page-2").children_count', 1 do
+        pg = CmsPage.find_by_slug('first-descendant')
+        pg.parent_id_will_change!
+        pg.parent_id = cms_pages(:complex2).id
+        pg.save!
+      end
+    end
+
   end
 end

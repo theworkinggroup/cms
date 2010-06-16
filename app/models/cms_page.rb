@@ -51,6 +51,8 @@ class CmsPage < ActiveRecord::Base
 
   before_save :assign_site
 
+  before_update :update_counter_cache
+
   after_save :save_blocks, :sync_child_slugs
   
   # -- Scopes ---------------------------------------------------------------
@@ -65,6 +67,18 @@ class CmsPage < ActiveRecord::Base
 
   def self.[](slug)
     CmsPage.find_by_slug!(slug)
+  end
+
+  def self.repair_children_count
+    self.all.each do |pg|
+      self.connection.update(
+        "
+          UPDATE #{self.quoted_table_name}
+            SET children_count = #{pg.children.count}
+            WHERE id = #{pg.id}
+        "
+      )
+    end
   end
       
   # -- Instance Methods -----------------------------------------------------
@@ -136,7 +150,7 @@ class CmsPage < ActiveRecord::Base
   def published_status
     self.published? ? 'published' : 'draft'
   end
-  
+
 protected
   def assign_full_path
     self.full_path = (self.ancestors.reverse.collect{ |p| p.slug }.reject { |p| p.blank? } + [ self.slug ]).join('/')
@@ -164,6 +178,19 @@ protected
     if full_path_changed?
       children.each do |child|
         child.save!
+      end
+    end
+  end
+
+  def update_counter_cache
+    if self.changed? && self.parent_id_changed?
+
+      if self.parent_id_was.present?
+        CmsPage.decrement_counter(:children_count, self.parent_id_was)
+      end
+
+      if self.parent_id.present?
+        CmsPage.increment_counter(:children_count, self.parent_id)
       end
     end
   end
