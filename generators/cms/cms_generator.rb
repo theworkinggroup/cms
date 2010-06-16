@@ -7,6 +7,16 @@ class CmsGenerator < Rails::Generator::Base
       else
         puts "WARNING: Migration 'create_cms' already exists. Manually adjust it, or remove it."
       end
+
+      # fix migrations
+      ["fix_children_count"].each do |fix_migration|
+        if Dir.glob("db/migrate[0-9]*_*.rb").grep(/[0-9]+_#{fix_migration}.rb$/).empty?
+          m.migration_template "migrations/#{fix_migration}.rb", 'db/migrate', :migration_file_name => fix_migration
+        else
+          puts "WARNING: Migration '#{fix_migration}' already exists. Manually adjust it, or remove it."
+        end
+      end
+
       
       # moving stylesheets
       if defined?(Sass)

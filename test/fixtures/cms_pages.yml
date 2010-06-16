@@ -16,6 +16,14 @@ complex:
   cms_layout: nested
   slug: complex-page
   full_path: 'complex-page'
+
+complex2:
+  <<: *page
+  parent: default
+  label: Complex 2nd Page
+  cms_layout: nested
+  slug: complex-page-2
+  full_path: 'complex-page-2'
   
 unpublished:
   <<: *page
