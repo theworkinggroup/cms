@@ -39,14 +39,9 @@ class CmsContentControllerTest < ActionController::TestCase
     assert assigns(:cms_page)
   end
   
-  def test_get_a_page_with_local_file_load
-    page = CmsPage.find_by_slug('under-development')
-    assert page
-    assert_equal '', page.content
-    
-    get :show, :path => %w(under-development)
-    assert_response :success
-    assert_equal "file content\n", @response.body.to_s
+  def test_get_page_with_extension
+    get :show, :path => %w(path to somepage.php?show=1)
+    assert_response 404
   end
   
 end
