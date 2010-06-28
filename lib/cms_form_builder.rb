@@ -29,7 +29,7 @@ class CmsFormBuilder < ActionView::Helpers::FormBuilder
       output << "</div>"
     output << "</div>"
 
-    output
+    output.html_safe
   end
   
   def custom_element(label, content, options={})
@@ -51,7 +51,7 @@ class CmsFormBuilder < ActionView::Helpers::FormBuilder
           #{description(options.delete(:desc))}
         </div>
       </div>
-    }
+    }.html_safe
   end
   
   def check_box(method, options = {}, checked_value = "1", unchecked_value = "0")
@@ -84,12 +84,14 @@ class CmsFormBuilder < ActionView::Helpers::FormBuilder
       options[:onclick] = "$(this).parent().next().show(); $(this).parent().hide();"
     end
     submit_id = Time.now.usec
+
     out = @template.content_tag(:div,
       %{
         #{super(value, options.merge(:style=>'visibility:hidden;position: absolute', :id => submit_id))}
         <a class="button" href="#" id="#{submit_id}_link" onclick="$('##{submit_id}').trigger('click');return false;">#{value}</a>
         #{cancel_link}
-      }, :class => 'form_element submit_element')
+      }.html_safe, :class => 'form_element submit_element').html_safe
+
     if options[:show_activity_indicator]
       out << %{
         <div class="form_element submit_element" style="display:none">
@@ -98,18 +100,19 @@ class CmsFormBuilder < ActionView::Helpers::FormBuilder
             #{options[:show_activity_indicator]}
           </div>
         </div>
-      } 
+      }.html_safe
     end
-    out
+
+    return out.html_safe
   end
   
   def label_for(method, options)
     label = options.delete(:label) || method.to_s.titleize.capitalize
-    "<label for=\"#{object_name}_#{method}\">#{label}</label>"
+    "<label for=\"#{object_name}_#{method}\">#{label}</label>".html_safe
   end  
   
   def description(description)
-    "<div class='description'>#{description}</div>" unless description.nil?
+    "<div class='description'>#{description}</div>".html_safe unless description.nil?
   end
   
   def error_messages
@@ -121,7 +124,7 @@ class CmsFormBuilder < ActionView::Helpers::FormBuilder
   
   def error_messages_for(method)
     if (!@object.nil? and @object.respond_to?(:errors) and errors = @object.errors.on(method))
-      "<div class=\'errors\'>#{method.to_s.humanize} #{errors.is_a?(Array) ? errors.first : errors}</div>"
+      "<div class=\'errors\'>#{method.to_s.humanize} #{errors.is_a?(Array) ? errors.first : errors}</div>".html_safe
     else
       ''
     end

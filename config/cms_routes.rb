@@ -1,25 +1,47 @@
-ActionController::Routing::Routes.draw do |map|
-  map.namespace :cms_admin, :path_prefix => 'cms-admin' do |cms_admin|
-    cms_admin.connect '/', :controller => 'base', :action => 'index'
+Rails.application.routes.draw do |map|
+  scope '/cms-admin', :module => 'cms_admin', :name_prefix => 'cms_admin'  do
+    match '/', :to => "base#index"
+    resources :layouts do
+      collection do
+        put :reorder
+      end
 
-    cms_admin.resources :layouts,
-      :collection => { :reorder      => :put },
-      :member => {  :children     => :any,
-                    :toggle       => :any }
-    cms_admin.resources :pages,
-    :collection => { :reorder      => :put },
-      :member => {  :toggle       => :any,
-                    :form_blocks  => :any }
-                    
-    cms_admin.resources :snippets,
-      :collection => { :reorder   => :any }
-    cms_admin.resources :sites
-    cms_admin.resources :categories,
-      :member => { :children => :any, :toggle => :any }
+      member do
+        match :toggle
+        match :children
+      end
+    end
+
+    resources :pages do
+      collection do
+        put :reorder
+      end
+
+      member do
+        match :toggle
+        match :form_blocks
+      end
+    end
+
+    resources :snippets do
+      collection do
+        put :reorder
+      end
+    end
+
+    resources :sites
+
+    resources :categories do
+      member do
+        match :toggle
+        match :children
+      end
+    end
   end
   
-  map.with_options :controller => 'cms_content' do |cms|
-    cms.connect '/sitemap.xml', :action => 'sitemap'
-    cms.connect '*path', :action => 'show'
+  controller :cms_content do
+    match '/sitemap.xml', :to => :sitemap
+    match '*path', :to => :show
+    root :to => :show
   end
 end

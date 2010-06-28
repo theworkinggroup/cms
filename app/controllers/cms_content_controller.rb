@@ -6,7 +6,8 @@ class CmsContentController < ApplicationController
   before_filter :assign_cms_root
   
   def show
-    page_path = params[:path].join('/')
+    #path = params[:path] || ""
+    page_path = params[:path] || ""
     @cms_page = (@cms_site ? @cms_site.cms_pages : CmsPage).published.find_by_full_path(page_path)
 
     render_page

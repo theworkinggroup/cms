@@ -35,7 +35,20 @@ module ComfortableMexicanSofa
   #raise (self.methods - Class.methods).to_yaml
 end
 
+module Rails
+  class Application::RoutesReloader
+    def reload_with_cms!
+      cms_routes = File.join(File.dirname(__FILE__), *%w[.. config cms_routes.rb])
+      @paths = @paths.insert(-2, cms_routes) unless @paths.include? cms_routes
+      reload_without_cms!
+    end
+     
+    alias_method_chain :reload!, :cms
+  end
+end
+
 # loading engine routes
+=begin
 class ActionController::Routing::RouteSet
   def load_routes_with_cms!
     cms_routes = File.join(File.dirname(__FILE__), *%w[.. config cms_routes.rb])
@@ -43,5 +56,6 @@ class ActionController::Routing::RouteSet
     load_routes_without_cms!
   end
   
-  alias_method_chain :load_routes!, :cms
+  #alias_method_chain :load_routes!, :cms
 end
+=end

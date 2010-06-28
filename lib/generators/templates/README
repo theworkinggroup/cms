@@ -11,12 +11,10 @@
 
 Hey, thanks for being AWESOME!
 
-Please make sure you got following in your environment.rb file:
+Please make sure you add the following into your Gemfile:
 
-  config.gem 'haml'
-  config.gem 'active_link_to'
-  
-  config.gem 'comfortable_mexican_sofa'
+  gem 'haml'
+  gem 'active_link_to'
 
 Be sure to check out config/initializers/cms.rb for configuration options!
 
