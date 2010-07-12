@@ -20,7 +20,7 @@ module ActsAsCategorized
       
       # -- Named Scopes -----------------------------------------------------
       
-      named_scope :in_category, lambda { |category| {
+      scope :in_category, lambda { |category| {
         :joins => __categorizations,
         :conditions => { __categorizations => {:cms_category_id => (category.is_a?(CmsCategory) ? category.id : category) } }
       }}

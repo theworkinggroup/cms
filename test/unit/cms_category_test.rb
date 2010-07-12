@@ -24,8 +24,8 @@ class CmsCategoryTest < ActiveSupport::TestCase
         :label  =>'', 
         :slug   =>''
       )
-      assert c.errors.on(:label)
-      assert c.errors.on(:slug)
+      assert c.errors[:label]
+      assert c.errors[:slug]
     end
   end
   
@@ -35,7 +35,7 @@ class CmsCategoryTest < ActiveSupport::TestCase
         :label  => 'Test Category',
         :slug   => cms_categories(:category_1).slug
       )
-      assert c.errors.on(:slug)
+      assert c.errors[:slug]
     end
   end
   

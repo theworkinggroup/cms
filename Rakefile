@@ -38,7 +38,7 @@ namespace :generator do
   task :cleanup do
     files = [
       'test/rails_root/vendor/plugins/comfortable_mexican_sofa',
-      'test/rails_root/db',
+      'test/rails_root/db/migrate',
       'test/rails_root/public/javascripts/cms',
       'test/rails_root/public/images/cms',
       'test/rails_root/tmp/',
@@ -48,7 +48,8 @@ namespace :generator do
       'test/rails_root/public/stylesheets/calendar_date_select/',
       'test/rails_root/public/stylesheets/cms_master.css',
       'test/rails_root/config/initializers/cms.rb',
-      'test/rails_root/public/system/files/'
+      'test/rails_root/public/system/files/',
+      'test/rails_root/test/fixtures'
     ]
     files.each do |file|
       FileUtils.rm_rf(file)
@@ -58,14 +59,22 @@ namespace :generator do
   desc "Run the generator on the tests"
   task :prepare do
     plugin_root = File.expand_path(File.dirname(__FILE__))
-    system("ln -s #{plugin_root} test/rails_root/vendor/plugins/comfortable_mexican_sofa")
-    system "cd test/rails_root && ./script/generate cms && rake db:migrate db:test:prepare"
+    system("cd #{plugin_root} && ln -s #{plugin_root} test/rails_root/vendor/plugins/comfortable_mexican_sofa")
+    system("cd #{plugin_root} && ln -s #{plugin_root}/test/fixtures test/rails_root/test/fixtures")
+    system "cd #{plugin_root}/test/rails_root && ./script/rails g cms && rake db:drop:all db:create db:migrate db:test:prepare"
   end
 end
 
 desc "Run the test suite"
 task :default => ['generator:cleanup', 'generator:prepare', :test]
+
 task :test => :check_dependencies
+
+namespace :test do
+  desc "Setup the test environment"
+  task :setup => ['generator:cleanup', 'generator:prepare']
+end
+
 task :gemspec => ['generator:cleanup']
 
 require 'rake/rdoctask'

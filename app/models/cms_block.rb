@@ -8,7 +8,7 @@ class CmsBlock < ActiveRecord::Base
   validates_uniqueness_of :label, :scope => :cms_page_id
   
   # -- Scopes ---------------------------------------------------------------
-  named_scope :with_label, lambda{ |name|{
+  scope :with_label, lambda{ |name|{
     :conditions => {:label => name}
   }}
   

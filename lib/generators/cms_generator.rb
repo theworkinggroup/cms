@@ -7,6 +7,7 @@ class CmsGenerator < Rails::Generators::Base
   source_root File.expand_path('../templates', __FILE__)
 
   def generate_migration
+    empty_directory 'db/migrate'
     @cms_migration_number = 1
     %w(create_cms fix_children_count).each do |fix_migration|
       @cms_migration_number += 1

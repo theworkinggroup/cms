@@ -49,7 +49,7 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
     end
     assert_response :success
     assert_template 'new'
-    assert assigns(:cms_category).errors.on(:label)
+    assert assigns(:cms_category).errors[:label]
   end
   
   def test_update
@@ -73,7 +73,7 @@ class CmsAdmin::CategoriesControllerTest < ActionController::TestCase
     }
     assert_response :success
     assert_template 'edit'
-    assert assigns(:cms_category).errors.on(:label)
+    assert assigns(:cms_category).errors[:label]
   end
   
   def test_destroy

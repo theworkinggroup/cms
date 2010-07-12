@@ -21,7 +21,7 @@ class CmsLayout < ActiveRecord::Base
 
   default_scope :order => 'position ASC'
 
-  named_scope :extendable,
+  scope :extendable,
     :conditions => { :is_extendable => true }
   
   # -- Class Methods --------------------------------------------------------
@@ -40,7 +40,7 @@ class CmsLayout < ActiveRecord::Base
   end
   
   def self.app_layouts_for_select
-    path = "#{RAILS_ROOT}/app/views/layouts"
+    path = "#{Rails.root}/app/views/layouts"
     regex = /^([a-z0-9]\w+)\.html/i
     
     app_layouts =

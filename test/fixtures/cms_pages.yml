@@ -3,7 +3,7 @@ default: &page
   cms_layout: default
   parent:
   slug:
-  full_path: ''
+  full_path: ""
   children_count: 1
   position: 0
   published: true
