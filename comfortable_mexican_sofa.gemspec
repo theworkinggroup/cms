@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{comfortable_mexican_sofa}
-  s.version = "0.0.18"
+  s.version = "0.0.18.rails3"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Oleg Khabarov, The Working Group Inc"]
-  s.date = %q{2010-05-14}
+  s.date = %q{2010-07-13}
   s.description = %q{}
   s.email = %q{oleg@theworkinggroup.ca}
   s.extra_rdoc_files = [
@@ -80,27 +80,6 @@ Gem::Specification.new do |s|
      "app/views/layouts/cms_admin.html.haml",
      "comfortable_mexican_sofa.gemspec",
      "config/cms_routes.rb",
-     "generators/cms/cms_generator.rb",
-     "generators/cms/templates/README",
-     "generators/cms/templates/images/arrow_bottom.gif",
-     "generators/cms/templates/images/arrow_right.gif",
-     "generators/cms/templates/images/background.png",
-     "generators/cms/templates/images/bg-button-green-34.gif",
-     "generators/cms/templates/images/default-logo.png",
-     "generators/cms/templates/images/icon_category.gif",
-     "generators/cms/templates/images/icon_draft.gif",
-     "generators/cms/templates/images/icon_layout.gif",
-     "generators/cms/templates/images/icon_move.gif",
-     "generators/cms/templates/images/icon_regular.gif",
-     "generators/cms/templates/images/icon_snippet.gif",
-     "generators/cms/templates/initializers/cms.rb",
-     "generators/cms/templates/javascripts/cms.js",
-     "generators/cms/templates/javascripts/codemirror.js",
-     "generators/cms/templates/javascripts/jquery-ui.js",
-     "generators/cms/templates/javascripts/jquery.js",
-     "generators/cms/templates/javascripts/rteditor.js",
-     "generators/cms/templates/migrations/create_cms.rb",
-     "generators/cms/templates/stylesheets/cms_master.sass",
      "init.rb",
      "lib/cms_form_builder.rb",
      "lib/comfortable_mexican_sofa.rb",
@@ -114,7 +93,28 @@ Gem::Specification.new do |s|
      "lib/comfortable_mexican_sofa/cms_tags/page_block.rb",
      "lib/comfortable_mexican_sofa/cms_tags/partial.rb",
      "lib/comfortable_mexican_sofa/cms_tags/snippet.rb",
-     "rails/init.rb",
+     "lib/generators/cms_generator.rb",
+     "lib/generators/templates/README",
+     "lib/generators/templates/images/arrow_bottom.gif",
+     "lib/generators/templates/images/arrow_right.gif",
+     "lib/generators/templates/images/background.png",
+     "lib/generators/templates/images/bg-button-green-34.gif",
+     "lib/generators/templates/images/default-logo.png",
+     "lib/generators/templates/images/icon_category.gif",
+     "lib/generators/templates/images/icon_draft.gif",
+     "lib/generators/templates/images/icon_layout.gif",
+     "lib/generators/templates/images/icon_move.gif",
+     "lib/generators/templates/images/icon_regular.gif",
+     "lib/generators/templates/images/icon_snippet.gif",
+     "lib/generators/templates/initializers/cms.rb",
+     "lib/generators/templates/javascripts/cms.js",
+     "lib/generators/templates/javascripts/codemirror.js",
+     "lib/generators/templates/javascripts/jquery-ui.js",
+     "lib/generators/templates/javascripts/jquery.js",
+     "lib/generators/templates/javascripts/rteditor.js",
+     "lib/generators/templates/migrations/create_cms.rb",
+     "lib/generators/templates/migrations/fix_children_count.rb",
+     "lib/generators/templates/stylesheets/cms_master.sass",
      "test/fixtures/cms_blocks.yml",
      "test/fixtures/cms_categories.yml",
      "test/fixtures/cms_layouts.yml",
@@ -127,18 +127,11 @@ Gem::Specification.new do |s|
      "test/functional/cms_admin/pages_controller_test.rb",
      "test/functional/cms_admin/snippets_controller_test.rb",
      "test/functional/cms_content_controller_test.rb",
-     "test/models/cms_block_test.rb",
-     "test/models/cms_category_test.rb",
-     "test/models/cms_layout_test.rb",
-     "test/models/cms_page_categorization_test.rb",
-     "test/models/cms_page_test.rb",
-     "test/models/cms_snippet_test.rb",
-     "test/models/cms_tag_test.rb",
+     "test/integration/route_order_test.rb",
      "test/rails_root/README",
      "test/rails_root/Rakefile",
      "test/rails_root/app/controllers/application_controller.rb",
      "test/rails_root/app/helpers/application_helper.rb",
-     "test/rails_root/app/views/cms/under-development.html.haml",
      "test/rails_root/app/views/complex_page/_example.html.erb",
      "test/rails_root/config/boot.rb",
      "test/rails_root/config/database.yml",
@@ -149,7 +142,6 @@ Gem::Specification.new do |s|
      "test/rails_root/config/initializers/backtrace_silencers.rb",
      "test/rails_root/config/initializers/inflections.rb",
      "test/rails_root/config/initializers/mime_types.rb",
-     "test/rails_root/config/initializers/new_rails_defaults.rb",
      "test/rails_root/config/initializers/session_store.rb",
      "test/rails_root/config/locales/en.yml",
      "test/rails_root/config/routes.rb",
@@ -166,24 +158,20 @@ Gem::Specification.new do |s|
      "test/rails_root/public/javascripts/effects.js",
      "test/rails_root/public/javascripts/prototype.js",
      "test/rails_root/public/robots.txt",
-     "test/rails_root/script/about",
-     "test/rails_root/script/console",
-     "test/rails_root/script/dbconsole",
-     "test/rails_root/script/destroy",
-     "test/rails_root/script/generate",
-     "test/rails_root/script/performance/benchmarker",
-     "test/rails_root/script/performance/profiler",
-     "test/rails_root/script/plugin",
-     "test/rails_root/script/runner",
-     "test/rails_root/script/server",
-     "test/rails_root/vendor/plugins/.gitignore",
-     "test/test_helper.rb"
+     "test/test_helper.rb",
+     "test/unit/cms_block_test.rb",
+     "test/unit/cms_category_test.rb",
+     "test/unit/cms_layout_test.rb",
+     "test/unit/cms_page_categorization_test.rb",
+     "test/unit/cms_page_test.rb",
+     "test/unit/cms_snippet_test.rb",
+     "test/unit/cms_tag_test.rb"
   ]
   s.homepage = %q{http://theworkinggroup.ca}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{cms-sofa}
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{ComfortableMexicanSofa is a Rails Engine CMS gem}
   s.test_files = [
     "test/functional/cms_admin/base_controller_test.rb",
@@ -192,15 +180,10 @@ Gem::Specification.new do |s|
      "test/functional/cms_admin/pages_controller_test.rb",
      "test/functional/cms_admin/snippets_controller_test.rb",
      "test/functional/cms_content_controller_test.rb",
-     "test/models/cms_block_test.rb",
-     "test/models/cms_category_test.rb",
-     "test/models/cms_layout_test.rb",
-     "test/models/cms_page_categorization_test.rb",
-     "test/models/cms_page_test.rb",
-     "test/models/cms_snippet_test.rb",
-     "test/models/cms_tag_test.rb",
+     "test/integration/route_order_test.rb",
      "test/rails_root/app/controllers/application_controller.rb",
      "test/rails_root/app/helpers/application_helper.rb",
+     "test/rails_root/config/application.rb",
      "test/rails_root/config/boot.rb",
      "test/rails_root/config/environment.rb",
      "test/rails_root/config/environments/development.rb",
@@ -209,17 +192,28 @@ Gem::Specification.new do |s|
      "test/rails_root/config/initializers/backtrace_silencers.rb",
      "test/rails_root/config/initializers/inflections.rb",
      "test/rails_root/config/initializers/mime_types.rb",
-     "test/rails_root/config/initializers/new_rails_defaults.rb",
+     "test/rails_root/config/initializers/secret_token.rb",
      "test/rails_root/config/initializers/session_store.rb",
      "test/rails_root/config/routes.rb",
-     "test/test_helper.rb"
+     "test/rails_root/db/schema.rb",
+     "test/rails_root/db/seeds.rb",
+     "test/rails_root/test/performance/browsing_test.rb",
+     "test/rails_root/test/test_helper.rb",
+     "test/test_helper.rb",
+     "test/unit/cms_block_test.rb",
+     "test/unit/cms_category_test.rb",
+     "test/unit/cms_layout_test.rb",
+     "test/unit/cms_page_categorization_test.rb",
+     "test/unit/cms_page_test.rb",
+     "test/unit/cms_snippet_test.rb",
+     "test/unit/cms_tag_test.rb"
   ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<haml>, [">= 0"])
       s.add_runtime_dependency(%q<active_link_to>, [">= 0"])
     else
