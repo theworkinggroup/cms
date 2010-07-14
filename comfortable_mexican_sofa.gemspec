@@ -79,7 +79,7 @@ Gem::Specification.new do |s|
      "app/views/cms_content/sitemap.xml.rxml",
      "app/views/layouts/cms_admin.html.haml",
      "comfortable_mexican_sofa.gemspec",
-     "config/cms_routes.rb",
+     "config/routes.rb",
      "init.rb",
      "lib/cms_form_builder.rb",
      "lib/comfortable_mexican_sofa.rb",

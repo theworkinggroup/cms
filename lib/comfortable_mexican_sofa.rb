@@ -36,17 +36,3 @@ module ComfortableMexicanSofa
     yield ComfortableMexicanSofa::Config
   end
 end
-
-=begin
-module Rails
-  class Application::RoutesReloader
-    def reload_with_cms!
-      cms_routes = File.join(File.dirname(__FILE__), *%w[.. config cms_routes.rb])
-      @paths = @paths << cms_routes unless @paths.include? cms_routes
-      reload_without_cms!
-    end
-
-    alias_method_chain :reload!, :cms
-  end
-end
-=end
