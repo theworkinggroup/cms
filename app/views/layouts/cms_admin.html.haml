@@ -4,6 +4,8 @@
     %title= application_name
     = stylesheet_link_tag 'cms_master'
     = javascript_include_tag 'cms/jquery', 'cms/jquery-ui', 'cms/cms'
+    = javascript_include_tag 'cms/rails'
+
     - if js_helper_installed?('ckeditor')
       = javascript_include_tag 'ckeditor/ckeditor', 'ckeditor/adapters/jquery', 'cms/rteditor'
     - if js_helper_installed?('codemirror')
