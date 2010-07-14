@@ -39,25 +39,22 @@ $.CMS = function(){
     $('select#cms_page_cms_layout_id').bind('change.cms', function() {
       $.ajax({url: ['/cms-admin/pages', page_id, 'form_blocks'].join('/'), data: ({ layout_id: $(this).val()})})
     })
-
-/*
-<input type="button" value="Add Category" onclick="new Ajax.Request('/cms-admin/categories?item_type=cms_page', {asynchronous:true, evalScripts:true, parameters:Form.Element.serialize('cms_category_label') + '&amp;' +  Form.Element.serialize('cms_category_parent_id') + '&amp;authenticity_token=' + encodeURIComponent('FKKVBan512QA+KxeuoTBO4SxjE215ixCl0oLNuZg4+w=')});" name="submit-btn" class="submit_button">
-*/
-
+    
     // Add Category Subform
     $.CMS.category_subform_submit();
   }); // End $(document).ready()
-
-    
   
   return {
     slugify: function(str){
       str = str.replace(/^\s+|\s+$/g, '');
       var from = "ÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛàáäâèéëêìíïîòóöôùúüûÑñÇç·/_,:;";
       var to   = "aaaaeeeeiiiioooouuuuaaaaeeeeiiiioooouuuunncc------";
-      for (var i=0, l=from.length ; i<l ; i++) {
-        str = str.replace(new RegExp(from[i], "g"), to[i]);
+      
+      var length = from.length;
+      for (i = 0; i < length; i++) {
+        str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
       }
+      
       str = str.replace(/[^a-zA-Z0-9 -]/g, '').replace(/\s+/g, '-').toLowerCase();
       return str;
     },
