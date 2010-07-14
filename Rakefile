@@ -12,7 +12,6 @@ begin
     gem.homepage = "http://theworkinggroup.ca"
     gem.authors = ["Oleg Khabarov, The Working Group Inc"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
-    gem.rubyforge_project = 'cms-sofa'
     gem.add_dependency('haml')
     gem.add_dependency('active_link_to')
   end
