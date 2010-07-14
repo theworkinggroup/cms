@@ -6,18 +6,27 @@ It is not intended for users that would put <% ActiveRecord::Base.connection.exe
 == Install
 
 From local gem:
-  rake manifest && rake install
+  rake install
   
 In your Rails project:
-  # config/environment.rb
-  config.gem 'comfortable_mexican_sofa'
+  # Gemfile
+  gem 'comfortable_mexican_sofa', 'VERSION_HERE.rails3'
   
 Run the follwing in your console to generate migrations and update your database:
-  script/generate cms
+  rails g cms
   rake db:migrate
   
 Navigate to the following address to access CMS admin page:
   http://your_application/cms-admin
+
+== Testing
+
+To run tests on the cms, go into the checked out cms folder and run
+  rake test:setup test
+
+The setup task builds some symlinks for the dummy rails app enclosed.
+
+Note that you'll have to run rake test:setup every time after you run rake install before you'll be able to run tests again since rake install apparently deletes symlinks.
   
 == Sample CMS Configuration
   
