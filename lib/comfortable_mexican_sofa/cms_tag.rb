@@ -13,7 +13,6 @@ module CmsTag
       
     tags = []
     CmsTag::Tag.subclasses.each do |tag|
-      tag = tag.constantize
       tags << tag.parse_tags(content).group_by{|s| s.split(':')[0...2].join(':')}.collect{|g, tag_signature| tag.new(tag_signature.first, options)}
     end
     tags.flatten

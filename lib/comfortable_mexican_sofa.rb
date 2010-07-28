@@ -7,13 +7,15 @@
   cms_tags/page_block
   cms_tags/snippet
   cms_tags/partial
+  cms_tags/helper
   engine
 ).each do |req|
   require File.join(File.dirname(__FILE__), 'comfortable_mexican_sofa', req)
 end
 
-# require 'comfortable_mexican_sofa/cms_tags/helper'
-# ActionView::Base.send(:include, CmsHelper)
+ActiveSupport.on_load(:action_controller) do
+  ActionController::Base.helper CmsHelper
+end
 
 module ComfortableMexicanSofa
   class Config

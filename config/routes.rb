@@ -1,5 +1,5 @@
-Rails.application.routes.draw do |map|
-  scope '/cms-admin', :module => 'cms_admin', :name_prefix => 'cms_admin'  do
+RailsRoot::Application.routes.draw do |map|
+  scope '/cms-admin', :module => 'cms_admin', :as => 'cms_admin'  do
     match '/', :to => "base#index"
     resources :layouts do
       collection do
