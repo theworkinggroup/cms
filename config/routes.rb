@@ -1,4 +1,4 @@
-RailsRoot::Application.routes.draw do |map|
+Rails.application.routes.draw do
   scope '/cms-admin', :module => 'cms_admin', :as => 'cms_admin'  do
     match '/', :to => "base#index"
     resources :layouts do
