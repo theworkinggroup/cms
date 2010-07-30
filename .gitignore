@@ -1,5 +1,4 @@
 .DS_Store
 pkg
 rdoc
-test/rails_root/*
 *.swp
