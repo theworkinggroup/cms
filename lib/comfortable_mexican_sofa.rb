@@ -8,6 +8,7 @@
   cms_tags/snippet
   cms_tags/partial
   cms_tags/helper
+  cms_form_builder
   engine
 ).each do |req|
   require File.join(File.dirname(__FILE__), 'comfortable_mexican_sofa', req)
