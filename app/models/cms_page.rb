@@ -85,7 +85,7 @@ class CmsPage < ActiveRecord::Base
 
   def content
     # TODO: Add column to cache the render output. pointless to run it all the time
-    render_content
+    render_content.html_safe
   end
   
   # FIX: Recursive Tag/Content Replacement
