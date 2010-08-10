@@ -103,32 +103,10 @@ class CmsFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def submit(value, options={}, &block)
-    cancel_link = @template.capture(&block) if block_given?
-    cancel_link ||= options[:cancel_url] ? ' or ' + options[:cancel_url] : ''
-    if options[:show_activity_indicator]
-      options[:onclick] = "$(this).parent().next().show(); $(this).parent().hide();"
-    end
-    submit_id = Time.now.usec
-
-    out = @template.content_tag(:div,
-      %{
-        #{super(value, options.merge(:style=>'visibility:hidden;position: absolute', :id => submit_id))}
-        <a class="button" href="#" id="#{submit_id}_link" onclick="$('##{submit_id}').trigger('click');return false;">#{value}</a>
-        #{cancel_link}
-      }.html_safe, :class => 'form_element submit_element').html_safe
-
-    if options[:show_activity_indicator]
-      out << %{
-        <div class="form_element submit_element" style="display:none">
-          <div class="activity_indicator">
-            <img src="/images/cms/ajax_loader.gif" />
-            #{options[:show_activity_indicator]}
-          </div>
-        </div>
-      }.html_safe
-    end
-
-    return out.html_safe
+    @template.content_tag(:div,
+      super(value, options.merge(:class => 'button')),
+      :class => 'form_element submit_element'
+    ).html_safe
   end
 
   def label_for(method, options)

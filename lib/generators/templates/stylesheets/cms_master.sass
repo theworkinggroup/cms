@@ -335,8 +335,6 @@ table.formatted
       width: 97%
       border: 1px solid #ccc
       padding: 3px
-    input[type=radio]
-      width: auto
     input[type=checkbox]
       width: auto
       border: 0
@@ -365,10 +363,22 @@ table.formatted
   .value
     input
       font-size: 16px
-.form_element.time, .form_element.date, .form_element.checkbox
+.form_element.time_element, .form_element.date_element, .form_element.checkbox_element, .form_element.radio_button_element
   select, input
     width: auto
-      
+
+.form_element.submit_element
+  input
+    -moz-border-radius: 5px
+    -webkit-border-radius: 5px
+    background-color: #7CAE00
+    padding: 5px 8px
+    font: 10px/20px Arial, sans-serif
+    color: #fff
+    text-transform: uppercase
+    letter-spacing: 1px
+    border: none
+        
 .form_element_group.vertical
   float: left
   width: 50%
