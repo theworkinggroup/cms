@@ -40,7 +40,10 @@
               %li= active_link_to label, url
       
       .content_column
-        = yield
+        .right_column
+          = yield :right_column
+        .center_column
+          = yield
         
       .footer
         = link_to('The Working Group', 'http://twg.ca/', :target => '_twg')
