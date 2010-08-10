@@ -4,13 +4,13 @@ class CmsSite < ActiveRecord::Base
   has_many :cms_pages,
     :dependent => :destroy
 
-  has_many :hostnames,
-    :class_name => 'CmsSiteHostname',
-    :dependent => :destroy
-
-  accepts_nested_attributes_for :hostnames,
-    :allow_destroy => true,
-    :reject_if => proc { |attributes| attributes['hostname'].blank? }
+  # has_many :hostnames,
+  #   :class_name => 'CmsSiteHostname',
+  #   :dependent => :destroy
+  # 
+  # accepts_nested_attributes_for :hostnames,
+  #   :allow_destroy => true,
+  #   :reject_if => proc { |attributes| attributes['hostname'].blank? }
   
   # -- Validations ----------------------------------------------------------
 
