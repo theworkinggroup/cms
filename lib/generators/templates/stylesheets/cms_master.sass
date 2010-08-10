@@ -316,54 +316,58 @@ table.formatted
     
 // -------------------------------------------------------------------- Forms
 .form_element_group
-  //outline: 1px dotted blue
   margin-top: 10px
-  .form_element
-    margin-bottom: 10px
-    overflow: hidden
-    .label
-      height: 22px
-      label
-        font: 10px/22px Arial, sans-serif
-        color: #000
-        text-transform: uppercase
-        letter-spacing: 1px
-    .value
-      input, select, textarea
-        width: 97%
-        border: 1px solid #ccc
-        padding: 3px
-      input[type=checkbox]
-        width: auto
-        border: 0
-        float: left
-        margin: 1px 4px 0px 0px
-        
-      .codemirror
-        background-color: #fff
-        border: 1px inset #e5e5e5
-    .value.narrow
-      input, select, textarea
-        width: 80%
-    .fieldWithErrors label
-      color: #9E0B0F
-    .errors
-      color: #9E0B0F
-      margin: 3px 0px
-    .select
-      .label
-        label
-          line-height: 20px
-  .form_element.large
-    label
-      font-size: 16px
-      line-height: 26px
-    .value
-      input
-        font-size: 16px
-  .form_element.time, .form_element.date, .form_element.checkbox
-    select, input
+
+
+.form_element
+  margin-bottom: 10px
+  overflow: hidden
+  .label
+    height: 22px
+    font: 10px/22px Arial, sans-serif
+    color: #000
+    text-transform: uppercase
+    letter-spacing: 1px
+  .value
+    .field_with_errors
+      display: inline
+    input, select, textarea
+      width: 97%
+      border: 1px solid #ccc
+      padding: 3px
+    input[type=radio]
       width: auto
+    input[type=checkbox]
+      width: auto
+      border: 0
+      float: left
+      margin: 1px 4px 0px 0px
+      
+    .codemirror
+      background-color: #fff
+      border: 1px inset #e5e5e5
+  .value.narrow
+    input, select, textarea
+      width: 80%
+  .fieldWithErrors label
+    color: #9E0B0F
+  .errors
+    color: #9E0B0F
+    margin: 3px 0px
+  .select
+    .label
+      label
+        line-height: 20px
+.form_element.large
+  label
+    font-size: 16px
+    line-height: 26px
+  .value
+    input
+      font-size: 16px
+.form_element.time, .form_element.date, .form_element.checkbox
+  select, input
+    width: auto
       
 .form_element_group.vertical
   float: left

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Oleg Khabarov, The Working Group Inc"]
-  s.date = %q{2010-07-29}
+  s.date = %q{2010-08-10}
   s.description = %q{}
   s.email = %q{oleg@theworkinggroup.ca}
   s.extra_rdoc_files = [
@@ -81,10 +81,10 @@ Gem::Specification.new do |s|
      "comfortable_mexican_sofa.gemspec",
      "config/routes.rb",
      "init.rb",
-     "lib/cms_form_builder.rb",
      "lib/comfortable_mexican_sofa.rb",
      "lib/comfortable_mexican_sofa/acts_as_categorized.rb",
      "lib/comfortable_mexican_sofa/cms_acts_as_tree.rb",
+     "lib/comfortable_mexican_sofa/cms_form_builder.rb",
      "lib/comfortable_mexican_sofa/cms_rails_extensions.rb",
      "lib/comfortable_mexican_sofa/cms_tag.rb",
      "lib/comfortable_mexican_sofa/cms_tags/.partial.rb.swp",
@@ -130,11 +130,17 @@ Gem::Specification.new do |s|
      "test/functional/cms_admin/snippets_controller_test.rb",
      "test/functional/cms_content_controller_test.rb",
      "test/integration/route_order_test.rb",
+     "test/rails_root/.gitignore",
+     "test/rails_root/Gemfile",
+     "test/rails_root/Gemfile.lock",
      "test/rails_root/README",
      "test/rails_root/Rakefile",
      "test/rails_root/app/controllers/application_controller.rb",
      "test/rails_root/app/helpers/application_helper.rb",
      "test/rails_root/app/views/complex_page/_example.html.erb",
+     "test/rails_root/app/views/layouts/application.html.erb",
+     "test/rails_root/config.ru",
+     "test/rails_root/config/application.rb",
      "test/rails_root/config/boot.rb",
      "test/rails_root/config/database.yml",
      "test/rails_root/config/environment.rb",
@@ -144,10 +150,14 @@ Gem::Specification.new do |s|
      "test/rails_root/config/initializers/backtrace_silencers.rb",
      "test/rails_root/config/initializers/inflections.rb",
      "test/rails_root/config/initializers/mime_types.rb",
+     "test/rails_root/config/initializers/secret_token.rb",
      "test/rails_root/config/initializers/session_store.rb",
      "test/rails_root/config/locales/en.yml",
      "test/rails_root/config/routes.rb",
+     "test/rails_root/db/schema.rb",
+     "test/rails_root/db/seeds.rb",
      "test/rails_root/doc/README_FOR_APP",
+     "test/rails_root/lib/tasks/.gitkeep",
      "test/rails_root/public/404.html",
      "test/rails_root/public/422.html",
      "test/rails_root/public/500.html",
@@ -159,7 +169,14 @@ Gem::Specification.new do |s|
      "test/rails_root/public/javascripts/dragdrop.js",
      "test/rails_root/public/javascripts/effects.js",
      "test/rails_root/public/javascripts/prototype.js",
+     "test/rails_root/public/javascripts/rails.js",
      "test/rails_root/public/robots.txt",
+     "test/rails_root/public/stylesheets/.gitkeep",
+     "test/rails_root/public/stylesheets/sass/cms_master.sass",
+     "test/rails_root/script/rails",
+     "test/rails_root/test/performance/browsing_test.rb",
+     "test/rails_root/test/test_helper.rb",
+     "test/rails_root/vendor/plugins/.gitkeep",
      "test/test_helper.rb",
      "test/unit/cms_block_test.rb",
      "test/unit/cms_category_test.rb",
