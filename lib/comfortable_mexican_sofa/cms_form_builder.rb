@@ -64,7 +64,7 @@ class CmsFormBuilder < ActionView::Helpers::FormBuilder
   #   form.radio_button :field_name, :foo_value
   #   form.radio_button :gender, %w(Male Female)
   #   form.radio_button :gender, [['Male','m'],['Female','f']]
-  #   form.radio_button :gender, {'Male' => 'm', 'Female' => 'f'}
+  #   form.radio_button :gender, {'Male' => 'm', 'Female' => 'f'}, :checked => 'f'
   def radio_button(method, tag_value, options = {})
     if tag_value.is_a? Hash
       tag_value_hash = tag_value
@@ -75,6 +75,7 @@ class CmsFormBuilder < ActionView::Helpers::FormBuilder
     end
 
     if tag_value.is_a? Array
+      checked_value = options.delete(:checked)
       radios = tag_value.collect do |choice|
         if choice.is_a? Array
           label, value = choice[0], choice[1]
@@ -83,7 +84,7 @@ class CmsFormBuilder < ActionView::Helpers::FormBuilder
         end
 
         %(
-          #{super(method,value)}
+          #{super(method,value,options.merge({:checked => (value == checked_value)}))}
           <label for='#{object_name}_#{method}_#{value.downcase}'>#{label}</label>
         ).html_safe
       end.join
