@@ -94,6 +94,11 @@ class CmsFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  # Renders a jQuery UI datepicker on a text field
+  def datepicker(method, options = {})
+    text_field(method, ({'data-datepicker' => true}).merge(options)) 
+  end
+
   def select(method, choices, options = {}, html_options = {})
     standard_field('select', method, options) { super(method, choices, options, html_options) }
   end
@@ -103,11 +108,28 @@ class CmsFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def submit(value, options={}, &block)
-    @template.content_tag(:div,
-      super(value, options.merge(:class => 'button')),
-      :class => 'form_element submit_element'
-    ).html_safe
+    cancel_link = @template.capture(&block) if block_given?
+    cancel_link ||= options[:cancel_url] ? ' or ' + options.delete(:cancel_url) : ''
+    if options[:show_ajax_loader]
+      options[:onclick] = "$(this).parent().next().css('display', 'block');$(this).parent().hide();"
+    end
+    out = @template.content_tag(:div, super(value, options) + cancel_link, :class => 'form_element submit_element')
+    if options[:show_ajax_loader] === true
+      options[:show_ajax_loader] = %{
+        Sending.. <img src='/images/cms/spinner.gif' />
+      }
+    end
+
+    if options[:show_ajax_loader]
+      out << %{
+        <div class="form_element submit_element" style="display:none">
+          <div class="submit_ajax_loader">#{options[:show_ajax_loader]}</div>
+        </div>
+      }.html_safe
+    end
+    out.html_safe
   end
+  
 
   def label_for(method, options)
     label = options.delete(:label) || method.to_s.titleize.capitalize

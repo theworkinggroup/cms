@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Oleg Khabarov, The Working Group Inc"]
-  s.date = %q{2010-08-10}
+  s.date = %q{2010-08-11}
   s.description = %q{}
   s.email = %q{oleg@theworkinggroup.ca}
   s.extra_rdoc_files = [
@@ -121,6 +121,7 @@ Gem::Specification.new do |s|
      "lib/generators/templates/images/jquery_ui/ui-icons_ef8c08_256x240.png",
      "lib/generators/templates/images/jquery_ui/ui-icons_ffd27a_256x240.png",
      "lib/generators/templates/images/jquery_ui/ui-icons_ffffff_256x240.png",
+     "lib/generators/templates/images/spinner.gif",
      "lib/generators/templates/initializers/cms.rb",
      "lib/generators/templates/javascripts/cms.js",
      "lib/generators/templates/javascripts/codemirror.js",
