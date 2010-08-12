@@ -97,9 +97,6 @@ a.big_button:hover
   background-position: 0 -34px
   border: 0px
   
-a.button + a.button, a.big_button + a.big_button
-  margin-right: 8px
-
 a.top_button
   float: right
   padding: 0px 15px
@@ -303,6 +300,12 @@ table.formatted
     padding: 10px
     vertical-align: top
     white-space: nowrap
+    a.label
+      color: black
+      font-size: 14px
+    a.slug
+      font-size: 10px
+
   th
     background-color: #eee
     font-size: 10px
@@ -476,11 +479,6 @@ form
     
 // ----------------------------------------------------------------- Snippets
 #cms_admin_snippets_index
-  a.label
-    font-size: 14px
-    color: #000
-  a.slug
-    font-size: 10px
   .icon
     width: 28px
     height: 28px
