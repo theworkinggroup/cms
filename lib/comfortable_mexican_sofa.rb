@@ -35,3 +35,15 @@ module ComfortableMexicanSofa
     yield ComfortableMexicanSofa::Config
   end
 end
+
+ActiveSupport.on_load(:action_controller) do
+  ActiveSupport.on_load(:after_initialize) do
+    ActionController::Base.send :include, CmsHelper
+  end
+end
+
+ActiveSupport.on_load(:action_view) do
+  ActiveSupport.on_load(:after_initialize) do
+    ActionView::Base.send :include, CmsHelper
+  end
+end
