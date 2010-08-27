@@ -14,10 +14,6 @@
   require File.join(File.dirname(__FILE__), 'comfortable_mexican_sofa', req)
 end
 
-ActiveSupport.on_load(:action_controller) do
-  ActionController::Base.helper CmsHelper
-end
-
 module ComfortableMexicanSofa
   class Config
     def self.cattr_accessor_with_default(name, value = nil)

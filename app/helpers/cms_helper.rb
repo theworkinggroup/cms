@@ -25,3 +25,8 @@ module CmsHelper
   end
   
 end
+
+ActiveSupport.on_load(:action_controller) do
+  ActionController::Base.helper CmsHelper
+end
+
